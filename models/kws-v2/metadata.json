@@ -1,0 +1,11 @@
+{
+  "feature_version": "aligned-mfcc-v2",
+  "weights_sha256": "91251ae7be454a62f9cd35607f3e2dbf6a4be8ce0b80342bd81f947e4a8e5527",
+  "weights_bytes": 17380,
+  "asset_sha256": {
+    "feature_tables.h": "f880061b75d258240508ca9b8ca11d519c708e8643858a83d0128487b6e20edf",
+    "pet_model.h": "946bcf467df0de6473b69461340e02fe85af685f58aeefbbcc2058126b086686"
+  },
+  "device_tested": false,
+  "threshold_q10": 0
+}

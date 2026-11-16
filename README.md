@@ -9,14 +9,14 @@ a companion whose behavior has been learned.
 
 ## What works today
 
-The host research code generates licensed synthetic speech, extracts small
-audio features, trains a compact classifier, and converts its dense layers to
-integer inference. It recognizes five command classes plus unknown and silence.
+The small [Japanese command model](models/kws-v2/model-card.md) now passes a
+fresh synthetic evaluation: macro F1 **0.979**, 17,380 bytes of weights.
+Its C front end and integer inference match Python decisions on all 956 examples.
 
-**The pet, voice service and on-device recognition are not finished.** The first
-model failed the acceptance target. An alignment change passes development
-validation, but still needs a fresh held-out evaluation and real speech tests.
-No firmware has been installed by this project.
+**The pet, voice service and on-device recognition are not finished.** The six
+voice settings in this test come from two synthetic speaker identities. Real
+human speech and ESP32-S3 behavior still need testing. No firmware has been
+installed by this project.
 
 ## Test
 
@@ -28,10 +28,10 @@ uv run --locked python -m unittest discover -s tests -v
 uv run --locked --group train python -m unittest discover -s tests/training -v
 ```
 
-The first suite needs no speech engine, GPU, network key or device. Training tests
+The first suite needs Clang, but no speech engine, GPU, network key or device. Training tests
 use a tiny deterministic CPU fixture, not downloaded speech or production weights.
 
-## Reproduce the first experiment
+## Run a training experiment
 
 On macOS, install Open JTalk with Homebrew. Keep generated speech and models local:
 
@@ -51,8 +51,10 @@ splits share the same voice identities; they do not measure unseen human speaker
 This runs on the computer's CPU and makes no Vast.ai API call. Cloud training is
 not enabled. Input audio is limited to two seconds of mono PCM16 at 16 kHz.
 Read the [acceptance targets](docs/acceptance.md),
-[experiment record](docs/validation.md) and [data licenses](docs/data-license.md).
+[frozen-model recipe](docs/reproduce-model.md), [experiment record](docs/validation.md)
+and [data licenses](docs/data-license.md).
 
 Code: [Apache-2.0](LICENSE). Voice models and generated/derived assets have separate
-CC BY 3.0 attribution requirements. No voice weights or recorded device audio are
-included in this repository.
+CC BY 3.0 attribution requirements. This repository includes the small trained KWS
+weights and derived conformance features. Upstream TTS weights and device
+recordings are not included.

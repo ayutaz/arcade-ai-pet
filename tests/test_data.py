@@ -27,6 +27,30 @@ class DataTests(unittest.TestCase):
                 (base/'first/sources'/(record['id']+'.wav')).write_bytes(b'changed')
                 with self.assertRaises(ValueError):create(base/'third',root,source_cache=base/'first')
 
+    def test_new_prosody_and_noise_sources_do_not_reuse_development_ids(self):
+        import json,tempfile,wave
+        from pathlib import Path
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as tmp:
+            base=Path(tmp);root=base/'engine'
+            for directory in ('bin','dic','voice/test'):(root/directory).mkdir(parents=True)
+            (root/'bin/open_jtalk').write_bytes(b'engine');(root/'dic/sys.dic').write_bytes(b'dictionary')
+            (root/'voice/test/test.htsvoice').write_bytes(b'voice')
+            def synth(argv,**kwargs):
+                with wave.open(argv[argv.index('-ow')+1],'wb') as stream:
+                    stream.setparams((1,2,16000,0,'NONE','not compressed'))
+                    stream.writeframes((1000*np.sin(np.arange(8000)*.1)).astype('<i2').tobytes())
+            with patch('arcade_ai_pet.data.subprocess.run',side_effect=synth):
+                create(base/'dev',root,variants=1)
+                create(base/'eval',root,variants=1,rates=(.95,1.2),pitches=(0,),noise_namespace='holdout-v1')
+            ids=lambda path:{row['id'] for row in json.loads((path/'manifest.json').read_text())['records']}
+            self.assertFalse(ids(base/'dev')&ids(base/'eval'))
+            noise=lambda path:next(row['pcm_sha256'] for row in json.loads((path/'manifest.json').read_text())['records'] if row['source'].endswith('/1') and row['label']==6)
+            self.assertNotEqual(noise(base/'dev'),noise(base/'eval'))
+            for rates in ((),(float('nan'),),(True,),(2.5,)):
+                with self.assertRaises(ValueError):create(base/'invalid',root,rates=rates)
+            self.assertFalse((base/'invalid').exists())
+
     def test_trim_keeps_speech_and_context_but_never_truncates_long_speech(self):
         x=np.zeros(48000,dtype=np.int16);x[16000:24000]=1000
         actual=trim_silence(x)
