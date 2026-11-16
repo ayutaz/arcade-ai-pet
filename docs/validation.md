@@ -103,3 +103,12 @@ uv run --locked python -m arcade_ai_pet.native_evaluation \
 ```
 
 修正後の全unit30件Green（2.836秒）、学習4件Green（1.944秒）。
+
+## CIのrunner供給不足
+
+GitHubの旧run 43924536580はMac arm64 runnerを取得できず失敗。
+annotationに`The job was not acquired by Runner of type hosted even after multiple attempts`と
+arm64のcapacity constraintsが記録され、テストの実行失敗とは区別した。
+ホストMac契約はmacos-15-intel、CPU学習はubuntu-24.04へ変更。
+必須check名とPR/管理者保護を維持し、skip/失敗無視/迂回mergeは使わない。
+CI構成の宣言変更で、新しいTDD実装とは数えない。手元のMac arm64検証は上の結果を保持する。

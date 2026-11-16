@@ -11,10 +11,15 @@ permissions:
   contents: read
 jobs:
   host:
+    name: host (${{ matrix.os }})
     strategy:
       matrix:
-        os: [ubuntu-24.04, macos-15]
-    runs-on: ${{ matrix.os }}
+        include:
+          - os: ubuntu-24.04
+            runner: ubuntu-24.04
+          - os: macos-15
+            runner: macos-15-intel
+    runs-on: ${{ matrix.runner }}
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
@@ -26,7 +31,7 @@ jobs:
       - run: uv sync --locked
       - run: uv run --locked python -m unittest discover -s tests -v
   training:
-    runs-on: macos-15
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
