@@ -76,7 +76,7 @@ uv run --locked --group train python -m unittest discover -s tests/training -v
 固定17,380Bモデルを新しく作った956例で評価し、macro F1=0.978908、
 対象外/無音の誤起動率=0.002577。評価後にモデルを変更していない。
 全956例のC/Python整数logitと最終classが一致、特徴差の最大は3.219e-6、C scratch5,680B。
-ホスト中央値0.228ms/p95 0.908msで、本体の速度ではない。
+ホスト中央値0.224ms/p95 0.847msで、本体の速度ではない。
 公開範囲と完全な結果は[モデルカード](../models/kws-v2/model-card.md)へ。
 
 最新のunit29件Green（3.202秒）、学習3件Green（1.799秒）は再現学習追加前の値。
@@ -85,3 +85,21 @@ uv run --locked --group train python -m unittest discover -s tests/training -v
 
 再現学習の先行Redはhidden引数未対応、実装後は学習4件Green（1.670秒）。
 修正済みunitの再実行は29件Green。Cの数値比較、固定後の合成評価、公開モデルの同一性を含む。
+
+## 未使用末尾のエネルギー床の回帰修正
+
+32000samplesのうちFFT窓に含まれない最後の80samplesだけに信号がある場合を先行試験。
+Cだけenergyが16となり、Pythonとの差16.0でRed。最大energyにも1e-8の床を適用し、
+Native 6件Green（0.440秒）。凍結重みは変更せず、全956例を再監査した。
+整数logit/最終判定956/956一致、特徴差最大3.219e-6を維持。
+公開native-evaluation.jsonは修正後のC hashと測定値（Mac中央値0.224ms/p95 0.847ms）へ更新。
+旧監査はローカルreportsに保持し、実声/実機の証拠へは拡大しない。
+
+```sh
+uv run --locked python -m unittest discover -s tests -p test_native.py -v
+uv run --locked python -m arcade_ai_pet.native_evaluation \
+  --model models/kws-v2 --dataset datasets/jtalk-heldout-v1 \
+  --output reports/native-kws-v2-tail-fix
+```
+
+修正後の全unit30件Green（2.836秒）、学習4件Green（1.944秒）。

@@ -8,11 +8,11 @@
   "weights_sha256": "91251ae7be454a62f9cd35607f3e2dbf6a4be8ce0b80342bd81f947e4a8e5527",
   "source_sha256": {
     "pet_kws.h": "89db3982be5364091326171415e32576a2977be792a49c0a141b496e07c9798a",
-    "features.c": "19cd56b1c6dec4e4cb41106b8eb48d16b97a652b12a9491f76275837a68fd652",
+    "features.c": "f61e62affddd7de8568a4816a6022242d0e0664e5f447bcc45dbe301985ca405",
     "inference.c": "33e40add1d73ff3ac75e80f71a79f7c4080569476941a2302f5c8c1f8dae6abd"
   },
-  "feature_median_host_ms": 0.2276875,
-  "feature_p95_host_ms": 0.908375,
+  "feature_median_host_ms": 0.2244375,
+  "feature_p95_host_ms": 0.8465935,
   "host_timings_only": true,
   "real_voice_tested": false,
   "device_tested": false,

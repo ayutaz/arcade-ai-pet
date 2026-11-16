@@ -51,6 +51,14 @@ class NativeTests(unittest.TestCase):
             self.assertEqual(self.lib.pet_features(pcm.ctypes.data,len(pcm),actual.ctypes.data,260,scratch,size),1)
             self.assertLess(float(abs(actual-features(pcm)).max()),.01)
 
+    def test_signal_only_in_the_unused_tail_keeps_zero_frame_energy_finite(self):
+        pcm=np.zeros(32000,dtype=np.int16);pcm[31950:]=1000
+        output=np.zeros(260,dtype=np.float32);size=self.lib.pet_feature_scratch_size()
+        scratch=ctypes.create_string_buffer(size)
+        self.assertEqual(self.lib.pet_features(pcm.ctypes.data,32000,output.ctypes.data,260,scratch,size),1)
+        self.assertTrue(np.isfinite(output).all())
+        self.assertLess(float(abs(output-features(pcm)).max()),.01)
+
     def test_c_integer_scores_match_python_including_ties_and_bounds(self):
         rng=np.random.default_rng(98)
         vectors=[np.zeros(260,dtype=np.float32),np.full(260,16,dtype=np.float32),np.full(260,-16,dtype=np.float32)]

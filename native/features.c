@@ -70,7 +70,7 @@ int pet_features(const int16_t *pcm,size_t samples,float *output,size_t count,
     if (last-first<20) { if (first>178)first=178;last=first+20; }
     unsigned base=(last-first)/20,extra=(last-first)%20;
     unsigned bin=0,next=first+base+(extra>0);
-    float maximum_log=(float)log(maximum);
+    float maximum_log=(float)log(fmax(maximum,1e-8));
     for (unsigned frame=first;frame<last;frame++) {
         while (frame>=next) { bin++;next+=base+(bin<extra); }
         for (unsigned i=0;i<512;i++) {
