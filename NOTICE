@@ -1,0 +1,6 @@
+Arcade AI Pet
+Copyright 2026 Arcade AI Pet contributors
+
+Host synthetic speech uses Open JTalk and HTS Voice Mei / NIT ATR503 M001.
+Voice and derivative asset attribution: docs/data-license.md.
+No upstream voice model or recorded device audio is distributed here.
