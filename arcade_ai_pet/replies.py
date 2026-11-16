@@ -63,12 +63,12 @@ def synthesize(root,output):
     with tempfile.TemporaryDirectory() as temporary:
         for i,text in enumerate(REPLIES):
             wave=Path(temporary)/f'{i}.wav'
-            subprocess.run([str(engine),'-x',str(dictionary.parent),'-m',str(voice),'-r','1.1','-ow',str(wave)],
+            subprocess.run([str(engine),'-x',str(dictionary.parent),'-m',str(voice),'-r','1.15','-ow',str(wave)],
                            input=text.encode(),stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,timeout=10,check=True)
             pcm=trim_silence(read_pcm(wave));hashes.append(hashlib.sha256(pcm.tobytes()).hexdigest());clips.append(encode_reply(pcm))
     report=export_replies(clips,output)
     report.update(engine_sha256=hashlib.sha256(engine.read_bytes()).hexdigest(),dictionary_sha256=hashlib.sha256(dictionary.read_bytes()).hexdigest(),
-                  voice_sha256=hashlib.sha256(voice.read_bytes()).hexdigest(),source_pcm_sha256=hashes,speed=1.1)
+                  voice_sha256=hashlib.sha256(voice.read_bytes()).hexdigest(),source_pcm_sha256=hashes,speed=1.15)
     (output/'metadata.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n');return report
 
 

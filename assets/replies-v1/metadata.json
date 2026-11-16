@@ -1,12 +1,12 @@
 {
   "samples_hz": 8000,
   "encoding": "signed PCM8, repeat twice at 16kHz, multiply by 28",
-  "encoded_bytes": 25569,
+  "encoded_bytes": 25418,
   "frames": [
-    8010,
-    3206,
-    4729,
-    4639,
+    7839,
+    3116,
+    4859,
+    4619,
     4985
   ],
   "texts": [
@@ -16,7 +16,7 @@
     "おやすみ",
     "ありがとう"
   ],
-  "asset_sha256": "c5242bd700aa4e2aaffbd644857826ad8a691b765bc839960004362bd03aa494",
+  "asset_sha256": "5aba2a8873fbc858f10e4b19c560f2a6aad454f66088ef512955f4be9a22ecdb",
   "on_device_tts": false,
   "device_tested": false,
   "license": "CC-BY-3.0",
@@ -24,11 +24,11 @@
   "dictionary_sha256": "49bb7ae70f373e99801ed1c8a9e68a2678947c8a49f7cd176bbd2d37b93f10e3",
   "voice_sha256": "1329c5e4c0176dc037eef50a73712c60bede2b26ff4a1cba5008223608ca942f",
   "source_pcm_sha256": [
-    "138b0d95cbb3415051f7ed248676048a52f2d7d3dca59168eec4dfc09f1da39d",
-    "9fef4c04c526a2a64d0a105ca1bdda7a724fed94a7de6e2ae9eb2ded1c36474b",
-    "1e1659910d926e1e524a1bc24ab12a17a17f17d49a727479ae39480e33937a41",
-    "3953f59559f424526060d37ae24c276da4c392badbefd164df320206fc6bc330",
-    "fa1b86a0961ba3508b1dc97858b84ad6a7a8f50c63a59de181bff3e5a7dd602f"
+    "eecdf71a5ef6853e7c0ba0bc27c60087e7b63388699627c475c0f81cc5911e38",
+    "34fb6ae6079aa6bd4435b9e073db499717bb633a9651888453a63ca3722afa0b",
+    "a6bc6c6b2cfee1b0fc7ff7ff5a69d03774eca023da26d9d55c8aa7508ba5cc8b",
+    "fbd3a0bd0351ac5b900846438ff92be4a3ec6219d4b89602b967266f749e3d25",
+    "9c965ba2465ca1b117708d6cf77ee5f7d5e7392b3f74c49462bffcf52d0446cc"
   ],
-  "speed": 1.1
+  "speed": 1.15
 }

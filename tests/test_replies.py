@@ -47,3 +47,10 @@ class ReplyTests(unittest.TestCase):
                 report=synthesize(root,output)
             self.assertEqual(call.call_count,5);self.assertEqual(len(report['source_pcm_sha256']),5)
             self.assertEqual(len(report['voice_sha256']),64)
+
+    def test_published_replies_all_fit_the_existing_one_second_speaker_buffer(self):
+        import json,hashlib
+        base=Path(__file__).resolve().parents[1]/'assets/replies-v1'
+        metadata=json.loads((base/'metadata.json').read_text())
+        self.assertTrue(all(n<=8000 for n in metadata['frames']))
+        self.assertEqual(hashlib.sha256((base/'replies.h').read_bytes()).hexdigest(),metadata['asset_sha256'])
