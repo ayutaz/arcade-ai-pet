@@ -12,3 +12,6 @@ feature_tables.h contains generated mathematical constants under Apache-2.0.
 assets/replies-v1: pre-generated NIT ATR503 M001 speech (HTS Working Group),
 CC BY 3.0. Attribution and processing details are in its LICENSE.txt and model-card.md.
 models/behavior-v1: original synthetic collection-world policy, Apache-2.0.
+
+tests/fixtures/pet_sdk/lab_digits.h: unchanged numeric drawing asset from
+scratch-arcade-os commit 3bb154b434da50462922257ec257ca6fdb62b742, Apache-2.0.

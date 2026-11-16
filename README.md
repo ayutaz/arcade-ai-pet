@@ -17,10 +17,20 @@ The [learned movement policy](models/behavior-v1/model-card.md) also runs in int
 On 64 unseen collection boards it averaged 8.64 points versus 0.97 for a seeded random policy.
 Its parameters occupy 472 bytes; this is a host benchmark, not handheld performance.
 
-**The pet, voice service and on-device recognition are not finished.** The six
+The pet now builds as a **5,142-byte WASM package**. The learned companion,
+five voice-result actions and normal exit pass both VM implementations.
+
+![Learned companion](docs/media/companion.gif)
+
+*Actual WASM host replay with simulated voice-result events. Not a device recording.*
+
+**On-device recognition, human speech quality and the complete product are still pending.** The six
 voice settings in this test come from two synthetic speaker identities. Real
 human speech and ESP32-S3 behavior still need testing. No firmware has been
-installed by this project.
+installed by this project. The shared OS voice service has passed a target build;
+its deployment requires a separate fixed-image review.
+
+[Build and preview the pet](docs/pet-app.md).
 
 ## Test
 
