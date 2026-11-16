@@ -13,6 +13,10 @@ The small [Japanese command model](models/kws-v2/model-card.md) now passes a
 fresh synthetic evaluation: macro F1 **0.979**, 17,380 bytes of weights.
 Its C front end and integer inference match Python decisions on all 956 examples.
 
+The [learned movement policy](models/behavior-v1/model-card.md) also runs in integer C.
+On 64 unseen collection boards it averaged 8.64 points versus 0.97 for a seeded random policy.
+Its parameters occupy 472 bytes; this is a host benchmark, not handheld performance.
+
 **The pet, voice service and on-device recognition are not finished.** The six
 voice settings in this test come from two synthetic speaker identities. Real
 human speech and ESP32-S3 behavior still need testing. No firmware has been
