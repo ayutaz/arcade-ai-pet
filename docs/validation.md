@@ -112,3 +112,24 @@ arm64のcapacity constraintsが記録され、テストの実行失敗とは区�
 ホストMac契約はmacos-15-intel、CPU学習はubuntu-24.04へ変更。
 必須check名とPR/管理者保護を維持し、skip/失敗無視/迂回mergeは使わない。
 CI構成の宣言変更で、新しいTDD実装とは数えない。手元のMac arm64検証は上の結果を保持する。
+
+## 収集行動のCPU学習と整数C
+
+World/teacher/benchmark、行動学習、数値export/C推論を先行module欠落のRedから実装。
+World 2件Green（0.017秒）、学習の再現1件Green（1.723秒）、export/C 1件Green（0.382秒）。
+公開候補がない先行試験のRed後に固定成果を置き、2件Greenへ。
+
+```sh
+uv run --locked python -m unittest discover -s tests -p 'test_behavior*.py' -v
+uv run --locked --group train python -m unittest discover -s tests/training -p test_behavior_training.py -v
+uv run --locked --group train python -m arcade_ai_pet.behavior_training \
+  --output checkpoints/behavior-v1 --epochs 300
+```
+
+新しい合成盤面のBFS模倣学習で、音声と別のモデル。固定後の未知64seedに対して
+平均得点8.640625（random0.96875/greedy7.375/BFS24.734375）。C/Python全7680stepの行動一致。
+ruleを一般的に超えたとは主張せず、局所観測だけで行き詰まる制限も記録した。
+[モデルカード](../models/behavior-v1/model-card.md)と固定JSON/NPZ/C表を公開、外部データなし/Apache-2.0。
+
+全unit34件Green（3.597秒）、学習5件Green（1.672秒）。CPUのみ、GPU費用0米ドル。
+行動のWASM/app/実機統合はまだない。
