@@ -199,3 +199,11 @@ package5,142B、実機未適用。[使い方と画像の区分](pet-app.md)。
 
 SDKを3bb9548846505eac303927b9064c6a8d0eb44f79へ固定。Mac native USBの再接続で稼働appがresetされる共通修正を取り込む。pin更新であり、新しいTDDのRedがあったとは記録しない。
 unit47件（4.271秒）/両VM統合2件（2.432秒）が成功。Petの再build SHAは14f657f0…と完全一致し、固定レビューの5,142B packageとFW候補は変更しない。追加の照合scriptは最初にMacの一時path aliasで拒否され、実pathへ解決して再実行した。実装のRedではない。実機への新FW書込みは未実施。
+
+## 実声30試行の集計
+
+`uv run --locked python -m unittest discover -s tests -p test_voice_trials.py -v`でmodule欠落Redを確認後、固定30試行/採用境界/推論エラー/欠落重複/余分な情報/CLI/FIFO拒否を最小実装し6件Green。
+巨大な整数latencyを追加してOverflowErrorのRed→上限検査を先に行ってGreen。実機へ合成音声を聞かせる区分も未対応のRed→人の声と別scopeにして7件Green（0.031秒）。
+集計は録音・USB・FW操作を行わず、scopeを自動証明しない。模擬入力が満点でもhardware_acceptance_provenはfalse。新しい実声結果を得たとは記載しない。
+
+最終回帰は標準54件/4.569秒、両VM統合2件/2.406秒が成功。nullの記録例はCLIがexit2で拒否。文書リンクも確認した。

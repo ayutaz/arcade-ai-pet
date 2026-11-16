@@ -72,3 +72,5 @@ Code: [Apache-2.0](LICENSE). Voice models and generated/derived assets have sepa
 CC BY 3.0 attribution requirements. This repository includes the small trained KWS
 weights and derived conformance features. Upstream TTS weights and device
 recordings are not included.
+
+Human-voice evaluation: [fixed protocol and anonymous result summary](docs/voice-validation.md).

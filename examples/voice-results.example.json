@@ -1,0 +1,156 @@
+{
+  "schema": 1,
+  "scope": "host_fixture",
+  "records": [
+    {
+      "trial": 1,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 2,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 3,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 4,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 5,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 6,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 7,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 8,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 9,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 10,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 11,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 12,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 13,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 14,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 15,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 16,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 17,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 18,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 19,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 20,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 21,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 22,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 23,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 24,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 25,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 26,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 27,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 28,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 29,
+      "observed": null,
+      "latency_ms": null
+    },
+    {
+      "trial": 30,
+      "observed": null,
+      "latency_ms": null
+    }
+  ]
+}
