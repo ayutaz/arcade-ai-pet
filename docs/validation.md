@@ -169,3 +169,28 @@ OS向けGCC buildで2箇所の連続ifがmisleading-indentationとして拒否�
 警告を無効にせず、文の改行だけを修正。動作変更や新しいTDDとは扱わない。
 
 改行後の全956例もC/Pythonの整数logit/判定が一致。unit42件Green（3.916秒）。
+
+## ペットのC/WASM化
+
+app.c欠落を先行Redにし、模擬audio I/O下の5操作/棄却/終了・行動・プレイヤー入力を
+3件Green（0.509秒）。ビルダーはmodule欠落でRed→2件Green（0.003秒）。
+最初のbuilder fixtureはmacOSの/var aliasを含んで失敗したためreal pathに修正し、機能のRedとは数えない。
+
+実WASMで起動fuel超過を再現する統合試験を先に固定し、initの到達性BFSを
+同じ判定のbitset floodへ置換。fuelは50,000を維持。nativeの盤面/行動照合も通過した。
+さらに実SDKの66px高の数字で画面外描画が発生し、実数字assetをfixtureへ持ち込んで
+先行再現（2件Red）。盤面と数値の座標を調整し、native3件Green（0.385秒）。
+
+数字assetを無描画stubにした初版native試験は描画範囲を保証していなかった。
+改めてSDK同一asset/実WASM両VMで確認。終了後debugを読もうとした統合fixtureも
+終了前の値を保持するよう修正し、productionのRedとは数えない。
+
+```sh
+uv run --locked python -m unittest discover -s tests -p test_pet_native.py -v
+uv run --locked python -m unittest discover -s tests -p test_build.py -v
+uv run --locked python -m unittest discover -s tests/integration -v
+```
+
+実WASM126frames、模擬voice全7classを両VM/160KiB poolで確認。
+統合2件Green（2.433秒）、全unit47件Green（4.453秒）、学習5件Green（1.870秒）。
+package5,142B、実機未適用。[使い方と画像の区分](pet-app.md)。

@@ -1,0 +1,11 @@
+{
+  "id": "ai-pet",
+  "wasm_bytes": 4886,
+  "package_bytes": 5142,
+  "package_sha256": "14f657f0fe5955d916f6a6811b2975bda0e9bd944a30f968aadbc9eb7c43a23f",
+  "device_tested": false,
+  "sdk_commit": "3bb154b434da50462922257ec257ca6fdb62b742",
+  "source": "host replay of the actual WASM package; simulated voice result events",
+  "real_voice_tested": false,
+  "physical_capture": false
+}
