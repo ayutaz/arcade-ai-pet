@@ -9,7 +9,7 @@ import subprocess
 import sys
 
 ROOT=Path(__file__).resolve().parents[1]
-SDK_COMMIT='3bb154b434da50462922257ec257ca6fdb62b742'
+SDK_COMMIT='3bb9548846505eac303927b9064c6a8d0eb44f79'
 
 
 def load_sdk(path):
