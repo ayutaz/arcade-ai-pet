@@ -26,3 +26,7 @@ manifestには実行ファイル・辞書・各voiceのSHA-256を残し、版名
 
 その後、`models/kws-v2`へ自作の小型KWS重み・C表現・照合用の派生特徴を追加した。
 原本TTS重みや音声PCMは含めず、同ディレクトリのmodel-card/LICENSEに帰属・変更内容・評価範囲を記録する。
+
+`assets/replies-v1`はM001だけを使う事前生成の短い返答。CC BY 3.0の
+帰属/変更内容/hashを添え、PCM8の数値C表を配布する。実機録音ではない。
+`models/behavior-v1`は自作盤面のBFS模倣学習で、外部音声由来ではなくApache-2.0。

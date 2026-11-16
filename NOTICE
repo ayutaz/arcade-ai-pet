@@ -8,3 +8,7 @@ No upstream voice model or recorded device audio is distributed here.
 models/kws-v2 contains trained derivative KWS weights and conformance features
 under CC BY 3.0, with attribution and modifications in model-card.md / LICENSE.txt.
 feature_tables.h contains generated mathematical constants under Apache-2.0.
+
+assets/replies-v1: pre-generated NIT ATR503 M001 speech (HTS Working Group),
+CC BY 3.0. Attribution and processing details are in its LICENSE.txt and model-card.md.
+models/behavior-v1: original synthetic collection-world policy, Apache-2.0.

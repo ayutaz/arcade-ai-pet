@@ -31,7 +31,7 @@
 | C/Python特徴の最大差 | 0.000003219 |
 
 行列等は[evaluation.json](evaluation.json)、Cの比較は[native-evaluation.json](native-evaluation.json)。
-ホストCの中央値0.224ms/p95 0.847msはこのMacでの値で、ESP32-S3の性能ではない。
+ホストCの中央値0.272ms/p95 0.906msはこのMacでの値で、ESP32-S3の性能ではない。
 このモデルをOSへ適用・本体へ書き込み済みとは扱わない。
 
 ## データと制限

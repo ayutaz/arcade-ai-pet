@@ -133,3 +133,27 @@ ruleを一般的に超えたとは主張せず、局所観測だけで行き詰�
 
 全unit34件Green（3.597秒）、学習5件Green（1.672秒）。CPUのみ、GPU費用0米ドル。
 行動のWASM/app/実機統合はまだない。
+
+## ペットの状態と返答素材
+
+- ペット状態はmodule欠落の先行Redから実装。5操作/対象外棄却/ボタン代替/終了、
+  学習した移動、待機/睡眠で時計停止、プレイヤー別得点/壁/外周を3件Green（0.007秒）。
+- 返答のcodec/exportはmodule欠落の先行Redから実装し、3件Green（0.033秒）。
+  合成器のfixture追加は実装前だが、その追加後の独立Redを再実行していないため、
+  合成CLI全体まで先行TDD済みとは拡大しない。公開モデル/原WAV hashを記録する追加検証も実施。
+- 分割PCMはCのbanked symbol欠落でRed。8bankを直接読む共通coreへ変更、1件Green（0.344秒）。
+  連続PCMのNative6件もGreen（0.407秒）、956例の全C経路を再監査し判定/logit一致。
+  C scratch5,680Bのまま、2つ目の64KB PCMを確保しない。
+
+```sh
+uv run --locked python -m unittest discover -s tests -p test_pet.py -v
+uv run --locked python -m unittest discover -s tests -p test_replies.py -v
+uv run --locked python -m unittest discover -s tests -p test_features_banked.py -v
+uv run --locked python -m arcade_ai_pet.native_evaluation \
+  --model models/kws-v2 --dataset datasets/jtalk-heldout-v1 --output reports/native-kws-v2-banked
+```
+
+返答5種は8kHz PCM8で25,569B、事前合成であり本体内TTSではない。
+ペットはPythonの状態モデルまで。描画/WASM/OS音声サービス/実声/本体録音の取得はまだない。
+
+この段階の全unit41件Green（4.220秒）、学習5件Green（1.658秒）。

@@ -37,15 +37,19 @@ static void fft(float *real,float *imag)
     }
 }
 
-int pet_features(const int16_t *pcm,size_t samples,float *output,size_t count,
-                 void *workspace,size_t workspace_bytes)
+static int16_t sample_at(const int16_t *pcm,const int16_t *const *banks,unsigned index) {
+    return pcm ? pcm[index]:banks[index/4096][index%4096];
+}
+
+static int features_core(const int16_t *pcm,const int16_t *const *banks,size_t samples,float *output,size_t count,
+                         void *workspace,size_t workspace_bytes)
 {
-    if (!pcm||!output||!workspace||samples!=PET_AUDIO_SAMPLES||count!=PET_FEATURE_COUNT||
+    if ((!pcm&&!banks)||!output||!workspace||samples!=PET_AUDIO_SAMPLES||count!=PET_FEATURE_COUNT||
         workspace_bytes<sizeof(FeatureScratch)||(uintptr_t)workspace%_Alignof(FeatureScratch)) return -1;
     FeatureScratch *scratch=workspace;
     int32_t peak=0;
     for (unsigned i=0;i<PET_AUDIO_SAMPLES;i++) {
-        int32_t value=pcm[i];if (value<0)value=-value;
+        int32_t value=sample_at(pcm,banks,i);if (value<0)value=-value;
         if (value>peak)peak=value;
     }
     for (unsigned i=0;i<PET_FEATURE_COUNT;i++)output[i]=0;
@@ -54,7 +58,7 @@ int pet_features(const int16_t *pcm,size_t samples,float *output,size_t count,
     for (unsigned frame=0;frame<198;frame++) {
         uint64_t total=0;
         for (unsigned i=0;i<400;i++) {
-            int32_t value=pcm[frame*160+i];total+=(uint64_t)(value*value);
+            int32_t value=sample_at(pcm,banks,frame*160+i);total+=(uint64_t)(value*value);
         }
         double energy=(double)total/(400.0*(double)peak*(double)peak);
         scratch->energy[frame]=energy;if (energy>maximum)maximum=energy;
@@ -74,7 +78,7 @@ int pet_features(const int16_t *pcm,size_t samples,float *output,size_t count,
     for (unsigned frame=first;frame<last;frame++) {
         while (frame>=next) { bin++;next+=base+(bin<extra); }
         for (unsigned i=0;i<512;i++) {
-            scratch->real[i]=i<400?((float)pcm[frame*160+i]/(float)peak)*pet_window[i]:0;
+            scratch->real[i]=i<400?((float)sample_at(pcm,banks,frame*160+i)/(float)peak)*pet_window[i]:0;
             scratch->imag[i]=0;
         }
         fft(scratch->real,scratch->imag);
@@ -104,4 +108,15 @@ int pet_features(const int16_t *pcm,size_t samples,float *output,size_t count,
         output[240+group]=fminf(16,fmaxf(-16,output[240+group]/frames/2));
     }
     return 1;
+}
+
+int pet_features(const int16_t *pcm,size_t samples,float *output,size_t count,
+                 void *workspace,size_t workspace_bytes) {
+    return features_core(pcm,NULL,samples,output,count,workspace,workspace_bytes);
+}
+int pet_features_banked(const int16_t *const *banks,size_t samples,float *output,size_t count,
+                        void *workspace,size_t workspace_bytes) {
+    if(!banks)return -1;
+    for(unsigned i=0;i<8;i++)if(!banks[i])return -1;
+    return features_core(NULL,banks,samples,output,count,workspace,workspace_bytes);
 }
