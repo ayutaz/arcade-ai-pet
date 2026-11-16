@@ -67,7 +67,8 @@ static int features_core(const int16_t *pcm,const int16_t *const *banks,size_t s
     unsigned first=198,last=0;
     for (unsigned frame=0;frame<198;frame++) {
         if (scratch->energy[frame]>=limit) {
-            if (first==198)first=frame;last=frame+1;
+            if (first==198)first=frame;
+            last=frame+1;
         }
     }
     if (first==198) { first=0;last=198; }
