@@ -194,3 +194,8 @@ uv run --locked python -m unittest discover -s tests/integration -v
 実WASM126frames、模擬voice全7classを両VM/160KiB poolで確認。
 統合2件Green（2.433秒）、全unit47件Green（4.453秒）、学習5件Green（1.870秒）。
 package5,142B、実機未適用。[使い方と画像の区分](pet-app.md)。
+
+## ホストSDKの接続修正
+
+SDKを3bb9548846505eac303927b9064c6a8d0eb44f79へ固定。Mac native USBの再接続で稼働appがresetされる共通修正を取り込む。pin更新であり、新しいTDDのRedがあったとは記録しない。
+unit47件（4.271秒）/両VM統合2件（2.432秒）が成功。Petの再build SHAは14f657f0…と完全一致し、固定レビューの5,142B packageとFW候補は変更しない。追加の照合scriptは最初にMacの一時path aliasで拒否され、実pathへ解決して再実行した。実装のRedではない。実機への新FW書込みは未実施。
