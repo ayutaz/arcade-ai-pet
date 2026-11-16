@@ -1,0 +1,34 @@
+{
+  "samples_hz": 8000,
+  "encoding": "signed PCM8, repeat twice at 16kHz, multiply by 28",
+  "encoded_bytes": 25418,
+  "frames": [
+    7839,
+    3116,
+    4859,
+    4619,
+    4985
+  ],
+  "texts": [
+    "いっしょにあそぼ",
+    "はーい",
+    "わかった",
+    "おやすみ",
+    "ありがとう"
+  ],
+  "asset_sha256": "5aba2a8873fbc858f10e4b19c560f2a6aad454f66088ef512955f4be9a22ecdb",
+  "on_device_tts": false,
+  "device_tested": false,
+  "license": "CC-BY-3.0",
+  "engine_sha256": "5471dfcdd681d162c10a3db79ebe597ef395d557435e21feb2f15c2edb87fa85",
+  "dictionary_sha256": "49bb7ae70f373e99801ed1c8a9e68a2678947c8a49f7cd176bbd2d37b93f10e3",
+  "voice_sha256": "1329c5e4c0176dc037eef50a73712c60bede2b26ff4a1cba5008223608ca942f",
+  "source_pcm_sha256": [
+    "eecdf71a5ef6853e7c0ba0bc27c60087e7b63388699627c475c0f81cc5911e38",
+    "34fb6ae6079aa6bd4435b9e073db499717bb633a9651888453a63ca3722afa0b",
+    "a6bc6c6b2cfee1b0fc7ff7ff5a69d03774eca023da26d9d55c8aa7508ba5cc8b",
+    "fbd3a0bd0351ac5b900846438ff92be4a3ec6219d4b89602b967266f749e3d25",
+    "9c965ba2465ca1b117708d6cf77ee5f7d5e7392b3f74c49462bffcf52d0446cc"
+  ],
+  "speed": 1.15
+}

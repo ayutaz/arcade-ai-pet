@@ -6,7 +6,8 @@
 
 static int32_t quantize(float value)
 {
-    if (value>16)value=16;if (value< -16)value=-16;
+    if (value>16)value=16;
+    if (value< -16)value=-16;
     float scaled=value*1024.0f;
     int32_t integer=(int32_t)scaled;
     float fraction=scaled-(float)integer;
