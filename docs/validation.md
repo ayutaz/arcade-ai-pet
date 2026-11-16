@@ -56,3 +56,32 @@ uv run --locked --group train python -m unittest discover -s tests/training -v
 次は新規合成の独立評価、Cへの特徴/整数推論移植、返答素材、ペットと行動学習を進める。
 
 現在の分離後のunit 13件Green（0.679秒）。学習試験はtests/trainingで別実行する。
+
+## 2026-11-17: 新規合成評価とC移植
+
+| 動作 | 意図したRed | Green/証拠 |
+|---|---|---|
+| 候補固定/新規評価 | frozen module欠落 | 固定hash、旧ID/改変重み/出力上書き拒否 |
+| 新しいprosody/noise | rates引数未対応 | PCMも新seed、開発IDと重複0 |
+| 元waveの重複防止 | 別IDなら同じwaveが通過 | WAV hash重複を拒否 |
+| validation独立照合 | 重みを壊しても申告成功だけで通過 | 直接推論して未達なら固定拒否 |
+| C export | native module欠落 | 表/重みの決定的出力 |
+| C特徴/整数推論 | 実Cファイル欠落によるcompile失敗 | Native 4件、0.772秒 |
+| 配布モデル | 配布メタデータ欠落 | 固定重み/38特徴とCの整数logit照合 |
+| 全C経路監査 | native_evaluation module欠落 | synthetic原本の再構成、改変header/wave拒否 |
+| 数値exportの境界 | threshold文字列からC注入が可能 | int範囲外を出力前に拒否 |
+| NPZ資源 | NumPyのallocation前検査なし | 全6memberを揃えた巨大shape headerをallocation前に拒否 |
+| 再現学習 | hidden/validation_only未対応 | testをscoreせず指定幅のcheckpointを保存 |
+
+固定17,380Bモデルを新しく作った956例で評価し、macro F1=0.978908、
+対象外/無音の誤起動率=0.002577。評価後にモデルを変更していない。
+全956例のC/Python整数logitと最終classが一致、特徴差の最大は3.219e-6、C scratch5,680B。
+ホスト中央値0.228ms/p95 0.908msで、本体の速度ではない。
+公開範囲と完全な結果は[モデルカード](../models/kws-v2/model-card.md)へ。
+
+最新のunit29件Green（3.202秒）、学習3件Green（1.799秒）は再現学習追加前の値。
+学習の4件目は先行Red確認後に追加実装し、別に再実行して記録する。
+実声/実機/GPU利用は未実施。古い不採用結果と開発validationは履歴として保持する。
+
+再現学習の先行Redはhidden引数未対応、実装後は学習4件Green（1.670秒）。
+修正済みunitの再実行は29件Green。Cの数値比較、固定後の合成評価、公開モデルの同一性を含む。

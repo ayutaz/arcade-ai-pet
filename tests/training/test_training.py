@@ -1,9 +1,29 @@
 import unittest
 import numpy as np
 from arcade_ai_pet.training import fit, scores, metrics, select_threshold
+from arcade_ai_pet.training import run
 
 
 class TrainingTests(unittest.TestCase):
+    def test_validation_only_recipe_never_scores_test_and_preserves_requested_width(self):
+        import json,tempfile
+        from pathlib import Path
+        from unittest.mock import patch
+        from arcade_ai_pet import training
+        with tempfile.TemporaryDirectory() as tmp:
+            base=Path(tmp);(base/'manifest.json').write_text('{}')
+            x=np.zeros((7,260),dtype=np.float32);x[np.arange(7),np.arange(7)]=4;y=np.arange(7)
+            test=x.copy();test[:,259]=15
+            data=dict(train=dict(x=x,y=y),validation=dict(x=x,y=y),test=dict(x=test,y=y))
+            original=training.scores
+            def guarded(values,layers):
+                if np.any(values[:,259]==15):raise AssertionError('held-out test was scored')
+                return original(values,layers)
+            with patch('arcade_ai_pet.training.load_dataset',return_value=data),patch('arcade_ai_pet.training.scores',side_effect=guarded):
+                result=run(base,base/'output',epochs=2,hidden=16,validation_only=True)
+            self.assertFalse(result['test_evaluated']);self.assertNotIn('test',result)
+            self.assertTrue((base/'output/validation.json').exists())
+            with np.load(base/'output/weights.npz',allow_pickle=False) as archive:self.assertEqual(archive['weight0'].shape,(16,260))
     def test_tiny_training_is_reproducible_and_integer_model_separates_inputs(self):
         x=np.zeros((40,260),dtype=np.float32);x[:20,0]=-2;x[20:,0]=2
         y=np.array([0]*20+[1]*20)

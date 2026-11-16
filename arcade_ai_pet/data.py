@@ -2,7 +2,9 @@
 import argparse
 import hashlib
 import json
+import math
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import wave
@@ -46,10 +48,16 @@ def trim_silence(pcm):
     return result
 
 
-def create(output,jtalk_root,*,variants=3,source_cache=None):
+def create(output,jtalk_root,*,variants=3,source_cache=None,rates=(.85,1.1,1.35),pitches=(-2,2),noise_namespace='noise'):
     output=Path(output).resolve();root=Path(jtalk_root).resolve()
     if output.exists():raise ValueError('fresh dataset directory required')
     if type(variants) is not int or not 1<=variants<=10:raise ValueError('augmentation count')
+    for values,lo,hi in ((rates,.6,1.8),(pitches,-6,6)):
+        if (type(values) not in (tuple,list) or not 1<=len(values)<=4 or len(set(values))!=len(values) or
+            any(type(v) not in (int,float) or not math.isfinite(v) or not lo<=v<=hi or round(v,3)!=v for v in values)):
+            raise ValueError('bounded unique prosody grid required')
+    if type(noise_namespace) is not str or not re.fullmatch('[a-z][a-z0-9-]{0,31}',noise_namespace):
+        raise ValueError('noise source namespace')
     voices=sorted((root/'voice').glob('*/*.htsvoice'))
     if not voices or not (root/'dic/sys.dic').is_file():raise ValueError('Open JTalk dictionary/voices required')
     fingerprint=dict(engine_sha256=hashlib.sha256((root/'bin/open_jtalk').read_bytes()).hexdigest(),
@@ -64,11 +72,11 @@ def create(output,jtalk_root,*,variants=3,source_cache=None):
     records=[];arrays={split:[] for split in ('train','validation','test')}
     labels={split:[] for split in arrays}
     for voice in voices:
-        for speed in (.85,1.1,1.35):
-            for pitch in (-2,2):
+        for speed in rates:
+            for pitch in pitches:
                 for label,texts in SOURCES.items():
                     for text in texts:
-                        source=f'{voice.parent.name}/{voice.name}/{speed}/{pitch}/{text}'
+                        source=f'{voice.parent.name}/{voice.name}/{speed:g}/{pitch:g}/{text}'
                         ident=hashlib.sha256(source.encode()).hexdigest();split=split_for(source)
                         file=output/'sources'/(ident+'.wav')
                         if cache is not None:
@@ -88,16 +96,19 @@ def create(output,jtalk_root,*,variants=3,source_cache=None):
                             sha256=hashlib.sha256(file.read_bytes()).hexdigest()))
     # Noise-only examples have their own independent source IDs and seeds.
     for index in range(200):
-        source=f'noise/{index}';split=split_for(source)
-        rng=np.random.default_rng(index+70000)
+        source=f'{noise_namespace}/{index}';split=split_for(source)
+        seed=index+70000 if noise_namespace=='noise' else int.from_bytes(hashlib.sha256(source.encode()).digest()[:8],'little')
+        rng=np.random.default_rng(seed)
         pcm=np.clip(rng.normal(0,0 if index%4==0 else rng.uniform(1,200),32000),-32767,32767).astype(np.int16)
         arrays[split].append(features(pcm));labels[split].append(6)
-        records.append(dict(id=hashlib.sha256(source.encode()).hexdigest(),source=source,split=split,label=6))
+        records.append(dict(id=hashlib.sha256(source.encode()).hexdigest(),source=source,split=split,label=6,
+                            pcm_sha256=hashlib.sha256(pcm.tobytes()).hexdigest()))
     for split in arrays:
         np.savez_compressed(output/(split+'.npz'),x=np.array(arrays[split],dtype=np.float32),y=np.array(labels[split],dtype=np.int64))
     manifest=dict(engine='Open JTalk Homebrew build; executable version must be recorded separately',
                   **fingerprint,feature_version='aligned-mfcc-v2',
-                  license='CC-BY-3.0 voices; see docs/data-license.md',variants=variants,records=records)
+                  license='CC-BY-3.0 voices; see docs/data-license.md',variants=variants,records=records,
+                  rates=list(rates),pitches=list(pitches),noise_namespace=noise_namespace)
     (output/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
     return {split:len(arrays[split]) for split in arrays}
 

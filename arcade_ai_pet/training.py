@@ -89,29 +89,32 @@ def fit(x,y,vx,vy,*,seed=42,epochs=240,hidden=48):
                 validation=best[2],seed=seed,epochs=epochs)
 
 
-def run(dataset,output,*,epochs=240,seed=42):
+def run(dataset,output,*,epochs=240,seed=42,hidden=48,validation_only=False):
     dataset=Path(dataset).resolve();output=Path(output).resolve()
     if output.exists():raise ValueError('fresh training output required')
     data=load_dataset(dataset)
-    result=fit(data['train']['x'],data['train']['y'],data['validation']['x'],data['validation']['y'],epochs=epochs,seed=seed)
+    result=fit(data['train']['x'],data['train']['y'],data['validation']['x'],data['validation']['y'],epochs=epochs,seed=seed,hidden=hidden)
     layers=result.pop('layers');logits=scores(data['validation']['x'],layers)
     threshold=select_threshold(data['validation']['y'],logits)
     result['threshold_q10']=threshold
     result['validation_selected']=metrics(data['validation']['y'],decisions(logits,threshold))
     # Test has no influence on checkpoint/threshold selection.
-    result['test']=metrics(data['test']['y'],decisions(scores(data['test']['x'],layers),threshold))
     result['weights_bytes']=sum(layer['weight'].nbytes+layer['bias'].nbytes+4 for layer in layers)
-    result['accepted_synthetic']=(result['test']['macro_f1']>=.90 and result['test']['false_activation_rate']<=.05 and result['weights_bytes']<=24576)
+    result['test_evaluated']=not validation_only
+    if not validation_only:
+        result['test']=metrics(data['test']['y'],decisions(scores(data['test']['x'],layers),threshold))
+        result['accepted_synthetic']=(result['test']['macro_f1']>=.90 and result['test']['false_activation_rate']<=.05 and result['weights_bytes']<=24576)
     result.update(real_voice_tested=False,device_tested=False,vast_usd=0,
                   dataset_manifest_sha256=hashlib.sha256((dataset/'manifest.json').read_bytes()).hexdigest(),
                   split_examples={split:len(data[split]['y']) for split in data})
     output.mkdir(parents=True)
     np.savez(output/'weights.npz',**{f'{field}{i}':layer[field] for i,layer in enumerate(layers) for field in ('weight','bias','shift')})
-    (output/'evaluation.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+    (output/('validation.json' if validation_only else 'evaluation.json')).write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
     return result
 
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--dataset',required=True)
     parser.add_argument('--output',required=True);parser.add_argument('--epochs',type=int,default=240)
-    args=parser.parse_args();print(json.dumps(run(args.dataset,args.output,epochs=args.epochs)))
+    parser.add_argument('--hidden',type=int,default=48);parser.add_argument('--validation-only',action='store_true')
+    args=parser.parse_args();print(json.dumps(run(args.dataset,args.output,epochs=args.epochs,hidden=args.hidden,validation_only=args.validation_only)))
