@@ -207,3 +207,7 @@ unit47件（4.271秒）/両VM統合2件（2.432秒）が成功。Petの再build 
 集計は録音・USB・FW操作を行わず、scopeを自動証明しない。模擬入力が満点でもhardware_acceptance_provenはfalse。新しい実声結果を得たとは記載しない。
 
 最終回帰は標準54件/4.569秒、両VM統合2件/2.406秒が成功。nullの記録例はCLIがexit2で拒否。文書リンクも確認した。
+
+導入監査でpet-app.mdが旧SDK3bb154bを案内し、builderの固定3bb9548と異なることを発見。guide/CI/builderの整合テストを先行追加し、旧guideでRed→現行pinへの修正でGreen。過去の固定FW source3bb154bと当時の記録は変更しない。
+
+SDK案内の回帰追加後、標準55件/4.495秒成功。app/VMコードは変更せず、直前の両VM統合2件も成功済み。

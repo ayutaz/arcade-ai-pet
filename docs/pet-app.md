@@ -4,9 +4,9 @@
 
 ## build
 
-公開OSのcommit `3bb154b434da50462922257ec257ca6fdb62b742`をcleanなcheckoutで用意し、
-SDK側で`uv run --locked python tools/bootstrap.py`を実行する。現時点は音声serviceのPR候補で、
-旧FWや旧SDKでは新しい音声importを使えない。
+公開OSのcommit `3bb9548846505eac303927b9064c6a8d0eb44f79`をcleanなcheckoutで用意し、
+SDK側で`uv run --locked python tools/bootstrap.py`を実行する。音声serviceとMac native USB修正は公開mainへマージ済み。
+旧FWや旧SDKでは新しい音声importを使えず、SDKを更新するだけでは本体FWは変わらない。
 
 ```sh
 uv sync --locked
