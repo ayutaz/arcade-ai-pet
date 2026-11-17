@@ -1,7 +1,7 @@
 # 固定候補のC実装と数値照合
 
 2026-11-18。**全7,648評価でPythonとCの最終判定が一致し、C側も品質ゲートを通過した。**
-CをESP32-S3へ組み込む前のホスト検証で、実機認識や処理時間の保証ではない。
+この監査はホスト検証。後続OS候補のS3 buildは成功したが、実機認識や処理時間の保証ではない。
 
 | 検査 | 結果 |
 |---|---|
@@ -64,7 +64,7 @@ evaluate_native_channel("checkpoints/fresh-frozen", "build/fresh-channel-native"
 ```
 
 比較は固定モデルの再現/移植試験。同じ最終データで新しい重みを選び直す処理ではない。
-新規GPU/API課金は0米ドル。target build・実heap/stack・遅延・実声30試行は未実施。
+新規GPU/API課金は0米ドル。監査時点ではtarget build未実施。その後、固定source48bf239のOS候補はS3 build/715件を通過した。[後続統合](../models/kws-v3/model-card.md#後続のos統合候補)。実heap/stack・遅延・実声30試行は未実施。
 
 最終回帰は標準94件/8.082秒、学習8件/2.222秒、固定SDKの両VM統合2件/3.203秒で成功。
 ホストcompilerはApple clang21.0.0。公開候補のC source5件と生成headerのSHAが、保存した実測JSONと一致することを別途照合した。
