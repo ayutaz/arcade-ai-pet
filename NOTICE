@@ -5,7 +5,7 @@ Host synthetic speech uses Open JTalk and HTS Voice Mei / NIT ATR503 M001.
 Voice and derivative asset attribution: docs/data-license.md.
 No upstream voice model or recorded device audio is distributed here.
 
-models/kws-v2 contains trained derivative KWS weights and conformance features
+models/kws-v2 and models/kws-v3 contain trained derivative KWS weights and conformance features
 under CC BY 3.0, with attribution and modifications in model-card.md / LICENSE.txt.
 feature_tables.h contains generated mathematical constants under Apache-2.0.
 

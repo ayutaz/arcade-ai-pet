@@ -1,0 +1,623 @@
+{
+  "schema": 1,
+  "scope": "host_native_frozen_channel_conformance_and_synthetic_quality",
+  "examples_per_profile": 956,
+  "total_profile_examples": 7648,
+  "profiles": [
+    {
+      "profile": "clean",
+      "macro_f1": 0.9978640271813012,
+      "accuracy": 0.9989539748953975,
+      "false_activation_rate": 0.0,
+      "confusion": [
+        [
+          35,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          36,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          36,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          36,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          36,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          576,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          200
+        ]
+      ],
+      "examples": 956,
+      "command_recall": 0.9944444444444445
+    },
+    {
+      "profile": "quiet",
+      "macro_f1": 0.9964140871831881,
+      "accuracy": 0.99581589958159,
+      "false_activation_rate": 0.0,
+      "confusion": [
+        [
+          35,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          36,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          36,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          36,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          36,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          576,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          197
+        ]
+      ],
+      "examples": 956,
+      "command_recall": 0.9944444444444445
+    },
+    {
+      "profile": "dc",
+      "macro_f1": 0.9973823035772219,
+      "accuracy": 0.997907949790795,
+      "false_activation_rate": 0.0,
+      "confusion": [
+        [
+          35,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          36,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          36,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          36,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          36,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          576,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          199
+        ]
+      ],
+      "examples": 956,
+      "command_recall": 0.9944444444444445
+    },
+    {
+      "profile": "drift",
+      "macro_f1": 0.9959275659544689,
+      "accuracy": 0.9947698744769874,
+      "false_activation_rate": 0.0,
+      "confusion": [
+        [
+          35,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          36,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          36,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          36,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          36,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          576,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          4,
+          196
+        ]
+      ],
+      "examples": 956,
+      "command_recall": 0.9944444444444445
+    },
+    {
+      "profile": "hum",
+      "macro_f1": 0.9275055840576931,
+      "accuracy": 0.9633891213389121,
+      "false_activation_rate": 0.00902061855670103,
+      "confusion": [
+        [
+          33,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          33,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          30,
+          0,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          30,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          29,
+          7,
+          0
+        ],
+        [
+          2,
+          0,
+          1,
+          3,
+          1,
+          566,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          200
+        ]
+      ],
+      "examples": 956,
+      "command_recall": 0.8611111111111112
+    },
+    {
+      "profile": "noise",
+      "macro_f1": 0.916142895136615,
+      "accuracy": 0.9602510460251046,
+      "false_activation_rate": 0.01288659793814433,
+      "confusion": [
+        [
+          30,
+          0,
+          0,
+          0,
+          0,
+          5,
+          1
+        ],
+        [
+          0,
+          29,
+          0,
+          0,
+          0,
+          7,
+          0
+        ],
+        [
+          1,
+          0,
+          30,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          34,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          31,
+          4,
+          0
+        ],
+        [
+          2,
+          5,
+          1,
+          2,
+          0,
+          564,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          200
+        ]
+      ],
+      "examples": 956,
+      "command_recall": 0.8555555555555555
+    },
+    {
+      "profile": "early",
+      "macro_f1": 0.9870670204131026,
+      "accuracy": 0.9937238493723849,
+      "false_activation_rate": 0.001288659793814433,
+      "confusion": [
+        [
+          33,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          36,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          35,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          35,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          36,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          575,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          200
+        ]
+      ],
+      "examples": 956,
+      "command_recall": 0.9722222222222222
+    },
+    {
+      "profile": "late",
+      "macro_f1": 0.9978640271813012,
+      "accuracy": 0.9989539748953975,
+      "false_activation_rate": 0.0,
+      "confusion": [
+        [
+          35,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          36,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          36,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          36,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          36,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          576,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          200
+        ]
+      ],
+      "examples": 956,
+      "command_recall": 0.9944444444444445
+    }
+  ],
+  "direct_integer_logit_matches": 7648,
+  "end_to_end_decision_matches": 7648,
+  "banked_feature_matches": 7648,
+  "maximum_feature_error": 4.291534423828125e-06,
+  "scratch_bytes": 5680,
+  "weights_bytes": 23884,
+  "weights_sha256": "374987a02446e805f18427d7de8de3cd955c4833efc6e0a9dbd9fa655c3c59f2",
+  "threshold_q10": 995,
+  "frozen_sha256": "10897e4bfaaa3dbc5fe517e1fb25b074e4bf68f67ef306d777b3cf283f25255e",
+  "dataset_manifest_sha256": "e574eee00dfb5cbbd6c00e39a73f58e1ec5bb68ddf50618ff9b9ff8c4bdac303",
+  "source_sha256": {
+    "channel_features.c": "7d8a93a3e854c9d01f881a17402c57728200710de6bb98d52ecd4d77f4ba491a",
+    "channel_prepare.c": "6ca2e011a50484adf2601c882c4ab336e3bea2e9a932d303d8522390cceb373d",
+    "inference.c": "37e2c27afc2711caed44311859686a9072b2d181976850b0780b57a7b884d905",
+    "channel_features.h": "ae7cb731cdeb5f95d87e520bde4c3b9ef8ac6767e64387841956888010cfdc50",
+    "pet_kws.h": "d357f391888bbb28d84ca5e9afbd3742ba6f73d282446479192684ff3a156c90"
+  },
+  "header_sha256": {
+    "feature_tables.h": "f880061b75d258240508ca9b8ca11d519c708e8643858a83d0128487b6e20edf",
+    "pet_model.h": "f04cbe0a5a9c495524b155da9b1e8a6284ce343db8ea5e647d0def73bef33548"
+  },
+  "conformance_passed": true,
+  "quality_passed": true,
+  "accepted_for_target_build": true,
+  "host_contiguous_extract_median_ms": 0.424042,
+  "host_contiguous_extract_p95_ms": 1.06752665,
+  "host_timings_only": true,
+  "target_build_tested": false,
+  "device_tested": false,
+  "real_voice_tested": false,
+  "vast_usd": 0
+}
