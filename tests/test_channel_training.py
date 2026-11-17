@@ -128,3 +128,23 @@ class ChannelTrainingTests(unittest.TestCase):
             with patch.object(training,'make_arrays',side_effect=AssertionError('must reject before waveforms')):
                 with self.assertRaises(ValueError):training.reselect_threshold(model,root,root/'refused')
             self.assertFalse((root/'refused').exists())
+
+    def test_hum_weighting_changes_only_train_counts_and_retains_validation_inputs(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            records=[dict(id=('a' if i==0 else 'b')*64,split=s,sha256=str(i)*64) for i,s in enumerate(('train','validation'))]
+            (root/'manifest.json').write_text(json.dumps(dict(variants=1,records=records)))
+            pcm=np.zeros(32000,dtype=np.int16);pcm[4000:12000]=(1000*np.sin(np.arange(8000)*.1)).astype(np.int16)
+            examples=[(pcm,i,np.zeros(260,dtype=np.float32)) for i in range(2)]
+            def arrays(hum):
+                with patch.object(training,'_examples',return_value=iter(examples)):
+                    return training.make_arrays(root,'hp160',frontend='adaptive',noise_replicas=5,hum_replicas=hum)
+            base=arrays(1);weighted=arrays(3)
+            self.assertEqual(len(weighted['train']['y']),14)
+            self.assertEqual(weighted['train']['profiles'].count('noise'),5)
+            self.assertEqual(weighted['train']['profiles'].count('hum'),3)
+            np.testing.assert_array_equal(base['validation']['x'],weighted['validation']['x'])
+            indexes=[i for i,p in enumerate(weighted['train']['profiles']) if p=='hum']
+            np.testing.assert_array_equal(weighted['train']['x'][indexes[0]],weighted['train']['x'][indexes[1]])
+        for value in (0,9,True):
+            with self.assertRaises(ValueError):training.make_arrays(Path('absent'),'hp160',hum_replicas=value)

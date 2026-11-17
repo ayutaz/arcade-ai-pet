@@ -17,8 +17,10 @@ class ChannelTrainingRecipeTests(unittest.TestCase):
             profiles=[p for p in PROFILES for _ in range(7)]
             data={s:dict(x=x,y=y,profiles=profiles) for s in ('train','validation')}
             with patch.object(training,'make_arrays',return_value=data) as construct:
-                result=training.train_channel_candidate(root,root/'out','hp80',epochs=1,frontend='subtract',hidden=88,selection='worst',noise_replicas=3,noise_mode='fresh')
+                result=training.train_channel_candidate(root,root/'out','hp80',epochs=1,frontend='subtract',hidden=88,selection='worst',noise_replicas=3,noise_mode='fresh',hum_replicas=3)
             self.assertEqual(construct.call_args.kwargs['noise_replicas'],3)
+            self.assertEqual(construct.call_args.kwargs['hum_replicas'],3)
+            self.assertEqual(result['hum_replicas'],3)
             self.assertEqual(result['noise_replicas'],3)
             self.assertEqual(result['noise_mode'],'fresh')
             self.assertEqual(result['frontend_version'],'subtract')
