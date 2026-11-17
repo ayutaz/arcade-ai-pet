@@ -68,3 +68,63 @@ class ChannelTrainingTests(unittest.TestCase):
         self.assertGreater(fit_module.validation_rank(y,b,groups),fit_module.validation_rank(y,a,groups))
         for invalid in (groups[:1],np.full(77,8),np.full(77,True)):
             with self.assertRaises(ValueError):fit_module.validation_rank(y,a,invalid)
+
+    def test_noise_diversity_augments_only_train_and_leaves_validation_identical(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            records=[dict(id=('a' if i==0 else 'b')*64,split=s,sha256=str(i)*64) for i,s in enumerate(('train','validation'))]
+            (root/'manifest.json').write_text(json.dumps(dict(variants=1,records=records)))
+            pcm=np.zeros(32000,dtype=np.int16);pcm[4000:12000]=(1000*np.sin(np.arange(8000)*.1)).astype(np.int16)
+            examples=[(pcm,i,np.zeros(260,dtype=np.float32)) for i in range(2)]
+            def arrays(replicas,mode='fresh'):
+                with patch.object(training,'_examples',return_value=iter(examples)):
+                    return training.make_arrays(root,'hp160',frontend='adaptive',noise_replicas=replicas,noise_mode=mode)
+            base=arrays(1);fresh=arrays(3);repeat=arrays(3,'repeat')
+            self.assertEqual(len(fresh['train']['y']),10);self.assertEqual(len(fresh['validation']['y']),8)
+            np.testing.assert_array_equal(base['validation']['x'],fresh['validation']['x'])
+            np.testing.assert_array_equal(base['validation']['x'],repeat['validation']['x'])
+            indexes=[i for i,p in enumerate(fresh['train']['profiles']) if p=='noise']
+            self.assertEqual(len(indexes),3)
+            self.assertFalse(np.array_equal(fresh['train']['x'][indexes[0]],fresh['train']['x'][indexes[1]]))
+            np.testing.assert_array_equal(repeat['train']['x'][indexes[0]],repeat['train']['x'][indexes[1]])
+            again=arrays(3);np.testing.assert_array_equal(again['train']['x'],fresh['train']['x'])
+        for kwargs in ({'noise_replicas':0},{'noise_replicas':9},{'noise_replicas':True},{'noise_mode':'device'}):
+            with self.assertRaises(ValueError):training.make_arrays(Path('absent'),'hp160',**kwargs)
+
+    def test_threshold_search_checks_integer_decision_boundaries_not_only_coarse_steps(self):
+        from arcade_ai_pet.channel_robustness import PROFILES
+        labels=np.tile(np.arange(7),len(PROFILES));profiles=[p for p in PROFILES for _ in range(7)]
+        logits=np.zeros((len(labels),7),dtype=np.int64)
+        logits[np.arange(len(labels)),labels]=5000
+        # Reject the unknown margin 1279, retain the command margin 1400.
+        logits[5]=0;logits[5,0]=1279
+        logits[0]=0;logits[0,0]=1400
+        threshold,rows,accepted=training.select_channel_threshold(labels,logits,profiles,'hp160')
+        self.assertEqual(threshold,1280);self.assertTrue(accepted)
+        self.assertTrue(all(r['macro_f1']==1 and r['command_recall']==1 and r['false_activation_rate']==0 for r in rows))
+        with self.assertRaises(ValueError):training.select_channel_threshold(labels,logits[:1],profiles,'hp160')
+        with self.assertRaises(ValueError):training.select_channel_threshold(labels,logits,['unknown']*len(labels),'hp160')
+
+    def test_reselection_preserves_original_model_and_rejects_changed_weights_before_waveforms(self):
+        import shutil
+        from test_frozen import checkpoint
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);model=root/'model';checkpoint(model)
+            (root/'manifest.json').write_text('{}')
+            digest=hashlib.sha256((model/'weights.npz').read_bytes()).hexdigest()
+            metadata=dict(candidate='hp160',frontend_version='adaptive',noise_replicas=1,noise_mode='fresh',
+                          weights_sha256=digest,dataset_manifest_sha256=hashlib.sha256(b'{}').hexdigest(),threshold_q10=0)
+            (model/'validation.json').write_text(json.dumps(metadata));original=(model/'validation.json').read_bytes()
+            y=np.tile(np.arange(7),8);profiles=[p for p in PROFILES for _ in range(7)]
+            logits=np.zeros((56,7),dtype=np.int64);logits[np.arange(56),y]=5000
+            logits[5]=0;logits[5,0]=1279;logits[0]=0;logits[0,0]=1400
+            arrays={'validation':dict(x=np.zeros((56,260),dtype=np.float32),y=y,profiles=profiles)}
+            with patch.object(training,'make_arrays',return_value=arrays),patch('arcade_ai_pet.training.scores',return_value=logits):
+                result=training.reselect_threshold(model,root,root/'selected')
+            self.assertTrue(result['accepted_validation']);self.assertEqual(result['threshold_q10'],1280)
+            self.assertEqual(hashlib.sha256((root/'selected/weights.npz').read_bytes()).hexdigest(),digest)
+            self.assertEqual((model/'validation.json').read_bytes(),original)
+            with (model/'weights.npz').open('ab') as stream:stream.write(b'changed')
+            with patch.object(training,'make_arrays',side_effect=AssertionError('must reject before waveforms')):
+                with self.assertRaises(ValueError):training.reselect_threshold(model,root,root/'refused')
+            self.assertFalse((root/'refused').exists())
