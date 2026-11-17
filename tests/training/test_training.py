@@ -55,3 +55,10 @@ class TrainingTests(unittest.TestCase):
         size=sum(l['weight'].nbytes+l['bias'].nbytes+4 for l in result['layers'])
         self.assertEqual(size,23884);self.assertLessEqual(size,24576)
         with self.assertRaises(ValueError):fit(x,y,x,y,epochs=1,hidden=91)
+
+    def test_grouped_selection_is_explicit_and_rejects_misaligned_groups(self):
+        x=np.zeros((14,260),dtype=np.float32);y=np.tile(np.arange(7),2);x[np.arange(14),y]=4
+        groups=np.array([0]*7+[1]*7)
+        result=fit(x,y,x,y,epochs=2,hidden=16,validation_groups=groups)
+        self.assertEqual(result['selection_metric'],'worst_channel')
+        with self.assertRaises(ValueError):fit(x,y,x,y,epochs=1,validation_groups=groups[:1])

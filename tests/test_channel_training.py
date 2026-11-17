@@ -58,3 +58,13 @@ class ChannelTrainingTests(unittest.TestCase):
             for values in ({'hidden':91},{'epochs':1001},{'hidden':True},{'epochs':0}):
                 with self.subTest(values=values),self.assertRaisesRegex(ValueError,'training resource bounds'):
                     training.train_channel_candidate(Path('absent'),Path(tmp)/'out','hp80',**values)
+
+    def test_checkpoint_rank_prefers_worst_channel_over_majority_average(self):
+        from arcade_ai_pet import training as fit_module
+        y=np.tile(np.arange(7),11);groups=np.array([0]*70+[1]*7)
+        a=y.copy();a[70:73]=(a[70:73]+1)%7
+        b=y.copy();b[:14]=(b[:14]+1)%7;b[70]=(b[70]+1)%7
+        self.assertGreater(fit_module.metrics(y,a)['macro_f1'],fit_module.metrics(y,b)['macro_f1'])
+        self.assertGreater(fit_module.validation_rank(y,b,groups),fit_module.validation_rank(y,a,groups))
+        for invalid in (groups[:1],np.full(77,8),np.full(77,True)):
+            with self.assertRaises(ValueError):fit_module.validation_rank(y,a,invalid)
