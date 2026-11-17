@@ -17,14 +17,14 @@ def level(pcm):
     return (np.sign(scaled)*(abs(scaled)//peak)).astype(np.int16)
 
 
-def _noise_options(replicas,mode):
-    if type(replicas) is not int or not 1<=replicas<=8 or mode not in ('fresh','repeat'):
+def _noise_options(replicas,mode,hum_replicas=1):
+    if any(type(n) is not int or not 1<=n<=8 for n in (replicas,hum_replicas)) or mode not in ('fresh','repeat'):
         raise ValueError('bounded training noise options required')
 
 
-def make_arrays(dataset,candidate,*,frontend='aligned',noise_replicas=1,noise_mode='fresh'):
+def make_arrays(dataset,candidate,*,frontend='aligned',noise_replicas=1,noise_mode='fresh',hum_replicas=1):
     if candidate not in CANDIDATES or frontend not in ('aligned','adaptive','subtract'):raise ValueError('conditioning candidate/frontend')
-    _noise_options(noise_replicas,noise_mode)
+    _noise_options(noise_replicas,noise_mode,hum_replicas)
     extract=features
     if frontend!='aligned':
         from .channel_frontend import features as adaptive
@@ -37,10 +37,10 @@ def make_arrays(dataset,candidate,*,frontend='aligned',noise_replicas=1,noise_mo
         if split not in arrays:continue
         seed=int(ident[:16],16);out=arrays[split]
         for profile in PROFILES:
-            replicas=noise_replicas if split=='train' and profile=='noise' else 1
+            replicas=(noise_replicas if profile=='noise' else hum_replicas if profile=='hum' else 1) if split=='train' else 1
             for replica in range(replicas):
                 current=seed
-                if replica and noise_mode=='fresh':
+                if replica and profile=='noise' and noise_mode=='fresh':
                     current=int.from_bytes(hashlib.sha256(ident.encode()+pcm.tobytes()+bytes([replica])).digest()[:8],'little')
                 out['x'].append(extract(level(condition(simulate(pcm,profile,current),candidate))))
                 out['y'].append(label);out['profiles'].append(profile)
@@ -73,22 +73,22 @@ def select_channel_threshold(labels,logits,profiles,candidate):
     return selected[3],selected[4],not selected[0]
 
 
-def train_channel_candidate(dataset,output,candidate,*,epochs=600,frontend='aligned',hidden=64,selection='overall',noise_replicas=1,noise_mode='fresh'):
+def train_channel_candidate(dataset,output,candidate,*,epochs=600,frontend='aligned',hidden=64,selection='overall',noise_replicas=1,noise_mode='fresh',hum_replicas=1):
     from .training import fit,scores,decisions,MAX_HIDDEN
     dataset=Path(dataset).resolve();output=Path(output).resolve()
     if output.exists():raise ValueError('fresh training output required')
     if type(hidden) is not int or not 1<=hidden<=MAX_HIDDEN or type(epochs) is not int or not 1<=epochs<=1000:
         raise ValueError('training resource bounds')
     if selection not in ('overall','worst'):raise ValueError('checkpoint selection')
-    _noise_options(noise_replicas,noise_mode)
-    data=make_arrays(dataset,candidate,frontend=frontend,noise_replicas=noise_replicas,noise_mode=noise_mode)
+    _noise_options(noise_replicas,noise_mode,hum_replicas)
+    data=make_arrays(dataset,candidate,frontend=frontend,noise_replicas=noise_replicas,noise_mode=noise_mode,hum_replicas=hum_replicas)
     groups=np.array([PROFILES.index(p) for p in data['validation']['profiles']]) if selection=='worst' else None
     result=fit(data['train']['x'],data['train']['y'],data['validation']['x'],data['validation']['y'],
                epochs=epochs,hidden=hidden,seed=42,validation_groups=groups)
     layers=result.pop('layers');v=data['validation'];logits=scores(v['x'],layers)
     threshold,rows,accepted=select_channel_threshold(v['y'],logits,v['profiles'],candidate)
     result.update(candidate=candidate,preprocessing='condition-then-peak4096-v1',frontend_version=frontend,
-                  noise_replicas=noise_replicas,noise_mode=noise_mode,validation=rows,
+                  noise_replicas=noise_replicas,noise_mode=noise_mode,hum_replicas=hum_replicas,validation=rows,
                   threshold_q10=threshold,threshold_search='integer-decision-boundaries-v1',accepted_validation=accepted,final_evaluated=False,
                   real_voice_tested=False,device_tested=False,vast_usd=0,
                   weights_bytes=sum(l['weight'].nbytes+l['bias'].nbytes+4 for l in layers),
@@ -134,5 +134,6 @@ if __name__=='__main__':
     p.add_argument('--hidden',type=int,default=64)
     p.add_argument('--selection',choices=('overall','worst'),default='overall')
     p.add_argument('--noise-replicas',type=int,default=1);p.add_argument('--noise-mode',choices=('fresh','repeat'),default='fresh')
-    a=p.parse_args();r=train_channel_candidate(a.dataset,a.output,a.candidate,epochs=a.epochs,frontend=a.frontend,hidden=a.hidden,selection=a.selection,noise_replicas=a.noise_replicas,noise_mode=a.noise_mode)
+    p.add_argument('--hum-replicas',type=int,default=1)
+    a=p.parse_args();r=train_channel_candidate(a.dataset,a.output,a.candidate,epochs=a.epochs,frontend=a.frontend,hidden=a.hidden,selection=a.selection,noise_replicas=a.noise_replicas,noise_mode=a.noise_mode,hum_replicas=a.hum_replicas)
     print(json.dumps({k:r[k] for k in ('candidate','accepted_validation','threshold_q10','weights_bytes','selected_epoch')}))
