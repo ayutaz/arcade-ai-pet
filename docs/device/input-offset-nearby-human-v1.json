@@ -1,0 +1,59 @@
+{
+  "nearby": {
+    "placement_user_reported": true,
+    "requested_distance_cm": [
+      5,
+      10
+    ],
+    "distance_measured": false,
+    "mac_volume_percent": 45,
+    "afplay_gain": 0.75,
+    "scope": "device_synthetic",
+    "correct": 0,
+    "total": 5,
+    "preserved_apps": 16,
+    "home": true,
+    "audio_released": true,
+    "human_voice_tested": false,
+    "pcm_exported": false,
+    "observed_actions": [
+      7,
+      7,
+      7,
+      0,
+      7
+    ],
+    "post_audio_settle_ms": 500
+  },
+  "human_single_diagnostic": {
+    "scope": "device_human_single_diagnostic_not_formal_30_trials",
+    "observed_at_utc": "2026-11-17T15:29:17.359555+00:00",
+    "user_reported_spoken": true,
+    "expected_action": 1,
+    "observed_action": 7,
+    "correct": false,
+    "observation_method": "record consumed and scrubbed, no visible action",
+    "ui_crc_action": 7,
+    "audio_snapshot": {
+      "version": 1,
+      "phase": 0,
+      "claimed": 1,
+      "driver_owned": 0,
+      "capacity": 32000,
+      "recorded": 0,
+      "total": 32000,
+      "position": 32000,
+      "kind": 2,
+      "replaying": 0,
+      "peak": 0,
+      "result": 1
+    },
+    "native_label_exposed": false,
+    "raw_pcm_exported": false,
+    "home": true,
+    "preserved_apps": 16,
+    "audio_released": true,
+    "radio_stopped": true
+  },
+  "formal_30_trials_performed": false
+}

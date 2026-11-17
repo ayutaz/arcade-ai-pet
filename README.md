@@ -30,7 +30,8 @@ All 16 apps remain intact, and these checks use no Wi-Fi.
 
 **Voice control is not ready.** The corrected firmware still gave no visible
 action for five synthetic commands. Two of three environmental recordings also
-entered the wait state. These are limited acoustic checks, not human accuracy.
+entered the wait state. Moving the board closer and a single human-spoken command
+also failed. These are limited diagnostic checks; formal human accuracy is unmeasured.
 [Device evidence](docs/device-validation.md) records the failures and the input-level
 checks; human speech, audible quality and physical display/input validation remain pending.
 
