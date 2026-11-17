@@ -47,3 +47,11 @@ class TrainingTests(unittest.TestCase):
         x=np.zeros((7,260),dtype=np.float32);y=np.arange(7)
         for invalid in (x[:,:2],np.full((7,260),np.nan)):
             with self.assertRaises(ValueError):fit(invalid,y,x,y,epochs=1)
+
+    def test_88_hidden_units_fit_the_existing_24kib_budget_and_larger_models_are_refused(self):
+        x=np.zeros((7,260),dtype=np.float32);x[np.arange(7),np.arange(7)]=4;y=np.arange(7)
+        result=fit(x,y,x,y,seed=42,epochs=2,hidden=88)
+        self.assertEqual(result['layers'][0]['weight'].shape,(88,260))
+        size=sum(l['weight'].nbytes+l['bias'].nbytes+4 for l in result['layers'])
+        self.assertEqual(size,23884);self.assertLessEqual(size,24576)
+        with self.assertRaises(ValueError):fit(x,y,x,y,epochs=1,hidden=91)

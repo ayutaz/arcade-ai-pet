@@ -90,3 +90,17 @@ class FrozenTests(unittest.TestCase):
                 for name in good.namelist():archive.writestr(name,header.getvalue() if name=='weight0.npy' else good.read(name))
             with patch('arcade_ai_pet.frozen.np.load',side_effect=AssertionError('must reject before allocation')):
                 with self.assertRaises(ValueError):read_layers(path)
+
+    def test_wider_integer_model_is_accepted_only_within_24kib_shape_budget(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            for hidden in (88,91):
+                path=root/(str(hidden)+'.npz')
+                np.savez(path,weight0=np.zeros((hidden,260),dtype=np.int8),bias0=np.zeros(hidden,dtype=np.int32),shift0=np.int64(1),
+                         weight1=np.zeros((7,hidden),dtype=np.int8),bias1=np.zeros(7,dtype=np.int32),shift1=np.int64(1))
+                if hidden==88:
+                    layers,size=read_layers(path);self.assertEqual(size,23884);self.assertEqual(layers[1]['weight'].shape,(7,88))
+                else:
+                    from unittest.mock import patch
+                    with patch('arcade_ai_pet.frozen.np.load',side_effect=AssertionError('reject before payload load')):
+                        with self.assertRaises(ValueError):read_layers(path)

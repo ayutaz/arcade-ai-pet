@@ -19,3 +19,9 @@ class QuantizeTests(unittest.TestCase):
         self.assertEqual(predict(np.zeros(260,dtype=np.float32),[first,last]),3)
         for weights,bias in ((np.full((1,1),np.nan),np.zeros(1)),(np.zeros((500,500)),np.zeros(500))):
             with self.assertRaises(ValueError):quantize_layer(weights,bias)
+
+    def test_wider_layer_quantization_remains_bounded(self):
+        result=quantize_layer(np.zeros((88,260)),np.zeros(88))
+        self.assertEqual(result['weight'].shape,(88,260))
+        self.assertEqual(result['weight'].dtype,np.int8)
+        with self.assertRaises(ValueError):quantize_layer(np.zeros((91,260)),np.zeros(91))

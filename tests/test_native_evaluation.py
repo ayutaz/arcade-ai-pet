@@ -66,3 +66,19 @@ class NativeEvaluationTests(unittest.TestCase):
             file=next((base/'corpus/sources').glob('*.wav'));file.write_bytes(b'changed')
             with self.assertRaises(ValueError):evaluate_native(base/'assets',base/'corpus',base/'report')
             self.assertFalse((base/'report').exists())
+
+    def test_existing_native_integer_engine_matches_python_for_88_hidden_units(self):
+        from arcade_ai_pet.quantize import quantize_layer
+        from arcade_ai_pet.training import scores
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);frozen=root/'frozen';frozen.mkdir()
+            layers=[quantize_layer(np.eye(88,260),np.zeros(88)),quantize_layer(np.eye(7,88),np.zeros(7))]
+            np.savez(frozen/'weights.npz',**{f'{field}{i}':l[field] for i,l in enumerate(layers) for field in ('weight','bias','shift')})
+            digest=hashlib.sha256((frozen/'weights.npz').read_bytes()).hexdigest()
+            (frozen/'frozen.json').write_text(json.dumps(dict(weights_sha256=digest,threshold_q10=0,feature_version='aligned-mfcc-v2')))
+            export_assets(frozen,root/'assets');shutil.copyfile(frozen/'weights.npz',root/'assets/weights.npz')
+            with NativeModel(root/'assets') as model:
+                x=np.zeros(260,dtype=np.float32);x[3]=4
+                label,logits=model.predict(x)
+                self.assertEqual(label,3);self.assertEqual(model.weights_bytes,23884)
+                np.testing.assert_array_equal(logits,scores(x[None,:],layers)[0])

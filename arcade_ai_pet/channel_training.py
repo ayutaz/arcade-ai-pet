@@ -39,14 +39,16 @@ def make_arrays(dataset,candidate,*,frontend='aligned'):
     return arrays
 
 
-def train_channel_candidate(dataset,output,candidate,*,epochs=600,frontend='aligned'):
-    from .training import fit,scores,decisions
+def train_channel_candidate(dataset,output,candidate,*,epochs=600,frontend='aligned',hidden=64):
+    from .training import fit,scores,decisions,MAX_HIDDEN
     from .channel_robustness import measure
     dataset=Path(dataset).resolve();output=Path(output).resolve()
     if output.exists():raise ValueError('fresh training output required')
+    if type(hidden) is not int or not 1<=hidden<=MAX_HIDDEN or type(epochs) is not int or not 1<=epochs<=1000:
+        raise ValueError('training resource bounds')
     data=make_arrays(dataset,candidate,frontend=frontend)
     result=fit(data['train']['x'],data['train']['y'],data['validation']['x'],data['validation']['y'],
-               epochs=epochs,hidden=64,seed=42)
+               epochs=epochs,hidden=hidden,seed=42)
     layers=result.pop('layers');v=data['validation'];logits=scores(v['x'],layers)
     options=[]
     for threshold in (0,128,256,512,768,1024,1536,2048,3072,4096):
@@ -76,5 +78,6 @@ if __name__=='__main__':
     p.add_argument('--dataset',required=True);p.add_argument('--output',required=True)
     p.add_argument('--candidate',choices=CANDIDATES,required=True);p.add_argument('--epochs',type=int,default=600)
     p.add_argument('--frontend',choices=('aligned','adaptive','subtract'),default='aligned')
-    a=p.parse_args();r=train_channel_candidate(a.dataset,a.output,a.candidate,epochs=a.epochs,frontend=a.frontend)
+    p.add_argument('--hidden',type=int,default=64)
+    a=p.parse_args();r=train_channel_candidate(a.dataset,a.output,a.candidate,epochs=a.epochs,frontend=a.frontend,hidden=a.hidden)
     print(json.dumps({k:r[k] for k in ('candidate','accepted_validation','threshold_q10','weights_bytes','selected_epoch')}))
