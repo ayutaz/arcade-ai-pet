@@ -211,3 +211,10 @@ unit47件（4.271秒）/両VM統合2件（2.432秒）が成功。Petの再build 
 導入監査でpet-app.mdが旧SDK3bb154bを案内し、builderの固定3bb9548と異なることを発見。guide/CI/builderの整合テストを先行追加し、旧guideでRed→現行pinへの修正でGreen。過去の固定FW source3bb154bと当時の記録は変更しない。
 
 SDK案内の回帰追加後、標準55件/4.495秒成功。app/VMコードは変更せず、直前の両VM統合2件も成功済み。
+
+## UIの無反応をnative分類と混同しない集計
+
+本体の描画からunknown/silenceの内訳は区別できない。操作なしを別コード7として扱う先行テストでRed→Green。
+さらに旧schema1の7×7維持と新schema2の7×8を先行追加し、互換性のRedを確認して最小修正した。
+明示エラーと内訳不明を分け、無反応をnative class5/6として捏造しない。hardware_acceptance_provenはfalseのまま。
+部分9件/0.035秒→全57件/5.048秒の標準回帰が成功。両VM統合2件/3.000秒も成功。FW/app/model/SDK pinは変更していない。
