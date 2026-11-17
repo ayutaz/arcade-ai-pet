@@ -1,0 +1,626 @@
+{
+  "schema": 1,
+  "scope": "frozen_synthetic_holdout_channel_stress_host_only",
+  "weights_sha256": "374987a02446e805f18427d7de8de3cd955c4833efc6e0a9dbd9fa655c3c59f2",
+  "weights_bytes": 23884,
+  "frozen_sha256": "10897e4bfaaa3dbc5fe517e1fb25b074e4bf68f67ef306d777b3cf283f25255e",
+  "dataset_manifest_sha256": "e574eee00dfb5cbbd6c00e39a73f58e1ec5bb68ddf50618ff9b9ff8c4bdac303",
+  "source_sha256": {
+    "uv.lock": "20d1a0d836eb1eebb118b8a6e416e04d8c4f1e153a5a88b93675397626b97f1c",
+    ".python-version": "aa0d6581054e6e4ff3f91839deca7a854ad37221b8784d060b42d0f847ff1a3b",
+    "arcade_ai_pet/channel_freeze.py": "74996cf574363c6d4634cb4a605c034a43a93cd6c7c8d42b4689b9a57c8e8505",
+    "arcade_ai_pet/channel_training.py": "67e1d5cdff53ae1cc8d5e575c9a1ae4f81e99fee74cb653207a6e566d06fb475",
+    "arcade_ai_pet/channel_frontend.py": "c02e259b04345b03d34335414c909be043f46da5d0196f48f1f5557744708d4f",
+    "arcade_ai_pet/channel_robustness.py": "474ce709069c9ed02a63f877ece69892f76c483f8dd753060d673da919089daf",
+    "arcade_ai_pet/features.py": "ada12539d4357581fab6bfbd5c932cfc4ea675138e62452e8ee37cdffcc95f28",
+    "arcade_ai_pet/data.py": "0f89381b03935645e527941701f88d0949e2129e1c6b3d5b63539bef340726e8",
+    "arcade_ai_pet/native_evaluation.py": "4153c76774f4dd435abfccf28812b471f093a9c83087e73f4e77eb055717af67",
+    "arcade_ai_pet/training.py": "98f1f20f19a1ffd63a9d62a6b0ab287e6c4e4fc8e311b8ece237e2d8c0030459",
+    "arcade_ai_pet/quantize.py": "19b96a8f84989dba17d78c8b6c102f2dc4bc35afd593bb90468649828d76ab00",
+    "arcade_ai_pet/frozen.py": "7c2f15ac7d9b318060a0a70e764ddce41f8890790f59dd28c539d2f5cad50966",
+    "native/conditioning.c": "3515372af36bba1563d2437003c57c6817054c7e14fa375db1994cd976058abc"
+  },
+  "threshold_q10": 995,
+  "profiles": [
+    {
+      "candidate": "hp160",
+      "profile": "clean",
+      "macro_f1": 0.9978640271813012,
+      "accuracy": 0.9989539748953975,
+      "false_activation_rate": 0.0,
+      "confusion": [
+        [
+          35,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          36,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          36,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          36,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          36,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          576,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          200
+        ]
+      ],
+      "examples": 956,
+      "command_recall": 0.9944444444444445
+    },
+    {
+      "candidate": "hp160",
+      "profile": "quiet",
+      "macro_f1": 0.9964140871831881,
+      "accuracy": 0.99581589958159,
+      "false_activation_rate": 0.0,
+      "confusion": [
+        [
+          35,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          36,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          36,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          36,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          36,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          576,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          3,
+          197
+        ]
+      ],
+      "examples": 956,
+      "command_recall": 0.9944444444444445
+    },
+    {
+      "candidate": "hp160",
+      "profile": "dc",
+      "macro_f1": 0.9973823035772219,
+      "accuracy": 0.997907949790795,
+      "false_activation_rate": 0.0,
+      "confusion": [
+        [
+          35,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          36,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          36,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          36,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          36,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          576,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          199
+        ]
+      ],
+      "examples": 956,
+      "command_recall": 0.9944444444444445
+    },
+    {
+      "candidate": "hp160",
+      "profile": "drift",
+      "macro_f1": 0.9959275659544689,
+      "accuracy": 0.9947698744769874,
+      "false_activation_rate": 0.0,
+      "confusion": [
+        [
+          35,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          36,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          36,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          36,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          36,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          576,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          4,
+          196
+        ]
+      ],
+      "examples": 956,
+      "command_recall": 0.9944444444444445
+    },
+    {
+      "candidate": "hp160",
+      "profile": "hum",
+      "macro_f1": 0.9275055840576931,
+      "accuracy": 0.9633891213389121,
+      "false_activation_rate": 0.00902061855670103,
+      "confusion": [
+        [
+          33,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          33,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          30,
+          0,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          30,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          29,
+          7,
+          0
+        ],
+        [
+          2,
+          0,
+          1,
+          3,
+          1,
+          566,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          200
+        ]
+      ],
+      "examples": 956,
+      "command_recall": 0.8611111111111112
+    },
+    {
+      "candidate": "hp160",
+      "profile": "noise",
+      "macro_f1": 0.916142895136615,
+      "accuracy": 0.9602510460251046,
+      "false_activation_rate": 0.01288659793814433,
+      "confusion": [
+        [
+          30,
+          0,
+          0,
+          0,
+          0,
+          5,
+          1
+        ],
+        [
+          0,
+          29,
+          0,
+          0,
+          0,
+          7,
+          0
+        ],
+        [
+          1,
+          0,
+          30,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          34,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          31,
+          4,
+          0
+        ],
+        [
+          2,
+          5,
+          1,
+          2,
+          0,
+          564,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          200
+        ]
+      ],
+      "examples": 956,
+      "command_recall": 0.8555555555555555
+    },
+    {
+      "candidate": "hp160",
+      "profile": "early",
+      "macro_f1": 0.9870670204131026,
+      "accuracy": 0.9937238493723849,
+      "false_activation_rate": 0.001288659793814433,
+      "confusion": [
+        [
+          33,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          36,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          35,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          35,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          36,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          575,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          200
+        ]
+      ],
+      "examples": 956,
+      "command_recall": 0.9722222222222222
+    },
+    {
+      "candidate": "hp160",
+      "profile": "late",
+      "macro_f1": 0.9978640271813012,
+      "accuracy": 0.9989539748953975,
+      "false_activation_rate": 0.0,
+      "confusion": [
+        [
+          35,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          36,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          36,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          36,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          36,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          576,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          200
+        ]
+      ],
+      "examples": 956,
+      "command_recall": 0.9944444444444445
+    }
+  ],
+  "source_overlap": 0,
+  "wave_overlap": 0,
+  "accepted_synthetic": true,
+  "final_evaluated": true,
+  "model_selection_used_final": false,
+  "device_tested": false,
+  "real_voice_tested": false,
+  "vast_usd": 0
+}

@@ -16,16 +16,7 @@ def _array(name,values,ctype):
     return f'static const {ctype} {name}{dimensions} = '+body(values)+';\n'
 
 
-def export_assets(frozen,output):
-    frozen=Path(frozen).resolve();output=Path(output).resolve()
-    if output.exists():raise ValueError('fresh native asset output required')
-    metadata=json.loads((frozen/'frozen.json').read_text())
-    digest=hashlib.sha256((frozen/'weights.npz').read_bytes()).hexdigest()
-    if digest!=metadata['weights_sha256'] or metadata['feature_version']!='aligned-mfcc-v2':
-        raise ValueError('frozen model identity/version mismatch')
-    if type(metadata['threshold_q10']) is not int or not 0<=metadata['threshold_q10']<=4096:
-        raise ValueError('bounded integer threshold required')
-    layers,size=read_layers(frozen/'weights.npz')
+def _render_tables(layers,threshold):
     indices=np.full((257,2),-1,dtype=np.int8);weights=np.zeros((257,2),dtype=np.float32)
     for index in range(257):
         active=np.flatnonzero(_MEL[:,index]>0)
@@ -44,11 +35,25 @@ def export_assets(frozen,output):
  * No human or device recording was used. This is not a real-voice accuracy claim.
  */
 '''
-    model+=f'enum {{ PET_HIDDEN={layers[0]["weight"].shape[0]}, PET_THRESHOLD={metadata["threshold_q10"]} }};\n'
+    model+=f'enum {{ PET_HIDDEN={layers[0]["weight"].shape[0]}, PET_THRESHOLD={threshold} }};\n'
     for index,layer in enumerate(layers):
         model+=f'enum {{ PET_SHIFT{index}={layer["shift"]} }};\n'
         model+=_array(f'pet_weight{index}',layer['weight'],'int8_t')
         model+=_array(f'pet_bias{index}',layer['bias'],'int32_t')
+    return tables,model
+
+
+def export_assets(frozen,output):
+    frozen=Path(frozen).resolve();output=Path(output).resolve()
+    if output.exists():raise ValueError('fresh native asset output required')
+    metadata=json.loads((frozen/'frozen.json').read_text())
+    digest=hashlib.sha256((frozen/'weights.npz').read_bytes()).hexdigest()
+    if digest!=metadata['weights_sha256'] or metadata['feature_version']!='aligned-mfcc-v2':
+        raise ValueError('frozen model identity/version mismatch')
+    if type(metadata['threshold_q10']) is not int or not 0<=metadata['threshold_q10']<=4096:
+        raise ValueError('bounded integer threshold required')
+    layers,size=read_layers(frozen/'weights.npz')
+    tables,model=_render_tables(layers,metadata["threshold_q10"])
     output.mkdir(parents=True)
     for name,text in (('feature_tables.h',tables),('pet_model.h',model)):(output/name).write_text(text)
     result=dict(feature_version='aligned-mfcc-v2',weights_sha256=digest,weights_bytes=size,threshold_q10=metadata['threshold_q10'],

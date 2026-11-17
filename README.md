@@ -9,9 +9,11 @@ a companion whose behavior has been learned.
 
 ## What works today
 
-The small [Japanese command model](models/kws-v2/model-card.md) now passes a
-fresh synthetic evaluation: macro F1 **0.979**, 17,380 bytes of weights.
-Its C front end and integer inference match Python decisions on all 956 examples.
+The new [Japanese command model](models/kws-v3/model-card.md) passes eight synthetic
+channel conditions, with a lowest macro F1 of **0.916** and 23,884 bytes of weights.
+Its C pipeline matches Python decisions on all 7,648 profile evaluations.
+Firmware integration and human voice testing are still pending; the earlier
+[v2 model](models/kws-v2/model-card.md) remains on the device.
 
 The [learned movement policy](models/behavior-v1/model-card.md) also runs in integer C.
 On 64 unseen collection boards it averaged 8.64 points versus 0.97 for a seeded random policy.
