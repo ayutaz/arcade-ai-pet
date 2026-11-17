@@ -32,6 +32,18 @@ def decisions(logits,threshold):
     return np.where((best<5)&(margins<threshold),5,best)
 
 
+def validation_rank(labels,predictions,groups=None):
+    if groups is None:
+        report=metrics(labels,predictions)
+        return report['macro_f1'],report['accuracy']
+    if (not isinstance(groups,np.ndarray) or groups.shape!=(len(labels),) or not len(groups) or
+        not np.issubdtype(groups.dtype,np.integer) or np.any((groups<0)|(groups>7))):
+        raise ValueError('aligned bounded validation groups required')
+    rows=[metrics(np.asarray(labels)[groups==g],np.asarray(predictions)[groups==g]) for g in np.unique(groups)]
+    return (all(r['macro_f1']>=.9 and r['false_activation_rate']<=.05 for r in rows),
+            min(r['macro_f1'] for r in rows),sum(r['macro_f1'] for r in rows)/len(rows))
+
+
 def select_threshold(y,logits):
     candidates=[]
     for threshold in (0,128,256,512,768,1024,1536,2048,3072,4096):
@@ -64,7 +76,7 @@ def load_dataset(dataset):
     return data
 
 
-def fit(x,y,vx,vy,*,seed=42,epochs=240,hidden=48):
+def fit(x,y,vx,vy,*,seed=42,epochs=240,hidden=48,validation_groups=None):
     import torch
     for values,labels in ((x,y),(vx,vy)):
         if (not isinstance(values,np.ndarray) or values.ndim!=2 or values.shape[1]!=260 or
@@ -72,21 +84,24 @@ def fit(x,y,vx,vy,*,seed=42,epochs=240,hidden=48):
             np.any(abs(values)>16) or not np.issubdtype(labels.dtype,np.integer) or np.any((labels<0)|(labels>6))):
             raise ValueError('bounded features and labels required')
     if not 1<=epochs<=1000 or not 1<=hidden<=MAX_HIDDEN:raise ValueError('training resource bounds')
+    validation_rank(vy,vy,validation_groups)
     torch.set_num_threads(2);torch.manual_seed(seed);torch.use_deterministic_algorithms(True)
     model=torch.nn.Sequential(torch.nn.Linear(260,hidden),torch.nn.ReLU6(),torch.nn.Linear(hidden,7))
     optimizer=torch.optim.Adam(model.parameters(),lr=.003,weight_decay=.0001)
     counts=np.bincount(y,minlength=7);weight=1/np.maximum(counts,1);weight/=weight.mean()
     lossfn=torch.nn.CrossEntropyLoss(weight=torch.tensor(weight,dtype=torch.float32))
     tx=torch.tensor(x,dtype=torch.float32);ty=torch.tensor(y,dtype=torch.long)
-    best=None;best_score=(-1,-1)
+    best=None;best_score=None
     for epoch in range(epochs):
         optimizer.zero_grad();loss=lossfn(model(tx),ty);loss.backward();optimizer.step()
         if epoch%5==0 or epoch==epochs-1:
             layers=[quantize_layer(model[index].weight.detach().numpy(),model[index].bias.detach().numpy()) for index in (0,2)]
-            report=metrics(vy,scores(vx,layers).argmax(axis=1));key=(report['macro_f1'],report['accuracy'])
-            if key>best_score:best_score=key;best=(layers,epoch+1,report)
+            predictions=scores(vx,layers).argmax(axis=1)
+            report=metrics(vy,predictions);key=validation_rank(vy,predictions,validation_groups)
+            if best_score is None or key>best_score:best_score=key;best=(layers,epoch+1,report)
     return dict(layers=best[0],selected_epoch=best[1],validation_accuracy=best[2]['accuracy'],
-                validation=best[2],seed=seed,epochs=epochs)
+                validation=best[2],seed=seed,epochs=epochs,
+                selection_metric='overall_macro_f1' if validation_groups is None else 'worst_channel')
 
 
 def run(dataset,output,*,epochs=240,seed=42,hidden=48,validation_only=False):

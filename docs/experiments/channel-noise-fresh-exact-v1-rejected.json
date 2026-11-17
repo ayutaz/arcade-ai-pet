@@ -1,0 +1,621 @@
+{
+  "selected_epoch": 921,
+  "validation_accuracy": 0.9856481481481482,
+  "validation": [
+    {
+      "candidate": "hp160",
+      "profile": "clean",
+      "macro_f1": 1.0,
+      "accuracy": 1.0,
+      "false_activation_rate": 0.0,
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "command_recall": 1.0
+    },
+    {
+      "candidate": "hp160",
+      "profile": "quiet",
+      "macro_f1": 1.0,
+      "accuracy": 1.0,
+      "false_activation_rate": 0.0,
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "command_recall": 1.0
+    },
+    {
+      "candidate": "hp160",
+      "profile": "dc",
+      "macro_f1": 1.0,
+      "accuracy": 1.0,
+      "false_activation_rate": 0.0,
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "command_recall": 1.0
+    },
+    {
+      "candidate": "hp160",
+      "profile": "drift",
+      "macro_f1": 0.993070944786042,
+      "accuracy": 0.9925925925925926,
+      "false_activation_rate": 0.0,
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          2,
+          22
+        ]
+      ],
+      "examples": 270,
+      "command_recall": 1.0
+    },
+    {
+      "candidate": "hp160",
+      "profile": "hum",
+      "macro_f1": 0.9074617575239987,
+      "accuracy": 0.9555555555555556,
+      "false_activation_rate": 0.0,
+      "confusion": [
+        [
+          11,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          7,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          13,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          4,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          196,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "command_recall": 0.7916666666666666
+    },
+    {
+      "candidate": "hp160",
+      "profile": "noise",
+      "macro_f1": 0.9049476981254093,
+      "accuracy": 0.9518518518518518,
+      "false_activation_rate": 0.009009009009009009,
+      "confusion": [
+        [
+          9,
+          0,
+          0,
+          0,
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          8,
+          0,
+          0,
+          4,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          14,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          0,
+          0,
+          193,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "command_recall": 0.8333333333333334
+    },
+    {
+      "candidate": "hp160",
+      "profile": "early",
+      "macro_f1": 0.9866531453433217,
+      "accuracy": 0.9962962962962963,
+      "false_activation_rate": 0.0,
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          5,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "command_recall": 0.9791666666666666
+    },
+    {
+      "candidate": "hp160",
+      "profile": "late",
+      "macro_f1": 1.0,
+      "accuracy": 1.0,
+      "false_activation_rate": 0.0,
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "command_recall": 1.0
+    }
+  ],
+  "seed": 42,
+  "epochs": 1000,
+  "selection_metric": "worst_channel",
+  "candidate": "hp160",
+  "preprocessing": "condition-then-peak4096-v1",
+  "frontend_version": "adaptive",
+  "noise_replicas": 5,
+  "noise_mode": "fresh",
+  "threshold_q10": 1888,
+  "accepted_validation": false,
+  "final_evaluated": false,
+  "real_voice_tested": false,
+  "device_tested": false,
+  "vast_usd": 0,
+  "weights_bytes": 23884,
+  "split_examples": {
+    "train": 23964,
+    "validation": 2160
+  },
+  "dataset_manifest_sha256": "907d32cd3262ac6e2ff2636dee9a625d13b1050ed0385a211a25ad7898832dfd",
+  "weights_sha256": "1b8c04a5e461d9c79f7de8924f965ec08d9248f859ac65c2e21d6270673c1665",
+  "threshold_search": "integer-decision-boundaries-v1",
+  "previous_validation_sha256": "c1e716379dc061c5745ca00f0e2ce9207545c3d05114aae06aa0b84c203bcc35"
+}
