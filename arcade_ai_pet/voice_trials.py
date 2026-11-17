@@ -21,30 +21,34 @@ def trial_plan():
 
 def summarize(data):
     if (type(data) is not dict or set(data)!={'schema','scope','records'} or
-        type(data['schema']) is not int or data['schema']!=1 or
+        type(data['schema']) is not int or data['schema'] not in (1,2) or
         data['scope'] not in ('host_fixture','device_synthetic','device_human') or
         type(data['records']) is not list or len(data['records'])!=30):
         raise ValueError('complete fixed trial results required')
-    plan={row['trial']:row for row in trial_plan()};seen=set();matrix=[[0]*7 for _ in range(7)]
-    correct=false_activations=errors=0;latencies=[]
+    width=8 if data['schema']==2 else 7
+    plan={row['trial']:row for row in trial_plan()};seen=set();matrix=[[0]*width for _ in range(7)]
+    correct=false_activations=errors=unresolved=0;latencies=[]
     for row in data['records']:
         if type(row) is not dict or set(row)!={'trial','observed','latency_ms'}:
             raise ValueError('anonymous numeric trial fields required')
         trial,observed,delay=row['trial'],row['observed'],row['latency_ms']
         if (type(trial) is not int or trial not in plan or trial in seen or
-            type(observed) is not int or not -1<=observed<=6 or
+            type(observed) is not int or not -1<=observed<width or
             type(delay) not in (int,float) or not 0<=delay<=60000 or not math.isfinite(delay)):
             raise ValueError('trial values outside the protocol')
         seen.add(trial);expected=plan[trial]['expected'];latencies.append(delay)
+        if observed==7:unresolved+=1
         if observed==-1:errors+=1
         else:matrix[expected][observed]+=1
         if expected<5 and observed==expected:correct+=1
         if expected>=5 and 0<=observed<5:false_activations+=1
-    return dict(schema=1,reported_scope=data['scope'],complete=True,command_correct=correct,
+    return dict(schema=data['schema'],reported_scope=data['scope'],complete=True,command_correct=correct,
                 command_total=15,negative_total=15,false_activations=false_activations,errors=errors,
                 thresholds=dict(command_correct_min=12,false_activations_max=1,errors_max=0),
                 thresholds_met=correct>=12 and false_activations<=1 and errors==0,
                 hardware_acceptance_proven=False,confusion=matrix,
+                observed_labels=[*COMMANDS,'unknown','silence']+(['no_action_observed'] if width==8 else []),
+                unresolved_native_trials=unresolved,native_labels_fully_reported=not errors and not unresolved,
                 latency_ms=dict(min=min(latencies),median=statistics.median(latencies),max=max(latencies)))
 
 

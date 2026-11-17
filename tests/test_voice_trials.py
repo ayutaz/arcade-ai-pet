@@ -49,10 +49,30 @@ class VoiceTrialsTests(unittest.TestCase):
         self.assertEqual(report['reported_scope'],'device_synthetic')
         self.assertFalse(report['hardware_acceptance_proven'])
 
+    def test_ui_nonaction_is_not_fabricated_as_a_native_unknown_or_silence_label(self):
+        data=results();data['scope']='device_human';data['schema']=2
+        for row in data['records'][15:]:row['observed']=7
+        report=summarize(data)
+        self.assertTrue(report['thresholds_met'])
+        self.assertEqual(report['unresolved_native_trials'],15)
+        self.assertFalse(report['native_labels_fully_reported'])
+        self.assertEqual(report['observed_labels'][7],'no_action_observed')
+        self.assertEqual(report['confusion'][5][7],10)
+        self.assertEqual(report['confusion'][6][7],5)
+        self.assertFalse(report['hardware_acceptance_proven'])
+
+    def test_legacy_native_schema_keeps_its_matrix_shape_and_rejects_ui_only_codes(self):
+        data=results();report=summarize(data)
+        self.assertEqual(report['schema'],1)
+        self.assertEqual([len(row) for row in report['confusion']],[7]*7)
+        self.assertEqual(len(report['observed_labels']),7)
+        data['records'][-1]['observed']=7
+        with self.assertRaises(ValueError):summarize(data)
+
     def test_missing_duplicate_foreign_or_noncanonical_results_never_pass(self):
         changes=[lambda d:d['records'].pop(),lambda d:d['records'].append(dict(d['records'][0])),
                  lambda d:d['records'][0].update(trial=31),lambda d:d['records'][0].update(observed=True),
-                 lambda d:d['records'][0].update(observed=7),lambda d:d['records'][0].update(latency_ms=math.nan),
+                 lambda d:d['records'][0].update(observed=8),lambda d:d['records'][0].update(latency_ms=math.nan),
                  lambda d:d['records'][0].update(latency_ms=10**1000),
                  lambda d:d['records'][0].update(latency_ms=-1),lambda d:d['records'][0].update(latency_ms=True),
                  lambda d:d['records'][0].update(audio='must-not-be-stored'),lambda d:d.update(scope='arbitrary'),
