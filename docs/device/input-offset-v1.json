@@ -1,0 +1,182 @@
+{
+  "firmware_sha256": "c0327a6929df379e05b1e5538bcc2bf74419959ee9c8780f69a06f1da841c143",
+  "package_sha256": "14f657f0fe5955d916f6a6811b2975bda0e9bd944a30f968aadbc9eb7c43a23f",
+  "basic": {
+    "button_actions": [
+      {
+        "action": 1,
+        "view_crc_matched": true,
+        "reply_frames": 6232,
+        "player_move_crc_matched": false
+      },
+      {
+        "action": 2,
+        "view_crc_matched": true,
+        "reply_frames": 9718,
+        "player_move_crc_matched": false
+      },
+      {
+        "action": 3,
+        "view_crc_matched": true,
+        "reply_frames": 9238,
+        "player_move_crc_matched": false
+      },
+      {
+        "action": 4,
+        "view_crc_matched": true,
+        "reply_frames": 9970,
+        "player_move_crc_matched": false
+      },
+      {
+        "action": 0,
+        "view_crc_matched": true,
+        "reply_frames": 15678,
+        "player_move_crc_matched": true
+      }
+    ],
+    "ambient": [
+      {
+        "trial": 1,
+        "observed_action": 2,
+        "recording_seen": true,
+        "recording_consumed_and_scrubbed": true,
+        "turnaround_ms": 3305.13,
+        "native_label_exposed": false
+      },
+      {
+        "trial": 2,
+        "observed_action": 2,
+        "recording_seen": true,
+        "recording_consumed_and_scrubbed": true,
+        "turnaround_ms": 3309.572,
+        "native_label_exposed": false
+      },
+      {
+        "trial": 3,
+        "observed_action": 7,
+        "recording_seen": true,
+        "recording_consumed_and_scrubbed": true,
+        "turnaround_ms": 2703.604,
+        "native_label_exposed": false
+      }
+    ],
+    "home": true,
+    "preserved_apps": 16,
+    "other_apps_preserved": 15,
+    "vm_recovered": true,
+    "heap_allowed_drop_bytes": 4096,
+    "audio_released": true,
+    "wifi_used": false,
+    "pcm_exported": false,
+    "human_voice_tested": false,
+    "physical_display_or_sound_verified": false
+  },
+  "acoustic": {
+    "scope": "device_synthetic",
+    "firmware_sha256": "c0327a6929df379e05b1e5538bcc2bf74419959ee9c8780f69a06f1da841c143",
+    "correct": 0,
+    "total": 5,
+    "observed_actions": [
+      7,
+      7,
+      7,
+      7,
+      7
+    ],
+    "mac_volume_percent": 19,
+    "afplay_gain": 0.75,
+    "post_audio_settle_ms": 500,
+    "preserved_apps": 16,
+    "home": true,
+    "audio_released": true,
+    "native_label_exposed": false,
+    "pcm_exported": false,
+    "human_voice_tested": false,
+    "source_distance_measured": false
+  },
+  "coupling": {
+    "scope": "device synthetic/ambient aggregate only",
+    "records": [
+      {
+        "stimulus": "ambient",
+        "metrics": {
+          "version": 1,
+          "available": 1,
+          "frames": 32000,
+          "minimum": 857,
+          "maximum": 1993,
+          "mean": 1689,
+          "rms": 1693,
+          "ac_rms": 113,
+          "centered_peak": 832,
+          "saturated_frames": 0,
+          "first_1320": 0,
+          "first_1760": 0,
+          "second_1320": 0,
+          "second_1760": 0,
+          "requested_gain": 1,
+          "effective_scale_q15": 0,
+          "discarded_input_frames": 1600
+        },
+        "elapsed_ms": 2202.566
+      },
+      {
+        "stimulus": "tone1760",
+        "metrics": {
+          "version": 1,
+          "available": 1,
+          "frames": 32000,
+          "minimum": 490,
+          "maximum": 2136,
+          "mean": 1675,
+          "rms": 1683,
+          "ac_rms": 171,
+          "centered_peak": 1185,
+          "saturated_frames": 0,
+          "first_1320": 0,
+          "first_1760": 173,
+          "second_1320": 0,
+          "second_1760": 78,
+          "requested_gain": 1,
+          "effective_scale_q15": 0,
+          "discarded_input_frames": 1600
+        },
+        "elapsed_ms": 2070.419
+      },
+      {
+        "stimulus": "word_oide",
+        "metrics": {
+          "version": 1,
+          "available": 1,
+          "frames": 32000,
+          "minimum": 456,
+          "maximum": 1923,
+          "mean": 1671,
+          "rms": 1675,
+          "ac_rms": 119,
+          "centered_peak": 1215,
+          "saturated_frames": 0,
+          "first_1320": 0,
+          "first_1760": 0,
+          "second_1320": 0,
+          "second_1760": 0,
+          "requested_gain": 1,
+          "effective_scale_q15": 0,
+          "discarded_input_frames": 1600
+        },
+        "elapsed_ms": 2000.034
+      }
+    ],
+    "mac_volume_percent": 45,
+    "restored_volume_percent": 19,
+    "afplay_gain": 0.75,
+    "tone_hz": 1760,
+    "tone_ms": 1000,
+    "home": true,
+    "preserved_apps": 16,
+    "audio_released": true,
+    "pcm_exported": false,
+    "source_physical_distance_measured": false,
+    "observed_at_utc": "2026-11-17T14:59:43.693290+00:00"
+  }
+}
