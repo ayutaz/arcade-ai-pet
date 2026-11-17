@@ -16,3 +16,4 @@ checkpoints/
 *.onnx
 *.pt
 .DS_Store
+dist/

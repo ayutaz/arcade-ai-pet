@@ -81,3 +81,5 @@ weights and derived conformance features. Upstream TTS weights and device
 recordings are not included.
 
 Human-voice evaluation: [fixed protocol and anonymous result summary](docs/voice-validation.md).
+
+Release packaging: [source archive and checksum](docs/releases.md). No tagged release has been published yet.
