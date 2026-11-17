@@ -1,6 +1,6 @@
 # ペットWASMの使い方と検証範囲
 
-2026-11-17 JST。実機未適用のホスト候補。音声認識は合成評価まで、実声の品質は未確認。
+2026-11-17 JST。固定FW/Petを1台へ適用し、基本の自動実機試験は成功。[実機結果](device-validation.md)。実声の品質・聴取・実LCD/物理入力は未確認。
 
 ## build
 
@@ -25,7 +25,7 @@ PYTHONPATH=../scratch-arcade-os/prototypes/lab-os uv run --locked python \
 
 | 本体 | Mac | 操作 |
 |---|---|---|
-| A | Z | 2秒録音。実機音声service成立後に使用 |
+| A | Z | 2秒録音。新しい実機音声serviceが必要 |
 | X | R | 学習した相棒との収集遊び |
 | 方向 | 矢印 | 遊び中は青い自分を操作。それ以外は上おいで/左まって/下おやすみ/右ありがとう |
 | B / FN+B | X / F+X | 終了/HOME |
@@ -41,7 +41,7 @@ BFSを毎frame実行せず、学習した472BのMLPが相棒の移動を選ぶ�
 - 既存50,000fuel/2pagesで起動。126framesの描画と状態がWasmtime/WAMRで一致し正常終了。
 - 各7classの模擬認識結果を実APIへ流し、5操作と棄却/返答要求/終了が両VMで一致。
 - ネイティブVM poolは160KiB。実音声I/Oではなくstubサービスなので、音質やS3速度は保証しない。
-- 画像は実WASMから生成。実LCDやMacウィンドウの目視、実キー、実声、実機音声は未確認。
+- 画像は実WASMから生成。実LCDやMacウィンドウの目視、実キー、実声、実機音声の聴取は未確認。
 
 学習/合成の評価を人間の声の精度へ拡大しない。アプリ追加前にも専用ID/前hash/他app保持を確認する。
-今回はFW/実機を変更していない。[OS候補](https://github.com/ayutaz/scratch-arcade-os/pull/6)。
+固定レビュー/個別許可を受けたimageを1回適用した。公開mainの任意buildを書込む許可ではない。[OS音声service](https://github.com/ayutaz/scratch-arcade-os/pull/6)。
