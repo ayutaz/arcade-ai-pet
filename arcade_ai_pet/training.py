@@ -4,7 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import numpy as np
-from .quantize import quantize_layer
+from .quantize import quantize_layer, MAX_HIDDEN
 from .features import split_for
 
 
@@ -71,7 +71,7 @@ def fit(x,y,vx,vy,*,seed=42,epochs=240,hidden=48):
             not len(values) or labels.shape!=(len(values),) or not np.isfinite(values).all() or
             np.any(abs(values)>16) or not np.issubdtype(labels.dtype,np.integer) or np.any((labels<0)|(labels>6))):
             raise ValueError('bounded features and labels required')
-    if not 1<=epochs<=1000 or not 1<=hidden<=64:raise ValueError('training resource bounds')
+    if not 1<=epochs<=1000 or not 1<=hidden<=MAX_HIDDEN:raise ValueError('training resource bounds')
     torch.set_num_threads(2);torch.manual_seed(seed);torch.use_deterministic_algorithms(True)
     model=torch.nn.Sequential(torch.nn.Linear(260,hidden),torch.nn.ReLU6(),torch.nn.Linear(hidden,7))
     optimizer=torch.optim.Adam(model.parameters(),lr=.003,weight_decay=.0001)

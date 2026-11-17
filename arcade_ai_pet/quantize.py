@@ -2,10 +2,12 @@
 import math
 import numpy as np
 
+MAX_HIDDEN=90  # 260->90->7 integer weights/biases/shifts: 24,426 bytes.
+
 
 def quantize_layer(weights,bias):
     w=np.asarray(weights,dtype=np.float64);b=np.asarray(bias,dtype=np.float64)
-    if (w.ndim!=2 or w.shape[1]>260 or w.shape[0]>64 or b.shape!=(w.shape[0],)
+    if (w.ndim!=2 or w.shape[1]>260 or w.shape[0]>MAX_HIDDEN or b.shape!=(w.shape[0],)
         or not w.size or not np.isfinite(w).all() or not np.isfinite(b).all()):
         raise ValueError('bounded finite dense layer required')
     peak=float(np.abs(w).max())

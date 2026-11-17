@@ -6,7 +6,7 @@ from pathlib import Path
 import shutil
 import zipfile
 import numpy as np
-from .training import load_dataset, scores, decisions, metrics
+from .training import load_dataset, scores, decisions, metrics, MAX_HIDDEN
 
 
 def read_layers(path):
@@ -23,9 +23,9 @@ def read_layers(path):
                     elif version==(2,0):shape,_,dtype=np.lib.format.read_array_header_2_0(stream,max_header_size=2048)
                     else:raise ValueError('model array format')
                     if info.filename.startswith('weight'):
-                        valid=dtype==np.int8 and len(shape)==2 and 1<=shape[0]<=64 and 1<=shape[1]<=260
+                        valid=dtype==np.int8 and len(shape)==2 and 1<=shape[0]<=MAX_HIDDEN and 1<=shape[1]<=260
                     elif info.filename.startswith('bias'):
-                        valid=dtype==np.int32 and len(shape)==1 and 1<=shape[0]<=64
+                        valid=dtype==np.int32 and len(shape)==1 and 1<=shape[0]<=MAX_HIDDEN
                     else:valid=np.issubdtype(dtype,np.integer) and dtype.itemsize<=8 and shape==()
                     if not valid or stream.tell()+math.prod(shape)*dtype.itemsize!=info.file_size:
                         raise ValueError('model array shape/payload budget')
@@ -41,7 +41,7 @@ def read_layers(path):
                 not 0<=int(shift)<=16):raise ValueError('integer model representation')
             layers.append(dict(weight=weight,bias=bias,shift=int(shift)))
     hidden=layers[0]['weight'].shape[0]
-    if not 1<=hidden<=64 or layers[0]['weight'].shape!=(hidden,260) or layers[1]['weight'].shape!=(7,hidden):
+    if not 1<=hidden<=MAX_HIDDEN or layers[0]['weight'].shape!=(hidden,260) or layers[1]['weight'].shape!=(7,hidden):
         raise ValueError('bounded model architecture')
     size=sum(layer['weight'].nbytes+layer['bias'].nbytes+4 for layer in layers)
     if size>24576:raise ValueError('24KiB weight budget exceeded')

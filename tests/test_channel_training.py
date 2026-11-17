@@ -52,3 +52,9 @@ class ChannelTrainingTests(unittest.TestCase):
             with patch.object(training,'_examples',return_value=iter(examples)),patch('arcade_ai_pet.channel_frontend.features',return_value=np.ones(260,dtype=np.float32)):
                 arrays=training.make_arrays(root,'hp80',frontend='subtract')
             self.assertTrue((arrays['train']['x']==1).all())
+
+    def test_training_resource_bounds_are_checked_before_loading_waveforms(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            for values in ({'hidden':91},{'epochs':1001},{'hidden':True},{'epochs':0}):
+                with self.subTest(values=values),self.assertRaisesRegex(ValueError,'training resource bounds'):
+                    training.train_channel_candidate(Path('absent'),Path(tmp)/'out','hp80',**values)
