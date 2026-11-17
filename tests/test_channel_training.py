@@ -40,3 +40,15 @@ class ChannelTrainingTests(unittest.TestCase):
 
     def test_unknown_conditioner_cannot_create_training_data(self):
         with self.assertRaises(ValueError):training.make_arrays(Path('absent'),'unreviewed')
+
+    def test_feature_variant_is_explicit_and_unknown_variants_fail_before_io(self):
+        with self.assertRaises(ValueError):training.make_arrays(Path('absent'),'hp80',frontend='unknown')
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)
+            records=[dict(id='a'*64,split=s,sha256=str(i)*64) for i,s in enumerate(('train','validation'))]
+            (root/'manifest.json').write_text(json.dumps(dict(variants=1,records=records)))
+            pcm=np.zeros(32000,dtype=np.int16)
+            examples=[(pcm,6,np.zeros(260,dtype=np.float32)) for _ in records]
+            with patch.object(training,'_examples',return_value=iter(examples)),patch('arcade_ai_pet.channel_frontend.features',return_value=np.ones(260,dtype=np.float32)):
+                arrays=training.make_arrays(root,'hp80',frontend='subtract')
+            self.assertTrue((arrays['train']['x']==1).all())
