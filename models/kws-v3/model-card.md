@@ -1,6 +1,6 @@
 # 日本語5操作 KWS v3 — 合成ストレス評価済み候補
 
-2026-11-18。**固定後の合成評価とホストC照合を通過。ESP32-S3 build・実機・実声は未検証。**
+2026-11-18。**固定後の合成評価・ホストC照合と、後続OS候補のESP32-S3 buildを通過。実機・実声は未検証。**
 日本語の自由文ASRではなく、5操作と対象外/無音の7分類。
 既存実機c032のKWS v2や、`models/kws-v2`の成果物は置き換えていない。
 
@@ -56,3 +56,10 @@ weights、model header、派生照合特徴はCC BY 3.0。手書きcodeと数学
 `weights.npz` SHA-256: `374987a02446e805f18427d7de8de3cd955c4833efc6e0a9dbd9fa655c3c59f2`。
 未知の人・実環境・長時間待受・録再同時動作の保証はない。実声の正式30試行と実機動画は未完了。
 新規GPU/API課金は0米ドル。ファームウェアbinaryの配布やFlash書込み許可とは別の成果物。
+
+
+## 後続のOS統合候補
+
+[Scratch Arcade OS PR #11](https://github.com/ayutaz/scratch-arcade-os/pull/11)は4必須CI成功後に通常merge（main5d33e3f）。モデル元source595f5d7を固定source48bf239へ取り込み、OS715ホスト試験とS3 buildを通過した。
+固定版48bf239を埋め込んだimageは974,080B、SHA `e59158619b0a3956c771d0b099a5d7201ff6d05e86c593c0b27e0250effd4c0c`。imageの実機適用は追加個別許可待ち。binaryはこのrepoへ含めない。
+分類結果/入力集計を現在のmic leaseからだけ読むAPIも加えたが、PCM/特徴量の外部取得、GPIO/PSRAM/partition変更はない。実heap/stack・推論時間・実声品質は未測定。[OSの検証範囲](https://github.com/ayutaz/scratch-arcade-os/blob/5d33e3f/docs/voice-service.md)。

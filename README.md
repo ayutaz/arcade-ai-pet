@@ -12,7 +12,8 @@ a companion whose behavior has been learned.
 The new [Japanese command model](models/kws-v3/model-card.md) passes eight synthetic
 channel conditions, with a lowest macro F1 of **0.916** and 23,884 bytes of weights.
 Its C pipeline matches Python decisions on all 7,648 profile evaluations.
-Firmware integration and human voice testing are still pending; the earlier
+The OS candidate passes an ESP32-S3 build and host regression tests. Device
+deployment and human voice testing are pending; the earlier
 [v2 model](models/kws-v2/model-card.md) remains on the device.
 
 The [learned movement policy](models/behavior-v1/model-card.md) also runs in integer C.
