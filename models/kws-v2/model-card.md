@@ -59,3 +59,5 @@ Department of Computer Science。NIT ATR503 M001: HTS Working Group、
 `pet_model.h`は同じ重みのC表現、`feature_tables.h`は生成した数学定数。
 `conformance.npz`は新規合成からの38特徴列とlogitで、音声PCMを含まない。
 上流TTS重み・本体録音・実機ID・資格情報は含まない。
+
+配備後の音響試験では、入力補正版でも合成5語の画面操作0/5だった。合成956例の精度を実機/実声へ拡大しない。[実機の品質記録](../../docs/device-validation.md)を参照。評価JSONのdevice_tested=falseは、モデル凍結時の合成評価の範囲を維持する。

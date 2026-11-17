@@ -24,17 +24,15 @@ five voice-result actions and normal exit pass both VM implementations.
 
 *Actual WASM host replay with simulated voice-result events. Not a device recording.*
 
-**The fixed voice firmware and pet are now installed on one ESP32-S3.**
-Five button actions, all five reply playback completions, player movement and
-three recording/consume/scrub cycles passed automated device checks with Wi-Fi off.
-All 16 installed apps retained their versions and hashes.
-[Device evidence](docs/device-validation.md) distinguishes these checks from
-human speech accuracy, audible reply quality and physical display/input validation,
-which remain pending. The synthetic model result above is not human accuracy.
+The input-offset firmware is installed on one ESP32-S3. Five button actions,
+reply playback, player movement and recording cleanup pass automated device checks.
+All 16 apps remain intact, and these checks use no Wi-Fi.
 
-The first acoustic smoke produced **no visible action for all five synthetic commands**.
-A louder single-word check also gave no visible action. Voice control is not ready;
-input conditioning is under investigation.
+**Voice control is not ready.** The corrected firmware still gave no visible
+action for five synthetic commands. Two of three environmental recordings also
+entered the wait state. These are limited acoustic checks, not human accuracy.
+[Device evidence](docs/device-validation.md) records the failures and the input-level
+checks; human speech, audible quality and physical display/input validation remain pending.
 
 [Build and preview the pet](docs/pet-app.md).
 
