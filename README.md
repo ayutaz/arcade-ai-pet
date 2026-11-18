@@ -13,9 +13,11 @@ The new [Japanese command model](models/kws-v3/model-card.md) passes eight synth
 channel conditions, with a lowest macro F1 of **0.916** and 23,884 bytes of weights.
 Its C pipeline matches Python decisions on all 7,648 profile evaluations.
 The v3 firmware is installed on one ESP32-S3 after a reviewed update and full
-Flash comparison. Synthetic sound played through a Mac speaker still fails the
-device quality gate: **1/5, 3/5, 1/5 and 0/5** commands across four input conditions.
-Human voice testing of v3 is pending.
+Flash comparison. Earlier synthetic sound checks through a Mac speaker returned
+**1/5, 3/5, 1/5 and 0/5** commands across four input conditions, missing the device quality gate.
+On the later diagnostic firmware, an operator-led 30-trial session completed:
+**6/15 commands correct**, 0/15 false activations and no native errors.
+The 12/15 acceptance target is still unmet. [Human trial summary](docs/voice-validation.md#最新の実声セッション).
 
 The [learned movement policy](models/behavior-v1/model-card.md) also runs in integer C.
 On 64 unseen collection boards it averaged 8.64 points versus 0.97 for a seeded random policy.
@@ -37,7 +39,7 @@ gate. None activated on the five negative cases, and no native errors were repor
 The model and threshold stayed fixed. These small acoustic checks do not measure
 human accuracy or demonstrate reliable voice control.
 [Device evidence](docs/device-validation.md) records the failures and the input-level
-checks; human speech, audible quality and physical display/input validation remain pending.
+checks; human-voice acceptance, audible quality and physical display/input validation remain incomplete.
 
 [Build and preview the pet](docs/pet-app.md).
 
@@ -55,6 +57,9 @@ The first suite needs Clang, but no speech engine, GPU, network key or device. T
 use a tiny deterministic CPU fixture, not downloaded speech or production weights.
 
 ## Run a training experiment
+
+[Generated-source auditing](docs/generated-audio-audit.md) compares synthetic inputs with an independent ASR.
+Content agreement is separate from licensing, split checks and model acceptance.
 
 On macOS, install Open JTalk with Homebrew. Keep generated speech and models local:
 
