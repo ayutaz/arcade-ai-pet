@@ -32,7 +32,7 @@ Pythonの比較wrapperは入力を保護するためcopyする。C本体の追�
 `models/kws-v3`へ重み・数学table・model header・固定/評価JSON・56照合特徴を追加した。
 weights/model header/派生特徴はCC BY 3.0、手書きcodeと数学tableはApache-2.0。[条件](data-license.md)。
 本体録音・原本TTS weight・資格情報・firmware binaryは含めない。
-既存のv2と実機c032は維持。OS組込みと個別の固定FWレビューは次の工程。
+このC監査時点では既存のv2と実機c032を維持した。後続のe591/v3適用と未達の音響比較は[実機記録](device-validation.md#v3の適用と音響比較)へ。
 
 ## TDDと回帰
 

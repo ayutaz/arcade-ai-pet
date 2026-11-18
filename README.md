@@ -12,9 +12,10 @@ a companion whose behavior has been learned.
 The new [Japanese command model](models/kws-v3/model-card.md) passes eight synthetic
 channel conditions, with a lowest macro F1 of **0.916** and 23,884 bytes of weights.
 Its C pipeline matches Python decisions on all 7,648 profile evaluations.
-The OS candidate passes an ESP32-S3 build and host regression tests. Device
-deployment and human voice testing are pending; the earlier
-[v2 model](models/kws-v2/model-card.md) remains on the device.
+The v3 firmware is installed on one ESP32-S3 after a reviewed update and full
+Flash comparison. Synthetic sound played through a Mac speaker still fails the
+device quality gate: **1/5, 3/5, 1/5 and 0/5** commands across four input conditions.
+Human voice testing of v3 is pending.
 
 The [learned movement policy](models/behavior-v1/model-card.md) also runs in integer C.
 On 64 unseen collection boards it averaged 8.64 points versus 0.97 for a seeded random policy.
@@ -27,14 +28,14 @@ five voice-result actions and normal exit pass both VM implementations.
 
 *Actual WASM host replay with simulated voice-result events. Not a device recording.*
 
-The input-offset firmware is installed on one ESP32-S3. Five button actions,
-reply playback, player movement and recording cleanup pass automated device checks.
+Earlier checks on the input-offset firmware verified five button actions,
+reply playback, player movement and recording cleanup on one ESP32-S3.
 All 16 apps remain intact, and these checks use no Wi-Fi.
 
-**Voice control is not ready.** The corrected firmware still gave no visible
-action for five synthetic commands. Two of three environmental recordings also
-entered the wait state. Moving the board closer and a single human-spoken command
-also failed. These are limited diagnostic checks; formal human accuracy is unmeasured.
+**Voice control is not ready.** All four v3 conditions missed the fixed 5/5 command
+gate. None activated on the five negative cases, and no native errors were reported.
+The model and threshold stayed fixed. These small acoustic checks do not measure
+human accuracy or demonstrate reliable voice control.
 [Device evidence](docs/device-validation.md) records the failures and the input-level
 checks; human speech, audible quality and physical display/input validation remain pending.
 
