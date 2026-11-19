@@ -1,0 +1,4480 @@
+{
+  "schema": 1,
+  "date": "2026-11-19",
+  "scope": "host_integer_core_conformance_not_pcm_or_target",
+  "source_commit": "c5573c61b511509fc754abd05b5ca66fdd49a126",
+  "source_sha256": {
+    "native/dscnn.h": "f2e1f54d46e3af07131f6ff4f12df59a0aedb21c8efef94a662c1dd2fe65adbd",
+    "native/dscnn.c": "7bdbd973be2fa57fe85ffab0aaab16f22784ae4dc4b05b1f26b8fb321ffadcf4",
+    "arcade_ai_pet/dscnn_native.py": "ee32caa3b6cb396542ceeb96419a398ae8477c4630865118aeddb44e40999b0a"
+  },
+  "preflight_sha256": "3d7b0fbc0c94099edcb328528fdc5944561920c4d4013d219e6199b920be0430",
+  "candidate_result_sha256": "b9e8576876381428d44144c06f1d13bc8fb8e98694b86c74e875abdbd9ed91ac",
+  "model_weights_sha256": "194c5fceaeb9e51f83d8637033680a779c50c614becc3ff7bc37339ec31d27a8",
+  "numeric_bytes": 23411,
+  "thresholds_q10": [
+    3505,
+    1220,
+    3063,
+    552,
+    1052
+  ],
+  "feature_cache_sha256": {
+    "legacy.npz": "ca96020b8cdad8a3f281b5f7527d6460d3e83960daa8c94c7f94d8f027c796d1",
+    "held-neural.npz": "b9130ea2b44bd01a5b4a919980605121ec2265f0e80c300ad46d40c645121651",
+    "familiar-neural.npz": "0da3de82edad35ad7f983dffc14690f0b98cf14274a906550f9ba570627a854f"
+  },
+  "original_model_sources_unchanged": 34,
+  "original_input_files_unchanged": 8,
+  "original_frozen_source_files_unchanged": 13,
+  "examples": 4808,
+  "integer_logits_compared": 33656,
+  "all_logits_identical": true,
+  "all_labels_identical": true,
+  "group_results": [
+    {
+      "domain": "legacy",
+      "profile": "clean",
+      "examples": 270,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "legacy",
+      "profile": "quiet",
+      "examples": 270,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "legacy",
+      "profile": "dc",
+      "examples": 270,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "legacy",
+      "profile": "drift",
+      "examples": 270,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "legacy",
+      "profile": "hum",
+      "examples": 270,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "legacy",
+      "profile": "noise",
+      "examples": 270,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "legacy",
+      "profile": "early",
+      "examples": 270,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "legacy",
+      "profile": "late",
+      "examples": 270,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "held-neural",
+      "profile": "clean",
+      "examples": 266,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "held-neural",
+      "profile": "quiet",
+      "examples": 266,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "held-neural",
+      "profile": "dc",
+      "examples": 266,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "held-neural",
+      "profile": "drift",
+      "examples": 266,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "held-neural",
+      "profile": "hum",
+      "examples": 266,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "held-neural",
+      "profile": "noise",
+      "examples": 266,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "held-neural",
+      "profile": "early",
+      "examples": 266,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "held-neural",
+      "profile": "late",
+      "examples": 266,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "familiar-neural",
+      "profile": "clean",
+      "examples": 65,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "familiar-neural",
+      "profile": "quiet",
+      "examples": 65,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "familiar-neural",
+      "profile": "dc",
+      "examples": 65,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "familiar-neural",
+      "profile": "drift",
+      "examples": 65,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "familiar-neural",
+      "profile": "hum",
+      "examples": 65,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "familiar-neural",
+      "profile": "noise",
+      "examples": 65,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "familiar-neural",
+      "profile": "early",
+      "examples": 65,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    },
+    {
+      "domain": "familiar-neural",
+      "profile": "late",
+      "examples": 65,
+      "all_logits_exact": true,
+      "all_labels_exact": true
+    }
+  ],
+  "metric_rows": [
+    {
+      "kind": "domain_profiles",
+      "domain": "legacy",
+      "profile": "clean",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "false_activation_rate": 0.0,
+      "command_recall": 1.0,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "legacy",
+      "profile": "quiet",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "false_activation_rate": 0.0,
+      "command_recall": 1.0,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "legacy",
+      "profile": "dc",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "false_activation_rate": 0.0,
+      "command_recall": 1.0,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "legacy",
+      "profile": "drift",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          197,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          23
+        ]
+      ],
+      "examples": 270,
+      "accuracy": 0.9925925925925926,
+      "macro_f1": 0.9758308223353815,
+      "false_activation_rate": 0.0045045045045045045,
+      "command_recall": 1.0,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "legacy",
+      "profile": "hum",
+      "confusion": [
+        [
+          11,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          9,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          14,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          4,
+          2,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          0,
+          0,
+          196,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "accuracy": 0.9666666666666667,
+      "macro_f1": 0.9254174051362115,
+      "false_activation_rate": 0.009009009009009009,
+      "command_recall": 0.8541666666666666,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "legacy",
+      "profile": "noise",
+      "confusion": [
+        [
+          9,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          10,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          0,
+          0,
+          192,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "accuracy": 0.9592592592592593,
+      "macro_f1": 0.9128623491223677,
+      "false_activation_rate": 0.013513513513513514,
+      "command_recall": 0.8958333333333334,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "legacy",
+      "profile": "early",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          197,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "accuracy": 0.9962962962962963,
+      "macro_f1": 0.9950300414163216,
+      "false_activation_rate": 0.0045045045045045045,
+      "command_recall": 1.0,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "legacy",
+      "profile": "late",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          197,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "accuracy": 0.9962962962962963,
+      "macro_f1": 0.979230173081891,
+      "false_activation_rate": 0.0045045045045045045,
+      "command_recall": 1.0,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "held-neural",
+      "profile": "clean",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          10,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          11,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          11,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          3,
+          181,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "examples": 266,
+      "accuracy": 0.9661654135338346,
+      "macro_f1": 0.9391981852851419,
+      "false_activation_rate": 0.024271844660194174,
+      "command_recall": 0.9333333333333333,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "held-neural",
+      "profile": "quiet",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          10,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          11,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          3,
+          181,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "examples": 266,
+      "accuracy": 0.9699248120300752,
+      "macro_f1": 0.9456819673786799,
+      "false_activation_rate": 0.024271844660194174,
+      "command_recall": 0.95,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "held-neural",
+      "profile": "dc",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          10,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          11,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          11,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          3,
+          181,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "examples": 266,
+      "accuracy": 0.9661654135338346,
+      "macro_f1": 0.9391981852851419,
+      "false_activation_rate": 0.024271844660194174,
+      "command_recall": 0.9333333333333333,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "held-neural",
+      "profile": "drift",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          11,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          11,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          3,
+          181,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "examples": 266,
+      "accuracy": 0.9736842105263158,
+      "macro_f1": 0.9527294685990338,
+      "false_activation_rate": 0.024271844660194174,
+      "command_recall": 0.9666666666666667,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "held-neural",
+      "profile": "hum",
+      "confusion": [
+        [
+          11,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          8,
+          0,
+          0,
+          4,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          11,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          10,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          4,
+          180,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "examples": 266,
+      "accuracy": 0.9473684210526315,
+      "macro_f1": 0.909555825978917,
+      "false_activation_rate": 0.02912621359223301,
+      "command_recall": 0.8666666666666667,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "held-neural",
+      "profile": "noise",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          10,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          7,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          11,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          2,
+          0,
+          2,
+          181,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "examples": 266,
+      "accuracy": 0.9511278195488722,
+      "macro_f1": 0.9115270816140381,
+      "false_activation_rate": 0.024271844660194174,
+      "command_recall": 0.8666666666666667,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "held-neural",
+      "profile": "early",
+      "confusion": [
+        [
+          11,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          11,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          10,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          11,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          11,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          4,
+          180,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "examples": 266,
+      "accuracy": 0.9548872180451128,
+      "macro_f1": 0.921172671055479,
+      "false_activation_rate": 0.02912621359223301,
+      "command_recall": 0.9,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "held-neural",
+      "profile": "late",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          9,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          10,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          11,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          2,
+          0,
+          3,
+          179,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "examples": 266,
+      "accuracy": 0.9511278195488722,
+      "macro_f1": 0.9126425630773457,
+      "false_activation_rate": 0.03398058252427184,
+      "command_recall": 0.9,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "familiar-neural",
+      "profile": "clean",
+      "confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "examples": 65,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "false_activation_rate": 0.0,
+      "command_recall": 1.0,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "familiar-neural",
+      "profile": "quiet",
+      "confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "examples": 65,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "false_activation_rate": 0.0,
+      "command_recall": 1.0,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "familiar-neural",
+      "profile": "dc",
+      "confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "examples": 65,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "false_activation_rate": 0.0,
+      "command_recall": 1.0,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "familiar-neural",
+      "profile": "drift",
+      "confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "examples": 65,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "false_activation_rate": 0.0,
+      "command_recall": 1.0,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "familiar-neural",
+      "profile": "hum",
+      "confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          32,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "examples": 65,
+      "accuracy": 0.9846153846153847,
+      "macro_f1": 0.9773940345368917,
+      "false_activation_rate": 0.02,
+      "command_recall": 1.0,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "familiar-neural",
+      "profile": "noise",
+      "confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "examples": 65,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "false_activation_rate": 0.0,
+      "command_recall": 1.0,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "familiar-neural",
+      "profile": "early",
+      "confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "examples": 65,
+      "accuracy": 0.9846153846153847,
+      "macro_f1": 0.9692963752665246,
+      "false_activation_rate": 0.0,
+      "command_recall": 0.9333333333333333,
+      "accepted": true
+    },
+    {
+      "kind": "domain_profiles",
+      "domain": "familiar-neural",
+      "profile": "late",
+      "confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "examples": 65,
+      "accuracy": 0.9846153846153847,
+      "macro_f1": 0.9692963752665246,
+      "false_activation_rate": 0.0,
+      "command_recall": 0.9333333333333333,
+      "accepted": true
+    },
+    {
+      "kind": "pooled_profiles",
+      "domain": null,
+      "profile": "clean",
+      "confusion": [
+        [
+          27,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          18,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          25,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          29,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          20,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          3,
+          412,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          61
+        ]
+      ],
+      "examples": 601,
+      "accuracy": 0.9850249584026622,
+      "macro_f1": 0.9687750386902929,
+      "false_activation_rate": 0.010460251046025104,
+      "command_recall": 0.967479674796748,
+      "accepted": true
+    },
+    {
+      "kind": "pooled_profiles",
+      "domain": null,
+      "profile": "quiet",
+      "confusion": [
+        [
+          27,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          18,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          25,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          29,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          21,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          3,
+          412,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          61
+        ]
+      ],
+      "examples": 601,
+      "accuracy": 0.9866888519134775,
+      "macro_f1": 0.9724084990927064,
+      "false_activation_rate": 0.010460251046025104,
+      "command_recall": 0.975609756097561,
+      "accepted": true
+    },
+    {
+      "kind": "pooled_profiles",
+      "domain": null,
+      "profile": "dc",
+      "confusion": [
+        [
+          27,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          18,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          25,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          29,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          20,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          3,
+          412,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          61
+        ]
+      ],
+      "examples": 601,
+      "accuracy": 0.9850249584026622,
+      "macro_f1": 0.9687750386902929,
+      "false_activation_rate": 0.010460251046025104,
+      "command_recall": 0.967479674796748,
+      "accepted": true
+    },
+    {
+      "kind": "pooled_profiles",
+      "domain": null,
+      "profile": "drift",
+      "confusion": [
+        [
+          27,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          18,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          26,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          29,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          21,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          2,
+          0,
+          3,
+          411,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          60
+        ]
+      ],
+      "examples": 601,
+      "accuracy": 0.9850249584026622,
+      "macro_f1": 0.970186304324479,
+      "false_activation_rate": 0.012552301255230125,
+      "command_recall": 0.983739837398374,
+      "accepted": true
+    },
+    {
+      "kind": "pooled_profiles",
+      "domain": null,
+      "profile": "hum",
+      "confusion": [
+        [
+          25,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          18,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          20,
+          0,
+          0,
+          7,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          28,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          17,
+          4,
+          0
+        ],
+        [
+          1,
+          0,
+          3,
+          1,
+          4,
+          408,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          61
+        ]
+      ],
+      "examples": 601,
+      "accuracy": 0.9600665557404326,
+      "macro_f1": 0.9247858785343367,
+      "false_activation_rate": 0.01882845188284519,
+      "command_recall": 0.8780487804878049,
+      "accepted": true
+    },
+    {
+      "kind": "pooled_profiles",
+      "domain": null,
+      "profile": "noise",
+      "confusion": [
+        [
+          24,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          16,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          20,
+          0,
+          0,
+          7,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          29,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          21,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          3,
+          0,
+          2,
+          406,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          61
+        ]
+      ],
+      "examples": 601,
+      "accuracy": 0.9600665557404326,
+      "macro_f1": 0.9281219971425145,
+      "false_activation_rate": 0.016736401673640166,
+      "command_recall": 0.8943089430894309,
+      "accepted": true
+    },
+    {
+      "kind": "pooled_profiles",
+      "domain": null,
+      "profile": "early",
+      "confusion": [
+        [
+          26,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          17,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          24,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          29,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          20,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          1,
+          4,
+          410,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          61
+        ]
+      ],
+      "examples": 601,
+      "accuracy": 0.9767054908485857,
+      "macro_f1": 0.9530266014761699,
+      "false_activation_rate": 0.014644351464435146,
+      "command_recall": 0.943089430894309,
+      "accepted": true
+    },
+    {
+      "kind": "pooled_profiles",
+      "domain": null,
+      "profile": "late",
+      "confusion": [
+        [
+          27,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          18,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          24,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          27,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          20,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          2,
+          0,
+          3,
+          409,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          61
+        ]
+      ],
+      "examples": 601,
+      "accuracy": 0.9750415973377704,
+      "macro_f1": 0.950026841331459,
+      "false_activation_rate": 0.016736401673640166,
+      "command_recall": 0.943089430894309,
+      "accepted": true
+    },
+    {
+      "kind": "selection_profiles",
+      "domain": "legacy",
+      "profile": "clean",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "false_activation_rate": 0.0,
+      "command_recall": 1.0,
+      "accepted": true
+    },
+    {
+      "kind": "selection_profiles",
+      "domain": "legacy",
+      "profile": "quiet",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "false_activation_rate": 0.0,
+      "command_recall": 1.0,
+      "accepted": true
+    },
+    {
+      "kind": "selection_profiles",
+      "domain": "legacy",
+      "profile": "dc",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "accuracy": 1.0,
+      "macro_f1": 1.0,
+      "false_activation_rate": 0.0,
+      "command_recall": 1.0,
+      "accepted": true
+    },
+    {
+      "kind": "selection_profiles",
+      "domain": "legacy",
+      "profile": "drift",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          197,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          23
+        ]
+      ],
+      "examples": 270,
+      "accuracy": 0.9925925925925926,
+      "macro_f1": 0.9758308223353815,
+      "false_activation_rate": 0.0045045045045045045,
+      "command_recall": 1.0,
+      "accepted": true
+    },
+    {
+      "kind": "selection_profiles",
+      "domain": "legacy",
+      "profile": "hum",
+      "confusion": [
+        [
+          11,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          9,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          14,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          4,
+          2,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          0,
+          0,
+          196,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "accuracy": 0.9666666666666667,
+      "macro_f1": 0.9254174051362115,
+      "false_activation_rate": 0.009009009009009009,
+      "command_recall": 0.8541666666666666,
+      "accepted": true
+    },
+    {
+      "kind": "selection_profiles",
+      "domain": "legacy",
+      "profile": "noise",
+      "confusion": [
+        [
+          9,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          10,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          0,
+          0,
+          192,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "accuracy": 0.9592592592592593,
+      "macro_f1": 0.9128623491223677,
+      "false_activation_rate": 0.013513513513513514,
+      "command_recall": 0.8958333333333334,
+      "accepted": true
+    },
+    {
+      "kind": "selection_profiles",
+      "domain": "legacy",
+      "profile": "early",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          197,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "accuracy": 0.9962962962962963,
+      "macro_f1": 0.9950300414163216,
+      "false_activation_rate": 0.0045045045045045045,
+      "command_recall": 1.0,
+      "accepted": true
+    },
+    {
+      "kind": "selection_profiles",
+      "domain": "legacy",
+      "profile": "late",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          197,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "examples": 270,
+      "accuracy": 0.9962962962962963,
+      "macro_f1": 0.979230173081891,
+      "false_activation_rate": 0.0045045045045045045,
+      "command_recall": 1.0,
+      "accepted": true
+    },
+    {
+      "kind": "selection_profiles",
+      "domain": "neural",
+      "profile": "clean",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          10,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          11,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          11,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          3,
+          181,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "examples": 266,
+      "accuracy": 0.9661654135338346,
+      "macro_f1": 0.9391981852851419,
+      "false_activation_rate": 0.024271844660194174,
+      "command_recall": 0.9333333333333333,
+      "accepted": true
+    },
+    {
+      "kind": "selection_profiles",
+      "domain": "neural",
+      "profile": "quiet",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          10,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          11,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          3,
+          181,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "examples": 266,
+      "accuracy": 0.9699248120300752,
+      "macro_f1": 0.9456819673786799,
+      "false_activation_rate": 0.024271844660194174,
+      "command_recall": 0.95,
+      "accepted": true
+    },
+    {
+      "kind": "selection_profiles",
+      "domain": "neural",
+      "profile": "dc",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          10,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          11,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          11,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          3,
+          181,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "examples": 266,
+      "accuracy": 0.9661654135338346,
+      "macro_f1": 0.9391981852851419,
+      "false_activation_rate": 0.024271844660194174,
+      "command_recall": 0.9333333333333333,
+      "accepted": true
+    },
+    {
+      "kind": "selection_profiles",
+      "domain": "neural",
+      "profile": "drift",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          11,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          11,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          3,
+          181,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "examples": 266,
+      "accuracy": 0.9736842105263158,
+      "macro_f1": 0.9527294685990338,
+      "false_activation_rate": 0.024271844660194174,
+      "command_recall": 0.9666666666666667,
+      "accepted": true
+    },
+    {
+      "kind": "selection_profiles",
+      "domain": "neural",
+      "profile": "hum",
+      "confusion": [
+        [
+          11,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          8,
+          0,
+          0,
+          4,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          11,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          10,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          4,
+          180,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "examples": 266,
+      "accuracy": 0.9473684210526315,
+      "macro_f1": 0.909555825978917,
+      "false_activation_rate": 0.02912621359223301,
+      "command_recall": 0.8666666666666667,
+      "accepted": true
+    },
+    {
+      "kind": "selection_profiles",
+      "domain": "neural",
+      "profile": "noise",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          10,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          7,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          11,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          2,
+          0,
+          2,
+          181,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "examples": 266,
+      "accuracy": 0.9511278195488722,
+      "macro_f1": 0.9115270816140381,
+      "false_activation_rate": 0.024271844660194174,
+      "command_recall": 0.8666666666666667,
+      "accepted": true
+    },
+    {
+      "kind": "selection_profiles",
+      "domain": "neural",
+      "profile": "early",
+      "confusion": [
+        [
+          11,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          11,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          10,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          11,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          11,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          4,
+          180,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "examples": 266,
+      "accuracy": 0.9548872180451128,
+      "macro_f1": 0.921172671055479,
+      "false_activation_rate": 0.02912621359223301,
+      "command_recall": 0.9,
+      "accepted": true
+    },
+    {
+      "kind": "selection_profiles",
+      "domain": "neural",
+      "profile": "late",
+      "confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          9,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          10,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          11,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          2,
+          0,
+          3,
+          179,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "examples": 266,
+      "accuracy": 0.9511278195488722,
+      "macro_f1": 0.9126425630773457,
+      "false_activation_rate": 0.03398058252427184,
+      "command_recall": 0.9,
+      "accepted": true
+    },
+    {
+      "kind": "selection_pooled_profiles",
+      "domain": null,
+      "profile": "clean",
+      "confusion": [
+        [
+          24,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          15,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          22,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          26,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          17,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          3,
+          379,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          44
+        ]
+      ],
+      "examples": 536,
+      "accuracy": 0.9832089552238806,
+      "macro_f1": 0.9642619507853906,
+      "false_activation_rate": 0.011682242990654205,
+      "command_recall": 0.9629629629629629,
+      "accepted": true
+    },
+    {
+      "kind": "selection_pooled_profiles",
+      "domain": null,
+      "profile": "quiet",
+      "confusion": [
+        [
+          24,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          15,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          22,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          26,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          18,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          3,
+          379,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          44
+        ]
+      ],
+      "examples": 536,
+      "accuracy": 0.9850746268656716,
+      "macro_f1": 0.9684953248431105,
+      "false_activation_rate": 0.011682242990654205,
+      "command_recall": 0.9722222222222222,
+      "accepted": true
+    },
+    {
+      "kind": "selection_pooled_profiles",
+      "domain": null,
+      "profile": "dc",
+      "confusion": [
+        [
+          24,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          15,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          22,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          26,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          17,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          3,
+          379,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          44
+        ]
+      ],
+      "examples": 536,
+      "accuracy": 0.9832089552238806,
+      "macro_f1": 0.9642619507853906,
+      "false_activation_rate": 0.011682242990654205,
+      "command_recall": 0.9629629629629629,
+      "accepted": true
+    },
+    {
+      "kind": "selection_pooled_profiles",
+      "domain": null,
+      "profile": "drift",
+      "confusion": [
+        [
+          24,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          15,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          23,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          26,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          18,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          2,
+          0,
+          3,
+          378,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          43
+        ]
+      ],
+      "examples": 536,
+      "accuracy": 0.9832089552238806,
+      "macro_f1": 0.965502721670094,
+      "false_activation_rate": 0.014018691588785047,
+      "command_recall": 0.9814814814814815,
+      "accepted": true
+    },
+    {
+      "kind": "selection_pooled_profiles",
+      "domain": null,
+      "profile": "hum",
+      "confusion": [
+        [
+          22,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          15,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          17,
+          0,
+          0,
+          7,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          25,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          14,
+          4,
+          0
+        ],
+        [
+          1,
+          0,
+          2,
+          1,
+          4,
+          376,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          44
+        ]
+      ],
+      "examples": 536,
+      "accuracy": 0.957089552238806,
+      "macro_f1": 0.9169092102889422,
+      "false_activation_rate": 0.018691588785046728,
+      "command_recall": 0.8611111111111112,
+      "accepted": true
+    },
+    {
+      "kind": "selection_pooled_profiles",
+      "domain": null,
+      "profile": "noise",
+      "confusion": [
+        [
+          21,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          13,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          17,
+          0,
+          0,
+          7,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          26,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          18,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          3,
+          0,
+          2,
+          373,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          44
+        ]
+      ],
+      "examples": 536,
+      "accuracy": 0.9552238805970149,
+      "macro_f1": 0.9166860071490391,
+      "false_activation_rate": 0.018691588785046728,
+      "command_recall": 0.8796296296296297,
+      "accepted": true
+    },
+    {
+      "kind": "selection_pooled_profiles",
+      "domain": null,
+      "profile": "early",
+      "confusion": [
+        [
+          23,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          14,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          22,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          26,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          17,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          1,
+          4,
+          377,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          44
+        ]
+      ],
+      "examples": 536,
+      "accuracy": 0.9757462686567164,
+      "macro_f1": 0.9496879203812151,
+      "false_activation_rate": 0.016355140186915886,
+      "command_recall": 0.9444444444444444,
+      "accepted": true
+    },
+    {
+      "kind": "selection_pooled_profiles",
+      "domain": null,
+      "profile": "late",
+      "confusion": [
+        [
+          24,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          15,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          21,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          25,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          17,
+          1,
+          0
+        ],
+        [
+          1,
+          2,
+          2,
+          0,
+          3,
+          376,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          44
+        ]
+      ],
+      "examples": 536,
+      "accuracy": 0.9738805970149254,
+      "macro_f1": 0.9459402295276622,
+      "false_activation_rate": 0.018691588785046728,
+      "command_recall": 0.9444444444444444,
+      "accepted": true
+    }
+  ],
+  "gate_acceptance_recomputed": true,
+  "accepted_development_conformance": true,
+  "scratch_bytes": 12288,
+  "native_total_seconds": 1.8435889999964274,
+  "numpy_reference_total_seconds": 1.069944166985806,
+  "elapsed_seconds": 3.440456709009595,
+  "process_high_water_bytes": 231260160,
+  "host_platform": "macOS arm64",
+  "host_timing_not_target_performance": true,
+  "additional_verification_not_tdd": true,
+  "pcm_to_features_compared": false,
+  "native_frontend_implemented": false,
+  "frozen": false,
+  "final_evaluated": false,
+  "target_built": false,
+  "device_tested": false,
+  "real_voice_tested": false,
+  "vast_usd": 0
+}
