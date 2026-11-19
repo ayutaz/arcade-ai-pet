@@ -46,6 +46,10 @@ def validate_plan(plan):
 
 
 def generate_development(plan, output, *, synthesize, recognize, finalize=True):
+    return _generate(plan,output,synthesize=synthesize,recognize=recognize,finalize=finalize,role='development')
+
+
+def _generate(plan,output,*,synthesize,recognize,finalize,role,model_binding=None):
     digest=validate_plan(plan);output=Path(output).absolute()
     if not callable(synthesize) or not callable(recognize) or output.resolve()!=output or output.exists():
         raise ValueError('fresh real output and provider callbacks required')
@@ -57,7 +61,7 @@ def generate_development(plan, output, *, synthesize, recognize, finalize=True):
     def save(): (output/'progress.json').write_text(json.dumps(progress,ensure_ascii=False,indent=2)+'\n')
     save();accepted=[];seen=set();covered=set()
     for condition in plan['conditions']:
-        if condition['role'] != 'development':continue
+        if condition['role'] != role:continue
         for label,texts in SOURCES.items():
             for prompt in texts:
                 for attempt in range(plan['attempts']):
@@ -83,25 +87,30 @@ def generate_development(plan, output, *, synthesize, recognize, finalize=True):
                     break
     if covered != {text for texts in SOURCES.values() for text in texts}:
         raise ValueError('incomplete qualified prompt coverage; preserve partial output')
-    qualified=dict(schema=1,role='development',plan_sha256=digest,records=accepted,
+    qualified=dict(schema=1,role=role,plan_sha256=digest,records=accepted,
                    **fingerprints)
+    if model_binding is not None:qualified['model_binding']=model_binding
     (output/'qualified-sources.json').write_text(json.dumps(qualified,ensure_ascii=False,indent=2)+'\n')
     progress['status']='qualified';save()
     if finalize:
-        return finalize_development(output)
+        return _finalize(output,role=role)
     return dict(qualified_speech_sources=len(accepted),plan_sha256=digest,
-                real_voice_tested=False,model_trained=False,final_conditions_generated=False)
+                real_voice_tested=False,model_trained=False,final_conditions_generated=(role=='final'))
 
 
 def finalize_development(output):
     """Build core-version features from frozen qualified WAVs without invoking models."""
+    return _finalize(output,role='development')
+
+
+def _finalize(output,*,role):
     output=Path(output).absolute()
     if output.resolve()!=output or any((output/name).exists() for name in ('manifest.json','train.npz','validation.npz','test.npz')):
         raise ValueError('fresh real feature destination required')
     plan=json.loads((output/'plan.json').read_text());digest=validate_plan(plan)
     qualified=json.loads((output/'qualified-sources.json').read_text())
-    accepted=qualified['records'];conditions={r['id']:r for r in plan['conditions'] if r['role']=='development'}
-    if qualified.get('schema')!=1 or qualified.get('role')!='development' or qualified.get('plan_sha256')!=digest:
+    accepted=qualified['records'];conditions={r['id']:r for r in plan['conditions'] if r['role']==role}
+    if qualified.get('schema')!=1 or qualified.get('role')!=role or qualified.get('plan_sha256')!=digest:
         raise ValueError('qualified plan identity changed')
     progress=json.loads((output/'progress.json').read_text())
     if progress.get('status')!='qualified' or progress.get('plan_sha256')!=digest:
@@ -133,7 +142,7 @@ def finalize_development(output):
         pcm=trim_silence(read_pcm(path))
         for variant in range(plan['variants']):
             out=arrays[row['split']];out['x'].append(features(augment(pcm,int(row['id'][:8],16)+variant)));out['y'].append(row['label'])
-    namespace='neural-dev-'+digest[:12]
+    namespace=('neural-dev-' if role=='development' else 'neural-final-')+digest[:12]
     for index in range(200):
         source=f'{namespace}/{index}';ident=hashlib.sha256(source.encode()).hexdigest();split=split_for(source)
         rng=np.random.default_rng(int.from_bytes(hashlib.sha256(source.encode()).digest()[:8],'little'))
@@ -143,13 +152,14 @@ def finalize_development(output):
     for split,out in arrays.items():
         np.savez_compressed(output/(split+'.npz'),x=np.asarray(out['x'],dtype=np.float32).reshape(-1,260),y=np.asarray(out['y'],dtype=np.int64))
     manifest=dict(schema=1,engine='Irodori VoiceDesign generated speech with independent ASR content checks',
-                  role='development',plan_sha256=digest,provider=plan['provider'],variants=plan['variants'],
+                  role=role,plan_sha256=digest,provider=plan['provider'],variants=plan['variants'],
                   generator_sha256=qualified['generator_sha256'],
                   audit_sha256=qualified['audit_sha256'],feature_numpy_version=np.__version__,
                   license='declared MIT provider; see provider artifacts and attribution',
                   feature_version='aligned-mfcc-v2',records=records)
+    if 'model_binding' in qualified:manifest['model_binding']=qualified['model_binding']
     (output/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
     progress=json.loads((output/'progress.json').read_text());progress['status']='complete'
     (output/'progress.json').write_text(json.dumps(progress,ensure_ascii=False,indent=2)+'\n')
     return dict(qualified_speech_sources=len(accepted),records=len(records),plan_sha256=digest,
-                real_voice_tested=False,model_trained=False,final_conditions_generated=False)
+                real_voice_tested=False,model_trained=False,final_conditions_generated=(role=='final'))
