@@ -1,6 +1,6 @@
 # 平均スペクトルを補助入力にするホストPoC
 
-2026-11-19。特徴/整数モデル/学習処理を先行TDDで実装した。**実データの認識品質、C/ESP32-S3の資源と動作は未確認。** [元の設計案](spectral-envelope-proposal.md)の未実装JSONは当時の記録として保持する。
+2026-11-19。特徴/整数モデル/学習処理を先行TDDで実装した。**固定1構成の実データ学習は完了。17/24条件の合格で基準未達のため不採用。C/ESP32-S3は未確認。** [元の設計案](spectral-envelope-proposal.md)の未実装JSONは当時の記録として保持する。
 
 ## 入力と形式
 
@@ -35,8 +35,30 @@ uv run --locked python -m unittest discover -s tests -p 'test_envelope_*.py' -v
 uv run --locked --group train python -m unittest discover -s tests/training -p test_envelope_training.py -v
 ```
 
+[旧形式の実データ互換](../experiments/neural-domain-20261119/spectral-envelope-legacy-compatibility.json)も追加確認した。変更前の固定実装と既定モードで4,808行の全整数logit/24混同行列が一致。旧モデルは不採用のままで、追加検証を新規TDDや実機保証とは扱わない。
+
 ## 固定した1構成
 
 [実学習前のrecipe](../experiments/neural-domain-20261119/spectral-envelope-plan.json)。同じ元archive/4合成条件と20無音の保留、30epoch/batch256/seed42、ローカルMPS、最大8,000step/fit900秒。float学習後の整数版でcheckpoint/点差を選び、全24domain＋結合8条件＋選定結合8条件を要求する。ASRの不一致を理由に評価行を削除/再ラベルせず、過去の最終2組をfit/選定/校正へ使わない。
 
 実sourceと容量を確認してからrecipeを保存した。事前JSONの`real_training_started:false`を後から変更しない。通過した場合だけ、新形式のC照合/固定、新しい独立最終評価、S3 build/資源確認へ進む。実機a553/16app・実声6/15と過去の不採用は維持する。新FWの個別許可は別工程。
+
+## 固定1構成の結果
+
+[数値と別照合](../experiments/neural-domain-20261119/spectral-envelope-result.json)。source `9260efbd1a65165ffce6f771209fcfa3f8f6995d`をarchiveし、同じ事前recipeで30epoch/7,350stepを完走。全処理376.242秒、選定epoch6。23,635B、process最大RSS1,758,101,504Bはホスト値で、S3資源の実測ではない。
+
+| 開発domain | 最小F1（基準0.90） | 最大誤反応（上限0.05） | 最小操作recall（基準0.80） | 未達profile |
+|---|---:|---:|---:|---|
+| legacy | 0.919074 | 0.018018 | 0.854167 | なし |
+| 保留neural | 0.886878 | 0.048544 | 0.800000 | quiet/hum/noise/early/late |
+| 元neural検証 | 0.868433 | 0.060000 | 0.800000 | noise/early |
+
+全24条件のうち17条件が合格し、旧モデルの21/24を下回った。selectionも未達で、不採用として保存する。56組の指標を混同行列から再計算し、30source/8元入力/重み/recipe hashと容量、旧modeで新headを拒否することも照合した。quality driverのexit1は基準未達で、学習処理の例外ではない。
+
+追加のclean「まって」12例では、棄却前1位の正解が旧モデル6/12から11/12へ増えた。ただし同じ4元発話のvariantで、実声や独立最終評価ではない。局所的な改善と他条件の悪化を分け、平均スペクトルを除いていたことだけが主因とは断定しない。
+
+次は旧CNNの既存係数を固定し、追加32値に対応する224係数だけを学習する仮説を検討する。全体の再学習による判定の変化を切り分け、全評価基準を維持する。別の学習recipe/契約はまだ未固定で、追加探索は開始していない。
+
+新しい最終データ/C移植/target build/実機変更は行わず、実機a553/16app・実声6/15、既存の不採用とVast.ai累計0米ドルを維持する。
+
+次の[固定係数による補助入力案](frozen-prefix-residual-proposal.md)は未実装/未学習。元の不採用を保持し、recipeは実装後に別途固定する。

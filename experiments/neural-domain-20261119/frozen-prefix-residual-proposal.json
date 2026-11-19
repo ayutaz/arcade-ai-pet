@@ -1,0 +1,22 @@
+{
+  "scope": "frozen_prefix_envelope_residual_design_not_implemented",
+  "date": "2026-11-19",
+  "implemented": false,
+  "training_started": false,
+  "recipe_fixed": false,
+  "base_model_sha256": "8595204eb5b1896c60d57e40c3fd72b7417623ca5f285d35ce2246f39c377e41",
+  "base_model_accepted": false,
+  "features": 2145,
+  "numeric_bytes_with_thresholds": 23635,
+  "trainable_coefficients": 224,
+  "frozen_convolution_layers": 5,
+  "frozen_head_prefix_columns": 3137,
+  "frozen_head_bias_and_shifts": true,
+  "auxiliary_columns": 32,
+  "zero_auxiliary_must_match_base": true,
+  "word_specific_routing_allowed": false,
+  "evaluation_rows_changed": false,
+  "final_data_allowed": false,
+  "target_or_device_changed": false,
+  "vast_usd": 0
+}

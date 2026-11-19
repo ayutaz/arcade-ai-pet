@@ -1,0 +1,13 @@
+{
+  "scope": "changed_default_cnn_matches_archived_old_math",
+  "examples": 4808,
+  "all_integer_logits_equal": true,
+  "group_confusions_matched": 24,
+  "old_source_commit": "f74710a19a6fa06f0d681b47e934e9c34b195a83",
+  "old_model_sha256": "8595204eb5b1896c60d57e40c3fd72b7417623ca5f285d35ce2246f39c377e41",
+  "old_model_source_sha256": "4579a91bd4ce9778b33246c1f34353a9ff8d755df50334dd865824b7d642ad3f",
+  "current_model_source_sha256": "fec5925915c205dca9c8eb7fb7d2ca55c75d918d0384b14c48c4a72056e4cda8",
+  "current_training_source_sha256": "27cef05e119e5981870f86eff175ffe2fe434c51775c0aa6d18d099c9e0a3b6b",
+  "real_voice_or_device_tested": false,
+  "additional_verification_not_tdd": true
+}
