@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "scope": "development_caption_holdout_preflight",
+  "seed": 2026111904,
+  "development_manifest_sha256": {
+    "legacy": "907d32cd3262ac6e2ff2636dee9a625d13b1050ed0385a211a25ad7898832dfd",
+    "neural": "5814cac6b2884f2c84e59a00e479b4aba0bee3ab00aff0fec61f3e623559b214"
+  },
+  "frontend": "context-duration-cmn",
+  "conditioning": "hp160",
+  "peak": 4096,
+  "maximum_model_configurations": 1,
+  "epochs": 1000,
+  "hidden": 88,
+  "training_seed": 42,
+  "neural_weight": 2,
+  "noise_replicas": 5,
+  "hum_replicas": 3,
+  "noise_mode": "fresh",
+  "maximum_calibration_passes": 4,
+  "selection_domains": [
+    "legacy_validation",
+    "held_neural_validation"
+  ],
+  "additional_required_regression": [
+    "original_neural_validation"
+  ],
+  "quality_gates": {
+    "macro_f1_min": 0.9,
+    "false_activation_rate_max": 0.05,
+    "command_recall_min": 0.8
+  },
+  "held_caption_selection": "first four train-only conditions sorted by sha256(seed/condition/id)",
+  "held_condition_ids": [
+    "extension-13",
+    "extension-14",
+    "extension-03",
+    "extension-02"
+  ],
+  "held_control_selection": "first twenty original train-only silence records sorted by sha256(seed/control/id)",
+  "held_control_count": 20,
+  "held_control_ids_sha256": "c22432767bf8d1b0a9e8c3787d7b0b042eae153a9dda65b3081469de7ecf325a",
+  "original_validation_and_test_archives_must_remain_unchanged": true,
+  "original_test_rows_used_for_fit_or_selection": false,
+  "final_corpora_used_for_fit_or_selection": false,
+  "consumed_final_plans": [
+    "67598d206e18b8d78bdf133fe8c9a0a4fc72b690b090ec88298926e5ab06554d",
+    "d357efa61c2085d221582407e99f892654ff56c2642d366a4c8d0ced442323c0"
+  ],
+  "new_unused_final_required_before_adoption": true,
+  "implemented": false,
+  "training_started": false,
+  "device_tested": false,
+  "vast_usd": 0,
+  "require_held_source_ids_and_all_augmented_examples_excluded_from_train": true,
+  "require_all_24_domain_profiles_and_8_pooled": true,
+  "require_selection_domains_pooled_profiles": true,
+  "previous_final_results_informed_validation_hypothesis": true
+}

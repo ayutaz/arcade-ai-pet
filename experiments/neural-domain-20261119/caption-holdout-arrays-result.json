@@ -1,0 +1,69 @@
+{
+  "scope": "development_caption_holdout_array_reconstruction_only",
+  "selection": {
+    "seed": 2026111904,
+    "manifest_sha256": "5814cac6b2884f2c84e59a00e479b4aba0bee3ab00aff0fec61f3e623559b214",
+    "held_condition_ids": [
+      "extension-13",
+      "extension-14",
+      "extension-03",
+      "extension-02"
+    ],
+    "held_control_ids": [
+      "4eb5ecec3bf290c1c1ba222ea443f58bb6a70e788ebbe8ec017b32429a4155fd",
+      "6bde1c93382b10222acf51995074725945383fecb2b11cade19162c98d1eb416",
+      "cb301701ceed922ccafcddb7c624e827db59afa7627cb8b682b55b5cb962d774",
+      "192578b2805d0b52a25d15d3f549dd9a8bfaef3d645d0f119d4a2ebca670a83b",
+      "44334f8fcab93b64b63cce0b2ec5f18fdd541173a6074505d50745c890ba1ca6",
+      "88cb9a0c60d4588582afa2b89095331a8715320d6b46ea2fa10cc5072efc9188",
+      "433560e535f697d436fd5d622d71151b2333a70cc5d5785efb98ceaae3368594",
+      "a21602ee242063559291415c197a789d98824578b5f6f254f834ec592d428233",
+      "1626d4d9b808fdb91e7df63edb662b29aebcc161e6254809a9453d29efdd85dc",
+      "d70092def98203932921b21bde7ebaaf74e417e13144a47ef64c573141d9a6fc",
+      "e368a409f5826c43fe69288027e3609d65bfd565d65fcbe50e4c9d1140a91c73",
+      "f337cb39aed06f0632de7cc7f55275e489e2a0a7f432992512f5bfbb4ba08e98",
+      "6bf5eda1ecc5ea32df41f09b28286522658e890a31ebf983935730a34335a462",
+      "6e0933baf0836cdb5953995097f60e242e3494d6c8d3ed4f7c1d07d5302c19b3",
+      "6206a9970240ea40dbe5d1e0add511c518f86be6362c0059edb826bd7faa246d",
+      "e6857574e9796ebd3cdd90a2ee508887c8ff9959d999cce58ebf23c624e34132",
+      "93ba4b97e5c683a018770c51887d2aad65d3a0554d5597d3f72b3307402a36cb",
+      "723c5125394309d9b5b079adf3ea50fa765da7620d5580370afa1a702c1bf803",
+      "e423421887e6829444c6b064c8fea470af01dca1f98600b17a33a4180159dbfb",
+      "0cef32bb60b93caaa7d311c5dd8b2af9a7f5e37b5591b660df975c9e3454baa3"
+    ]
+  },
+  "split_examples": {
+    "train": 17332,
+    "validation": 520,
+    "held_validation": 2128
+  },
+  "unique_source_counts": {
+    "train": 506,
+    "validation": 33,
+    "held_validation": 102
+  },
+  "caption_counts": {
+    "train": 20,
+    "validation": 8,
+    "held_validation": 4
+  },
+  "held_sources_absent_from_train": true,
+  "original_archives_unchanged": true,
+  "original_archive_sha256": {
+    "legacy/train": "9763ff7241d904b37df0651918ac53efdb54e5da9863394d088daf8646e95f2d",
+    "legacy/validation": "57b09d07420c65d7a56f07cedf7eba021b6334ee2f3eb930bc0a4f5108e08bd6",
+    "legacy/test": "2d01b12f4dbc44eb7667a46f6ebf2db63ec2ec7941670605e984728747e5a05b",
+    "neural/train": "cc71e5c8f5a05fa9e53826968fc0d04fa0ba8bff39040b6f96af78a0a275a6cc",
+    "neural/validation": "393110b7ece0b201e634450e5044778ab3908ef6f185a87efff21a5b711dc53c",
+    "neural/test": "92db5ab8b6444ece340f6f9d9668311a0bc701dc5d861db47cb7f8894f8fc620"
+  },
+  "familiar_validation_logits_reproduced": 520,
+  "retired_model_evaluated_on_new_holdout": false,
+  "elapsed_seconds": 25.574,
+  "builder_sha256": "acf7b09020bf09886609c241021d1df6a9d1af45c737c6166cd232de22102def",
+  "training_started": false,
+  "final_used": false,
+  "target_built": false,
+  "device_tested": false,
+  "vast_usd": 0
+}
