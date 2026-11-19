@@ -1,0 +1,36 @@
+{
+  "device_tested": false,
+  "frozen": false,
+  "header_sha256": {
+    "logmel_model.h": "e0542f352296c4b69a91e8ff800764a8abf1f81b24a5ef2e429b95f525f612b1",
+    "logmel_tables.h": "bd9ff5df6f6033179122c5f957bb6cbeaf1445d643dc1ef861153f6bfa0da110"
+  },
+  "input_contract": {
+    "activation": "signed_Q5_then_uint8_Q5_ReLU6",
+    "band_normalization": "per_band_mean_divide4",
+    "conditioning": "hp160",
+    "context_frames": 10,
+    "duration_scale": 4,
+    "features": 2113,
+    "frontend": "context-logmel64",
+    "logits": "signed_int32_Q10",
+    "mel_bands": 32,
+    "peak": 4096,
+    "pooling": "fractional_frame_overlap",
+    "rate": 16000,
+    "samples": 32000,
+    "time_bins": 64
+  },
+  "numeric_bytes": 23411,
+  "real_voice_tested": false,
+  "runtime": "context-logmel-dscnn-v1",
+  "thresholds_q10": [
+    3505,
+    1220,
+    3063,
+    552,
+    1052
+  ],
+  "weights_bytes": 23391,
+  "weights_sha256": "194c5fceaeb9e51f83d8637033680a779c50c614becc3ff7bc37339ec31d27a8"
+}

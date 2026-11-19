@@ -13,3 +13,7 @@ packageは5,176B/SHA-256 a6b624c9684642448f673bf782e2e777953b506c523e95d8a4f5376
 ## CIランナー
 
 結果文書PR64のwasmはmacos-15でrunner未割当のまま15分後cancelled（実行stepなし）。PR65へ統合し、同じ必須job名/固定SDK/全2VM試験/15分上限を保って、標準ARM64のmacos-26へ移行する。先行contractで旧labelをRed→1件Green。無料の標準公開repo用labelで、有料large/self-hostedやCI迂回は使わない。[GitHub公式runner仕様](https://docs.github.com/en/actions/reference/runners/github-hosted-runners)。実際のCI成功は別に確認する。
+
+## 後続の実機結果
+
+1.0.1を所有確認付きで更新し、他15app/FWを保持した。返答完走を待つホスト試験の修正後、固定10音源で5語5/5・負例誤反応0/5・返答5本完走を確認。途中3分類の1/3や最初の返答失敗は当時の結果として維持する。[現状と残作業](logmel-device-check.md)。PR65の必須4CIは成功し、通常merge済み。

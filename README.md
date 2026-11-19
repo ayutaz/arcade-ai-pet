@@ -1,100 +1,57 @@
 # Arcade AI Pet
 
-An offline companion being built for the
-[Scratch Arcade OS](https://github.com/ayutaz/scratch-arcade-os).
-The goal is simple: speak a short Japanese command, get a reply, and play with
-a companion whose behavior has been learned.
+An offline companion for [Scratch Arcade OS](https://github.com/ayutaz/scratch-arcade-os).
+Move around with a pet that uses a learned policy, or try five short Japanese voice commands.
+The app runs as a small WASM package; speech recognition runs in the OS.
 
 [日本語](README.ja.md)
 
-## What works today
-
-The new [Japanese command model](models/kws-v3/model-card.md) passes eight synthetic
-channel conditions, with a lowest macro F1 of **0.916** and 23,884 bytes of weights.
-Its C pipeline matches Python decisions on all 7,648 profile evaluations.
-The v3 firmware is installed on one ESP32-S3 after a reviewed update and full
-Flash comparison. Earlier synthetic sound checks through a Mac speaker returned
-**1/5, 3/5, 1/5 and 0/5** commands across four input conditions, missing the device quality gate.
-On the later diagnostic firmware, an operator-led 30-trial session completed:
-**6/15 commands correct**, 0/15 false activations and no native errors.
-The 12/15 acceptance target is still unmet. [Human trial summary](docs/voice-validation.md#最新の実声セッション).
-
-A later [experimental candidate](docs/reserved-final-evaluation.md) passed its
-development checks but failed reserved synthetic conditions (lowest macro F1 0.763).
-It has not replaced the device model.
-
-A [CMN candidate](docs/utterance-cmn-final.md) also failed new reserved conditions
-(lowest macro F1 0.802). All 3,448 C/Python decisions matched, but voice quality
-remains insufficient; this candidate has not been deployed.
-
-The [learned movement policy](models/behavior-v1/model-card.md) also runs in integer C.
-On 64 unseen collection boards it averaged 8.64 points versus 0.97 for a seeded random policy.
-Its parameters occupy 472 bytes; this is a host benchmark, not handheld performance.
-
-The pet now builds as a **5,142-byte WASM package**. The learned companion,
-five voice-result actions and normal exit pass both VM implementations.
-
 ![Learned companion](docs/media/companion.gif)
 
-*Actual WASM host replay with simulated voice-result events. Not a device recording.*
+*Actual WASM host replay with simulated voice-result events. This is not a device recording.*
 
-Earlier checks on the input-offset firmware verified five button actions,
-reply playback, player movement and recording cleanup on one ESP32-S3.
-All 16 apps remain intact, and these checks use no Wi-Fi.
+## Current status
 
-**Voice control is not ready.** All four v3 conditions missed the fixed 5/5 command
-gate. None activated on the five negative cases, and no native errors were reported.
-The model and threshold stayed fixed. These small acoustic checks do not measure
-human accuracy or demonstrate reliable voice control.
-[Device evidence](docs/device-validation.md) records the failures and the input-level
-checks; human-voice acceptance, audible quality and physical display/input validation remain incomplete.
+**Experimental; human-voice acceptance is still pending. No tagged release yet.**
 
-[Build and preview the pet](docs/pet-app.md).
+| Part | Evidence |
+|---|---|
+| Pet app 1.0.1 | 5,176-byte package; movement, voice-result actions and exit tested in both host VMs |
+| Learned movement | 472-byte policy; 8.64 points vs 0.97 for seeded random play on 64 unseen host boards |
+| [Fixed voice candidate](models/kws-logmel-v1/model-card.md) | 23,411 bytes of numeric parameters; all 3,448 C/Python decisions match; eight reserved synthetic profiles pass |
+| One handheld, synthetic playback | 5/5 commands, 0/5 negative activations, all five replies complete; recording cleared and 16 apps preserved |
+| Remaining work | Desk/Wi-Fi audio allocation failed on that firmware. A memory fix is built and reviewed but not installed. The new model has no human-voice result yet |
 
-## Test
+The previous model scored **6/15 human commands**, below the 12/15 target.
+The new synthetic results do not replace that human trial or prove reliable voice control.
+See the [current device checks](docs/logmel-device-check.md) and
+[earlier voice trials](docs/voice-validation.md).
 
-Use [uv](https://docs.astral.sh/uv/) with the pinned Python 3.12.13:
+## Try it on your computer
+
+Use [uv](https://docs.astral.sh/uv/) and the pinned Python 3.12.13. Tests need Clang.
+No device, GPU, API key or speech-engine download is required for these checks.
 
 ```sh
 uv sync --locked
 uv run --locked python -m unittest discover -s tests -v
-uv run --locked --group train python -m unittest discover -s tests/training -v
 ```
 
-The first suite needs Clang, but no speech engine, GPU, network key or device. Training tests
-use a tiny deterministic CPU fixture, not downloaded speech or production weights.
+[Build and play in the Mac simulator](docs/pet-app.md).
+The simulator uses buttons and simulated voice results; it does not record your microphone.
+Handheld installation requires a separately reviewed OS update, not just an SDK update.
 
-## Run a training experiment
+## Models and reproduction
 
-[Generated-source auditing](docs/generated-audio-audit.md) compares synthetic inputs with an independent ASR.
-Content agreement is separate from licensing, split checks and model acceptance.
+The pet recognizes **あそぼ / おいで / まって / おやすみ / ありがとう**,
+plus unknown speech and silence. It is a five-command classifier, not general Japanese ASR or a conversational model.
 
-On macOS, install Open JTalk with Homebrew. Keep generated speech and models local:
+- [Fixed log-mel model, evaluation and host example](models/kws-logmel-v1/model-card.md)
+- [Learned movement model](models/behavior-v1/model-card.md)
+- [Synthetic-data auditing](docs/generated-audio-audit.md) and [data licenses](docs/data-license.md)
+- [Earlier CPU training recipe](docs/reproduce-model.md) and [experiment history](docs/validation.md)
 
-```sh
-brew install open-jtalk
-uv run --locked --group train python -m arcade_ai_pet.data \
-  --jtalk-root /opt/homebrew/opt/open-jtalk --output datasets/my-speech
-uv run --locked --group train python -m arcade_ai_pet.training \
-  --dataset datasets/my-speech --output checkpoints/my-model
-```
-
-The recipe uses a 260-value aligned MFCC/energy front end and a small MLP.
-Each source utterance belongs to one split before augmentation. The checkpoint
-and rejection threshold are selected using validation only. Current synthetic
-splits share the same voice identities; they do not measure unseen human speakers.
-
-This runs on the computer's CPU and makes no Vast.ai API call. Cloud training is
-not enabled. Input audio is limited to two seconds of mono PCM16 at 16 kHz.
-Read the [acceptance targets](docs/acceptance.md),
-[frozen-model recipe](docs/reproduce-model.md), [experiment record](docs/validation.md)
-and [data licenses](docs/data-license.md).
-
-Code: [Apache-2.0](LICENSE). Voice models and generated/derived assets have separate
-CC BY 3.0 attribution requirements. This repository includes the small trained KWS
-weights and derived conformance features. Upstream TTS weights and device
-recordings are not included.
-
-Human-voice evaluation: [fixed protocol and anonymous result summary](docs/voice-validation.md).
-
-Release packaging: [source archive and checksum](docs/releases.md). No tagged release has been published yet.
+Code is [Apache-2.0](LICENSE). Voice weights and derived numeric assets have
+[separate attribution and license terms](models/kws-logmel-v1/LICENSE.txt).
+Upstream TTS weights, generated audio and device recordings are not included.
+[Source release procedure](docs/releases.md).
