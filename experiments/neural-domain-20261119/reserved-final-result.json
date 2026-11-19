@@ -1,0 +1,641 @@
+{
+  "schema": 1,
+  "scope": "reserved_synthetic_final_host_only",
+  "model_binding": {
+    "weights_sha256": "dfcc3aa03494b7bd96670c2c3b0cbb1e5e6416ccd91f2fb8f00d342a913bf22b",
+    "plan_sha256": "67598d206e18b8d78bdf133fe8c9a0a4fc72b690b090ec88298926e5ab06554d",
+    "frozen_sha256": "3e9316e518663a7bd26b40a1cc67322a7d0c7cd4f991702261d858d6342640e9"
+  },
+  "weights_sha256": "dfcc3aa03494b7bd96670c2c3b0cbb1e5e6416ccd91f2fb8f00d342a913bf22b",
+  "thresholds_q10": [
+    977,
+    2531,
+    1780,
+    181,
+    768
+  ],
+  "dataset_manifest_sha256": "c459ea358badcf5d326d2ef7b9be280dc9a8a2de5958f1098f7434fbe0293180",
+  "profiles": [
+    {
+      "profile": "clean",
+      "macro_f1": 0.7751021477493276,
+      "accuracy": 0.9435294117647058,
+      "false_activation_rate": 0.0215633423180593,
+      "confusion": [
+        [
+          9,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          10,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          9,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          9,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          4,
+          0,
+          4,
+          163,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          200
+        ]
+      ],
+      "examples": 425,
+      "command_recall": 0.7037037037037037
+    },
+    {
+      "profile": "quiet",
+      "macro_f1": 0.774358444252144,
+      "accuracy": 0.9411764705882353,
+      "false_activation_rate": 0.0215633423180593,
+      "confusion": [
+        [
+          9,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          10,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          9,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          9,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          4,
+          0,
+          4,
+          163,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          199
+        ]
+      ],
+      "examples": 425,
+      "command_recall": 0.7037037037037037
+    },
+    {
+      "profile": "dc",
+      "macro_f1": 0.7751021477493276,
+      "accuracy": 0.9435294117647058,
+      "false_activation_rate": 0.0215633423180593,
+      "confusion": [
+        [
+          9,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          10,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          9,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          9,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          4,
+          0,
+          4,
+          163,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          200
+        ]
+      ],
+      "examples": 425,
+      "command_recall": 0.7037037037037037
+    },
+    {
+      "profile": "drift",
+      "macro_f1": 0.7721296692725262,
+      "accuracy": 0.9341176470588235,
+      "false_activation_rate": 0.0215633423180593,
+      "confusion": [
+        [
+          9,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          10,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          9,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          9,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          4,
+          0,
+          4,
+          163,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          4,
+          196
+        ]
+      ],
+      "examples": 425,
+      "command_recall": 0.7037037037037037
+    },
+    {
+      "profile": "hum",
+      "macro_f1": 0.7637492528356411,
+      "accuracy": 0.9317647058823529,
+      "false_activation_rate": 0.029649595687331536,
+      "confusion": [
+        [
+          9,
+          0,
+          0,
+          0,
+          0,
+          0,
+          3
+        ],
+        [
+          0,
+          7,
+          0,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          0,
+          7,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          9,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          9,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          4,
+          1,
+          6,
+          160,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          200
+        ]
+      ],
+      "examples": 425,
+      "command_recall": 0.6666666666666666
+    },
+    {
+      "profile": "noise",
+      "macro_f1": 0.7881401852937182,
+      "accuracy": 0.9364705882352942,
+      "false_activation_rate": 0.026954177897574125,
+      "confusion": [
+        [
+          9,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          5,
+          0,
+          1,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          0,
+          0,
+          4,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          9,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          9,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          5,
+          3,
+          2,
+          161,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          200
+        ]
+      ],
+      "examples": 425,
+      "command_recall": 0.6851851851851852
+    },
+    {
+      "profile": "early",
+      "macro_f1": 0.7627293496109088,
+      "accuracy": 0.9341176470588235,
+      "false_activation_rate": 0.029649595687331536,
+      "confusion": [
+        [
+          9,
+          0,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          10,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          8,
+          0,
+          4,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          9,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          4,
+          0,
+          6,
+          160,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          200
+        ]
+      ],
+      "examples": 425,
+      "command_recall": 0.6851851851851852
+    },
+    {
+      "profile": "late",
+      "macro_f1": 0.7793699342000612,
+      "accuracy": 0.9411764705882353,
+      "false_activation_rate": 0.02425876010781671,
+      "confusion": [
+        [
+          10,
+          0,
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          9,
+          0,
+          0,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          8,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          9,
+          0,
+          3,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          9,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          6,
+          162,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          200
+        ]
+      ],
+      "examples": 425,
+      "command_recall": 0.7037037037037037
+    }
+  ],
+  "native_conformance": {
+    "rows": 3400,
+    "exact_integer_logits": 3400,
+    "banked_features_equal": 3400,
+    "final_decisions_equal": 3400,
+    "maximum_feature_error": 2.7418136596679688e-06,
+    "scratch_bytes": 5680,
+    "matched": true
+  },
+  "accepted_synthetic": false,
+  "source_overlap": 0,
+  "wave_overlap": 0,
+  "final_evaluated": true,
+  "model_selection_used_final": false,
+  "device_tested": false,
+  "real_voice_tested": false,
+  "vast_usd": 0,
+  "elapsed_seconds": 15.231,
+  "source_commit": "727f9d663e22af125ea122928e73b83bc72045e7",
+  "generation": {
+    "qualified_speech_sources": 75,
+    "attempts": 103,
+    "elapsed_seconds": 1132.579,
+    "backend": "cpu-fp32",
+    "plan_sha256": "67598d206e18b8d78bdf133fe8c9a0a4fc72b690b090ec88298926e5ab06554d",
+    "content_mismatches_excluded": 28
+  },
+  "preparation": {
+    "records": 275,
+    "numpy_version": "2.5.5",
+    "elapsed_seconds": 0.495
+  },
+  "input_examples_per_profile": 425,
+  "all_profiles_passed": false,
+  "trained_again_after_final": false,
+  "thresholds_changed_after_final": false,
+  "model_deployed": false
+}
