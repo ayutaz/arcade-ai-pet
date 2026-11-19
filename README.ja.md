@@ -15,6 +15,8 @@ v3版を個別レビュー後に実機へ適用し、全Flash照合を確認し�
 
 後続の[改善候補](docs/reserved-final-evaluation.md)は開発用条件を通りましたが、予約した合成条件で最小macro F1=0.763となり不合格でした。実機のモデルは置き換えていません。
 
+さらに[CMN候補](docs/utterance-cmn-final.md)も新しい予約条件で最小macro F1=0.802となり不合格でした。3,448件のC/Python判定は一致しましたが、品質が不足するため実機へ適用していません。
+
 ペットは**5,142BのWASM package**になり、学習した移動・5操作の模擬認識結果・終了を両VMで確認しました。
 
 ![学習した相棒](docs/media/companion.gif)
