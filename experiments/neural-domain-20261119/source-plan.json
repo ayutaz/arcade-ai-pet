@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "seed": 20261119,
+  "variants": 3,
+  "attempts": 2,
+  "provider": {
+    "name": "irodori-v2-voice-design",
+    "license": "MIT",
+    "engine_commit": "2708d3cadf726d4389d25eb4bb7a0344517a9a40",
+    "model_sha256": "8b703c28e88f160dee0258b1136f8fe1ea68c063b45fc28375b5a134d6ce1131",
+    "codec_sha256": "db120339c5ee7eca1912cdf29bc612b947a0808e69c3cebfb4936b45a762c1d5",
+    "runtime_lock_sha256": "ebe2d03280ab0032b11dd20913c37f20854280825a69d8fd2f321ff1a6c3da54",
+    "asr_model_sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671"
+  },
+  "conditions": [
+    {
+      "id": "development-01",
+      "role": "development",
+      "caption": "低めで落ち着いた成人男性の声。自然な速さで明瞭に話す。"
+    },
+    {
+      "id": "development-02",
+      "role": "development",
+      "caption": "明るく少し高めの成人女性の声。自然な速さではっきり話す。"
+    },
+    {
+      "id": "development-03",
+      "role": "development",
+      "caption": "少し低めの成人女性の声。静かで穏やかな調子で話す。"
+    },
+    {
+      "id": "development-04",
+      "role": "development",
+      "caption": "中程度の高さの成人男性の声。やや早口で元気に話す。"
+    },
+    {
+      "id": "development-05",
+      "role": "development",
+      "caption": "高めで軽い成人男性の声。ゆっくりと明瞭に話す。"
+    },
+    {
+      "id": "development-06",
+      "role": "development",
+      "caption": "中程度の高さの成人女性の声。早口で歯切れよく話す。"
+    },
+    {
+      "id": "development-07",
+      "role": "development",
+      "caption": "深みのある成人男性の声。柔らかく控えめな音量で話す。"
+    },
+    {
+      "id": "development-08",
+      "role": "development",
+      "caption": "軽やかな成人女性の声。少し抑えた声量で丁寧に話す。"
+    },
+    {
+      "id": "final-01",
+      "role": "final",
+      "caption": "ややかすれた中低音の成人男性の声。一定の速さで話す。"
+    },
+    {
+      "id": "final-02",
+      "role": "final",
+      "caption": "張りのある中音域の成人女性の声。短く自然に呼びかける。"
+    },
+    {
+      "id": "final-03",
+      "role": "final",
+      "caption": "鼻に少しかかった成人男性の声。穏やかにゆっくり話す。"
+    },
+    {
+      "id": "final-04",
+      "role": "final",
+      "caption": "柔らかな高音域の成人女性の声。弾むような調子で話す。"
+    }
+  ]
+}
