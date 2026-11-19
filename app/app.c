@@ -87,12 +87,12 @@ int32_t tick(uint32_t held,uint32_t pressed,uint32_t released,uint32_t dt){
     (void)held;(void)released;
     if(closed)return 1;
     if(pressed&BACK){audio_stop();closed=1;return 1;}
-    int state=audio_state();
+    int state=audio_state(),classified=0;
     if(recording){
         if(state<0)recording=0;
         else if(state==0){
             recording=0;
-            if(audio_position()==32000){int action=audio_classify();if(action>=0 && action<5)apply_command((unsigned)action);}
+            if(audio_position()==32000){int action=audio_classify();classified=1;if(action>=0 && action<5)apply_command((unsigned)action);}
         }
     } else if((pressed&START) && state==0){
         if(audio_record(2000)==1){recording=1;pending_reply=-1;}
@@ -103,7 +103,8 @@ int32_t tick(uint32_t held,uint32_t pressed,uint32_t released,uint32_t dt){
     else if(pressed&LEFT)apply_command(2);
     else if(pressed&DOWN)apply_command(3);
     else if(pressed&RIGHT)apply_command(4);
-    if(!recording && pending_reply>=0 && state==0){
+    /* A later tick refreshes the service clock after synchronous inference. */
+    if(!classified && !recording && pending_reply>=0 && state==0){
         int result=audio_reply(pending_reply);if(result!=0)pending_reply=-1;
     }
     if(mode==1){accumulator+=dt>200 ? 200:dt;if(accumulator>=200){accumulator-=200;companion_step();}}

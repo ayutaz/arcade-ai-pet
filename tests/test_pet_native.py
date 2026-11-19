@@ -27,6 +27,8 @@ class PetNativeTests(unittest.TestCase):
             self.lib.test_init();self.lib.test_tick(16,0);self.assertEqual(self.lib.test_stat(0),1)
             self.lib.test_tick(0,16);self.lib.test_voice(command);self.lib.test_tick(0,16)
             self.assertEqual(self.lib.debug_value()>>24,command+1 if command<5 else 0)
+            self.assertEqual(self.lib.test_stat(1),0)
+            self.lib.test_tick(0,16)
             self.assertEqual(self.lib.test_stat(1),1 if command<5 else 0)
             self.assertEqual(self.lib.test_tick(64,16),1)
             self.assertEqual(self.lib.test_stat(2),1);self.assertEqual(self.lib.test_stat(3),0)
@@ -48,3 +50,14 @@ class PetNativeTests(unittest.TestCase):
         self.assertEqual(self.lib.debug_x()>>8,pet.player[0]);self.assertEqual(self.lib.debug_y()>>8,pet.player[1])
         self.assertEqual(self.lib.test_tick(64|16,16),1)
         self.assertEqual(self.lib.test_stat(0),0)
+
+    def test_classification_defers_reply_until_fresh_tick_and_back_cancels_pending_reply(self):
+        for command in range(5):
+            self.lib.test_init();self.lib.test_tick(16,0);self.lib.test_tick(0,16)
+            self.lib.test_voice(command);self.lib.test_tick(0,16)
+            self.assertEqual(self.lib.debug_value()>>24,command+1)
+            self.assertEqual(self.lib.test_stat(1),0,'classification must not start a reply with its cached timestamp')
+            self.lib.test_tick(0,16);self.assertEqual(self.lib.test_stat(1),1)
+            self.lib.test_tick(0,16);self.assertEqual(self.lib.test_stat(1),1)
+        self.lib.test_init();self.lib.test_tick(16,0);self.lib.test_tick(0,16);self.lib.test_voice(0);self.lib.test_tick(0,16)
+        self.assertEqual(self.lib.test_tick(64,16),1);self.assertEqual(self.lib.test_stat(1),0);self.assertEqual(self.lib.test_stat(2),1)

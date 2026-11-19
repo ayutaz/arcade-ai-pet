@@ -16,6 +16,7 @@ class PetVmTests(unittest.TestCase):
             native=importlib.import_module('labos.native')
             manifest,blob=decode(Path(result['package']).read_bytes())
             self.assertLessEqual(result['package_bytes'],16384);self.assertEqual(manifest['fuel'],50000)
+            self.assertEqual((manifest['id'],manifest['version']),('ai-pet','1.0.1'))
             inputs=[(0,0),(32,0),(0,200)]+[(0,200)]*120+[(64,16)]
             actual=native.run_probe(native.build_probe(),[blob],inputs,capabilities=7)
             session=Session(blob,manifest);now=0;last_score=0
@@ -73,8 +74,10 @@ class PetVmTests(unittest.TestCase):
                         expected=(label+1)<<24 if label<5 else 0
                         self.assertEqual(session.debug('debug_value'),expected);self.assertEqual(lib.pet_vm_stat(rig,0),expected)
                         self.assertEqual(backend.records,1);self.assertEqual(lib.pet_vm_stat(rig,1),1)
+                        self.assertEqual(backend.replies,0);self.assertEqual(lib.pet_vm_stat(rig,2),0)
+                        session.frame(0,64);self.assertEqual(lib.pet_vm_frame(rig,0,16),0)
                         self.assertEqual(backend.replies,1 if label<5 else 0);self.assertEqual(lib.pet_vm_stat(rig,2),backend.replies)
-                        self.assertTrue(session.frame(64,64));self.assertEqual(lib.pet_vm_frame(rig,64,16),1)
+                        self.assertTrue(session.frame(64,80));self.assertEqual(lib.pet_vm_frame(rig,64,16),1)
                         self.assertEqual(backend.stops,1);self.assertEqual(lib.pet_vm_stat(rig,3),1)
                     finally:session.close();lib.pet_vm_free(rig)
             finally:lib.pet_runtime_stop()
