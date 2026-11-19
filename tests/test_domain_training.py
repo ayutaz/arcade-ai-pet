@@ -96,5 +96,25 @@ class DomainTrainingTests(unittest.TestCase):
                 with self.assertRaises(ValueError):channel_freeze.freeze_channel(root/'candidate',mixed,root/'legacy-frozen')
             self.assertFalse((root/'legacy-frozen').exists())
 
+    def test_prosody_is_train_only_for_neural_domain_and_not_mixed_with_context(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp).resolve();domains={name:root/name for name in ('legacy','neural')};records=[]
+            for name,path in domains.items():
+                path.mkdir();row=dict(id=hashlib.sha256(name.encode()).hexdigest(),sha256=hashlib.sha256((name+'wave').encode()).hexdigest());records.append(row)
+                (path/'manifest.json').write_text(json.dumps(dict(role='development',variants=1,records=[row])))
+            mixed=root/'mixed';mixed.mkdir();(mixed/'manifest.json').write_text(json.dumps(dict(role='development',variants=1,records=records)))
+            model=root/'fixture';fixture.checkpoint(model);layers,_=read_layers(model/'weights.npz')
+            def arrays():
+                y=np.tile(np.arange(7),8);x=np.zeros((56,260),dtype=np.float32);x[np.arange(56),y]=4
+                return dict(train=dict(x=x,y=y),validation=dict(x=x,y=y,profiles=[p for p in PROFILES for _ in range(7)]))
+            def legacy(path,*args,**kwargs):self.assertEqual(path,domains['legacy']);return arrays()
+            def neural(path,*args,**kwargs):
+                self.assertEqual(path,domains['neural']);self.assertEqual(kwargs['qualified'],root/'qualified');result=arrays();result['augmentation']=dict(marker='prosody');return result
+            with patch.object(train,'make_arrays',side_effect=legacy),patch.object(train,'load_prosody_arrays',side_effect=neural,create=True),patch.object(train,'fit',return_value=dict(layers=layers,selected_epoch=1)):
+                result=train.train_candidate(domains,mixed,root/'candidate',epochs=5,hidden=7,neural_prosody=True,prosody_qualification=root/'qualified')
+            self.assertTrue(result['neural_prosody']);self.assertEqual(result['training_augmentation']['marker'],'prosody')
+            self.assertEqual(result['frontend_version'],'adaptive');self.assertIn('prosody_arrays.py',result['feature_sha256'])
+            with self.assertRaises(ValueError):train.train_candidate(domains,mixed,root/'invalid',frontend='context',neural_prosody=True)
+
 
 if __name__=='__main__':unittest.main()
