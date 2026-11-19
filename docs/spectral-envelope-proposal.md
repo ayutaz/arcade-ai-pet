@@ -1,5 +1,7 @@
 # 平均スペクトルを残す次期PoC案
 
+後続: [ホスト実装と先行TDD](spectral-envelope.md)。以下は実装前の設計案で、未実施flag/容量JSONを保持する。
+
 2026-11-19。**設計仮説であり、未実装/未学習。** [容量計算](../experiments/neural-domain-20261119/spectral-envelope-capacity-proposal.json)。[内容点検](utterance-stages.md)では、単純なgain/文脈拡張を採用する根拠は得られなかった。元の評価行/閾値/不採用は保持する。
 
 ## 比較する仮説

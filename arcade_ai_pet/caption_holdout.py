@@ -9,7 +9,7 @@ from .native_evaluation import _examples
 from .channel_robustness import PROFILES, simulate, condition
 from .channel_training import level, _noise_options
 from .cmn_frontend import features
-from . import logmel_frontend
+from . import logmel_frontend, envelope_frontend
 
 
 def _manifest(dataset):
@@ -65,9 +65,10 @@ def _checksums(dataset):
 
 def make_arrays(dataset, *, selection, noise_replicas=5, noise_mode='fresh', hum_replicas=3,
                 frontend='context-duration-cmn'):
-    if frontend not in ('context-duration-cmn', 'context-logmel64'):
+    if frontend not in ('context-duration-cmn', 'context-logmel64', 'context-logmel64-envelope'):
         raise ValueError('explicit supported development frontend required')
-    feature_fn = features if frontend == 'context-duration-cmn' else logmel_frontend.features
+    feature_fn = {'context-duration-cmn': features, 'context-logmel64': logmel_frontend.features,
+                  'context-logmel64-envelope': envelope_frontend.features}[frontend]
     _noise_options(noise_replicas, noise_mode, hum_replicas)
     if type(selection) is not dict:
         raise ValueError('explicit deterministic development selection required')

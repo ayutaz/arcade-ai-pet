@@ -15,7 +15,8 @@ from .channel_robustness import PROFILES, measure
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = (*SHARED_SOURCES, 'arcade_ai_pet/logmel_frontend.py', 'arcade_ai_pet/logmel_arrays.py',
            'arcade_ai_pet/dscnn_model.py', 'arcade_ai_pet/dscnn_quantize.py',
-           'arcade_ai_pet/dscnn_training.py', 'arcade_ai_pet/dscnn_candidate.py')
+           'arcade_ai_pet/dscnn_training.py', 'arcade_ai_pet/dscnn_candidate.py',
+           'arcade_ai_pet/envelope_frontend.py')
 
 
 def _source_hashes():
@@ -23,9 +24,10 @@ def _source_hashes():
 
 
 def train_candidate(domains, output, *, holdout_seed, epochs=30, batch_size=256, neural_weight=2,
-                    max_passes=4, device='cpu', max_steps=8000, max_seconds=900):
+                    max_passes=4, device='cpu', max_steps=8000, max_seconds=900, frontend='context-logmel64'):
     output = real_path(output)
-    if (output.exists() or type(epochs) is not int or not 1 <= epochs <= 1000 or
+    if (type(frontend) is not str or frontend not in ('context-logmel64','context-logmel64-envelope') or
+        output.exists() or type(epochs) is not int or not 1 <= epochs <= 1000 or
         type(batch_size) is not int or not 1 <= batch_size <= 1024 or
         type(neural_weight) is not int or not 1 <= neural_weight <= 8 or
         type(holdout_seed) is not int or not 0 <= holdout_seed < 2**31 or
@@ -33,12 +35,13 @@ def train_candidate(domains, output, *, holdout_seed, epochs=30, batch_size=256,
         device not in ('cpu', 'mps') or type(max_steps) is not int or not 1 <= max_steps <= 1000000 or
         type(max_seconds) not in (int, float) or not math.isfinite(max_seconds) or not 0 < max_seconds <= 86400):
         raise ValueError('fresh output and bounded local DS-CNN recipe required')
+    mode = dict(envelope=True) if frontend == 'context-logmel64-envelope' else {}
     paths = _domains(domains)
     before, code = _input_hashes(paths), _source_hashes()
     selection = select_holdout(paths['neural'], seed=holdout_seed)
     options = dict(noise_replicas=5, hum_replicas=3, noise_mode='fresh')
-    legacy = load_legacy_arrays(paths['legacy'], 'hp160', **options)
-    neural = load_neural_arrays(paths['neural'], selection=selection, frontend='context-logmel64', **options)
+    legacy = load_legacy_arrays(paths['legacy'], 'hp160', frontend=frontend, **options)
+    neural = load_neural_arrays(paths['neural'], selection=selection, frontend=frontend, **options)
     if set(legacy) != {'train', 'validation'} or set(neural) != {'train', 'validation', 'held_validation'}:
         raise ValueError('only explicit development arrays allowed')
     ids = [set(neural[name]['source_ids']) for name in ('train', 'validation', 'held_validation')]
@@ -53,28 +56,28 @@ def train_candidate(domains, output, *, holdout_seed, epochs=30, batch_size=256,
     vx, vy = (np.concatenate([row[key] for row in primary]) for key in ('x', 'y'))
     groups = np.asarray([domain * 8 + PROFILES.index(profile) for domain, row in enumerate(primary) for profile in row['profiles']], dtype=np.int64)
     result = fit(x, y, vx, vy, groups, epochs=epochs, batch_size=batch_size, seed=42,
-                 device=device, max_steps=max_steps, max_seconds=max_seconds)
+                 device=device, max_steps=max_steps, max_seconds=max_seconds, **mode)
     layers = result.pop('layers')
-    calibrated = calibrate(vy, scores(vx, layers), groups,
+    calibrated = calibrate(vy, scores(vx, layers, **mode), groups,
                            initial_threshold=result['checkpoint_threshold_q10'], max_passes=max_passes)
     table = np.asarray(calibrated['thresholds_q10'], dtype=np.int32)
     familiar = neural['validation']
     fp = np.asarray([PROFILES.index(p) for p in familiar['profiles']])
-    familiar_predictions = decisions(scores(familiar['x'], layers), table)
+    familiar_predictions = decisions(scores(familiar['x'], layers, **mode), table)
     familiar_rows = [dict(domain='familiar-neural', profile=profile,
                           **measure(familiar['y'][fp == i], familiar_predictions[fp == i])) for i, profile in enumerate(PROFILES)]
     rows = [dict(row, domain='legacy' if row['domain'] == 'legacy' else 'held-neural')
             for row in calibrated['domain_profiles']] + familiar_rows
     all_y = np.concatenate((vy, familiar['y']))
-    all_predictions = np.concatenate((decisions(scores(vx, layers), table), familiar_predictions))
+    all_predictions = np.concatenate((decisions(scores(vx, layers, **mode), table), familiar_predictions))
     all_profiles = np.concatenate((groups % 8, fp))
     pooled = [dict(profile=profile, **measure(all_y[all_profiles == i], all_predictions[all_profiles == i])) for i, profile in enumerate(PROFILES)]
     if before != _input_hashes(paths) or code != _source_hashes():
         raise ValueError('development inputs or source changed during fit')
-    size = weights_bytes(layers)
+    size = weights_bytes(layers, **mode)
     if size + 20 > 24576:
         raise ValueError('24KiB numeric model budget')
-    result.update(scope='development_logmel_dscnn_not_final', classifier='logmel-dscnn-v1', frontend='context-logmel64',
+    result.update(scope='development_logmel_dscnn_not_final', classifier='logmel-dscnn-envelope-v1' if mode else 'logmel-dscnn-v1', frontend=frontend,
                   thresholds_q10=calibrated['thresholds_q10'], domain_profiles=rows, pooled_profiles=pooled,
                   selection_domains=['legacy_validation', 'held_neural_validation'],
                   additional_required_regression=['original_neural_validation'],

@@ -1,0 +1,19 @@
+{
+  "scope": "small_fixture_mps_repeat_not_real_corpus",
+  "training_steps_per_fit": 4,
+  "repeat_fits": 2,
+  "integer_layers_and_logits_equal": true,
+  "numeric_bytes": 23635,
+  "elapsed_seconds": 1.936,
+  "numpy": "2.5.5",
+  "torch": "2.15.0",
+  "source_sha256": {
+    "arcade_ai_pet/dscnn_training.py": "27cef05e119e5981870f86eff175ffe2fe434c51775c0aa6d18d099c9e0a3b6b",
+    "arcade_ai_pet/dscnn_model.py": "fec5925915c205dca9c8eb7fb7d2ca55c75d918d0384b14c48c4a72056e4cda8",
+    "arcade_ai_pet/dscnn_quantize.py": "65a01b00fa0bf1e24b821c2c7afcea24a00c3f3b2e147d79205a423b96d0a71d"
+  },
+  "models_saved": false,
+  "real_corpus_used": false,
+  "vast_usd": 0,
+  "additional_verification_not_tdd": true
+}
