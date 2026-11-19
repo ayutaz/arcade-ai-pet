@@ -1,6 +1,6 @@
 # 発話ごとのMFCC平均を除くPoC
 
-2026-11-19。[予約4条件の最終評価](reserved-final-evaluation.md)で不採用になった候補を維持し、**開発データだけで別の前処理を1構成比較する。改善は未確認。** [実行前の条件](../experiments/neural-domain-20261119/utterance-cmn-plan.json)。
+2026-11-19。**固定1構成で開発用24条件が全合格。独立評価/実機の改善は未確認。** [予約4条件の最終評価](reserved-final-evaluation.md)で不採用になった前候補を維持し、開発データだけで別の前処理を比較した。[実行前の条件](../experiments/neural-domain-20261119/utterance-cmn-plan.json)。
 
 ## 仮説と契約
 
@@ -50,3 +50,13 @@ result = train_candidate(
 出力は新しい前処理を示すホストcheckpoint。261値でも従来の`context-duration-class-v1`とは意味が異なるため、旧freeze/export/OS runtimeへ流用しない。C版/新形式の固定処理/独立最終評価/実機適用は、このPoCの成功とは別工程。
 
 前回の最終データは消費済みで、このfit/選定に使わない。次の採用候補には新しい事前固定の独立条件が必要。実機・録音の外部転送・GPIO/PSRAM/security・課金は変更しない。
+
+## 固定1構成の結果
+
+[初回の数値](../experiments/neural-domain-20261119/utterance-cmn-initial-result.json)。source906a070、同じ元データ/固定1構成を104.333秒で学習・校正した。選択epoch991、重み23,972B、5閾値は2538/3401/326/2312/871、合計23,992B。
+
+開発用16domain条件と結合8条件がすべて合格。最小F1=0.916793・最大誤反応0.02・最小操作recall0.854167。独立したscalar判定と全2,680行が一致し、全24groupの数値も再計算して照合した。元の6つのdevelopment NPZはhash不変。
+
+実行driverは実builderをラップし、返されたvalidationを保持して校正へ使った。入力/乱数/profile/分割を置き換えず、学習と校正は同じ配列を使用した。この実データ比較は追加検証で、新規TDDとは数えない。
+
+前の最終4条件は使用していない。この合格だけでは汎化/実機の改善を証明しない。次は新しい意味を区別するC実装/数値形式・固定処理をTDDで整え、候補固定後に別の独立条件を生成する。
