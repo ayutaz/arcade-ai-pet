@@ -1,11 +1,14 @@
 """Host-only adaptive MFCC plus explicit active-span duration; 261 values."""
 import numpy as np
 from .channel_frontend import features as previous, active_span
+from .context_frontend import features as context_previous
 from .features import FRAMES, WINDOW, HOP
 
 
-def features(pcm):
-    old=previous(pcm)  # Validate the same PCM contract before any new processing.
+def features(pcm,*,context=False):
+    if type(context) is not bool:
+        raise ValueError('explicit boolean context choice required')
+    old=(context_previous if context else previous)(pcm)
     x=pcm.astype(np.float64);peak=float(abs(x).max())
     if peak<32:
         return np.zeros(261,dtype=np.float32)

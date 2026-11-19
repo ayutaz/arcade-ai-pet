@@ -4,6 +4,7 @@ import numpy as np
 from arcade_ai_pet import duration_frontend as duration
 from arcade_ai_pet.channel_frontend import features as previous, active_span
 from arcade_ai_pet.features import WINDOW, HOP, FRAMES
+from arcade_ai_pet.context_frontend import features as context_features
 
 
 def tone(length, start=3200):
@@ -33,6 +34,17 @@ class DurationFrontendTests(unittest.TestCase):
     def test_wrong_pcm_type_or_shape_is_rejected(self):
         for bad in (np.zeros(32000),np.zeros(31999,dtype=np.int16),np.zeros((1,32000),dtype=np.int16)):
             with self.assertRaises(ValueError):duration.features(bad)
+
+    def test_context_keeps_previous_context_features_but_duration_uses_unpadded_activity(self):
+        pcm=tone(8000);actual=duration.features(pcm,context=True)
+        np.testing.assert_array_equal(actual[:260],context_features(pcm))
+        self.assertEqual(actual[-1],duration.features(pcm)[-1])
+        self.assertFalse(np.array_equal(actual[:260],previous(pcm)))
+        np.testing.assert_array_equal(duration.features(np.zeros(32000,dtype=np.int16),context=True),np.zeros(261,dtype=np.float32))
+
+    def test_context_choice_is_explicit_boolean(self):
+        for invalid in ('context',1,None):
+            with self.assertRaises(ValueError):duration.features(tone(8000),context=invalid)
 
 
 if __name__=='__main__':unittest.main()
