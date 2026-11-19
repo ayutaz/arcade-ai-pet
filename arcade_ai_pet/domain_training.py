@@ -118,7 +118,7 @@ def fit(x,y,vx,vy,groups,*,epochs=1000,hidden=88,seed=42,feature_count=260):
 def train_candidate(domains,mixed,output,*,epochs=1000,hidden=88,neural_weight=4,frontend='adaptive',neural_prosody=False,prosody_qualification=None):
     output=Path(output).absolute();mixed=Path(mixed).absolute()
     if (output.resolve()!=output or output.exists() or type(domains) is not dict or set(domains)!={'legacy','neural'} or
-            type(neural_weight) is not int or not 1<=neural_weight<=8 or frontend not in ('adaptive','context','duration') or type(neural_prosody) is not bool or neural_prosody and (frontend!='adaptive' or prosody_qualification is None) or not neural_prosody and prosody_qualification is not None):
+            type(neural_weight) is not int or not 1<=neural_weight<=8 or frontend not in ('adaptive','context','duration','context-duration') or type(neural_prosody) is not bool or neural_prosody and (frontend!='adaptive' or prosody_qualification is None) or not neural_prosody and prosody_qualification is not None):
         raise ValueError('fresh bounded development experiment required')
     domains={name:Path(domains[name]) for name in ('legacy','neural')};records=[];seen=set();waves=set();variants=set()
     for path in domains.values():
@@ -132,7 +132,7 @@ def train_candidate(domains,mixed,output,*,epochs=1000,hidden=88,neural_weight=4
     combined=json.loads((mixed/'manifest.json').read_text())
     if len(variants)!=1 or combined.get('role')!='development' or combined['records']!=records or combined['variants'] not in variants:
         raise ValueError('mixed development identity differs from component domains')
-    builder={'adaptive':make_arrays,'context':load_context_arrays,'duration':load_duration_arrays}[frontend]
+    builder={'adaptive':make_arrays,'context':load_context_arrays,'duration':load_duration_arrays,'context-duration':load_duration_arrays}[frontend]
     arrays={}
     for name,path in domains.items():
         kwargs=dict(frontend=frontend,noise_replicas=5,noise_mode='fresh',hum_replicas=3)
@@ -145,11 +145,13 @@ def train_candidate(domains,mixed,output,*,epochs=1000,hidden=88,neural_weight=4
     vx=np.concatenate([a['validation']['x'] for a in arrays.values()]);vy=np.concatenate([a['validation']['y'] for a in arrays.values()])
     profiles=[p for a in arrays.values() for p in a['validation']['profiles']]
     groups=np.array([domain*8+PROFILES.index(p) for domain,a in enumerate(arrays.values()) for p in a['validation']['profiles']])
-    feature_options=dict(feature_count=261) if frontend=='duration' else {}
+    duration_mode=frontend in ('duration','context-duration')
+    feature_options=dict(feature_count=261) if duration_mode else {}
     result=fit(x,y,vx,vy,groups,epochs=epochs,hidden=hidden,**feature_options);layers=result.pop('layers');logits=scores(vx,layers)
     threshold,rows,accepted=select_threshold(vy,logits,groups);combined_rows=_rows(vy,logits,profiles,'hp160',threshold)
     feature_files=('channel_frontend.py','channel_training.py') if frontend=='adaptive' else ('context_frontend.py','context_arrays.py')
-    if frontend=='duration':feature_files=('channel_frontend.py','duration_frontend.py','duration_arrays.py','duration_quantize.py','channel_training.py')
+    if duration_mode:feature_files=('channel_frontend.py','duration_frontend.py','duration_arrays.py','duration_quantize.py','channel_training.py')
+    if frontend=='context-duration':feature_files+=('context_frontend.py',)
     if neural_prosody:feature_files+=('prosody_arrays.py',)
     result.update(candidate='hp160',frontend_version=frontend,threshold_q10=threshold,validation=combined_rows,
                   domain_profiles=rows,accepted_all_domains=accepted,accepted_validation=accepted and _accepted(combined_rows),

@@ -43,3 +43,6 @@ Greenは通常6件/0.014秒、実学習1件/1.241秒。最大16候補を校正�
 
 
 [発話時間を加える261入力のPoC](duration-features.md)は旧260特徴を保持し、別量子化器で追加値を扱う。明示したduration modeだけが対象で、旧reader/exportには渡さない。固定した実データ1構成も基準未達で不採用。失敗結果と未実施範囲を同資料へ残す。
+
+
+[context-durationの261入力](context-duration-features.md)は前後100msを保持する既存context特徴と、余白を含まない活動時間を組み合わせる。明示選択のホストPoCで、既定のadaptive/context/durationは維持する。

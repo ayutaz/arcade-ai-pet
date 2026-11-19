@@ -9,8 +9,8 @@ from .duration_frontend import features
 
 
 def make_arrays(dataset,candidate,*,frontend='duration',noise_replicas=1,noise_mode='fresh',hum_replicas=1):
-    if candidate!='hp160' or frontend!='duration':
-        raise ValueError('explicit hp160/duration experiment required')
+    if candidate!='hp160' or frontend not in ('duration','context-duration'):
+        raise ValueError('explicit hp160 duration experiment required')
     _noise_options(noise_replicas,noise_mode,hum_replicas)
     dataset=Path(dataset);manifest=json.loads((dataset/'manifest.json').read_text())
     if manifest.get('role','development')!='development':
@@ -27,7 +27,7 @@ def make_arrays(dataset,candidate,*,frontend='duration',noise_replicas=1,noise_m
                 current=seed
                 if replica and profile=='noise' and noise_mode=='fresh':
                     current=int.from_bytes(hashlib.sha256(ident.encode()+pcm.tobytes()+bytes([replica])).digest()[:8],'little')
-                out['x'].append(features(level(condition(simulate(pcm,profile,current),candidate))))
+                out['x'].append(features(level(condition(simulate(pcm,profile,current),candidate)),context=frontend=='context-duration'))
                 out['y'].append(label);out['profiles'].append(profile)
     for out in arrays.values():
         if not out['y']:raise ValueError('nonempty train and validation required')
