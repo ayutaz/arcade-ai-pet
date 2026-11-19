@@ -1,0 +1,12 @@
+{
+  "scope": "tiny_host_mps_verification_not_device",
+  "mask_cpu_mps_exact": true,
+  "repeated_integer_layers_identical": true,
+  "repeated_float_state_identical": true,
+  "selected_float_replay_identical": true,
+  "training_steps_per_fit": 4,
+  "numeric_bytes": 23411,
+  "additional_verification_not_tdd": true,
+  "device_tested": false,
+  "vast_usd": 0
+}

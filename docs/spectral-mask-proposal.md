@@ -1,5 +1,7 @@
 # 学習時だけの時間/周波数maskの次期案
 
+2026-11-19の後続: [実装/固定比較条件](training-spectral-mask.md)を追加。以下は実装前の設計記録。
+
 2026-11-19。**未実装/未学習/recipe未固定。** [設計範囲](../experiments/neural-domain-20261119/spectral-mask-proposal.json)。[元floatの診断](float-checkpoint-probe.md)では学習用の操作拡張例9,534例を全て正しく分類した一方、選定用の操作864例はfloat/整数とも794正解、同じ70誤順位が残った。
 
 ## 仮説

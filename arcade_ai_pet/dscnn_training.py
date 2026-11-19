@@ -3,6 +3,7 @@ import numpy as np
 from .dscnn_model import SHAPES, STRIDES, GROUPS, validate
 from .dscnn_quantize import fold_batch_norm, quantize_layer
 from . import dscnn_probe as probe
+from . import spectral_mask as masking
 
 
 def build_model(*, envelope=False, time_pool=False):
@@ -57,10 +58,11 @@ from .domain_training import _inputs, validation_rank, select_threshold, shortli
 
 
 def fit(x, y, vx, vy, groups, *, epochs=30, batch_size=256, seed=42,
-        device='cpu', max_steps=8000, max_seconds=900, envelope=False, time_pool=False, float_probe=False):
+        device='cpu', max_steps=8000, max_seconds=900, envelope=False, time_pool=False, float_probe=False, spectral_mask=False):
     import torch
     started = monotonic()
-    if (type(float_probe) is not bool or type(envelope) is not bool or type(time_pool) is not bool or time_pool and not envelope or
+    if (type(spectral_mask) is not bool or spectral_mask and (envelope or time_pool) or
+        type(float_probe) is not bool or type(envelope) is not bool or type(time_pool) is not bool or time_pool and not envelope or
         type(epochs) is not int or not 1 <= epochs <= 1000 or
         type(batch_size) is not int or not 1 <= batch_size <= 1024 or
         type(seed) is not int or not 0 <= seed < 2**31 or
@@ -86,6 +88,7 @@ def fit(x, y, vx, vy, groups, *, epochs=30, batch_size=256, seed=42,
             raise TimeoutError('CNN training deadline exceeded; no partial candidate')
     check_time()
     torch.set_num_threads(2); torch.manual_seed(seed); torch.use_deterministic_algorithms(True)
+    mask_rng = np.random.default_rng(seed+1) if spectral_mask else None
     model = optimizer = tx = ty = None
     try:
         model = build_model(**mode).to(device)
@@ -104,7 +107,10 @@ def fit(x, y, vx, vy, groups, *, epochs=30, batch_size=256, seed=42,
                 check_time()
                 indexes = order[start:start+batch_size]
                 optimizer.zero_grad()
-                loss = lossfn(model(tx[indexes]), ty[indexes])
+                batch = tx[indexes]
+                if spectral_mask:
+                    batch = masking.apply(batch, masking.make_plan(len(indexes),mask_rng))
+                loss = lossfn(model(batch), ty[indexes])
                 loss.backward(); optimizer.step()
                 if device == 'mps':
                     torch.mps.synchronize()  # Bound in-flight work and deadline observations.
@@ -151,6 +157,8 @@ def fit(x, y, vx, vy, groups, *, epochs=30, batch_size=256, seed=42,
             best.update(float_probe_enabled=True, float_probe_device=device,
                         float_probe_checkpoints=[dict(epoch=row['epoch'], float_state_sha256=row['float_state_sha256'],
                             float_logits_sha256=row['float_logits_sha256'], comparison=row['float_probe']) for row in checkpoints])
+        if spectral_mask:
+            best['spectral_mask'] = dict(time_max=6,frequency_max=3,fill=0,seed=seed+1,training_only=True)
         return best
     finally:
         del model, optimizer, tx, ty
