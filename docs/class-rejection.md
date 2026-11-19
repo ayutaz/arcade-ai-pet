@@ -1,6 +1,6 @@
 # 固定モデルのクラス別棄却PoC
 
-**固定したcontext-durationモデルに、クラス別の点差閾値5値を校正するホストPoC。実データの改善・C対応・実機適用は未確認。** 旧global棄却処理と凍結済み13ファイルを変更せず、別moduleで比較する。
+**固定したcontext-durationモデルのクラス別棄却により、開発用16条件と結合8条件の全基準に合格。独立最終評価・C対応・実機適用は未確認。** 旧global棄却処理と凍結済み13ファイルを変更せず、別moduleで比較する。
 
 ## 根拠と範囲
 
@@ -35,3 +35,12 @@ predictions = decisions(logits, np.asarray(result['thresholds_q10'], dtype=np.in
 契約は旧判定との一致・unknown/silence・同点・overflow・不正入力、単一閾値で解けない例の校正、1groupの未達拒否、入力不変と行順不変、探索回数の上限。単一閾値では両方満たせない例を、独立した旧校正器とも照合する。
 
 コマンド: `uv run --locked python -m unittest discover -s tests -p test_class_rejection.py`。回帰198件/21.033秒、training15件/3.265秒、SDK2件/2.426秒、skipなし。実データの校正効果はこの記録後に判断する。
+
+
+## 固定モデルでの校正結果
+
+[初回の数値](../experiments/neural-domain-20261119/class-rejection-initial-result.json)。sourceef50810で、固定重み/固定2,680行を校正した。5閾値は `[977, 2531, 1780, 181, 768]`、366候補・各2/3pass・0.035秒。重みは再学習していない。
+
+全16domain/profileと結合8profileが合格。最悪F1=0.903890、最大誤反応0.04、最小操作recall0.833333。独立したscalar判定と2,680行の全予測が一致し、全24groupの数値を別に再計算して照合した。元の重み/検証NPZのhashも不変。重み＋棄却表は23,992B。
+
+これは校正に使ったdevelopment validationでの選定結果で、汎化性能や実声/実機の合格ではない。候補の固定・Cでの特徴/判定の照合・未使用の最終4条件・target build/資源確認が残る。最終データを見て再校正せず、実機へ書く場合は固定imageの個別許可を必要とする。
