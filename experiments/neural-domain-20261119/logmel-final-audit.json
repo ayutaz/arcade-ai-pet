@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "report_sha256": "e0a6586db328bc241a01ca108d110977c503d1f11611e1e697db1668338f08b3",
+  "profiles": [
+    {
+      "profile": "clean",
+      "macro_f1": 0.960241224902499,
+      "false_activation_rate": 0.005390835579514825,
+      "command_recall": 0.9333333333333333,
+      "examples": 431
+    },
+    {
+      "profile": "quiet",
+      "macro_f1": 0.9458569065237912,
+      "false_activation_rate": 0.008086253369272238,
+      "command_recall": 0.9166666666666666,
+      "examples": 431
+    },
+    {
+      "profile": "dc",
+      "macro_f1": 0.960241224902499,
+      "false_activation_rate": 0.005390835579514825,
+      "command_recall": 0.9333333333333333,
+      "examples": 431
+    },
+    {
+      "profile": "drift",
+      "macro_f1": 0.9594763305779977,
+      "false_activation_rate": 0.005390835579514825,
+      "command_recall": 0.9333333333333333,
+      "examples": 431
+    },
+    {
+      "profile": "hum",
+      "macro_f1": 0.9315100595155118,
+      "false_activation_rate": 0.008086253369272238,
+      "command_recall": 0.8833333333333333,
+      "examples": 431
+    },
+    {
+      "profile": "noise",
+      "macro_f1": 0.9247513836448462,
+      "false_activation_rate": 0.013477088948787063,
+      "command_recall": 0.9,
+      "examples": 431
+    },
+    {
+      "profile": "early",
+      "macro_f1": 0.9276397515527951,
+      "false_activation_rate": 0.01078167115902965,
+      "command_recall": 0.8833333333333333,
+      "examples": 431
+    },
+    {
+      "profile": "late",
+      "macro_f1": 0.9484595546838109,
+      "false_activation_rate": 0.01078167115902965,
+      "command_recall": 0.9333333333333333,
+      "examples": 431
+    }
+  ],
+  "confusion_recomputed": true,
+  "all_quality_gates_passed": true,
+  "additional_verification_not_tdd": true,
+  "device_tested": false
+}
