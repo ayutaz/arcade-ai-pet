@@ -38,3 +38,15 @@ def prepare(pcm,*,seed):
                      dict(stage='cropped',variant=variant,pcm=conditioned[start:end].copy(),
                           active_first_frame=first,active_last_frame=last,start_sample=start,end_sample=end)))
     return rows
+
+
+def padded_context(pcm,*,first,last,margin):
+    """Keep one declared context in place; no amplitude or sample-rate changes."""
+    if (not isinstance(pcm,np.ndarray) or pcm.dtype!=np.int16 or pcm.shape!=(32000,) or
+        type(first) is not int or type(last) is not int or not 0<=first<last<=FRAMES or
+        type(margin) is not int or margin not in (10,20)):
+        raise ValueError('full PCM16 and bounded declared frame context required')
+    left,right=max(0,first-margin),min(FRAMES,last+margin)
+    start,end=left*HOP,(right-1)*HOP+WINDOW
+    out=np.zeros_like(pcm);out[start:end]=pcm[start:end]
+    return dict(pcm=out,start_sample=start,end_sample=end)

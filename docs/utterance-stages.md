@@ -29,3 +29,25 @@ uv run --locked python -m unittest discover -s tests -p test_utterance_stages.py
 ASRは分類器から独立したモデルだが、元音声を採用するときに使ったASRと同じ。元音声との一致を新しい独立最終評価や人の正解判定とは扱わない。変換後に不一致が出ても誤ラベルと即断せず、評価行を削除/変更しない。PCMはローカルの合成音声だけで、実機録音の取得や外部転送は行わない。
 
 内容の一致と小型CNNの正解は別の指標。[丸めなし比較](dscnn-shadow.md)や実声6/15を成功へ置き換えず、次の仮説を絞る診断として使う。
+
+## 初回52件の点検結果
+
+[結果](../experiments/neural-domain-20261119/utterance-stage-result.json)。source `9b68fe0a3c5778ccdf54958da6fefea9c7ccf7d5`のarchiveを使い、52呼出し/CPU66.947秒で完走した。12variantのconditioned特徴は保存済みvalidationと一致し、元音声/manifest/モデル/ASR資産を保持した。
+
+| 段階 | ASRとの完全一致 |
+|---|---:|
+| 元source / resampled / trimmed | 各3/4 |
+| augmented | 6/12 |
+| conditioned | 5/12 |
+| cropped | 4/12 |
+| 対照の「こんにちは」 | 4/4 |
+
+extension-03のvariant0は全段階で「待って」と認識されたが、小型CNNは対象外1位だった。extension-13のvariant1はconditionedで「まって」、croppedで「まい」となった。ASRの不一致だけで誤ラベルとは断定せず、評価行の除外/変更は行っていない。元音声の1条件でも不一致があり、gainやASR側の影響も残る。
+
+## gainと文脈の追加比較
+
+[追加条件](../experiments/neural-domain-20261119/utterance-context-plan.json)は28呼出し。元の音量のsource4件と、同じ2秒/同じ位置のまま文脈だけを変えた各12件を比較する。conditioned全体を一度だけpeak16,384に合わせ、発話区間±10frame/±20frameの外側を0にする。可変長入力と位置の変化を避け、二つの文脈でgainを変えない。
+
+`padded_context`の3契約も先行の未実装import Red後に最小実装。3件/0.019秒が成功し、同じ位置の保持、frame窓の終端、gainなし、範囲外0、入力不変と不正入力を確認した。初回52件のsource/事前条件を後続の成功で上書きしない。この比較も診断用で、長い文脈を学習候補へ採用する許可や精度保証ではない。
+
+追加後の回帰293件/33.705秒、学習21件/3.161秒、SDK2件/2.397秒もskipなし成功。`uv run --locked python -m unittest discover -s tests -p test_padded_context.py -v`で追加3契約を再現できる。
