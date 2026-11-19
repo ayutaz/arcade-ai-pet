@@ -33,4 +33,4 @@ ARCADE_OS_ROOT=/absolute/path/to/pinned/scratch-arcade-os uv run --locked --grou
 
 回帰231件/28.483秒、training15件/3.828秒が成功。SDK試験は相対パスの`..`を実パス検査で拒否した初回失敗を保存し、clean/pinned SDKの絶対パスでは2件/2.437秒、skipなしで成功した。旧v3凍結13ファイルは不変。2,680条件の照合は追加検証で、新規TDDや独立最終評価には数えない。
 
-次はCMN専用freezeと新しい予約4条件の評価経路を固定する。以前の最終4条件は消費済みで、再校正や選定へ使わない。正式freeze・新最終評価・target build・実機は未実施。新規課金0米ドル。
+後続の[固定/独立評価経路](utterance-cmn-freeze.md)もTDDで追加した。正式freezeは次の工程。以前の最終4条件は消費済みで、再校正や選定へ使わない。正式freeze・新最終評価・target build・実機は未実施。新規課金0米ドル。

@@ -43,7 +43,8 @@ def finalize_final(output, *, frozen):
 
 
 def _native_audit(frozen, dataset, layers, table):
-    _, _, result = _recompute({'final': dataset}, frozen, layers, table, validation_only=False)
+    meta, _ = verify(frozen)
+    _, _, result = _recompute({'final': dataset}, frozen, layers, table, validation_only=False, runtime=meta['runtime'])
     return result
 
 
@@ -98,7 +99,7 @@ def evaluate_final(frozen, dataset, output):
             raise ValueError('final reconstructed label changed')
         labels.append(label); seed = int(row['id'][:16], 16)
         for profile in PROFILES:
-            logit = scores(_features(pcm, profile, seed)[None, :], layers)
+            logit = scores(_features(pcm, profile, seed, meta['runtime'])[None, :], layers)
             predictions[profile].append(int(decisions(logit, table)[0]))
     if set(labels) != set(range(7)):
         raise ValueError('all seven final classes required')
@@ -107,7 +108,7 @@ def evaluate_final(frozen, dataset, output):
     # Detect any mutation during this one evaluation, including source or plan.
     if binding(frozen) != bound or assets.digest(dataset / 'manifest.json') != manifest_hash:
         raise ValueError('freeze or manifest changed during final evaluation')
-    result = dict(schema=1, scope='reserved_synthetic_final_host_only', model_binding=bound,
+    result = dict(schema=1, scope='reserved_synthetic_final_host_only', model_binding=bound, runtime=meta['runtime'],
                   weights_sha256=meta['weights_sha256'], thresholds_q10=meta['thresholds_q10'],
                   dataset_manifest_sha256=manifest_hash, profiles=rows,
                   native_conformance=native, accepted_synthetic=_accepted(rows) and native['matched'],
