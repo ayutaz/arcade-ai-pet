@@ -1,0 +1,36 @@
+{
+  "scope": "fixed_weight_development_rounding_comparison",
+  "date": "2026-11-19",
+  "comparison_started": false,
+  "variants": [
+    "original_q5_floor",
+    "dequantized_real_shadow"
+  ],
+  "weights_sha256": "8595204eb5b1896c60d57e40c3fd72b7417623ca5f285d35ce2246f39c377e41",
+  "thresholds_q10": [
+    3237,
+    533,
+    1268,
+    1595,
+    2311
+  ],
+  "development_domains": [
+    "legacy",
+    "held-neural",
+    "familiar-neural"
+  ],
+  "profile_count": 8,
+  "expected_examples": 4808,
+  "expected_baseline_confusions": 24,
+  "shadow_head_conversion": "rint_ties_even_then_int32_saturation",
+  "count_shadow_head_raw_rank_changes": true,
+  "preserve_relu6": true,
+  "maximum_elapsed_seconds": 300,
+  "training_allowed": false,
+  "threshold_search_allowed": false,
+  "final_data_allowed": false,
+  "native_or_target_or_device_allowed": false,
+  "original_float_checkpoint_restored": false,
+  "quantized_weight_error_identifiable": false,
+  "vast_usd": 0
+}
