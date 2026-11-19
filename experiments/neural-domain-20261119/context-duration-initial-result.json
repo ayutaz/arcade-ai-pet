@@ -1,0 +1,276 @@
+{
+  "selected_epoch": 246,
+  "validation_accuracy": 0.9671641791044776,
+  "seed": 42,
+  "epochs": 1000,
+  "selection_metric": "calibrated_worst_development_domain_profile",
+  "checkpoint_candidates_evaluated": 14,
+  "checkpoint_threshold_q10": 2531,
+  "candidate": "hp160",
+  "frontend_version": "context-duration",
+  "threshold_q10": 2531,
+  "accepted_all_domains": false,
+  "accepted_validation": false,
+  "training_domain_weights": {
+    "legacy": 1,
+    "neural": 2
+  },
+  "noise_replicas": 5,
+  "hum_replicas": 3,
+  "noise_mode": "fresh",
+  "dataset_manifest_sha256": "ca453d45342e7216ae278b72673f8c4621f31e8c5f40fc3134016785675a6230",
+  "trainer_sha256": "9eeadeb15c7984c2daa496081cea61c63fcde58abc4c346f86d1e772f33a7921",
+  "feature_sha256": {
+    "channel_frontend.py": "c02e259b04345b03d34335414c909be043f46da5d0196f48f1f5557744708d4f",
+    "duration_frontend.py": "c2a2238aaa2f2053615e79a17c51a1c8954b3c95d0c664212bff2b70b2a0fc9e",
+    "duration_arrays.py": "59ecba17eb59baa5cfc566996a024ea63f3ec0e4580d2f26e87e6acd7b029d0d",
+    "duration_quantize.py": "ae91924c432ed2a1b903f71ef0313d962fae9d37528f12356b125bbc936a9b09",
+    "channel_training.py": "67e1d5cdff53ae1cc8d5e575c9a1ae4f81e99fee74cb653207a6e566d06fb475",
+    "context_frontend.py": "be74b2012a82b3455901fb66ecd3b203d8d223b2f9e8fada21afb927dbe58888"
+  },
+  "neural_prosody": false,
+  "training_augmentation": null,
+  "weights_bytes": 23972,
+  "split_examples": {
+    "train": 70070,
+    "validation": 2680
+  },
+  "final_evaluated": false,
+  "real_voice_tested": false,
+  "device_tested": false,
+  "vast_usd": 0,
+  "weights_sha256": "dfcc3aa03494b7bd96670c2c3b0cbb1e5e6416ccd91f2fb8f00d342a913bf22b",
+  "elapsed_seconds": 104.222,
+  "source_commit": "ce95ed5cd23ca58bb062174cb349be51c890763e",
+  "plan_sha256": "82608e1d11f14e4a61ae1265b82844136828477d38e51260c2b9182a3d25456b",
+  "input_features": 261,
+  "final_used": false,
+  "device_firmware_changed": false,
+  "domain_profiles": [
+    {
+      "domain": "legacy",
+      "profile": "clean",
+      "macro_f1": 1.0,
+      "accuracy": 1.0,
+      "false_activation_rate": 0.0,
+      "examples": 270,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "legacy",
+      "profile": "quiet",
+      "macro_f1": 0.9934289782061111,
+      "accuracy": 0.9962962962962963,
+      "false_activation_rate": 0.0,
+      "examples": 270,
+      "command_recall": 0.9791666666666666
+    },
+    {
+      "domain": "legacy",
+      "profile": "dc",
+      "macro_f1": 1.0,
+      "accuracy": 1.0,
+      "false_activation_rate": 0.0,
+      "examples": 270,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "legacy",
+      "profile": "drift",
+      "macro_f1": 0.9966006446525232,
+      "accuracy": 0.9962962962962963,
+      "false_activation_rate": 0.0,
+      "examples": 270,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "legacy",
+      "profile": "hum",
+      "macro_f1": 0.896113660775315,
+      "accuracy": 0.9407407407407408,
+      "false_activation_rate": 0.0,
+      "examples": 270,
+      "command_recall": 0.7916666666666666
+    },
+    {
+      "domain": "legacy",
+      "profile": "noise",
+      "macro_f1": 0.8980576079585981,
+      "accuracy": 0.9444444444444444,
+      "false_activation_rate": 0.0,
+      "examples": 270,
+      "command_recall": 0.75
+    },
+    {
+      "domain": "legacy",
+      "profile": "early",
+      "macro_f1": 0.9881448364116577,
+      "accuracy": 0.9925925925925926,
+      "false_activation_rate": 0.0,
+      "examples": 270,
+      "command_recall": 0.9583333333333334
+    },
+    {
+      "domain": "legacy",
+      "profile": "late",
+      "macro_f1": 0.9947140499559505,
+      "accuracy": 0.9962962962962963,
+      "false_activation_rate": 0.0,
+      "examples": 270,
+      "command_recall": 0.9791666666666666
+    },
+    {
+      "domain": "neural",
+      "profile": "clean",
+      "macro_f1": 0.9692963752665245,
+      "accuracy": 0.9846153846153847,
+      "false_activation_rate": 0.0,
+      "examples": 65,
+      "command_recall": 0.9333333333333333
+    },
+    {
+      "domain": "neural",
+      "profile": "quiet",
+      "macro_f1": 0.9692963752665245,
+      "accuracy": 0.9846153846153847,
+      "false_activation_rate": 0.0,
+      "examples": 65,
+      "command_recall": 0.9333333333333333
+    },
+    {
+      "domain": "neural",
+      "profile": "dc",
+      "macro_f1": 0.9692963752665245,
+      "accuracy": 0.9846153846153847,
+      "false_activation_rate": 0.0,
+      "examples": 65,
+      "command_recall": 0.9333333333333333
+    },
+    {
+      "domain": "neural",
+      "profile": "drift",
+      "macro_f1": 0.9692963752665245,
+      "accuracy": 0.9846153846153847,
+      "false_activation_rate": 0.0,
+      "examples": 65,
+      "command_recall": 0.9333333333333333
+    },
+    {
+      "domain": "neural",
+      "profile": "hum",
+      "macro_f1": 0.9240188383045526,
+      "accuracy": 0.9538461538461539,
+      "false_activation_rate": 0.04,
+      "examples": 65,
+      "command_recall": 0.9333333333333333
+    },
+    {
+      "domain": "neural",
+      "profile": "noise",
+      "macro_f1": 0.9937205651491366,
+      "accuracy": 0.9846153846153847,
+      "false_activation_rate": 0.0,
+      "examples": 65,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "neural",
+      "profile": "early",
+      "macro_f1": 0.9203167834297898,
+      "accuracy": 0.9692307692307692,
+      "false_activation_rate": 0.0,
+      "examples": 65,
+      "command_recall": 0.8666666666666667
+    },
+    {
+      "domain": "neural",
+      "profile": "late",
+      "macro_f1": 0.954719387755102,
+      "accuracy": 0.9692307692307692,
+      "false_activation_rate": 0.04,
+      "examples": 65,
+      "command_recall": 1.0
+    }
+  ],
+  "pooled_profiles": [
+    {
+      "candidate": "hp160",
+      "profile": "clean",
+      "macro_f1": 0.995609820602107,
+      "accuracy": 0.9970149253731343,
+      "false_activation_rate": 0.0,
+      "examples": 335,
+      "command_recall": 0.9841269841269841
+    },
+    {
+      "candidate": "hp160",
+      "profile": "quiet",
+      "macro_f1": 0.9903764954257566,
+      "accuracy": 0.9940298507462687,
+      "false_activation_rate": 0.0,
+      "examples": 335,
+      "command_recall": 0.9682539682539683
+    },
+    {
+      "candidate": "hp160",
+      "profile": "dc",
+      "macro_f1": 0.995609820602107,
+      "accuracy": 0.9970149253731343,
+      "false_activation_rate": 0.0,
+      "examples": 335,
+      "command_recall": 0.9841269841269841
+    },
+    {
+      "candidate": "hp160",
+      "profile": "drift",
+      "macro_f1": 0.9935389353698056,
+      "accuracy": 0.9940298507462687,
+      "false_activation_rate": 0.0,
+      "examples": 335,
+      "command_recall": 0.9841269841269841
+    },
+    {
+      "candidate": "hp160",
+      "profile": "hum",
+      "macro_f1": 0.911144665600303,
+      "accuracy": 0.9432835820895522,
+      "false_activation_rate": 0.007352941176470588,
+      "examples": 335,
+      "command_recall": 0.8253968253968254
+    },
+    {
+      "candidate": "hp160",
+      "profile": "noise",
+      "macro_f1": 0.9218744093126168,
+      "accuracy": 0.9522388059701492,
+      "false_activation_rate": 0.0,
+      "examples": 335,
+      "command_recall": 0.8095238095238095
+    },
+    {
+      "candidate": "hp160",
+      "profile": "early",
+      "macro_f1": 0.9762250617710932,
+      "accuracy": 0.9880597014925373,
+      "false_activation_rate": 0.0,
+      "examples": 335,
+      "command_recall": 0.9365079365079365
+    },
+    {
+      "candidate": "hp160",
+      "profile": "late",
+      "macro_f1": 0.9793914053997824,
+      "accuracy": 0.991044776119403,
+      "false_activation_rate": 0.007352941176470588,
+      "examples": 335,
+      "command_recall": 0.9841269841269841
+    }
+  ],
+  "worst_domain_f1": 0.896113660775315,
+  "maximum_domain_false_activation": 0.04,
+  "minimum_domain_command_recall": 0.75,
+  "passing_domain_profiles": 14,
+  "frozen": false,
+  "c_exported": false,
+  "target_built": false
+}
