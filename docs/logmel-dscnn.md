@@ -1,5 +1,7 @@
 # log-melと2D小型CNNのホストPoC
 
+後続の[固定モデル診断](development-errors.md)で、未達3条件の操作の誤りは正解棄却ではなく誤順位と確認した。品質未達/実機未変更は維持する。
+
 2026-11-19。**ホスト実装/自動試験と1構成の学習を完了。開発品質は3条件で未達のため不採用。C/実機は未確認。** [実学習前の固定条件](../experiments/neural-domain-20261119/logmel-dscnn-plan.json)・[前候補の不合格](caption-holdout.md)。
 
 低資源KWSのDS-CNNは[Hello Edgeの原論文](https://arxiv.org/abs/1711.07128)を参考にした独自構成。原論文の成績を本機/日本語の実績とは扱わない。
