@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "date": "2026-11-19",
+  "scope": "host_integer_core_conformance_not_pcm_or_target",
+  "model_weights_sha256": "194c5fceaeb9e51f83d8637033680a779c50c614becc3ff7bc37339ec31d27a8",
+  "candidate_result_sha256": "b9e8576876381428d44144c06f1d13bc8fb8e98694b86c74e875abdbd9ed91ac",
+  "source_sha256": {
+    "native/dscnn.h": "f2e1f54d46e3af07131f6ff4f12df59a0aedb21c8efef94a662c1dd2fe65adbd",
+    "native/dscnn.c": "7bdbd973be2fa57fe85ffab0aaab16f22784ae4dc4b05b1f26b8fb321ffadcf4",
+    "arcade_ai_pet/dscnn_native.py": "ee32caa3b6cb396542ceeb96419a398ae8477c4630865118aeddb44e40999b0a"
+  },
+  "feature_cache_sha256": {
+    "legacy.npz": "ca96020b8cdad8a3f281b5f7527d6460d3e83960daa8c94c7f94d8f027c796d1",
+    "held-neural.npz": "b9130ea2b44bd01a5b4a919980605121ec2265f0e80c300ad46d40c645121651",
+    "familiar-neural.npz": "0da3de82edad35ad7f983dffc14690f0b98cf14274a906550f9ba570627a854f"
+  },
+  "expected_examples": 4808,
+  "expected_groups": 24,
+  "expected_metric_rows": 56,
+  "expected_scratch_bytes": 12288,
+  "expected_numeric_bytes": 23411,
+  "thresholds_q10": [
+    3505,
+    1220,
+    3063,
+    552,
+    1052
+  ],
+  "required_exactness": [
+    "all seven integer logits",
+    "class-rejected labels",
+    "all group confusion matrices",
+    "all56 metrics and gate acceptance"
+  ],
+  "input_features": "unchanged cached float32 logmel features; not native PCM extraction",
+  "synthetic_host_not_device": true,
+  "model_or_threshold_retuning": false,
+  "consumed_finals_used": false,
+  "conformance_started": false,
+  "target_built": false,
+  "device_tested": false,
+  "vast_usd": 0
+}
