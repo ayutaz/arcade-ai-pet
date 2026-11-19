@@ -1,0 +1,31 @@
+[project]
+name = "scratch-neural-corpus-provider"
+version = "0.1.0"
+requires-python = ">=3.12.13,<3.13"
+dependencies = [
+  "dacvae",
+  "datasets==4.5.0",
+  "gradio==6.6.0",
+  "huggingface-hub==0.36.2",
+  "llvmlite==0.46.0",
+  "numba==0.63.1",
+  "peft==0.18.1",
+  "pyyaml==6.0.3",
+  "safetensors==0.7.0",
+  "soundfile==0.13.1",
+  "sentencepiece==0.1.99",
+  "torch==2.10.0",
+  "torchaudio==2.10.0",
+  "torchcodec==0.10.0",
+  "transformers==4.57.6",
+  "tqdm==4.67.3",
+  "wandb==0.25.0",
+  "numpy==2.3.5",
+  "scipy==1.18.1",
+  "faster-whisper==1.2.1"
+]
+
+[tool.uv.sources]
+dacvae = {git = "https://github.com/facebookresearch/dacvae", rev = "414c20785fc3a28373073ea8ef7a1316eeeaca6e"}
+
+[tool.uv.workspace]
