@@ -1,0 +1,26 @@
+{
+  "scope": "spectral_envelope_design_proposal_not_implemented",
+  "date": "2026-11-19",
+  "implemented": false,
+  "training_started": false,
+  "frontend": "context-logmel64-envelope-proposal",
+  "classifier": "logmel-dscnn-envelope-proposal",
+  "context_frames": 10,
+  "old_prefix_features": 2113,
+  "extra_band_means": 32,
+  "features": 2145,
+  "feature_bytes": 8580,
+  "head_shape": [
+    7,
+    3169
+  ],
+  "training_parameters": 23134,
+  "numeric_bytes_with_five_thresholds": 23635,
+  "numeric_budget_bytes": 24576,
+  "activation_ping_pong_estimate_bytes": 12288,
+  "target_workspace_measured": false,
+  "old_numeric_reader_must_reject": true,
+  "training_recipe_fixed": false,
+  "final_data_used": false,
+  "device_changed": false
+}
