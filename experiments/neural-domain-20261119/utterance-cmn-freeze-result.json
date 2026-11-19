@@ -1,0 +1,36 @@
+{
+  "source_commit": "667d650263208f09a711aa77b53c27c46fe69cd5",
+  "model_binding": {
+    "weights_sha256": "0292ba74cf47954d09c5a755fa4b7b4cff7cb7e3090e32ae52b03de95770c0c6",
+    "plan_sha256": "d357efa61c2085d221582407e99f892654ff56c2642d366a4c8d0ced442323c0",
+    "frozen_sha256": "fa84e9fbda884341af804b3e8b0c9b343fd5621bce8c741e14475d7edb8324c8"
+  },
+  "conformance": {
+    "rows": 2680,
+    "exact_integer_logits": 2680,
+    "banked_features_equal": 2680,
+    "final_decisions_equal": 2680,
+    "maximum_feature_error": 2.3543834686279297e-06,
+    "scratch_bytes": 5680,
+    "matched": true
+  },
+  "weights_bytes": 23972,
+  "numeric_bytes": 23992,
+  "thresholds_q10": [
+    2538,
+    3401,
+    326,
+    2312,
+    871
+  ],
+  "source_files": 38,
+  "domain_profiles": 16,
+  "pooled_profiles": 8,
+  "source_ids_count": 1636,
+  "wave_hashes_count": 1236,
+  "elapsed_seconds": 12.132,
+  "frozen": true,
+  "final_evaluated": false,
+  "device_tested": false,
+  "vast_usd": 0
+}

@@ -64,3 +64,5 @@ result = train_candidate(
 ## C処理の照合
 
 CMN専用の[C処理と数値形式](utterance-cmn-native.md)を追加し、開発用2,680条件のPython/C判定がすべて一致した。新しい独立最終評価・target build・実機は未確認。
+
+[正式freeze](utterance-cmn-freeze.md)も同じ開発データの再計算/C照合後に成功。新しい4条件の独立評価は進行中で、旧最終不合格と実声6/15は維持する。
