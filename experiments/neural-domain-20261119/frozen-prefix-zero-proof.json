@@ -1,0 +1,18 @@
+{
+  "scope": "zero_auxiliary_real_prefix_invariance_not_training",
+  "examples": 4808,
+  "old_full_and_decomposed_integer_logits_equal": true,
+  "extra_columns": "bounded_deterministic_probe_not_recomputed_audio_means",
+  "probe_seed": 2026111906,
+  "base_weights_sha256": "8595204eb5b1896c60d57e40c3fd72b7417623ca5f285d35ce2246f39c377e41",
+  "base_numeric_sha256": "026095d70b8bdd2662f38ef6133d09a43b67bf6f39b4316d57a773cbe704c775",
+  "numeric_bytes": 23635,
+  "source_sha256": {
+    "arcade_ai_pet/dscnn_residual.py": "9ca59bbd914e37529f681ec94e249e54c7804fc560f480bcb5b2161d7b33ca6c",
+    "arcade_ai_pet/dscnn_residual_training.py": "02b2cbb650a79b5595ced55cdc9cf1d0e0efb43d2d64354f4352d8f84256304f",
+    "arcade_ai_pet/dscnn_model.py": "fec5925915c205dca9c8eb7fb7d2ca55c75d918d0384b14c48c4a72056e4cda8"
+  },
+  "base_unchanged": true,
+  "real_voice_or_device_tested": false,
+  "additional_verification_not_tdd": true
+}
