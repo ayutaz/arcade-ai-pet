@@ -1,0 +1,30 @@
+{
+  "scope": "training_only_logmel_mask_design_not_training_recipe",
+  "date": "2026-11-19",
+  "implemented": false,
+  "training_started": false,
+  "recipe_fixed": false,
+  "motivation": "training command examples 9534/9534 versus primary development commands 794/864 in both float and integer; improve generalization before numeric precision changes",
+  "classifier": "existing logmel-dscnn-v1",
+  "features": 2113,
+  "image_shape": [
+    64,
+    32
+  ],
+  "tail_features_unchanged": 65,
+  "training_only": true,
+  "evaluation_mask_allowed": false,
+  "labels_or_source_ids_changed": false,
+  "proposed_max_time_bins": 6,
+  "proposed_max_frequency_bands": 3,
+  "mask_fill": 0,
+  "independent_augmentation_rng": true,
+  "new_network_shape_allowed": false,
+  "new_runtime_features_allowed": false,
+  "estimated_existing_numeric_bytes": 23411,
+  "all_quality_gates_unchanged": true,
+  "final_data_allowed": false,
+  "target_or_device_changed": false,
+  "vast_usd": 0,
+  "reference": "https://arxiv.org/abs/1904.08779"
+}

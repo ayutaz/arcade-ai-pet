@@ -1,5 +1,7 @@
 # float checkpointと整数版の対比較の次期案
 
+現行の[実装と再計測結果](float-checkpoint-probe.md)を参照。以下は実装前の設計記録で、JSONの当時のflagも保持する。
+
 2026-11-19。**未実装/未学習/recipe未固定。** [設計範囲](../experiments/neural-domain-20261119/float-checkpoint-probe-proposal.json)。[時間方向pooling版](time-pooled-head.md)も15/24条件で不採用だった。次の構成を試す前に、学習時のfloatモデルと整数版の差を直接観測する。
 
 ## 観測不足
@@ -16,3 +18,5 @@
 floatでも誤るならデータ/特徴/分類器側、floatでは正しいのに整数で誤るなら量子化側への対策を検討する。混在する場合は件数を分ける。floatが必ず正しい/高精度とは仮定せず、新headや閾値だけの探索を先行させない。
 
 消費済み最終2組は使わず、実機a553/16app・実声6/15、既存の不採用とVast.ai累計0米ドルを維持する。
+
+後続の[先行TDD・固定recipeと再計測結果](float-checkpoint-probe.md)へ進んだ。上の未実装/未学習とJSONのflagは設計時点の履歴として維持する。

@@ -1,0 +1,18 @@
+{
+  "scope": "tiny_mps_original_float_state_probe_not_real_data_quality",
+  "status": "passed",
+  "runs": 2,
+  "steps_per_run": 4,
+  "control_and_probe_integer_layers_identical": true,
+  "selected_epoch_identical": true,
+  "restored_float_logits_digest_identical": true,
+  "selected_comparison_reproduced": true,
+  "torch_version": "2.15.0",
+  "numpy_version": "2.5.5",
+  "source_sha256": {
+    "arcade_ai_pet/dscnn_probe.py": "28427be455a205c605f7622fdeb31c649ff2e43fc66450de09db4b8d4054b13b",
+    "arcade_ai_pet/dscnn_training.py": "70443a0ed7aa9739209464eac77edfceb3d184e48aaf07504d3e9dbdea9341dc"
+  },
+  "additional_verification_not_tdd": true,
+  "target_or_device_tested": false
+}
