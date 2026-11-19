@@ -1,0 +1,117 @@
+{
+  "schema": 1,
+  "seed": 2026111902,
+  "variants": 3,
+  "attempts": 3,
+  "provider": {
+    "name": "irodori-v2-voice-design",
+    "license": "MIT",
+    "engine_commit": "2708d3cadf726d4389d25eb4bb7a0344517a9a40",
+    "model_sha256": "8b703c28e88f160dee0258b1136f8fe1ea68c063b45fc28375b5a134d6ce1131",
+    "codec_sha256": "db120339c5ee7eca1912cdf29bc612b947a0808e69c3cebfb4936b45a762c1d5",
+    "runtime_lock_sha256": "ebe2d03280ab0032b11dd20913c37f20854280825a69d8fd2f321ff1a6c3da54",
+    "asr_model_sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671"
+  },
+  "conditions": [
+    {
+      "id": "extension-01",
+      "role": "development",
+      "caption": "成人女性の中音域の声。落ち着いた自然な速さで、短い日本語を明瞭に話す。"
+    },
+    {
+      "id": "extension-02",
+      "role": "development",
+      "caption": "成人男性の中音域の声。ゆっくりしすぎず、短い日本語をはっきりと話す。"
+    },
+    {
+      "id": "extension-03",
+      "role": "development",
+      "caption": "若い成人女性の柔らかな高めの声。自然な会話の速さで、語尾を伸ばさず話す。"
+    },
+    {
+      "id": "extension-04",
+      "role": "development",
+      "caption": "若い成人男性の軽やかな声。自然な会話の速さで、子音を明瞭に話す。"
+    },
+    {
+      "id": "extension-05",
+      "role": "development",
+      "caption": "成人女性の少し低い落ち着いた声。短い言葉を丁寧に、余計な息を付けず話す。"
+    },
+    {
+      "id": "extension-06",
+      "role": "development",
+      "caption": "成人男性の低めで柔らかな声。短い言葉を丁寧に、語尾を伸ばさず話す。"
+    },
+    {
+      "id": "extension-07",
+      "role": "development",
+      "caption": "中年の成人女性の明るい声。日常会話のように、短い言葉をはっきりと話す。"
+    },
+    {
+      "id": "extension-08",
+      "role": "development",
+      "caption": "中年の成人男性の穏やかな声。日常会話のように、短い言葉を明瞭に話す。"
+    },
+    {
+      "id": "extension-09",
+      "role": "development",
+      "caption": "成人女性の少し息を含む中音域の声。日本語の各音を自然に区切って話す。"
+    },
+    {
+      "id": "extension-10",
+      "role": "development",
+      "caption": "成人男性の少しかすれた中音域の声。日本語の各音をはっきりと自然に話す。"
+    },
+    {
+      "id": "extension-11",
+      "role": "development",
+      "caption": "成人女性の通りのよい声。少し速い会話の調子で、短い日本語を明瞭に話す。"
+    },
+    {
+      "id": "extension-12",
+      "role": "development",
+      "caption": "成人男性の通りのよい声。少し速い会話の調子で、短い日本語を明瞭に話す。"
+    },
+    {
+      "id": "extension-13",
+      "role": "development",
+      "caption": "年配の成人女性の落ち着いた声。自然な抑揚で、短い日本語を丁寧に話す。"
+    },
+    {
+      "id": "extension-14",
+      "role": "development",
+      "caption": "年配の成人男性の落ち着いた声。自然な抑揚で、短い日本語を丁寧に話す。"
+    },
+    {
+      "id": "extension-15",
+      "role": "development",
+      "caption": "成人女性の明るく親しみやすい声。短い言葉を平坦にせず、はっきりと話す。"
+    },
+    {
+      "id": "extension-16",
+      "role": "development",
+      "caption": "成人男性の明るく親しみやすい声。短い言葉を平坦にせず、はっきりと話す。"
+    },
+    {
+      "id": "final-01",
+      "role": "final",
+      "caption": "ややかすれた中低音の成人男性の声。一定の速さで話す。"
+    },
+    {
+      "id": "final-02",
+      "role": "final",
+      "caption": "張りのある中音域の成人女性の声。短く自然に呼びかける。"
+    },
+    {
+      "id": "final-03",
+      "role": "final",
+      "caption": "鼻に少しかかった成人男性の声。穏やかにゆっくり話す。"
+    },
+    {
+      "id": "final-04",
+      "role": "final",
+      "caption": "柔らかな高音域の成人女性の声。弾むような調子で話す。"
+    }
+  ]
+}
