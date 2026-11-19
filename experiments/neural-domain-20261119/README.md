@@ -57,3 +57,15 @@ CPUでの最初の比較であり新規クラウド課金は0。声の原音・�
 [1/4学習初版](domain-weighted-initial-result.json)はepoch381/threshold1188を選択。新domainのclean操作recallは1.0だが、誤反応最大0.08・earlyのF1=0.8659、旧domainのnoise F1=0.8791で未達だった。この候補も凍結・最終生成・実機適用しない。
 
 次は同じデータ・1/4学習・hidden88/1000epochsのまま、raw順位上位と学習期間別の候補から最大16checkpointを取り、それぞれ校正した16groupの成績で選定する。閾値適用後に順位が逆転する反例をTDDで確認した変更で、合格基準や最終4条件は変更しない。
+
+
+## 固定4構成の不採用とcontext PoC
+
+[比重2/8×hidden88/90](bounded-grid-results.json)はすべて基準未達。候補数を増やす前に、同じ失敗元発話を調査した。[区間とASR](window-asr-analysis.json)では「かわいい」の全区間と前後100ms付き区間は一致し、活性範囲だけでは不一致だった。これは語頭を残す[context frontend](../../docs/context-frontend.md)を試す根拠で、原因確定や実声改善の結果ではない。
+
+次の比較は同じデータ/比重1/4/hidden88/1000epochsのcontext版。全8stress条件と基準、未生成の最終4captionを維持する。対応C実装は未実装で、旧freezeへは渡せない。
+
+
+## context候補の不採用
+
+[context初版](context-initial-result.json)も全条件を満たさず、最悪F1=0.86176・最大誤反応0.10・最低recall0.75。C実装へは進まない。ASRで文脈の影響が見えても、その変更だけで分類器が改善するとは言えなかった。次は同じvalidationを維持し、学習用元発話だけの速度/音程変化を検証する。最終4条件は引き続き未生成。

@@ -1,0 +1,99 @@
+{
+  "plan": {
+    "scope": "bounded_development_grid_after_rejected_calibrated_trial",
+    "source_commit": "3d8e25b8bd1b0d5a71fdddf3b9e49c04d9453db4",
+    "mixed_manifest_sha256": "92bbcb8816133ae023c62a06345afdcda2b64731daf0aaa9395902ce2b26274b",
+    "epochs": 1000,
+    "seed": 42,
+    "configurations": [
+      {
+        "neural_weight": 2,
+        "hidden": 88
+      },
+      {
+        "neural_weight": 8,
+        "hidden": 88
+      },
+      {
+        "neural_weight": 2,
+        "hidden": 90
+      },
+      {
+        "neural_weight": 8,
+        "hidden": 90
+      }
+    ],
+    "selection_order": [
+      "all sixteen and pooled gates",
+      "minimum domain profile F1",
+      "mean domain profile F1",
+      "smaller numeric weights",
+      "smaller threshold"
+    ],
+    "numeric_weight_budget_bytes": 24576,
+    "final_conditions_used": false,
+    "gates_unchanged": true,
+    "new_spend_usd": 0
+  },
+  "trials": [
+    {
+      "neural_weight": 2,
+      "hidden": 88,
+      "selected_epoch": 371,
+      "threshold_q10": 825,
+      "weights_sha256": "57ac7a11f812198197af261ad609844685c3a087c5989fdf42a0de4cc9f7613a",
+      "weights_bytes": 23884,
+      "accepted_validation": false,
+      "accepted_all_domains": false,
+      "minimum_f1": 0.8659013605442176,
+      "maximum_false": 0.08,
+      "minimum_command_recall": 0.8541666666666666,
+      "elapsed_host_seconds": 96.271
+    },
+    {
+      "neural_weight": 8,
+      "hidden": 88,
+      "selected_epoch": 506,
+      "threshold_q10": 1069,
+      "weights_sha256": "ebba73b451ce21d6321b1b717cae476e4019caaf6e96814746bfd88fbf50dcd7",
+      "weights_bytes": 23884,
+      "accepted_validation": false,
+      "accepted_all_domains": false,
+      "minimum_f1": 0.8659013605442176,
+      "maximum_false": 0.06,
+      "minimum_command_recall": 0.8333333333333334,
+      "elapsed_host_seconds": 106.096
+    },
+    {
+      "neural_weight": 2,
+      "hidden": 90,
+      "selected_epoch": 236,
+      "threshold_q10": 1255,
+      "weights_sha256": "92335d6a26a3d3c0a355a27ea42a963b81dccbde99bad5876e55ed1112bb575f",
+      "weights_bytes": 24426,
+      "accepted_validation": false,
+      "accepted_all_domains": false,
+      "minimum_f1": 0.8493197278911566,
+      "maximum_false": 0.12,
+      "minimum_command_recall": 0.8541666666666666,
+      "elapsed_host_seconds": 98.36
+    },
+    {
+      "neural_weight": 8,
+      "hidden": 90,
+      "selected_epoch": 976,
+      "threshold_q10": 1117,
+      "weights_sha256": "6e2e815e26be7b954c6727996a75018789adf0af3713b9264317aadec4fa53d6",
+      "weights_bytes": 24426,
+      "accepted_validation": false,
+      "accepted_all_domains": false,
+      "minimum_f1": 0.8659013605442176,
+      "maximum_false": 0.08,
+      "minimum_command_recall": 0.7916666666666666,
+      "elapsed_host_seconds": 108.874
+    }
+  ],
+  "final_conditions_generated": false,
+  "frozen_candidate_created": false,
+  "firmware_updated": false
+}
