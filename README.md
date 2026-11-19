@@ -23,6 +23,10 @@ A later [experimental candidate](docs/reserved-final-evaluation.md) passed its
 development checks but failed reserved synthetic conditions (lowest macro F1 0.763).
 It has not replaced the device model.
 
+A [CMN candidate](docs/utterance-cmn-final.md) also failed new reserved conditions
+(lowest macro F1 0.802). All 3,448 C/Python decisions matched, but voice quality
+remains insufficient; this candidate has not been deployed.
+
 The [learned movement policy](models/behavior-v1/model-card.md) also runs in integer C.
 On 64 unseen collection boards it averaged 8.64 points versus 0.97 for a seeded random policy.
 Its parameters occupy 472 bytes; this is a host benchmark, not handheld performance.

@@ -1,5 +1,7 @@
 # CMN候補の固定と新しい独立評価
 
+後続の[新4条件による最終評価](utterance-cmn-final.md)は品質未達で不採用。以下の生成/評価未完了は各工程時点の記録。実機の採用モデルを変更していない。
+
 2026-11-19。CMN専用の固定/評価経路をTDDで追加した。後続の実データによる正式freezeは成功した。新しい独立評価は未完了。[C照合](utterance-cmn-native.md)・[新しい4条件の計画](../experiments/neural-domain-20261119/utterance-cmn-reserved-plan.json)。
 
 ## 固定する内容
