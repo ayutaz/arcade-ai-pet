@@ -1,5 +1,7 @@
 # 最終条件の生成
 
+ここでは旧260入力のchannel freezeを扱う。261入力/5閾値には別の[decision freeze/最終評価API](decision-freeze.md)を使い、旧処理を拡張解釈しない。
+
 `final_corpus.generate_final(plan, output, frozen=..., synthesize=..., recognize=...)` は、検証済みのモデル凍結後に予約済みfinal条件だけを生成する。development条件は生成しない。既存のchannel freeze検証でソース/重み/設定を照合し、凍結JSONと重みのhashを生成結果へ結び付ける。
 
 音源生成と内容点検の後、特徴量はまだ作らない。本体側の固定uv環境から `finalize_final(output, frozen=...)` を呼び、同じモデルの凍結状態を再照合してから特徴量を作る。途中でthresholdなどの凍結JSONが変わった場合も拒否する。manifestのroleはfinalであり、開発データ結合には使用できない。
