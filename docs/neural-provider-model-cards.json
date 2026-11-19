@@ -1,0 +1,20 @@
+[
+  {
+    "repository": "Aratako/Irodori-TTS-500M-v2-VoiceDesign",
+    "revision": "456e55708e7183f5c7faa1448209d54aa8991451",
+    "file": "README.md",
+    "sha256": "d4e8fbb148c81c4e1aca76d69c8ef6fe46b92ef92332e3d5e6eb5357ba23bc19"
+  },
+  {
+    "repository": "Aratako/Semantic-DACVAE-Japanese-32dim",
+    "revision": "47376ee24834d7a05a48ebabfe3cde29b3c5e214",
+    "file": "README.md",
+    "sha256": "105a6541b90e1c7817f2c5012f431ad107fed066aaa35d5b501c6d09d31f99ec"
+  },
+  {
+    "repository": "Systran/faster-whisper-small",
+    "revision": "536b0662742c02347bc0e980a01041f333bce120",
+    "file": "README.md",
+    "sha256": "329373481008c7c38654aff8ecdcf0163c211557cc7ba8e2ef6f2f84b4f75ec8"
+  }
+]
