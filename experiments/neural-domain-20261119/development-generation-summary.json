@@ -1,0 +1,53 @@
+{
+  "scope": "completed_synthetic_development_generation_before_final_evaluation",
+  "generation": {
+    "qualified_speech_sources": 152,
+    "plan_sha256": "67598d206e18b8d78bdf133fe8c9a0a4fc72b690b090ec88298926e5ab06554d",
+    "real_voice_tested": false,
+    "model_trained": false,
+    "final_conditions_generated": false,
+    "elapsed_seconds": 2177.381,
+    "source_commit": "ffc44e3",
+    "new_spend_usd": 0,
+    "device_tested": false
+  },
+  "attempts": 203,
+  "status_counts": {
+    "matched": 152,
+    "mismatch": 51
+  },
+  "raw_generator_commit": "ffc44e3ab1b975ea74329ac15d93a5a84afb045b",
+  "core_source_commit": "2f258810cd0053a959dfcd98a40297fedfb87326",
+  "feature_numpy_version": "2.5.5",
+  "variants": 3,
+  "legacy_speech_sources": 756,
+  "new_speech_sources": 152,
+  "mixed_speech_sources": 908,
+  "noise_control_records": 400,
+  "mixed_examples": 3124,
+  "prepared": {
+    "class_coverage_complete": true,
+    "origin_manifest_sha256": "c6fa516050a765e05d2f8d32c349dd306fd454ef1dda21cb100a1551abefbd85",
+    "source_counts": {
+      "train": 280,
+      "validation": 33,
+      "test": 39
+    },
+    "final_conditions_used": false,
+    "real_voice_tested": false,
+    "device_tested": false
+  },
+  "helper_sha256": {
+    "development_split.py": "5caf6718ff1f06a5fdc6a484632990b0036593c03f28e397a577e47823ea765d",
+    "mixed_corpus.py": "d869ed12ed3cfdcd5ba0c807bbd0724fc9275fe36dc48de5c439c3c972f6199c",
+    "domain_validation.py": "ca34918413cfe3625523b08b4ebbc1ded6d8424f449c8ac3861d0bac24e0aedf"
+  },
+  "manifest_sha256": {
+    "development-data": "c6fa516050a765e05d2f8d32c349dd306fd454ef1dda21cb100a1551abefbd85",
+    "development-prepared": "d4f9c2db987490c5c8972afaec3752a220687c5d749103ed6dc0ae181365e5c8",
+    "mixed-development": "92bbcb8816133ae023c62a06345afdcda2b64731daf0aaa9395902ce2b26274b"
+  },
+  "final_conditions_generated": false,
+  "device_pcm_exported": false,
+  "new_spend_usd": 0
+}
