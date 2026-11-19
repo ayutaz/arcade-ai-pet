@@ -15,12 +15,16 @@ SOURCES = ('decision_features.c', 'channel_prepare.c', 'decision_inference.c',
 
 
 class DecisionNativeModel(ChannelNativeModel):
+    asset_profile = assets
+    sources = SOURCES
+    feature_prefix = "pet_decision"
+
     def __init__(self, directory):
         directory = assets.real_path(directory)
         meta = json.loads(assets.real_path(directory / 'decision-metadata.json').read_text())
         table = assets.thresholds(meta['thresholds_q10'])
         self.layers, size = assets.read_layers(directory / 'weights.npz')
-        if (meta['runtime'] != assets.RUNTIME or meta['input_contract'] != assets.CONTRACT or
+        if (meta['runtime'] != self.asset_profile.RUNTIME or meta['input_contract'] != self.asset_profile.CONTRACT or
             assets.digest(directory / 'weights.npz') != meta['weights_sha256'] or
             size != meta['weights_bytes'] or size + 20 != meta['numeric_bytes'] or meta['frozen'] is not False):
             raise ValueError('new numeric model identity/contract mismatch')
@@ -38,21 +42,22 @@ class DecisionNativeModel(ChannelNativeModel):
                 (base / name).write_text(text)
             subprocess.run(['clang', '-O2', '-std=c11', '-Wall', '-Wextra', '-Werror', '-shared', '-fPIC',
                             '-I' + str(ROOT / 'native'), '-I' + str(base),
-                            *[str(ROOT / 'native' / name) for name in SOURCES[:3]], '-lm', '-o', str(base / 'decision.so')],
+                            *[str(ROOT / 'native' / name) for name in self.sources if name.endswith('.c')], '-lm', '-o', str(base / 'decision.so')],
                            capture_output=True, check=True, timeout=30)
             self.lib = C.CDLL(str(base / 'decision.so'))
-            self.lib.pet_decision_feature_scratch_size.restype = C.c_size_t
-            self.scratch_bytes = self.lib.pet_decision_feature_scratch_size()
+            scratch_size = getattr(self.lib, self.feature_prefix + "_feature_scratch_size")
+            scratch_size.restype = C.c_size_t
+            self.scratch_bytes = scratch_size()
             if self.scratch_bytes > 24576:
                 raise ValueError('feature scratch budget')
             self.scratch = C.create_string_buffer(self.scratch_bytes)
             for name in ('pet_channel_prepare', 'pet_channel_prepare_banked'):
                 getattr(self.lib, name).argtypes = [C.c_void_p, C.c_size_t]
-            for name in ('pet_decision_features', 'pet_decision_features_banked'):
+            for name in (self.feature_prefix + '_features', self.feature_prefix + '_features_banked'):
                 getattr(self.lib, name).argtypes = [C.c_void_p, C.c_size_t, C.c_void_p, C.c_size_t, C.c_void_p, C.c_size_t]
             for name in ('pet_decision_predict', 'pet_decision_classify'):
                 getattr(self.lib, name).argtypes = [C.c_void_p, C.c_size_t, C.c_void_p, C.c_size_t]
-            self.source_sha256 = {name: assets.digest(ROOT / 'native' / name) for name in SOURCES}
+            self.source_sha256 = {name: assets.digest(ROOT / 'native' / name) for name in self.sources}
         except BaseException:
             self.temp.cleanup()
             raise
@@ -60,7 +65,7 @@ class DecisionNativeModel(ChannelNativeModel):
     def extract(self, pcm, *, banked=False):
         values, banks, pointer = self._prepared(pcm, banked)
         result = np.zeros(261, dtype=np.float32)
-        fn = self.lib.pet_decision_features_banked if banked else self.lib.pet_decision_features
+        fn = getattr(self.lib, self.feature_prefix + ('_features_banked' if banked else '_features'))
         if fn(pointer if banked else values.ctypes.data, 32000, result.ctypes.data, 261, self.scratch, self.scratch_bytes) != 1:
             raise ValueError('context-duration features failed')
         return result
