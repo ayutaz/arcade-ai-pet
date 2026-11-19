@@ -1,6 +1,6 @@
 # log-melと2D小型CNNのホストPoC
 
-2026-11-19。**特徴/整数演算/学習停止の契約とMacの予備計測を確認。実データの学習/品質とC/実機は未確認。** [実学習前の固定条件](../experiments/neural-domain-20261119/logmel-dscnn-plan.json)・[前候補の不合格](caption-holdout.md)。
+2026-11-19。**ホスト実装/自動試験と1構成の学習を完了。開発品質は3条件で未達のため不採用。C/実機は未確認。** [実学習前の固定条件](../experiments/neural-domain-20261119/logmel-dscnn-plan.json)・[前候補の不合格](caption-holdout.md)。
 
 低資源KWSのDS-CNNは[Hello Edgeの原論文](https://arxiv.org/abs/1711.07128)を参考にした独自構成。原論文の成績を本機/日本語の実績とは扱わない。
 
@@ -45,7 +45,7 @@ NumPyの整数演算を別のPython整数/ループ実装と全6層で照合し�
 
 process最大RSSは最終時点548,945,920B。先に行ったCPU処理も含むhigh-waterで、MPS単体や全実データの消費量ではない。別の[小型fixtureのMPS repeat](../experiments/neural-domain-20261119/logmel-dscnn-mps-smoke.json)も2回完走し、量子化層/整数logitが一致した。ESP32-S3の速度や認識精度は未測定。
 
-## 次の1比較
+## 固定した1比較
 
 同じcaption保留と元archiveを使い、30epoch/batch256/seed42、MPS、最大8,000step/fit900秒の1構成を固定した。float学習後のBN fold/量子化結果で候補を選び、全24domain＋結合8条件と選定2domainの結合8条件を要求する。実学習前の`training_started:false`を後から変更しない。
 
@@ -56,3 +56,19 @@ uv run --locked --group train python -m unittest discover -s tests/training -p '
 ```
 
 学習の配列/fit/選定はホスト専用で、期限超過や入力/source改変時は途中の候補を保存しない。旧reader/runtimeへ流用せず、採用には新形式のC照合/固定と新しい独立最終評価、S3資源確認が必要。実機a553/16app、実声6/15、過去の失敗と課金0米ドルを維持する。
+
+## 実データ比較の結果
+
+[数値と別計算の照合](../experiments/neural-domain-20261119/logmel-dscnn-result.json)。source `f74710a19a6fa06f0d681b47e934e9c34b195a83`のarchiveと事前条件を使い、30epoch/7,350stepをローカルMPSで実行した。全処理356.100秒、fit300.952秒、選定epoch26。数値モデル＋5閾値23,411B、process最大RSS1,822,343,168Bで、ESP32-S3のRAM/速度ではない。
+
+| 開発domain | 最小F1（基準0.90） | 最大誤反応（上限0.05） | 最小操作recall（基準0.80） | 未達profile |
+|---|---:|---:|---:|---|
+| legacy | 0.928734 | 0.009009 | 0.916667 | なし |
+| 保留neural | 0.894295 | 0.038835 | 0.833333 | hum / noise |
+| 元のneural検証 | 0.884537 | 0.020000 | 0.866667 | early |
+
+全24domain/profileのうち21条件は通過したが、全条件を要求する採用基準には届かなかった。selectionも未達。閾値やepochを追加探索せず、不採用として保存する。56組の指標を混同行列から別計算し、29source/8元入力/重み/事前条件のhash不変と数値容量を照合した。この照合は追加検証であり、新規TDDではない。
+
+[PR50](https://github.com/ayutaz/arcade-ai-pet/pull/50)のhead `f74710a`は必須4CI（workflow44486621064）成功後にmain `b66b019`へ通常merge済み。コードの契約成功とモデル品質の未達を区別する。新形式のC版/正式freeze/新しい独立最終評価/S3 build/実機適用は行っていない。過去の最終2組を学習/選定へ使わず、実声6/15、実機a553/16app、Vast.ai累計0米ドルを維持する。
+
+次は開発用の失敗3条件を、棄却前1位の誤りと正解の棄却に分ける。データ条件/入力表現/量子化のどこに差があるかを確認してから、次の比較を事前定義する。未達モデルをC移植や新FWへ進めない。
