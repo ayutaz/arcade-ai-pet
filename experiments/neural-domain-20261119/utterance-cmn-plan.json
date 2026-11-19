@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "date_jst": "2026-11-19",
+  "scope": "predeclared_cmn_development_only_poc",
+  "hypothesis": "Remove per-utterance MFCC coefficient offsets without changing timing or energy; improvement is unproven.",
+  "frontend": "context-duration-cmn",
+  "input_features": 261,
+  "centered_mfcc_bins": 20,
+  "centered_mfcc_coefficients": 12,
+  "unchanged_energy_features": 20,
+  "unchanged_duration_features": 1,
+  "variance_normalization": false,
+  "output_clip": [
+    -16,
+    16
+  ],
+  "epochs": 1000,
+  "hidden": 88,
+  "seed": 42,
+  "neural_weight": 2,
+  "noise_replicas": 5,
+  "hum_replicas": 3,
+  "noise_mode": "fresh",
+  "maximum_model_configurations": 1,
+  "maximum_weights_and_threshold_bytes": 24576,
+  "calibration_initializations": [
+    "validation_global",
+    "zeros"
+  ],
+  "calibration_max_passes": 4,
+  "minimum_macro_f1": 0.9,
+  "maximum_false_activation_rate": 0.05,
+  "minimum_command_recall": 0.8,
+  "domain_profiles": 16,
+  "pooled_profiles": 8,
+  "dataset_manifest_sha256": "ca453d45342e7216ae278b72673f8c4621f31e8c5f40fc3134016785675a6230",
+  "development_manifest_sha256": {
+    "legacy": "907d32cd3262ac6e2ff2636dee9a625d13b1050ed0385a211a25ad7898832dfd",
+    "neural": "5814cac6b2884f2c84e59a00e479b4aba0bee3ab00aff0fec61f3e623559b214"
+  },
+  "prior_final_plan_consumed": true,
+  "prior_final_used_for_fit_or_selection": false,
+  "prior_final_results_informed_hypothesis": true,
+  "new_independent_final_required_before_adoption": true,
+  "source_audio_generation": false,
+  "device_tested": false,
+  "training_started": false,
+  "vast_usd": 0
+}
