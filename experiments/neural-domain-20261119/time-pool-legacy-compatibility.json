@@ -1,0 +1,21 @@
+{
+  "scope": "old_integer_modes_compatibility_not_new_model_evaluation",
+  "examples_per_mode": 4808,
+  "modes": 2,
+  "integer_logit_rows_equal": 9616,
+  "old_model_source_sha256": "fec5925915c205dca9c8eb7fb7d2ca55c75d918d0384b14c48c4a72056e4cda8",
+  "current_model_source_sha256": "7e02d207a402a6b5778af94012b7f6d777271ef1a0d401fa6df6b281986d716e",
+  "weights_sha256": {
+    "legacy": "8595204eb5b1896c60d57e40c3fd72b7417623ca5f285d35ce2246f39c377e41",
+    "envelope": "11814bf5db46284309b86564bdcf427b6497a72856b4788c253c42044dea522e"
+  },
+  "cache_sha256": {
+    "legacy.npz": "ca96020b8cdad8a3f281b5f7527d6460d3e83960daa8c94c7f94d8f027c796d1",
+    "held-neural.npz": "b9130ea2b44bd01a5b4a919980605121ec2265f0e80c300ad46d40c645121651",
+    "familiar-neural.npz": "0da3de82edad35ad7f983dffc14690f0b98cf14274a906550f9ba570627a854f"
+  },
+  "envelope_extra_columns": "bounded_deterministic_probe_not_recomputed_audio_means",
+  "probe_seed": 2026111907,
+  "additional_verification_not_tdd": true,
+  "target_or_device_tested": false
+}

@@ -8,10 +8,10 @@ GROUPS = (1,8,1,16,1)
 BATCH = 32
 
 
-def validate(layers, *, envelope=False):
-    if type(envelope) is not bool:
-        raise ValueError('explicit boolean envelope mode required')
-    shapes = (*SHAPES[:5], (7,3169)) if envelope else SHAPES
+def validate(layers, *, envelope=False, time_pool=False):
+    if type(envelope) is not bool or type(time_pool) is not bool or time_pool and not envelope:
+        raise ValueError('explicit boolean modes; time pooling requires envelope input')
+    shapes = (*SHAPES[:5], (7,865)) if time_pool else (*SHAPES[:5], (7,3169)) if envelope else SHAPES
     if not isinstance(layers, (list, tuple)) or len(layers) != 6:
         raise ValueError('exactly six fixed CNN layers required')
     for row, shape in zip(layers, shapes, strict=True):
@@ -24,8 +24,8 @@ def validate(layers, *, envelope=False):
             raise ValueError('fixed int8/int32 CNN representation required')
 
 
-def weights_bytes(layers, *, envelope=False):
-    validate(layers, envelope=envelope)
+def weights_bytes(layers, *, envelope=False, time_pool=False):
+    validate(layers, envelope=envelope, time_pool=time_pool)
     return sum(value.nbytes for row in layers for value in row.values())
 
 
@@ -72,14 +72,23 @@ def _conv(values, layer, stride, groups):
     return np.clip(total, 0, 192).astype(np.uint8)
 
 
-def scores(values, layers, *, envelope=False):
-    validate(layers, envelope=envelope)
+def _pool_time(values):
+    if (not isinstance(values,np.ndarray) or values.dtype!=np.uint8 or values.ndim!=4 or
+        values.shape[1:]!=(24,16,8) or not 1<=len(values)<=BATCH or np.any(values>192)):
+        raise ValueError('bounded uint8 Q5 convolution output required')
+    return (values.reshape(len(values),24,4,4,8).sum(axis=3,dtype=np.uint16)//4).astype(np.uint8)
+
+
+def scores(values, layers, *, envelope=False, time_pool=False):
+    validate(layers, envelope=envelope, time_pool=time_pool)
     images, tails = inputs(values, envelope=envelope)
     rows = []
     for start in range(0, len(values), BATCH):
         current = np.rint(images[start:start+BATCH] * 32).astype(np.int16)
         for layer, stride, groups in zip(layers[:5], STRIDES, GROUPS, strict=True):
             current = _conv(current, layer, stride, groups)
+        if time_pool:
+            current = _pool_time(current)
         flat = current.reshape(len(current), -1).astype(np.int64)
         tail = np.rint(tails[start:start+BATCH] * 32).astype(np.int64)
         joined = np.concatenate((flat, tail), axis=1)

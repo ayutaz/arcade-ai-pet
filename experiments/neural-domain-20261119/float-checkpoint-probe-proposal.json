@@ -1,0 +1,20 @@
+{
+  "scope": "paired_float_integer_checkpoint_probe_design_not_training_recipe",
+  "date": "2026-11-19",
+  "implemented": false,
+  "training_started": false,
+  "recipe_fixed": false,
+  "purpose": "distinguish original learned float decisions from quantized integer decisions within the same checkpoint",
+  "reference_architecture": "logmel-dscnn-v1",
+  "reference_features": 2113,
+  "selection_uses": "unchanged integer quality only",
+  "initial_probe_domains": "existing primary 16 development domain-profile groups",
+  "record": "paired raw top1 by class/group and private selected float state with provenance",
+  "old_float_checkpoint_recovered": false,
+  "dequantized_shadow_is_original_float": false,
+  "new_architecture_search_allowed": false,
+  "evaluation_rows_changed": false,
+  "final_data_allowed": false,
+  "target_or_device_changed": false,
+  "vast_usd": 0
+}

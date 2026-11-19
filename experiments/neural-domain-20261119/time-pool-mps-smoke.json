@@ -1,0 +1,15 @@
+{
+  "scope": "time_pool_tiny_mps_fixture_not_real_data_quality",
+  "status": "passed",
+  "runs": 2,
+  "steps_per_run": 4,
+  "quantized_layers_identical": true,
+  "torch_version": "2.15.0",
+  "numpy_version": "2.5.5",
+  "source_sha256": {
+    "arcade_ai_pet/dscnn_model.py": "7e02d207a402a6b5778af94012b7f6d777271ef1a0d401fa6df6b281986d716e",
+    "arcade_ai_pet/dscnn_training.py": "b0c462ec7a99683014bd5aa64d4d630f81532bceadde71322401d43051c6133a"
+  },
+  "additional_verification_not_tdd": true,
+  "target_or_device_tested": false
+}

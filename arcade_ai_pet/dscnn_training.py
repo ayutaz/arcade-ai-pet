@@ -4,11 +4,11 @@ from .dscnn_model import SHAPES, STRIDES, GROUPS, validate
 from .dscnn_quantize import fold_batch_norm, quantize_layer
 
 
-def build_model(*, envelope=False):
-    if type(envelope) is not bool:
-        raise ValueError('explicit boolean envelope mode required')
+def build_model(*, envelope=False, time_pool=False):
+    if type(envelope) is not bool or type(time_pool) is not bool or time_pool and not envelope:
+        raise ValueError('explicit boolean modes; time pooling requires envelope input')
     feature_count = 2145 if envelope else 2113
-    head_count = 3169 if envelope else 3137
+    head_count = 865 if time_pool else 3169 if envelope else 3137
     import torch
     class Dscnn(torch.nn.Module):
         def __init__(self):
@@ -27,11 +27,13 @@ def build_model(*, envelope=False):
             image = values[:,:2048].reshape(-1,1,64,32)
             for block in self.blocks:
                 image = block(image)
+            if time_pool:
+                image = torch.nn.functional.avg_pool2d(image, (4,1))
             return self.head(torch.cat((image.flatten(1), values[:,2048:]), dim=1))
     return Dscnn()
 
 
-def quantize(model, *, envelope=False):
+def quantize(model, *, envelope=False, time_pool=False):
     if model.training:
         raise ValueError('BN export requires evaluation mode')
     layers = []
@@ -43,7 +45,7 @@ def quantize(model, *, envelope=False):
             bn.bias.detach().cpu().numpy(), eps=bn.eps)
         layers.append(quantize_layer(weight, bias))
     layers.append(quantize_layer(model.head.weight.detach().cpu().numpy(), model.head.bias.detach().cpu().numpy()))
-    validate(layers, envelope=envelope)
+    validate(layers, envelope=envelope, time_pool=time_pool)
     return layers
 
 
@@ -54,10 +56,11 @@ from .domain_training import _inputs, validation_rank, select_threshold, shortli
 
 
 def fit(x, y, vx, vy, groups, *, epochs=30, batch_size=256, seed=42,
-        device='cpu', max_steps=8000, max_seconds=900, envelope=False):
+        device='cpu', max_steps=8000, max_seconds=900, envelope=False, time_pool=False):
     import torch
     started = monotonic()
-    if (type(envelope) is not bool or type(epochs) is not int or not 1 <= epochs <= 1000 or
+    if (type(envelope) is not bool or type(time_pool) is not bool or time_pool and not envelope or
+        type(epochs) is not int or not 1 <= epochs <= 1000 or
         type(batch_size) is not int or not 1 <= batch_size <= 1024 or
         type(seed) is not int or not 0 <= seed < 2**31 or
         type(max_steps) is not int or not 1 <= max_steps <= 1000000 or
@@ -65,9 +68,11 @@ def fit(x, y, vx, vy, groups, *, epochs=30, batch_size=256, seed=42,
         device not in ('cpu', 'mps')):
         raise ValueError('bounded local CNN training configuration required')
     mode = dict(envelope=True) if envelope else {}
+    if time_pool:
+        mode['time_pool'] = True
     _inputs(vy, groups)
     for values, labels in ((x,y), (vx,vy)):
-        inputs(values, **mode)
+        inputs(values, envelope=envelope)
         if (not isinstance(labels, np.ndarray) or labels.shape != (len(values),) or
             not np.issubdtype(labels.dtype, np.integer) or set(labels.tolist()) != set(range(7))):
             raise ValueError('all seven aligned training/validation classes required')
