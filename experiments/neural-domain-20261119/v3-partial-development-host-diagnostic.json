@@ -1,0 +1,547 @@
+{
+  "scope": "partial_generated_development_host_c_diagnostic",
+  "weights_sha256": "374987a02446e805f18427d7de8de3cd955c4833efc6e0a9dbd9fa655c3c59f2",
+  "threshold_q10": 995,
+  "snapshot_attempts": 72,
+  "rows": [
+    {
+      "id": "b46160942efc401c5e78969bbb685ee9e3ef1184b38dcbed39cc3476e20c3a45",
+      "condition_id": "development-01",
+      "prompt": "あそぼ",
+      "label": 0,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 13556
+    },
+    {
+      "id": "69d575655b09239216d34c5a559044a51d5c3b62fe22c8ed0b99a93a73100643",
+      "condition_id": "development-01",
+      "prompt": "おいで",
+      "label": 1,
+      "prediction": 1,
+      "raw_top1": 1,
+      "margin_q10": 6587
+    },
+    {
+      "id": "88dc7cb6db324fa96b98fa4d4ee239d85f7d52587810cec78fce6d12c079bf1a",
+      "condition_id": "development-01",
+      "prompt": "おやすみ",
+      "label": 3,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 9910
+    },
+    {
+      "id": "4409c90e7a335666da4bdc7999d58153498895fb2c370c6bf118fdac7f8312d1",
+      "condition_id": "development-01",
+      "prompt": "ありがとう",
+      "label": 4,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 2740
+    },
+    {
+      "id": "499352d58798c0e6ce6440c7f60992008f7194a7eb937724610bfa6bdbc5ff59",
+      "condition_id": "development-01",
+      "prompt": "こんにちは",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 2236
+    },
+    {
+      "id": "6882b3c38cd6e03188205c809a2cdcc710259cdc8665b480df9cfd0aa6f194a5",
+      "condition_id": "development-01",
+      "prompt": "さようなら",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 21719
+    },
+    {
+      "id": "da2bd4cd4494c3d2aa8e86f4917dd2f1b1213d7d02fc26b1468a9f11fd918d12",
+      "condition_id": "development-01",
+      "prompt": "ゲーム",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 25360
+    },
+    {
+      "id": "f95332746834a4aae2cd0f72b687c32c639c11c3d56d556ad5672b6345087386",
+      "condition_id": "development-01",
+      "prompt": "うたって",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 465
+    },
+    {
+      "id": "ea96ddaab54503b998beea458d9055974baa390a1ae1f2760e89d137d7c599dc",
+      "condition_id": "development-01",
+      "prompt": "すすむ",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 10685
+    },
+    {
+      "id": "d904a7d133a3fc188df73607cfe6e8c1a22cb415c3452d93cd488a8e3e28a383",
+      "condition_id": "development-01",
+      "prompt": "うしろ",
+      "label": 5,
+      "prediction": 2,
+      "raw_top1": 2,
+      "margin_q10": 1240
+    },
+    {
+      "id": "561072ed16f3d7e9dc7f3608adaa4706c6b180a9553b58636dcf38201e8fca3e",
+      "condition_id": "development-01",
+      "prompt": "てんき",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 13200
+    },
+    {
+      "id": "7578477c76c17e639920f0a89f261808b0a22e749506d8946a1d3a30e3e289a7",
+      "condition_id": "development-01",
+      "prompt": "スタート",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 14189
+    },
+    {
+      "id": "93b55e4697af9b3d3e0afac341791b26c5c53f0af8116b332f8aabb7803504fd",
+      "condition_id": "development-01",
+      "prompt": "がんばれ",
+      "label": 5,
+      "prediction": 1,
+      "raw_top1": 1,
+      "margin_q10": 3237
+    },
+    {
+      "id": "45038dfd384142b5a569f23303e7b7baf3330cf0178313a6e08b7ca11c3f4b4d",
+      "condition_id": "development-01",
+      "prompt": "ごはん",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 8930
+    },
+    {
+      "id": "0864e391f5931fe10c6d07a0f103a5b27df9d85102b8bd9773d2c2ee01aabf3b",
+      "condition_id": "development-01",
+      "prompt": "かわいい",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 5934
+    },
+    {
+      "id": "979872d635147d06562584abdf45dd8bdb1f78b406c2535f646a88ff88601ce9",
+      "condition_id": "development-01",
+      "prompt": "はやく",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 27795
+    },
+    {
+      "id": "74673b0b9be4ca57cdb06c9e5137cbb9f7884fefd89b65481b94cf9454f926a6",
+      "condition_id": "development-01",
+      "prompt": "すごい",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 22588
+    },
+    {
+      "id": "7d9643aece4dda349a2d74da7bbb05d76de9ce83cd5f6c3c3841f6691c71d22f",
+      "condition_id": "development-01",
+      "prompt": "なまえはなに",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 23495
+    },
+    {
+      "id": "8024f67b5e0c49a23c7b1172008d58fa95847857da6d9885ddefdf4d5ce8b751",
+      "condition_id": "development-02",
+      "prompt": "あそぼ",
+      "label": 0,
+      "prediction": 0,
+      "raw_top1": 0,
+      "margin_q10": 18245
+    },
+    {
+      "id": "71a2267f810868edc22c5ae7538a2808f2dab22e57c494a21f67a048a53d756e",
+      "condition_id": "development-02",
+      "prompt": "おいで",
+      "label": 1,
+      "prediction": 1,
+      "raw_top1": 1,
+      "margin_q10": 4953
+    },
+    {
+      "id": "9430670c822f27fa7754876ffe3eb6808db4b75009c27c87ec5702fc99645979",
+      "condition_id": "development-02",
+      "prompt": "まって",
+      "label": 2,
+      "prediction": 2,
+      "raw_top1": 2,
+      "margin_q10": 29827
+    },
+    {
+      "id": "3123a5ec44a18a8560ad1242381ba2e809a0f0660a0e1e6a537a4588b63c0d26",
+      "condition_id": "development-02",
+      "prompt": "おやすみ",
+      "label": 3,
+      "prediction": 3,
+      "raw_top1": 3,
+      "margin_q10": 3742
+    },
+    {
+      "id": "e8d6456976c38f9042af30a3de13d2bb4ed9d7bd9a6573b155985c4b8ae8e9ad",
+      "condition_id": "development-02",
+      "prompt": "ありがとう",
+      "label": 4,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 11038
+    },
+    {
+      "id": "9b7f4b324d165d966ef6f3508ec1fb882cc846303aae6ce8914cc34dd5464041",
+      "condition_id": "development-02",
+      "prompt": "こんにちは",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 19051
+    },
+    {
+      "id": "5a42089f9715670ce5ac60d09d5879180c23c2d901a7ad04c113a3efe17a6d36",
+      "condition_id": "development-02",
+      "prompt": "さようなら",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 22010
+    },
+    {
+      "id": "a0a3764ef280acfb189ca362940b501d7e021e3c71c467b4f997ca2af7b01e63",
+      "condition_id": "development-02",
+      "prompt": "ゲーム",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 13334
+    },
+    {
+      "id": "818ff51913f06d18e667d1e455f6225f0ccf219fe34897d326d255fb28ca831f",
+      "condition_id": "development-02",
+      "prompt": "うたって",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 20181
+    },
+    {
+      "id": "48fd54f989cb16158d78f5941d9e8be48086d27acb3067b16f4b6da1d2c1243b",
+      "condition_id": "development-02",
+      "prompt": "すすむ",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 12273
+    },
+    {
+      "id": "18f11523781e5f3ba1640c92ce3d064b6cf2e535e2ff41669bb007ae7a73e2c5",
+      "condition_id": "development-02",
+      "prompt": "うしろ",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 22265
+    },
+    {
+      "id": "87a864dc66f06622973cf09ef9e9e4e21972edd086de550fe183ddec16b84166",
+      "condition_id": "development-02",
+      "prompt": "てんき",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 8725
+    },
+    {
+      "id": "6262bf8e8af68764dd16756adaf8abf54144248748c4dca4446eaa09670f74f1",
+      "condition_id": "development-02",
+      "prompt": "スタート",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 4434
+    },
+    {
+      "id": "0b2c20589e3a0479e635f25fc3b90960e1eb47c611d9b8d74929ac6194fbcdde",
+      "condition_id": "development-02",
+      "prompt": "とまれ",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 7817
+    },
+    {
+      "id": "b9bf21b349dd37d1eb3bb5a1f71be3c3f9ba07353e989ac32614a36a6fcacd48",
+      "condition_id": "development-02",
+      "prompt": "がんばれ",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 21461
+    },
+    {
+      "id": "3df7893cf867c66584fd41a3d1eb5e98c5e9f48238bc0f54ba1480627b22808a",
+      "condition_id": "development-02",
+      "prompt": "ごはん",
+      "label": 5,
+      "prediction": 2,
+      "raw_top1": 2,
+      "margin_q10": 14188
+    },
+    {
+      "id": "937bb55a31f5de3fda0584172e114e0f2b59914af18731aa98b58836b0d70401",
+      "condition_id": "development-02",
+      "prompt": "かわいい",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 14948
+    },
+    {
+      "id": "c301c4ad434b4fa41093f3ee3bb1cad85bc0a0a4d343ab72d7fe9de8b816ddec",
+      "condition_id": "development-02",
+      "prompt": "はやく",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 5199
+    },
+    {
+      "id": "00e35b4bff368ad027173284da54c5627ff4a9db2ae53d22ff889610a21a6419",
+      "condition_id": "development-02",
+      "prompt": "すごい",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 30066
+    },
+    {
+      "id": "a75190bdbd81980ef7325d7b93411d0adabfc052c4dcb6d6b515ccc52771bba1",
+      "condition_id": "development-02",
+      "prompt": "きょうはあめ",
+      "label": 5,
+      "prediction": 2,
+      "raw_top1": 2,
+      "margin_q10": 9423
+    },
+    {
+      "id": "b99f0c9ccb5a36fec58f65927ec4f43656922f6235ad5cf1233112f3ec98a714",
+      "condition_id": "development-02",
+      "prompt": "なまえはなに",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 4420
+    },
+    {
+      "id": "f56fbfc50fddd00e0e17d8f8f54055852aafb45bd9d6df77a092f9df51273b43",
+      "condition_id": "development-03",
+      "prompt": "あそぼ",
+      "label": 0,
+      "prediction": 0,
+      "raw_top1": 0,
+      "margin_q10": 2530
+    },
+    {
+      "id": "b6a8700b2b4f0e0bb9e7fec48ac52e47104a21d794a2b36562d2206bb66cc556",
+      "condition_id": "development-03",
+      "prompt": "おいで",
+      "label": 1,
+      "prediction": 1,
+      "raw_top1": 1,
+      "margin_q10": 10302
+    },
+    {
+      "id": "eca46d10905e407003b35aa0b14663347c29c6e80cbad02c4f5fdbcae862c3f4",
+      "condition_id": "development-03",
+      "prompt": "まって",
+      "label": 2,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 1040
+    },
+    {
+      "id": "3afab1903230c31de0788b05e30ad806717c4eb0145085fce6631afd8f186bf6",
+      "condition_id": "development-03",
+      "prompt": "おやすみ",
+      "label": 3,
+      "prediction": 3,
+      "raw_top1": 3,
+      "margin_q10": 8910
+    },
+    {
+      "id": "d874cc9eadf9aa5471e78954e43e9b74e0a5985f4cefc3f991cc6a3d278833c0",
+      "condition_id": "development-03",
+      "prompt": "ありがとう",
+      "label": 4,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 8973
+    },
+    {
+      "id": "3b2e68c8207e8254d0e0f21541e38fd8df5764c18a093cdbe106972b836ac950",
+      "condition_id": "development-03",
+      "prompt": "こんにちは",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 9263
+    },
+    {
+      "id": "a7d488126e1690f89eeb41940844fdd8048f33f41653d41658dde782be8ff929",
+      "condition_id": "development-03",
+      "prompt": "さようなら",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 9367
+    },
+    {
+      "id": "fe1bd31e6b8ec540c048aaaecfd053d72a111e326ba9f34c6e24ff99befc9e24",
+      "condition_id": "development-03",
+      "prompt": "ゲーム",
+      "label": 5,
+      "prediction": 1,
+      "raw_top1": 1,
+      "margin_q10": 3997
+    },
+    {
+      "id": "8d719e8f348b3a72826955d8235be18b7fc6a92631a4965e58a4dcfe1656de98",
+      "condition_id": "development-03",
+      "prompt": "うたって",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 10102
+    },
+    {
+      "id": "329b8bf07a9e9d8cdccd44bff52a2ae3901a06960b235e1e659a6bb72c00c561",
+      "condition_id": "development-03",
+      "prompt": "うしろ",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 13777
+    },
+    {
+      "id": "5fa6682626f081cb307bc48ca8dbaefb5ce346e3e4c9b10c32be6a82a6ebc886",
+      "condition_id": "development-03",
+      "prompt": "てんき",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 1,
+      "margin_q10": 584
+    },
+    {
+      "id": "81f21f22c704757538f7c3fc59dce930d3fc973a113f39ec4ac18e635ae320c2",
+      "condition_id": "development-03",
+      "prompt": "スタート",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 18132
+    },
+    {
+      "id": "1be5616c0b4e57534387e77c8883d6a4550bd706556c22cd1f477d9d568e9903",
+      "condition_id": "development-03",
+      "prompt": "とまれ",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 17329
+    },
+    {
+      "id": "195613b4db4fe42c90cf9c67c82f7a9df43ab4550c86df2ea62e8438462c670f",
+      "condition_id": "development-03",
+      "prompt": "がんばれ",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 8308
+    },
+    {
+      "id": "04454c194ef651135fbd635c44f822e3a1af1157ba909aa0ee7062b72886df5a",
+      "condition_id": "development-03",
+      "prompt": "ごはん",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 6413
+    },
+    {
+      "id": "bf4a89bf4194e921fae0169ead7ebff3ab964bb029535562fb039ed4092d3fbc",
+      "condition_id": "development-03",
+      "prompt": "かわいい",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 2922
+    },
+    {
+      "id": "4ae1f7dcf80e795e903e405dfa284e76b8b21ef10bbb191ab9fa49294affcbcb",
+      "condition_id": "development-03",
+      "prompt": "はやく",
+      "label": 5,
+      "prediction": 2,
+      "raw_top1": 2,
+      "margin_q10": 13863
+    },
+    {
+      "id": "3e052e1de39353772430922f5baa3f9b1fc7ce1854f07a24d4552c6632cbb8ed",
+      "condition_id": "development-03",
+      "prompt": "すごい",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 15224
+    },
+    {
+      "id": "b1268f0386da06fb50c574fcf8f5f09686b70d7b6101f30ec275dafae57d52a6",
+      "condition_id": "development-03",
+      "prompt": "きょうはあめ",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 12436
+    },
+    {
+      "id": "c55dc3624af6f09af068169676875fbb93ceee029b328df51666b459d5b4c360",
+      "condition_id": "development-03",
+      "prompt": "なまえはなに",
+      "label": 5,
+      "prediction": 5,
+      "raw_top1": 5,
+      "margin_q10": 23105
+    }
+  ],
+  "command_correct": 8,
+  "command_total": 14,
+  "negative_false": 6,
+  "negative_total": 45,
+  "final_conditions_used": false,
+  "model_trained": false,
+  "real_voice_tested": false,
+  "device_tested": false
+}
