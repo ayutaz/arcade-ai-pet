@@ -1,0 +1,274 @@
+{
+  "selected_epoch": 351,
+  "validation_accuracy": 0.9731343283582089,
+  "seed": 42,
+  "epochs": 1000,
+  "selection_metric": "calibrated_worst_development_domain_profile",
+  "checkpoint_candidates_evaluated": 15,
+  "checkpoint_threshold_q10": 1048,
+  "candidate": "hp160",
+  "frontend_version": "duration",
+  "threshold_q10": 1048,
+  "accepted_all_domains": false,
+  "accepted_validation": false,
+  "training_domain_weights": {
+    "legacy": 1,
+    "neural": 2
+  },
+  "noise_replicas": 5,
+  "hum_replicas": 3,
+  "noise_mode": "fresh",
+  "dataset_manifest_sha256": "ca453d45342e7216ae278b72673f8c4621f31e8c5f40fc3134016785675a6230",
+  "trainer_sha256": "1251c9fe3764a3ecd486f8473fba516e4853bd24fd1653b63e5e5a86f4e23fd3",
+  "feature_sha256": {
+    "channel_frontend.py": "c02e259b04345b03d34335414c909be043f46da5d0196f48f1f5557744708d4f",
+    "duration_frontend.py": "0eae17ea849d3118ba7ca34e56ae14100ad3cb285319572b82965efe45d98619",
+    "duration_arrays.py": "ad0e9866b30c9b0cebc148807437c5acd134484b21a75c07bb56874780a983bd",
+    "duration_quantize.py": "ae91924c432ed2a1b903f71ef0313d962fae9d37528f12356b125bbc936a9b09",
+    "channel_training.py": "67e1d5cdff53ae1cc8d5e575c9a1ae4f81e99fee74cb653207a6e566d06fb475"
+  },
+  "neural_prosody": false,
+  "training_augmentation": null,
+  "weights_bytes": 23972,
+  "split_examples": {
+    "train": 70070,
+    "validation": 2680
+  },
+  "final_evaluated": false,
+  "real_voice_tested": false,
+  "device_tested": false,
+  "vast_usd": 0,
+  "weights_sha256": "8c661c22dc3bb2c1ee85ff6491675ea1d1e04b2412ee3b984189f7c35eb9435f",
+  "elapsed_seconds": 104.844,
+  "source_commit": "5ee49fe6fb38c3e3bd8093d0594e22fbe3d9758b",
+  "plan_sha256": "bbb52d09f3dc9a5d86f7c23e4f480f2b33de63661505289e5753149474923f45",
+  "input_features": 261,
+  "final_used": false,
+  "device_firmware_changed": false,
+  "domain_profiles": [
+    {
+      "domain": "legacy",
+      "profile": "clean",
+      "macro_f1": 1.0,
+      "accuracy": 1.0,
+      "false_activation_rate": 0.0,
+      "examples": 270,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "legacy",
+      "profile": "quiet",
+      "macro_f1": 1.0,
+      "accuracy": 1.0,
+      "false_activation_rate": 0.0,
+      "examples": 270,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "legacy",
+      "profile": "dc",
+      "macro_f1": 1.0,
+      "accuracy": 1.0,
+      "false_activation_rate": 0.0,
+      "examples": 270,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "legacy",
+      "profile": "drift",
+      "macro_f1": 0.9912462006079028,
+      "accuracy": 0.9962962962962963,
+      "false_activation_rate": 0.0045045045045045045,
+      "examples": 270,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "legacy",
+      "profile": "hum",
+      "macro_f1": 0.9079927031507714,
+      "accuracy": 0.9518518518518518,
+      "false_activation_rate": 0.0045045045045045045,
+      "examples": 270,
+      "command_recall": 0.8541666666666666
+    },
+    {
+      "domain": "legacy",
+      "profile": "noise",
+      "macro_f1": 0.875011705605557,
+      "accuracy": 0.937037037037037,
+      "false_activation_rate": 0.02252252252252252,
+      "examples": 270,
+      "command_recall": 0.8333333333333334
+    },
+    {
+      "domain": "legacy",
+      "profile": "early",
+      "macro_f1": 1.0,
+      "accuracy": 1.0,
+      "false_activation_rate": 0.0,
+      "examples": 270,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "legacy",
+      "profile": "late",
+      "macro_f1": 1.0,
+      "accuracy": 1.0,
+      "false_activation_rate": 0.0,
+      "examples": 270,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "neural",
+      "profile": "clean",
+      "macro_f1": 0.945578231292517,
+      "accuracy": 0.9538461538461539,
+      "false_activation_rate": 0.06,
+      "examples": 65,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "neural",
+      "profile": "quiet",
+      "macro_f1": 0.9391233766233765,
+      "accuracy": 0.9384615384615385,
+      "false_activation_rate": 0.06,
+      "examples": 65,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "neural",
+      "profile": "dc",
+      "macro_f1": 0.945578231292517,
+      "accuracy": 0.9538461538461539,
+      "false_activation_rate": 0.06,
+      "examples": 65,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "neural",
+      "profile": "drift",
+      "macro_f1": 0.945578231292517,
+      "accuracy": 0.9538461538461539,
+      "false_activation_rate": 0.06,
+      "examples": 65,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "neural",
+      "profile": "hum",
+      "macro_f1": 0.8819727891156462,
+      "accuracy": 0.9076923076923077,
+      "false_activation_rate": 0.12,
+      "examples": 65,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "neural",
+      "profile": "noise",
+      "macro_f1": 0.945578231292517,
+      "accuracy": 0.9538461538461539,
+      "false_activation_rate": 0.06,
+      "examples": 65,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "neural",
+      "profile": "early",
+      "macro_f1": 0.8659013605442176,
+      "accuracy": 0.9230769230769231,
+      "false_activation_rate": 0.06,
+      "examples": 65,
+      "command_recall": 0.8666666666666667
+    },
+    {
+      "domain": "neural",
+      "profile": "late",
+      "macro_f1": 0.945578231292517,
+      "accuracy": 0.9538461538461539,
+      "false_activation_rate": 0.06,
+      "examples": 65,
+      "command_recall": 1.0
+    }
+  ],
+  "pooled_profiles": [
+    {
+      "candidate": "hp160",
+      "profile": "clean",
+      "macro_f1": 0.9704948646125117,
+      "accuracy": 0.991044776119403,
+      "false_activation_rate": 0.011029411764705883,
+      "examples": 335,
+      "command_recall": 1.0
+    },
+    {
+      "candidate": "hp160",
+      "profile": "quiet",
+      "macro_f1": 0.9684226669733915,
+      "accuracy": 0.9880597014925373,
+      "false_activation_rate": 0.011029411764705883,
+      "examples": 335,
+      "command_recall": 1.0
+    },
+    {
+      "candidate": "hp160",
+      "profile": "dc",
+      "macro_f1": 0.9704948646125117,
+      "accuracy": 0.991044776119403,
+      "false_activation_rate": 0.011029411764705883,
+      "examples": 335,
+      "command_recall": 1.0
+    },
+    {
+      "candidate": "hp160",
+      "profile": "drift",
+      "macro_f1": 0.964122901251301,
+      "accuracy": 0.9880597014925373,
+      "false_activation_rate": 0.014705882352941176,
+      "examples": 335,
+      "command_recall": 1.0
+    },
+    {
+      "candidate": "hp160",
+      "profile": "hum",
+      "macro_f1": 0.8909277262870424,
+      "accuracy": 0.9432835820895522,
+      "false_activation_rate": 0.025735294117647058,
+      "examples": 335,
+      "command_recall": 0.8888888888888888
+    },
+    {
+      "candidate": "hp160",
+      "profile": "noise",
+      "macro_f1": 0.888666455624563,
+      "accuracy": 0.9402985074626866,
+      "false_activation_rate": 0.029411764705882353,
+      "examples": 335,
+      "command_recall": 0.873015873015873
+    },
+    {
+      "candidate": "hp160",
+      "profile": "early",
+      "macro_f1": 0.9565702994454056,
+      "accuracy": 0.9850746268656716,
+      "false_activation_rate": 0.011029411764705883,
+      "examples": 335,
+      "command_recall": 0.9682539682539683
+    },
+    {
+      "candidate": "hp160",
+      "profile": "late",
+      "macro_f1": 0.9704948646125117,
+      "accuracy": 0.991044776119403,
+      "false_activation_rate": 0.011029411764705883,
+      "examples": 335,
+      "command_recall": 1.0
+    }
+  ],
+  "worst_domain_f1": 0.8659013605442176,
+  "maximum_domain_false_activation": 0.12,
+  "minimum_domain_command_recall": 0.8333333333333334,
+  "frozen": false,
+  "c_exported": false,
+  "target_built": false
+}

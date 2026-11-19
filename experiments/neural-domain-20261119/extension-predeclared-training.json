@@ -1,0 +1,89 @@
+{
+  "legacy": {
+    "manifest_sha256": "907d32cd3262ac6e2ff2636dee9a625d13b1050ed0385a211a25ad7898832dfd",
+    "reconstructed_examples": 2468,
+    "speech_sources": 756,
+    "record_count": 956,
+    "split_examples": {
+      "train": 1997,
+      "validation": 270,
+      "test": 201
+    },
+    "training_command_sources": {
+      "0": 26,
+      "1": 31,
+      "2": 27,
+      "3": 28,
+      "4": 29
+    },
+    "evaluation_sha256": {
+      "validation.npz": "57b09d07420c65d7a56f07cedf7eba021b6334ee2f3eb930bc0a4f5108e08bd6",
+      "test.npz": "2d01b12f4dbc44eb7667a46f6ebf2db63ec2ec7941670605e984728747e5a05b"
+    }
+  },
+  "neural": {
+    "manifest_sha256": "d4f9c2db987490c5c8972afaec3752a220687c5d749103ed6dc0ae181365e5c8",
+    "reconstructed_examples": 656,
+    "speech_sources": 152,
+    "record_count": 352,
+    "split_examples": {
+      "train": 520,
+      "validation": 65,
+      "test": 71
+    },
+    "training_command_sources": {
+      "0": 5,
+      "1": 6,
+      "3": 6,
+      "4": 6,
+      "2": 4
+    },
+    "evaluation_sha256": {
+      "validation.npz": "393110b7ece0b201e634450e5044778ab3908ef6f185a87efff21a5b711dc53c",
+      "test.npz": "92db5ab8b6444ece340f6f9d9668311a0bc701dc5d861db47cb7f8894f8fc620"
+    }
+  },
+  "frozen_source_files": 13,
+  "frozen_sources_unchanged": true,
+  "source_commit": "1b7b5a1850c472307eeb35677da775e20ceb3b83",
+  "elapsed_seconds": 6.371,
+  "device_tested": false,
+  "final_conditions_used": false,
+  "schema": 1,
+  "scope": "host_dataset_integrity_and_predeclared_training_only",
+  "recorded_date": "2026-11-19",
+  "baseline_validation_examples": 335,
+  "baseline_test_examples": 272,
+  "training_runs": [
+    {
+      "name": "extended-domain-2",
+      "epochs": 1000,
+      "hidden": 88,
+      "seed": 42,
+      "neural_weight": 2,
+      "frontend": "adaptive",
+      "neural_prosody": false
+    },
+    {
+      "name": "extended-domain-4",
+      "epochs": 1000,
+      "hidden": 88,
+      "seed": 42,
+      "neural_weight": 4,
+      "frontend": "adaptive",
+      "neural_prosody": false
+    }
+  ],
+  "acceptance": {
+    "minimum_domain_profile_macro_f1": 0.9,
+    "maximum_domain_profile_false_activation_rate": 0.05,
+    "minimum_domain_profile_command_recall": 0.8,
+    "domain_profiles": 16,
+    "pooled_profiles": 8,
+    "maximum_weights_bytes": 24576
+  },
+  "training_started": false,
+  "final_conditions_generated": false,
+  "device_firmware_changed": false,
+  "vast_usd": 0
+}

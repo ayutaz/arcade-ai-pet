@@ -5,10 +5,12 @@ import numpy as np
 from .channel_training import make_arrays
 from .context_arrays import make_arrays as load_context_arrays
 from .prosody_arrays import make_arrays as load_prosody_arrays
+from .duration_arrays import make_arrays as load_duration_arrays
 from .channel_robustness import PROFILES,measure
 from .channel_freeze import _rows,_accepted
 from .training import scores,decisions
 from .quantize import quantize_layer,MAX_HIDDEN
+from .duration_quantize import quantize_layer as quantize_duration_layer
 
 
 def _inputs(labels,groups):
@@ -83,18 +85,20 @@ def select_checkpoint(checkpoints,values,labels,groups):
     return best
 
 
-def fit(x,y,vx,vy,groups,*,epochs=1000,hidden=88,seed=42):
+def fit(x,y,vx,vy,groups,*,epochs=1000,hidden=88,seed=42,feature_count=260):
     import torch
     _inputs(vy,groups)
+    if type(feature_count) is not int or feature_count not in (260,261):
+        raise ValueError('explicit 260 or 261 feature contract required')
     for values,labels in ((x,y),(vx,vy)):
-        if (not isinstance(values,np.ndarray) or values.ndim!=2 or values.shape[1]!=260 or not len(values) or
+        if (not isinstance(values,np.ndarray) or values.ndim!=2 or values.shape[1]!=feature_count or not len(values) or
                 labels.shape!=(len(values),) or not np.isfinite(values).all() or np.any(abs(values)>16) or
                 not np.issubdtype(labels.dtype,np.integer) or np.any((labels<0)|(labels>6))):
             raise ValueError('bounded development features required')
     if type(epochs) is not int or not 1<=epochs<=1000 or type(hidden) is not int or not 1<=hidden<=MAX_HIDDEN:
         raise ValueError('bounded training resource configuration required')
     torch.set_num_threads(2);torch.manual_seed(seed);torch.use_deterministic_algorithms(True)
-    model=torch.nn.Sequential(torch.nn.Linear(260,hidden),torch.nn.ReLU6(),torch.nn.Linear(hidden,7))
+    model=torch.nn.Sequential(torch.nn.Linear(feature_count,hidden),torch.nn.ReLU6(),torch.nn.Linear(hidden,7))
     optimizer=torch.optim.Adam(model.parameters(),lr=.003,weight_decay=.0001)
     counts=np.bincount(y,minlength=7);weight=1/np.maximum(counts,1);weight/=weight.mean()
     lossfn=torch.nn.CrossEntropyLoss(weight=torch.tensor(weight,dtype=torch.float32))
@@ -102,7 +106,7 @@ def fit(x,y,vx,vy,groups,*,epochs=1000,hidden=88,seed=42):
     for epoch in range(epochs):
         optimizer.zero_grad();loss=lossfn(model(tx),ty);loss.backward();optimizer.step()
         if epoch%5==0 or epoch==epochs-1:
-            layers=[quantize_layer(model[i].weight.detach().numpy(),model[i].bias.detach().numpy()) for i in (0,2)]
+            layers=[(quantize_duration_layer if i==0 and feature_count==261 else quantize_layer)(model[i].weight.detach().numpy(),model[i].bias.detach().numpy()) for i in (0,2)]
             predictions=scores(vx,layers).argmax(1);rank=validation_rank(vy,predictions,groups)
             checkpoints.append(dict(layers=layers,epoch=epoch+1,rank=rank))
     candidates=shortlist(checkpoints);selected=select_checkpoint(candidates,vx,vy,groups)
@@ -114,7 +118,7 @@ def fit(x,y,vx,vy,groups,*,epochs=1000,hidden=88,seed=42):
 def train_candidate(domains,mixed,output,*,epochs=1000,hidden=88,neural_weight=4,frontend='adaptive',neural_prosody=False,prosody_qualification=None):
     output=Path(output).absolute();mixed=Path(mixed).absolute()
     if (output.resolve()!=output or output.exists() or type(domains) is not dict or set(domains)!={'legacy','neural'} or
-            type(neural_weight) is not int or not 1<=neural_weight<=8 or frontend not in ('adaptive','context') or type(neural_prosody) is not bool or neural_prosody and (frontend!='adaptive' or prosody_qualification is None) or not neural_prosody and prosody_qualification is not None):
+            type(neural_weight) is not int or not 1<=neural_weight<=8 or frontend not in ('adaptive','context','duration') or type(neural_prosody) is not bool or neural_prosody and (frontend!='adaptive' or prosody_qualification is None) or not neural_prosody and prosody_qualification is not None):
         raise ValueError('fresh bounded development experiment required')
     domains={name:Path(domains[name]) for name in ('legacy','neural')};records=[];seen=set();waves=set();variants=set()
     for path in domains.values():
@@ -128,7 +132,7 @@ def train_candidate(domains,mixed,output,*,epochs=1000,hidden=88,neural_weight=4
     combined=json.loads((mixed/'manifest.json').read_text())
     if len(variants)!=1 or combined.get('role')!='development' or combined['records']!=records or combined['variants'] not in variants:
         raise ValueError('mixed development identity differs from component domains')
-    builder=make_arrays if frontend=='adaptive' else load_context_arrays
+    builder={'adaptive':make_arrays,'context':load_context_arrays,'duration':load_duration_arrays}[frontend]
     arrays={}
     for name,path in domains.items():
         kwargs=dict(frontend=frontend,noise_replicas=5,noise_mode='fresh',hum_replicas=3)
@@ -141,9 +145,11 @@ def train_candidate(domains,mixed,output,*,epochs=1000,hidden=88,neural_weight=4
     vx=np.concatenate([a['validation']['x'] for a in arrays.values()]);vy=np.concatenate([a['validation']['y'] for a in arrays.values()])
     profiles=[p for a in arrays.values() for p in a['validation']['profiles']]
     groups=np.array([domain*8+PROFILES.index(p) for domain,a in enumerate(arrays.values()) for p in a['validation']['profiles']])
-    result=fit(x,y,vx,vy,groups,epochs=epochs,hidden=hidden);layers=result.pop('layers');logits=scores(vx,layers)
+    feature_options=dict(feature_count=261) if frontend=='duration' else {}
+    result=fit(x,y,vx,vy,groups,epochs=epochs,hidden=hidden,**feature_options);layers=result.pop('layers');logits=scores(vx,layers)
     threshold,rows,accepted=select_threshold(vy,logits,groups);combined_rows=_rows(vy,logits,profiles,'hp160',threshold)
     feature_files=('channel_frontend.py','channel_training.py') if frontend=='adaptive' else ('context_frontend.py','context_arrays.py')
+    if frontend=='duration':feature_files=('channel_frontend.py','duration_frontend.py','duration_arrays.py','duration_quantize.py','channel_training.py')
     if neural_prosody:feature_files+=('prosody_arrays.py',)
     result.update(candidate='hp160',frontend_version=frontend,threshold_q10=threshold,validation=combined_rows,
                   domain_profiles=rows,accepted_all_domains=accepted,accepted_validation=accepted and _accepted(combined_rows),
