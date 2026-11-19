@@ -1,0 +1,47 @@
+# 時間方向の小型分類器
+
+**ホスト上の開発PoC。認識品質・C実装・ESP32-S3での実行はまだ未確認。** 既存v3の重み、凍結対象13ファイル、推論コードは変更しない。新しい5層の重みは旧2層readerが拒否する。
+
+## 目的
+
+別TTSの開発音声を加えたMLPは、比重・校正・区間・速度/音程の比較でも最悪F1が0.866前後で基準未達だった。次は近接する時間区間でパラメーターを共有する分類器を比較する。話速や話者への改善を実証した方式とは扱わない。
+
+入力は現在と同じHP160/adaptiveの260特徴。20区間×12MFCCの後に20energy値が続く配列を、20区間×13channelへ並べ直す。新しい音声処理やGPIO設定は追加しない。
+
+| 層 | 構成 |
+|---|---|
+| 畳み込み1 | 13→24channel、kernel5、同じ長さの零padding、ReLU6 |
+| 畳み込み2/3 | 24→32→32channel、kernel3、同じ長さの零padding、ReLU6 |
+| 時間pool | 連続4区間の平均、5区間×32channel。時間順にflatten |
+| 全結合/出力 | 160→64→7、途中だけReLU6 |
+
+重みint8・bias int32・shift各4Bで**18280B**。既定MLPの23884Bより小さいが、1入力の積和は約149408回でMLPの23496回より多い。速度向上とは主張しない。整数Q10、右shift、平均poolの切捨てまで独立したscalar参照と照合する。
+
+将来Cへ実装する際、20×32×int32の中間buffer2枚なら5120Bになる。これは算術上の見積もりで、実装のstack・heap・時間・linker結果ではない。既存の内部RAM上限、PSRAM無効、全16app保持は維持する。
+
+## 学習と判定
+
+最初の実データ比較は同じ908元発話/既存validation、旧対新の比重1対2と1対4、200epochs、batch512、seed42。速度/音程の加工音声はこの比較に追加しない。分類器とmini-batch学習の両方が変わるため、結果から分類器だけの因果効果を断定しない。
+
+学習はCPUまたは明示したローカルMPSだけ。MPS指定時に利用不可なら拒否し、別backendへ黙って切り替えない。重みをCPUへ読み戻してint8化し、checkpoint/閾値の選定はNumPyの整数演算で行う。旧/新×8条件と結合8条件のF1≥0.90・誤反応≤0.05・操作recall≥0.80、数値重み24KiB以下を維持する。最終4条件は未生成。
+
+短い同一Macの測定では、batch512×20更新がCPU0.788秒/MPS0.178秒。学習全体や実機推論の速度ではない。同じ小fixtureのMPS20epochsを2回実行し、選定epoch6/閾値0/数値パラメーターSHAが一致した。別OSやCPUとのbit一致は保証しない。クラウド/APIを呼ばず、新規課金0米ドル。
+
+## TDD（2026-11-19）
+
+| 段階 | 先行Red | Green |
+|---|---|---|
+| 整数モデル・domain分離 | 通常2moduleの未実装importエラー | 通常6件/0.526秒 |
+| 実学習・float/整数layout | training moduleの未実装importエラー | training3件/10.133秒 |
+| 明示backend | 未対応device引数のTypeError、fitとdispatch各1件 | 通常6件/0.136秒、training4件/1.747秒 |
+| int64最小値の範囲拒否 | absのoverflowで拒否されない失敗1件 | 直接上下比較へ修正後6件/0.104秒 |
+
+コマンドは`uv run --locked python -m unittest discover -s tests -p 'test_temporal*.py'`、学習は`uv run --locked --group train python -m unittest discover -s tests/training -p test_temporal_training.py`。
+
+回帰は通常156件/15.895秒、training13件/1.918秒、SDK2件/3.262秒が成功。最後の整数範囲修正後の通常回帰は別途記録する。小fixtureの学習成功を実音声や実機の合格とは扱わない。MPS速度測定/同一fixtureの追加照合は既存動作の検査で、先行TDDとは数えない。
+
+## 次へ進む条件
+
+実データの品質が合格した場合だけ、専用の安全な読込/凍結・C/Python照合・独立最終評価・資源測定を進める。既存のexportへ新形式を流さない。新FWの適用には別の固定レビュー/個別許可が必要。実声12/15以上の条件は変更しない。
+
+整数範囲修正後の通常回帰156件/16.156秒も成功した。skipなし。lock/Markdown参照/diff検査と、既存v3の凍結13ファイル不変を確認した。
