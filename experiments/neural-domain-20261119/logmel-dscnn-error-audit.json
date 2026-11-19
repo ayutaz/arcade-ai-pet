@@ -1,0 +1,5057 @@
+{
+  "scope": "fixed_development_error_audit_not_final",
+  "source_commit": "6cd6d16744914c630e7c16dca62c1599518805f9",
+  "diagnostic_source_sha256": "30a11552e3cdf386e9b9d95e813818b3d7b92a8d7127fa27b83dd262bde523e3",
+  "model_sha256": "8595204eb5b1896c60d57e40c3fd72b7417623ca5f285d35ce2246f39c377e41",
+  "thresholds_q10": [
+    3237,
+    533,
+    1268,
+    1595,
+    2311
+  ],
+  "training_source_commit": "f74710a19a6fa06f0d681b47e934e9c34b195a83",
+  "rows": [
+    {
+      "examples": 270,
+      "raw_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "final_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "commands": {
+        "examples": 48,
+        "raw_top1_correct": 48,
+        "final_correct": 48,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 0,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 222,
+        "raw_false_activation": 0,
+        "final_false_activation": 0,
+        "command_rejected": 0
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 3,
+          "examples": 15,
+          "raw_top1_correct": 15,
+          "final_correct": 15,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 4,
+          "examples": 6,
+          "raw_top1_correct": 6,
+          "final_correct": 6,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 198,
+          "raw_top1_correct": 198,
+          "final_correct": 198,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 6,
+          "examples": 24,
+          "raw_top1_correct": 24,
+          "final_correct": 24,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "legacy",
+      "profile": "clean",
+      "failed_quality": false
+    },
+    {
+      "examples": 270,
+      "raw_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "final_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "commands": {
+        "examples": 48,
+        "raw_top1_correct": 48,
+        "final_correct": 48,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 0,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 222,
+        "raw_false_activation": 0,
+        "final_false_activation": 0,
+        "command_rejected": 0
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 3,
+          "examples": 15,
+          "raw_top1_correct": 15,
+          "final_correct": 15,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 4,
+          "examples": 6,
+          "raw_top1_correct": 6,
+          "final_correct": 6,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 198,
+          "raw_top1_correct": 198,
+          "final_correct": 198,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 6,
+          "examples": 24,
+          "raw_top1_correct": 24,
+          "final_correct": 24,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "legacy",
+      "profile": "quiet",
+      "failed_quality": false
+    },
+    {
+      "examples": 270,
+      "raw_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "final_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "commands": {
+        "examples": 48,
+        "raw_top1_correct": 48,
+        "final_correct": 48,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 0,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 222,
+        "raw_false_activation": 0,
+        "final_false_activation": 0,
+        "command_rejected": 0
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 3,
+          "examples": 15,
+          "raw_top1_correct": 15,
+          "final_correct": 15,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 4,
+          "examples": 6,
+          "raw_top1_correct": 6,
+          "final_correct": 6,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 198,
+          "raw_top1_correct": 198,
+          "final_correct": 198,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 6,
+          "examples": 24,
+          "raw_top1_correct": 24,
+          "final_correct": 24,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "legacy",
+      "profile": "dc",
+      "failed_quality": false
+    },
+    {
+      "examples": 270,
+      "raw_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          197,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "final_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          197,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "commands": {
+        "examples": 48,
+        "raw_top1_correct": 48,
+        "final_correct": 48,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 0,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 222,
+        "raw_false_activation": 1,
+        "final_false_activation": 1,
+        "command_rejected": 0
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 3,
+          "examples": 15,
+          "raw_top1_correct": 15,
+          "final_correct": 15,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 4,
+          "examples": 6,
+          "raw_top1_correct": 6,
+          "final_correct": 6,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 198,
+          "raw_top1_correct": 197,
+          "final_correct": 197,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 6,
+          "examples": 24,
+          "raw_top1_correct": 24,
+          "final_correct": 24,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "legacy",
+      "profile": "drift",
+      "failed_quality": false
+    },
+    {
+      "examples": 270,
+      "raw_confusion": [
+        [
+          11,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          14,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          4,
+          2,
+          0
+        ],
+        [
+          1,
+          1,
+          2,
+          1,
+          1,
+          191,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "final_confusion": [
+        [
+          11,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          14,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          4,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          0,
+          0,
+          195,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "commands": {
+        "examples": 48,
+        "raw_top1_correct": 44,
+        "final_correct": 44,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 4,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 222,
+        "raw_false_activation": 6,
+        "final_false_activation": 2,
+        "command_rejected": 4
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 12,
+          "raw_top1_correct": 11,
+          "final_correct": 11,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 1,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 3,
+          "examples": 15,
+          "raw_top1_correct": 14,
+          "final_correct": 14,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 4,
+          "examples": 6,
+          "raw_top1_correct": 4,
+          "final_correct": 4,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 2
+        },
+        {
+          "label": 5,
+          "examples": 198,
+          "raw_top1_correct": 191,
+          "final_correct": 195,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 7
+        },
+        {
+          "label": 6,
+          "examples": 24,
+          "raw_top1_correct": 24,
+          "final_correct": 24,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "legacy",
+      "profile": "hum",
+      "failed_quality": false
+    },
+    {
+      "examples": 270,
+      "raw_confusion": [
+        [
+          10,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          10,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          0,
+          1,
+          192,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "final_confusion": [
+        [
+          10,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          10,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          0,
+          0,
+          194,
+          2
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "commands": {
+        "examples": 48,
+        "raw_top1_correct": 44,
+        "final_correct": 44,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 4,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 222,
+        "raw_false_activation": 4,
+        "final_false_activation": 2,
+        "command_rejected": 2
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 12,
+          "raw_top1_correct": 10,
+          "final_correct": 10,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 2
+        },
+        {
+          "label": 1,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 12,
+          "raw_top1_correct": 10,
+          "final_correct": 10,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 2
+        },
+        {
+          "label": 3,
+          "examples": 15,
+          "raw_top1_correct": 15,
+          "final_correct": 15,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 4,
+          "examples": 6,
+          "raw_top1_correct": 6,
+          "final_correct": 6,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 198,
+          "raw_top1_correct": 192,
+          "final_correct": 194,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 6
+        },
+        {
+          "label": 6,
+          "examples": 24,
+          "raw_top1_correct": 24,
+          "final_correct": 24,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "legacy",
+      "profile": "noise",
+      "failed_quality": false
+    },
+    {
+      "examples": 270,
+      "raw_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          1,
+          196,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "final_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          14,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          0,
+          197,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "commands": {
+        "examples": 48,
+        "raw_top1_correct": 48,
+        "final_correct": 47,
+        "correct_top1_rejected": 1,
+        "wrong_top1": 0,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 222,
+        "raw_false_activation": 2,
+        "final_false_activation": 1,
+        "command_rejected": 1
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 3,
+          "examples": 15,
+          "raw_top1_correct": 15,
+          "final_correct": 14,
+          "correct_top1_rejected": 1,
+          "wrong_top1": 0
+        },
+        {
+          "label": 4,
+          "examples": 6,
+          "raw_top1_correct": 6,
+          "final_correct": 6,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 198,
+          "raw_top1_correct": 196,
+          "final_correct": 197,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 2
+        },
+        {
+          "label": 6,
+          "examples": 24,
+          "raw_top1_correct": 24,
+          "final_correct": 24,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": {
+        "minimum": 1264,
+        "median": 1264.0,
+        "maximum": 1264
+      },
+      "domain": "legacy",
+      "profile": "early",
+      "failed_quality": false
+    },
+    {
+      "examples": 270,
+      "raw_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          197,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "final_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          12,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          6,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          198,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          24
+        ]
+      ],
+      "commands": {
+        "examples": 48,
+        "raw_top1_correct": 48,
+        "final_correct": 48,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 0,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 222,
+        "raw_false_activation": 1,
+        "final_false_activation": 0,
+        "command_rejected": 1
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 3,
+          "examples": 15,
+          "raw_top1_correct": 15,
+          "final_correct": 15,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 4,
+          "examples": 6,
+          "raw_top1_correct": 6,
+          "final_correct": 6,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 198,
+          "raw_top1_correct": 197,
+          "final_correct": 198,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 6,
+          "examples": 24,
+          "raw_top1_correct": 24,
+          "final_correct": 24,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "legacy",
+      "profile": "late",
+      "failed_quality": false
+    },
+    {
+      "examples": 266,
+      "raw_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          6,
+          0,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          11,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          1,
+          3,
+          179,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "final_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          6,
+          0,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          11,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          3,
+          182,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "commands": {
+        "examples": 60,
+        "raw_top1_correct": 53,
+        "final_correct": 53,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 7,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 206,
+        "raw_false_activation": 7,
+        "final_false_activation": 4,
+        "command_rejected": 3
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 12,
+          "raw_top1_correct": 6,
+          "final_correct": 6,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 6
+        },
+        {
+          "label": 3,
+          "examples": 12,
+          "raw_top1_correct": 11,
+          "final_correct": 11,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 4,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 186,
+          "raw_top1_correct": 179,
+          "final_correct": 182,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 7
+        },
+        {
+          "label": 6,
+          "examples": 20,
+          "raw_top1_correct": 20,
+          "final_correct": 20,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "held-neural",
+      "profile": "clean",
+      "failed_quality": false
+    },
+    {
+      "examples": 266,
+      "raw_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          6,
+          0,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          11,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          3,
+          180,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "final_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          6,
+          0,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          11,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          3,
+          182,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "commands": {
+        "examples": 60,
+        "raw_top1_correct": 53,
+        "final_correct": 53,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 7,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 206,
+        "raw_false_activation": 6,
+        "final_false_activation": 4,
+        "command_rejected": 2
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 12,
+          "raw_top1_correct": 6,
+          "final_correct": 6,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 6
+        },
+        {
+          "label": 3,
+          "examples": 12,
+          "raw_top1_correct": 11,
+          "final_correct": 11,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 4,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 186,
+          "raw_top1_correct": 180,
+          "final_correct": 182,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 6
+        },
+        {
+          "label": 6,
+          "examples": 20,
+          "raw_top1_correct": 20,
+          "final_correct": 20,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "held-neural",
+      "profile": "quiet",
+      "failed_quality": false
+    },
+    {
+      "examples": 266,
+      "raw_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          6,
+          0,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          11,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          1,
+          3,
+          179,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "final_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          6,
+          0,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          11,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          3,
+          182,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "commands": {
+        "examples": 60,
+        "raw_top1_correct": 53,
+        "final_correct": 53,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 7,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 206,
+        "raw_false_activation": 7,
+        "final_false_activation": 4,
+        "command_rejected": 3
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 12,
+          "raw_top1_correct": 6,
+          "final_correct": 6,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 6
+        },
+        {
+          "label": 3,
+          "examples": 12,
+          "raw_top1_correct": 11,
+          "final_correct": 11,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 4,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 186,
+          "raw_top1_correct": 179,
+          "final_correct": 182,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 7
+        },
+        {
+          "label": 6,
+          "examples": 20,
+          "raw_top1_correct": 20,
+          "final_correct": 20,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "held-neural",
+      "profile": "dc",
+      "failed_quality": false
+    },
+    {
+      "examples": 266,
+      "raw_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          7,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          11,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          3,
+          180,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "final_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          7,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          11,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          3,
+          181,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "commands": {
+        "examples": 60,
+        "raw_top1_correct": 54,
+        "final_correct": 54,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 6,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 206,
+        "raw_false_activation": 6,
+        "final_false_activation": 5,
+        "command_rejected": 1
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 12,
+          "raw_top1_correct": 7,
+          "final_correct": 7,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 5
+        },
+        {
+          "label": 3,
+          "examples": 12,
+          "raw_top1_correct": 11,
+          "final_correct": 11,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 4,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 186,
+          "raw_top1_correct": 180,
+          "final_correct": 181,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 6
+        },
+        {
+          "label": 6,
+          "examples": 20,
+          "raw_top1_correct": 20,
+          "final_correct": 20,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "held-neural",
+      "profile": "drift",
+      "failed_quality": false
+    },
+    {
+      "examples": 266,
+      "raw_confusion": [
+        [
+          11,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          6,
+          0,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          11,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          10,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          3,
+          3,
+          178,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "final_confusion": [
+        [
+          11,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          6,
+          0,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          11,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          10,
+          2,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          3,
+          181,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "commands": {
+        "examples": 60,
+        "raw_top1_correct": 50,
+        "final_correct": 50,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 10,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 206,
+        "raw_false_activation": 8,
+        "final_false_activation": 5,
+        "command_rejected": 3
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 12,
+          "raw_top1_correct": 11,
+          "final_correct": 11,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 1,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 12,
+          "raw_top1_correct": 6,
+          "final_correct": 6,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 6
+        },
+        {
+          "label": 3,
+          "examples": 12,
+          "raw_top1_correct": 11,
+          "final_correct": 11,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 4,
+          "examples": 12,
+          "raw_top1_correct": 10,
+          "final_correct": 10,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 2
+        },
+        {
+          "label": 5,
+          "examples": 186,
+          "raw_top1_correct": 178,
+          "final_correct": 181,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 8
+        },
+        {
+          "label": 6,
+          "examples": 20,
+          "raw_top1_correct": 20,
+          "final_correct": 20,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "held-neural",
+      "profile": "hum",
+      "failed_quality": true
+    },
+    {
+      "examples": 266,
+      "raw_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          11,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          6,
+          0,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          11,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          7,
+          0,
+          5,
+          173,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "final_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          11,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          6,
+          0,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          11,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          6,
+          0,
+          2,
+          178,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "commands": {
+        "examples": 60,
+        "raw_top1_correct": 52,
+        "final_correct": 52,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 8,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 206,
+        "raw_false_activation": 13,
+        "final_false_activation": 8,
+        "command_rejected": 5
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 12,
+          "raw_top1_correct": 11,
+          "final_correct": 11,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 2,
+          "examples": 12,
+          "raw_top1_correct": 6,
+          "final_correct": 6,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 6
+        },
+        {
+          "label": 3,
+          "examples": 12,
+          "raw_top1_correct": 11,
+          "final_correct": 11,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 4,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 186,
+          "raw_top1_correct": 173,
+          "final_correct": 178,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 13
+        },
+        {
+          "label": 6,
+          "examples": 20,
+          "raw_top1_correct": 20,
+          "final_correct": 20,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "held-neural",
+      "profile": "noise",
+      "failed_quality": true
+    },
+    {
+      "examples": 266,
+      "raw_confusion": [
+        [
+          11,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          11,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          7,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          11,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          11,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          2,
+          1,
+          3,
+          178,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "final_confusion": [
+        [
+          11,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          11,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          7,
+          0,
+          0,
+          5,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          11,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          11,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          3,
+          181,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "commands": {
+        "examples": 60,
+        "raw_top1_correct": 51,
+        "final_correct": 51,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 9,
+        "wrong_command_accepted": 1
+      },
+      "negatives": {
+        "examples": 206,
+        "raw_false_activation": 7,
+        "final_false_activation": 4,
+        "command_rejected": 3
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 12,
+          "raw_top1_correct": 11,
+          "final_correct": 11,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 1,
+          "examples": 12,
+          "raw_top1_correct": 11,
+          "final_correct": 11,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 2,
+          "examples": 12,
+          "raw_top1_correct": 7,
+          "final_correct": 7,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 5
+        },
+        {
+          "label": 3,
+          "examples": 12,
+          "raw_top1_correct": 11,
+          "final_correct": 11,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 4,
+          "examples": 12,
+          "raw_top1_correct": 11,
+          "final_correct": 11,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 5,
+          "examples": 186,
+          "raw_top1_correct": 178,
+          "final_correct": 181,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 8
+        },
+        {
+          "label": 6,
+          "examples": 20,
+          "raw_top1_correct": 20,
+          "final_correct": 20,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "held-neural",
+      "profile": "early",
+      "failed_quality": false
+    },
+    {
+      "examples": 266,
+      "raw_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          6,
+          0,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          10,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          3,
+          2,
+          4,
+          175,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "final_confusion": [
+        [
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          6,
+          0,
+          0,
+          6,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          10,
+          0,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          12,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          0,
+          3,
+          180,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          20
+        ]
+      ],
+      "commands": {
+        "examples": 60,
+        "raw_top1_correct": 52,
+        "final_correct": 52,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 8,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 206,
+        "raw_false_activation": 11,
+        "final_false_activation": 6,
+        "command_rejected": 5
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 12,
+          "raw_top1_correct": 6,
+          "final_correct": 6,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 6
+        },
+        {
+          "label": 3,
+          "examples": 12,
+          "raw_top1_correct": 10,
+          "final_correct": 10,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 2
+        },
+        {
+          "label": 4,
+          "examples": 12,
+          "raw_top1_correct": 12,
+          "final_correct": 12,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 186,
+          "raw_top1_correct": 175,
+          "final_correct": 180,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 11
+        },
+        {
+          "label": 6,
+          "examples": 20,
+          "raw_top1_correct": 20,
+          "final_correct": 20,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "held-neural",
+      "profile": "late",
+      "failed_quality": false
+    },
+    {
+      "examples": 65,
+      "raw_confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "final_confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "commands": {
+        "examples": 15,
+        "raw_top1_correct": 15,
+        "final_correct": 15,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 0,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 50,
+        "raw_false_activation": 0,
+        "final_false_activation": 0,
+        "command_rejected": 0
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 3,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 4,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 33,
+          "raw_top1_correct": 33,
+          "final_correct": 33,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 6,
+          "examples": 17,
+          "raw_top1_correct": 17,
+          "final_correct": 17,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "familiar-neural",
+      "profile": "clean",
+      "failed_quality": false
+    },
+    {
+      "examples": 65,
+      "raw_confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "final_confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "commands": {
+        "examples": 15,
+        "raw_top1_correct": 15,
+        "final_correct": 15,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 0,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 50,
+        "raw_false_activation": 0,
+        "final_false_activation": 0,
+        "command_rejected": 0
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 3,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 4,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 33,
+          "raw_top1_correct": 33,
+          "final_correct": 33,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 6,
+          "examples": 17,
+          "raw_top1_correct": 17,
+          "final_correct": 17,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "familiar-neural",
+      "profile": "quiet",
+      "failed_quality": false
+    },
+    {
+      "examples": 65,
+      "raw_confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "final_confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "commands": {
+        "examples": 15,
+        "raw_top1_correct": 15,
+        "final_correct": 15,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 0,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 50,
+        "raw_false_activation": 0,
+        "final_false_activation": 0,
+        "command_rejected": 0
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 3,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 4,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 33,
+          "raw_top1_correct": 33,
+          "final_correct": 33,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 6,
+          "examples": 17,
+          "raw_top1_correct": 17,
+          "final_correct": 17,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "familiar-neural",
+      "profile": "dc",
+      "failed_quality": false
+    },
+    {
+      "examples": 65,
+      "raw_confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "final_confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "commands": {
+        "examples": 15,
+        "raw_top1_correct": 15,
+        "final_correct": 15,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 0,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 50,
+        "raw_false_activation": 0,
+        "final_false_activation": 0,
+        "command_rejected": 0
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 3,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 4,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 33,
+          "raw_top1_correct": 33,
+          "final_correct": 33,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 6,
+          "examples": 17,
+          "raw_top1_correct": 17,
+          "final_correct": 17,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "familiar-neural",
+      "profile": "drift",
+      "failed_quality": false
+    },
+    {
+      "examples": 65,
+      "raw_confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "final_confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "commands": {
+        "examples": 15,
+        "raw_top1_correct": 15,
+        "final_correct": 15,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 0,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 50,
+        "raw_false_activation": 0,
+        "final_false_activation": 0,
+        "command_rejected": 0
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 3,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 4,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 33,
+          "raw_top1_correct": 33,
+          "final_correct": 33,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 6,
+          "examples": 17,
+          "raw_top1_correct": 17,
+          "final_correct": 17,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "familiar-neural",
+      "profile": "hum",
+      "failed_quality": false
+    },
+    {
+      "examples": 65,
+      "raw_confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          32,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "final_confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          0,
+          32,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "commands": {
+        "examples": 15,
+        "raw_top1_correct": 14,
+        "final_correct": 13,
+        "correct_top1_rejected": 1,
+        "wrong_top1": 1,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 50,
+        "raw_false_activation": 1,
+        "final_false_activation": 1,
+        "command_rejected": 0
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 3,
+          "raw_top1_correct": 2,
+          "final_correct": 2,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 2,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 3,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 2,
+          "correct_top1_rejected": 1,
+          "wrong_top1": 0
+        },
+        {
+          "label": 4,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 33,
+          "raw_top1_correct": 32,
+          "final_correct": 32,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 6,
+          "examples": 17,
+          "raw_top1_correct": 17,
+          "final_correct": 17,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": {
+        "minimum": 138,
+        "median": 138.0,
+        "maximum": 138
+      },
+      "domain": "familiar-neural",
+      "profile": "noise",
+      "failed_quality": false
+    },
+    {
+      "examples": 65,
+      "raw_confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          32,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "final_confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0,
+          0,
+          32,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "commands": {
+        "examples": 15,
+        "raw_top1_correct": 13,
+        "final_correct": 13,
+        "correct_top1_rejected": 0,
+        "wrong_top1": 2,
+        "wrong_command_accepted": 2
+      },
+      "negatives": {
+        "examples": 50,
+        "raw_false_activation": 1,
+        "final_false_activation": 1,
+        "command_rejected": 0
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 3,
+          "raw_top1_correct": 2,
+          "final_correct": 2,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 3,
+          "examples": 3,
+          "raw_top1_correct": 2,
+          "final_correct": 2,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 4,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 33,
+          "raw_top1_correct": 32,
+          "final_correct": 32,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 1
+        },
+        {
+          "label": 6,
+          "examples": 17,
+          "raw_top1_correct": 17,
+          "final_correct": 17,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": null,
+      "domain": "familiar-neural",
+      "profile": "early",
+      "failed_quality": true
+    },
+    {
+      "examples": 65,
+      "raw_confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          3,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "final_confusion": [
+        [
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          3,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          33,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          17
+        ]
+      ],
+      "commands": {
+        "examples": 15,
+        "raw_top1_correct": 15,
+        "final_correct": 14,
+        "correct_top1_rejected": 1,
+        "wrong_top1": 0,
+        "wrong_command_accepted": 0
+      },
+      "negatives": {
+        "examples": 50,
+        "raw_false_activation": 0,
+        "final_false_activation": 0,
+        "command_rejected": 0
+      },
+      "by_class": [
+        {
+          "label": 0,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 1,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 2,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 3,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 2,
+          "correct_top1_rejected": 1,
+          "wrong_top1": 0
+        },
+        {
+          "label": 4,
+          "examples": 3,
+          "raw_top1_correct": 3,
+          "final_correct": 3,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 5,
+          "examples": 33,
+          "raw_top1_correct": 33,
+          "final_correct": 33,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        },
+        {
+          "label": 6,
+          "examples": 17,
+          "raw_top1_correct": 17,
+          "final_correct": 17,
+          "correct_top1_rejected": 0,
+          "wrong_top1": 0
+        }
+      ],
+      "correct_rejection_margins_q10": {
+        "minimum": 1308,
+        "median": 1308.0,
+        "maximum": 1308
+      },
+      "domain": "familiar-neural",
+      "profile": "late",
+      "failed_quality": false
+    }
+  ],
+  "examples": 4808,
+  "group_confusions_matched": 24,
+  "scalar_command_partitions_matched": 24,
+  "model_and_original_inputs_unchanged": true,
+  "training_called": false,
+  "thresholds_changed": false,
+  "final_data_used": false,
+  "native_c_tested": false,
+  "target_built": false,
+  "device_changed": false,
+  "vast_usd": 0,
+  "additional_verification_not_tdd": true,
+  "elapsed_seconds": 53.713
+}
