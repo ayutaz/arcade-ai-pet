@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "scope": "fixed_checkpoint_development_class_rejection",
+  "weights_sha256": "dfcc3aa03494b7bd96670c2c3b0cbb1e5e6416ccd91f2fb8f00d342a913bf22b",
+  "model_source_commit": "ce95ed5cd23ca58bb062174cb349be51c890763e",
+  "validation_logits_sha256": "e81d7f77689fa8e377b0036e59346dffbda1bd967f82335b2042becc3c5c6ca8",
+  "validation_examples": 2680,
+  "validation_domain_profiles": 16,
+  "validation_pooled_profiles": 8,
+  "initial_threshold": 2531,
+  "starts": [
+    "existing_global_threshold",
+    "zeros"
+  ],
+  "max_passes": 4,
+  "search": "bounded_coordinate_class_margins_v1",
+  "threshold_count": 5,
+  "threshold_min": 0,
+  "threshold_max": 4096,
+  "threshold_bytes": 20,
+  "weights_bytes": 23972,
+  "total_numeric_bytes": 23992,
+  "maximum_numeric_bytes": 24576,
+  "minimum_domain_macro_f1": 0.9,
+  "maximum_domain_false_activation_rate": 0.05,
+  "minimum_domain_command_recall": 0.8,
+  "weights_retrained": false,
+  "calibration_started": false,
+  "final_used": false,
+  "keyword_specific_rule": false,
+  "device_tested": false,
+  "vast_usd": 0
+}
