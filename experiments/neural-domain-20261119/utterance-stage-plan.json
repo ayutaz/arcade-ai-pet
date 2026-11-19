@@ -1,0 +1,72 @@
+{
+  "scope": "development_utterance_stage_content_audit",
+  "date": "2026-11-19",
+  "audit_started": false,
+  "condition_ids": [
+    "extension-02",
+    "extension-03",
+    "extension-13",
+    "extension-14"
+  ],
+  "prompt": "まって",
+  "control_prompt": "こんにちは",
+  "variants": 3,
+  "stage_expected_counts": {
+    "source": 4,
+    "resampled": 4,
+    "trimmed": 4,
+    "augmented": 12,
+    "conditioned": 12,
+    "cropped": 12,
+    "control-source": 4
+  },
+  "maximum_asr_calls": 52,
+  "maximum_cpu_seconds": 600,
+  "asr_device": "cpu",
+  "asr_compute_type": "int8",
+  "asr_cpu_threads": 2,
+  "asr_parameters": {
+    "language": "ja",
+    "beam_size": 5,
+    "condition_on_previous_text": false,
+    "vad_filter": false,
+    "temperature": 0.0,
+    "max_new_tokens": 32
+  },
+  "asr_audit_peak": 16384,
+  "asr_receives_prompt_or_label": false,
+  "asr_used_for_original_source_acceptance": true,
+  "human_transcript_verified": false,
+  "manifest_sha256": "5814cac6b2884f2c84e59a00e479b4aba0bee3ab00aff0fec61f3e623559b214",
+  "asr_asset_sha256": {
+    "model.bin": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+    "config.json": "b55496ac7940a7ae47d2c01eab40edfd8701feec1229d9cce3b40014383fb828",
+    "tokenizer.json": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab",
+    "vocabulary.txt": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913"
+  },
+  "provider_lock_sha256": "ebe2d03280ab0032b11dd20913c37f20854280825a69d8fd2f321ff1a6c3da54",
+  "versions": {
+    "numpy": "2.3.5",
+    "faster-whisper": "1.2.1",
+    "ctranslate2": "4.9.0",
+    "scipy": "1.18.1"
+  },
+  "assembly_source_sha256": {
+    "arcade_ai_pet/utterance_stages.py": "01e633e83e687ca8c9070d636bca94c645ab1ea0b50de9bfddeed7f789285bfe",
+    "arcade_ai_pet/host_teacher.py": "0255834edc5d25e076a4aca720f2fcfb090055d5d397a10ece9c355eaf0098c4",
+    "arcade_ai_pet/generated_audio.py": "3b39aea3ed5f7c4b16df277e22933bb4c3bd05a669b55fb6d79ec692711ede16",
+    "arcade_ai_pet/data.py": "0f89381b03935645e527941701f88d0949e2129e1c6b3d5b63539bef340726e8",
+    "arcade_ai_pet/logmel_frontend.py": "23390bc96ae98404feeff3f28e11a8af07e3693a76c70e7dc78104a9191bdf19",
+    "arcade_ai_pet/channel_frontend.py": "c02e259b04345b03d34335414c909be043f46da5d0196f48f1f5557744708d4f",
+    "arcade_ai_pet/channel_training.py": "67e1d5cdff53ae1cc8d5e575c9a1ae4f81e99fee74cb653207a6e566d06fb475",
+    "arcade_ai_pet/channel_robustness.py": "474ce709069c9ed02a63f877ece69892f76c483f8dd753060d673da919089daf"
+  },
+  "training_allowed": false,
+  "threshold_changes_allowed": false,
+  "drop_or_relabel_evaluation_allowed": false,
+  "final_data_allowed": false,
+  "device_pcm_allowed": false,
+  "device_changes_allowed": false,
+  "external_audio_transfer_allowed": false,
+  "vast_usd": 0
+}
