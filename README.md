@@ -19,6 +19,10 @@ On the later diagnostic firmware, an operator-led 30-trial session completed:
 **6/15 commands correct**, 0/15 false activations and no native errors.
 The 12/15 acceptance target is still unmet. [Human trial summary](docs/voice-validation.md#最新の実声セッション).
 
+A later [experimental candidate](docs/reserved-final-evaluation.md) passed its
+development checks but failed reserved synthetic conditions (lowest macro F1 0.763).
+It has not replaced the device model.
+
 The [learned movement policy](models/behavior-v1/model-card.md) also runs in integer C.
 On 64 unseen collection boards it averaged 8.64 points versus 0.97 for a seeded random policy.
 Its parameters occupy 472 bytes; this is a host benchmark, not handheld performance.
