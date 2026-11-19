@@ -27,9 +27,10 @@ def _source_hashes():
 
 
 def train_candidate(domains, output, *, holdout_seed, epochs=30, batch_size=256, neural_weight=2,
-                    max_passes=4, device='cpu', max_steps=8000, max_seconds=900, frontend='context-logmel64', frozen_base=None):
+                    max_passes=4, device='cpu', max_steps=8000, max_seconds=900, frontend='context-logmel64', frozen_base=None, time_pool=False):
     output = real_path(output)
     if (type(frontend) is not str or frontend not in ('context-logmel64','context-logmel64-envelope') or
+        type(time_pool) is not bool or time_pool and (frontend!='context-logmel64-envelope' or frozen_base is not None) or
         output.exists() or type(epochs) is not int or not 1 <= epochs <= 1000 or
         type(batch_size) is not int or not 1 <= batch_size <= 1024 or
         type(neural_weight) is not int or not 1 <= neural_weight <= 8 or
@@ -39,6 +40,8 @@ def train_candidate(domains, output, *, holdout_seed, epochs=30, batch_size=256,
         type(max_seconds) not in (int, float) or not math.isfinite(max_seconds) or not 0 < max_seconds <= 86400):
         raise ValueError('fresh output and bounded local DS-CNN recipe required')
     mode = dict(envelope=True) if frontend == 'context-logmel64-envelope' else {}
+    if time_pool:
+        mode['time_pool'] = True
     if frozen_base is not None and (not mode or device != 'cpu'):
         raise ValueError('frozen prefix requires envelope frontend and CPU')
     base_identity = frozen_digest(frozen_base) if frozen_base is not None else None
@@ -89,7 +92,7 @@ def train_candidate(domains, output, *, holdout_seed, epochs=30, batch_size=256,
     size = weights_bytes(layers, **mode)
     if size + 20 > 24576:
         raise ValueError('24KiB numeric model budget')
-    result.update(scope='development_logmel_dscnn_not_final', classifier='logmel-dscnn-envelope-v1' if mode else 'logmel-dscnn-v1', frontend=frontend,
+    result.update(scope='development_logmel_dscnn_not_final', classifier='logmel-dscnn-timepool-v1' if time_pool else 'logmel-dscnn-envelope-v1' if mode else 'logmel-dscnn-v1', frontend=frontend,
                   thresholds_q10=calibrated['thresholds_q10'], domain_profiles=rows, pooled_profiles=pooled,
                   selection_domains=['legacy_validation', 'held_neural_validation'],
                   additional_required_regression=['original_neural_validation'],
@@ -103,6 +106,8 @@ def train_candidate(domains, output, *, holdout_seed, epochs=30, batch_size=256,
                   neural_weight=neural_weight, noise_replicas=5, hum_replicas=3, noise_mode='fresh',
                   weights_bytes=size, numeric_bytes=size+20, frozen=False, final_evaluated=False,
                   device_tested=False, real_voice_tested=False, vast_usd=0)
+    if time_pool:
+        result.update(time_pool_bins=4, time_pool_integer_divisor=4)
     if frozen_base is not None:
         if frozen_digest(frozen_base) != base_identity:
             raise ValueError('frozen base changed during candidate calibration')
