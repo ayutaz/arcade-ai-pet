@@ -65,6 +65,8 @@ uv run --locked --group train python -m unittest discover -s tests/training -v
 
 ## 残る工程
 
+後続の[新形式freeze/最終評価API](decision-freeze.md)を追加した。以下の未完了事項はC照合時点の記録。実際の候補固定と最終評価は契約テストとは別に実施する。
+
 固定処理と未使用の最終4条件へのbindingをTDDで実装し、候補と処理を固定した後に独立最終データを開く。最終結果を見た再校正はしない。合格時のみtarget build/資源確認/具体的なimageレビューへ進む。
 
 実機は従来a553/16app、実声6/15のまま。新FWの適用、録音の外部取得、PSRAM/GPIO/security変更は行っていない。Vast.ai/API課金0米ドル。
