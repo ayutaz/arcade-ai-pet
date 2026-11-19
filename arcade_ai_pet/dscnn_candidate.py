@@ -10,7 +10,8 @@ from .logmel_arrays import make_arrays as load_legacy_arrays
 from .dscnn_training import fit
 from .dscnn_residual_training import fit as fit_residual
 from .dscnn_residual import frozen_digest, assert_frozen
-from .dscnn_model import scores, weights_bytes
+from .dscnn_model import scores, weights_bytes, validate
+from . import dscnn_probe as probe
 from .class_rejection import calibrate, decisions
 from .channel_robustness import PROFILES, measure
 
@@ -19,18 +20,31 @@ SOURCES = (*SHARED_SOURCES, 'arcade_ai_pet/logmel_frontend.py', 'arcade_ai_pet/l
            'arcade_ai_pet/dscnn_model.py', 'arcade_ai_pet/dscnn_quantize.py',
            'arcade_ai_pet/dscnn_training.py', 'arcade_ai_pet/dscnn_candidate.py',
            'arcade_ai_pet/envelope_frontend.py', 'arcade_ai_pet/dscnn_residual.py',
-           'arcade_ai_pet/dscnn_residual_training.py')
+           'arcade_ai_pet/dscnn_residual_training.py', 'arcade_ai_pet/dscnn_probe.py')
 
 
 def _source_hashes():
     return {name: digest(ROOT / name) for name in SOURCES}
 
 
+def _check_float_checkpoint(state, layers, result, mode, device):
+    if (state is None or result.get('float_probe_enabled') is not True or
+        result.get('float_probe_device') != device or
+        probe.state_digest(state, **mode) != result.get('float_state_sha256')):
+        raise ValueError('float checkpoint identity or backend changed')
+    validate(layers, **mode)
+    expected = probe.quantized_state(state, **mode)
+    if any(not np.array_equal(old[key], new[key]) for old, new in zip(expected, layers, strict=True)
+           for key in ('weight', 'bias', 'shift')):
+        raise ValueError('float checkpoint does not bind the integer layers')
+
+
 def train_candidate(domains, output, *, holdout_seed, epochs=30, batch_size=256, neural_weight=2,
-                    max_passes=4, device='cpu', max_steps=8000, max_seconds=900, frontend='context-logmel64', frozen_base=None, time_pool=False):
+                    max_passes=4, device='cpu', max_steps=8000, max_seconds=900, frontend='context-logmel64', frozen_base=None, time_pool=False, float_probe=False):
     output = real_path(output)
     if (type(frontend) is not str or frontend not in ('context-logmel64','context-logmel64-envelope') or
         type(time_pool) is not bool or time_pool and (frontend!='context-logmel64-envelope' or frozen_base is not None) or
+        type(float_probe) is not bool or float_probe and frozen_base is not None or
         output.exists() or type(epochs) is not int or not 1 <= epochs <= 1000 or
         type(batch_size) is not int or not 1 <= batch_size <= 1024 or
         type(neural_weight) is not int or not 1 <= neural_weight <= 8 or
@@ -66,9 +80,17 @@ def train_candidate(domains, output, *, holdout_seed, epochs=30, batch_size=256,
     groups = np.asarray([domain * 8 + PROFILES.index(profile) for domain, row in enumerate(primary) for profile in row['profiles']], dtype=np.int64)
     fitter = fit_residual if frozen_base is not None else fit
     extra = dict(base_layers=frozen_base) if frozen_base is not None else {}
+    if float_probe:
+        extra['float_probe'] = True
     result = fitter(x, y, vx, vy, groups, epochs=epochs, batch_size=batch_size, seed=42,
                  device=device, max_steps=max_steps, max_seconds=max_seconds, **mode, **extra)
     layers = result.pop('layers')
+    has_float_state = 'float_state' in result
+    float_state = result.pop('float_state', None)
+    if float_probe:
+        _check_float_checkpoint(float_state, layers, result, mode, device)
+    elif has_float_state:
+        raise ValueError('undeclared float checkpoint refused')
     if frozen_base is not None:
         if frozen_digest(frozen_base) != base_identity:
             raise ValueError('frozen base changed during candidate fit')
@@ -114,8 +136,15 @@ def train_candidate(domains, output, *, holdout_seed, epochs=30, batch_size=256,
         assert_frozen(frozen_base, layers)
         result.update(base_prefix_unchanged=True, base_numeric_sha256=base_identity,
                       learning_method='frozen_prefix_auxiliary_qat')
+    if float_probe:
+        _check_float_checkpoint(float_state, layers, result, mode, device)
     output.mkdir(parents=True, mode=0o700)
     np.savez(output / 'weights.npz', **{f'{field}{i}': layer[field] for i, layer in enumerate(layers) for field in ('weight', 'bias', 'shift')})
     result['weights_sha256'] = digest(output / 'weights.npz')
+    if float_probe:
+        checkpoint = output / 'float-checkpoint.npz'
+        np.savez(checkpoint, **float_state)
+        checkpoint.chmod(0o600)
+        result.update(float_checkpoint_sha256=digest(checkpoint), float_checkpoint_arrays=len(float_state))
     (output / 'validation.json').write_text(json.dumps(result, indent=2) + '\n')
     return result

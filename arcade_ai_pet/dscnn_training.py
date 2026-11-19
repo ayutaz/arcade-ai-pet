@@ -2,6 +2,7 @@
 import numpy as np
 from .dscnn_model import SHAPES, STRIDES, GROUPS, validate
 from .dscnn_quantize import fold_batch_norm, quantize_layer
+from . import dscnn_probe as probe
 
 
 def build_model(*, envelope=False, time_pool=False):
@@ -56,10 +57,10 @@ from .domain_training import _inputs, validation_rank, select_threshold, shortli
 
 
 def fit(x, y, vx, vy, groups, *, epochs=30, batch_size=256, seed=42,
-        device='cpu', max_steps=8000, max_seconds=900, envelope=False, time_pool=False):
+        device='cpu', max_steps=8000, max_seconds=900, envelope=False, time_pool=False, float_probe=False):
     import torch
     started = monotonic()
-    if (type(envelope) is not bool or type(time_pool) is not bool or time_pool and not envelope or
+    if (type(float_probe) is not bool or type(envelope) is not bool or type(time_pool) is not bool or time_pool and not envelope or
         type(epochs) is not int or not 1 <= epochs <= 1000 or
         type(batch_size) is not int or not 1 <= batch_size <= 1024 or
         type(seed) is not int or not 0 <= seed < 2**31 or
@@ -117,8 +118,15 @@ def fit(x, y, vx, vy, groups, *, epochs=30, batch_size=256, seed=42,
             if epoch % 5 == 0 or epoch == epochs - 1:
                 model.eval(); layers = quantize(model, **mode)
                 logits = scores(vx, layers, **mode)
-                checkpoints.append(dict(layers=layers, epoch=epoch+1,
-                                        rank=validation_rank(vy, logits.argmax(1), groups)))
+                row = dict(layers=layers, epoch=epoch+1,
+                           rank=validation_rank(vy, logits.argmax(1), groups))
+                if float_probe:
+                    state = probe.capture_state(model, **mode)
+                    floating = probe.float_scores(model, vx, device=device, **mode)
+                    row.update(float_state=state, float_state_sha256=probe.state_digest(state, **mode),
+                               float_logits_sha256=probe.logits_digest(floating),
+                               float_probe=probe.compare(vy, floating, logits, groups))
+                checkpoints.append(row)
                 check_time()
         candidates = shortlist(checkpoints)
         best = best_key = None
@@ -130,12 +138,19 @@ def fit(x, y, vx, vy, groups, *, epochs=30, batch_size=256, seed=42,
             if best_key is None or key > best_key:
                 best_key = key
                 best = dict(layers=row['layers'], selected_epoch=row['epoch'], checkpoint_threshold_q10=threshold)
+                if float_probe:
+                    best.update(float_state=row['float_state'], float_state_sha256=row['float_state_sha256'],
+                                float_logits_sha256=row['float_logits_sha256'], float_probe_selected=row['float_probe'])
             check_time()
         best.update(seed=seed, epochs=epochs, batch_size=batch_size, training_device=device,
                     training_steps=steps, checkpoint_candidates_evaluated=len(candidates),
                     first_batch_loss=first_loss, final_batch_loss=last_loss,
                     fit_elapsed_seconds=monotonic()-started, weights_bytes=weights_bytes(best['layers'], **mode),
                     selection_metric='calibrated_worst_development_domain_profile')
+        if float_probe:
+            best.update(float_probe_enabled=True, float_probe_device=device,
+                        float_probe_checkpoints=[dict(epoch=row['epoch'], float_state_sha256=row['float_state_sha256'],
+                            float_logits_sha256=row['float_logits_sha256'], comparison=row['float_probe']) for row in checkpoints])
         return best
     finally:
         del model, optimizer, tx, ty
