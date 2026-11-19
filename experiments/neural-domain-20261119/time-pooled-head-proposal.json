@@ -1,0 +1,39 @@
+{
+  "scope": "time_pooled_head_design_not_training_recipe",
+  "date": "2026-11-19",
+  "implemented": false,
+  "training_started": false,
+  "recipe_fixed": false,
+  "input_features": 2145,
+  "backbone_layers": 5,
+  "backbone_output_shape": [
+    24,
+    16,
+    8
+  ],
+  "pool_time_from": 16,
+  "pool_time_to": 4,
+  "pool_kernel": [
+    4,
+    1
+  ],
+  "proposed_integer_pool": "nonnegative Q5 sum of 4 time cells then floor divide by 4",
+  "head_input_features": 865,
+  "head_shape": [
+    7,
+    865
+  ],
+  "estimated_numeric_bytes_with_five_thresholds": 7507,
+  "estimated_training_parameters": 7006,
+  "estimate_not_measured": true,
+  "current_head_weights": 22183,
+  "weights_removed": 16128,
+  "hypothesis": "reduce absolute temporal-position dependence while retaining four coarse time regions and band positions",
+  "original_prefix_and_dataset_to_keep": true,
+  "all_quality_gates_to_keep": true,
+  "final_data_allowed_for_fit": false,
+  "full_retraining_expected": true,
+  "baseline_weights_are_not_adopted": true,
+  "native_c_or_device_verified": false,
+  "vast_usd": 0
+}
