@@ -24,8 +24,8 @@ Open JTalkの合成音声と、Irodori VoiceDesignで生成/独立ASR点検し�
 ```python
 from pathlib import Path
 import numpy as np
-from arcade_ai_pet.dscnn_assets import DscnnNativeAssets
-with DscnnNativeAssets(Path("models/kws-logmel-v1")) as model:
+from arcade_ai_pet.logmel_release import FrozenLogmelModel
+with FrozenLogmelModel(Path("models/kws-logmel-v1")) as model:
     label, logits = model.predict(model.extract(np.zeros(32000, np.int16)))
     assert label == 6  # silence; this is a host smoke check
 ```
@@ -35,3 +35,7 @@ ESP-IDF側は公開OSの明示選択[log-mel backend](https://github.com/ayutaz/
 ## 条件
 
 重み・数値C表は保守的に[CC BY 3.0と帰属](LICENSE.txt)を添えて公開する。数学table/手書きcodeはApache-2.0。Irodori/codecはMIT表記と追加の倫理条件を固定model cardで点検済みで、人物名/参照録音/意図的な声まね/誤認目的を使用していない。上流の原本重み/音声PCMは再配布しない。[各データの条件](../../docs/data-license.md)。
+
+## 配布時の数学table
+
+数学tableは固定SHA `bd9ff5df6f6033179122c5f957bb6cbeaf1445d643dc1ef861153f6bfa0da110`のbyteを使用する。CPU/NumPyの数学関数から再生成した値は末尾bitが変わる場合があるため、配布例は専用loaderで固定headerを検証して直接コンパイルする。凍結時の52source・重み・閾値・metadata・plan・headerの検査は維持し、近似一致を許可しない。[配布loaderの検証](../../docs/logmel-release-loader.md)。

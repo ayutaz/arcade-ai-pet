@@ -2,15 +2,14 @@
 from pathlib import Path
 import hashlib,json,unittest
 import numpy as np
-from arcade_ai_pet.dscnn_assets import DscnnNativeAssets
-from arcade_ai_pet.dscnn_freeze import verify
+from arcade_ai_pet.logmel_release import FrozenLogmelModel,verify_release
 ROOT=Path(__file__).resolve().parents[1];MODEL=ROOT/'models/kws-logmel-v1'
 class LogmelReleaseModelTests(unittest.TestCase):
  def test_numeric_export_reproduces_frozen_model_and_silence_in_both_layouts(self):
-  meta,layers=verify(MODEL)
+  meta,layers=verify_release(MODEL)
   self.assertEqual(meta['weights_sha256'],'194c5fceaeb9e51f83d8637033680a779c50c614becc3ff7bc37339ec31d27a8');self.assertEqual(meta['numeric_bytes'],23411)
   self.assertEqual(meta['thresholds_q10'],[3505,1220,3063,552,1052]);self.assertEqual(len(layers),6)
-  with DscnnNativeAssets(MODEL) as native:
+  with FrozenLogmelModel(MODEL) as native:
    raw=np.zeros(32000,np.int16);a=native.extract(raw);b=native.extract(raw,banked=True)
    np.testing.assert_array_equal(a,b);self.assertEqual(native.predict(a)[0],6)
  def test_final_evidence_license_and_small_asset_boundary_are_preserved(self):
