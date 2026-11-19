@@ -4,6 +4,7 @@ from pathlib import Path
 import numpy as np
 from .channel_training import make_arrays
 from .context_arrays import make_arrays as load_context_arrays
+from .prosody_arrays import make_arrays as load_prosody_arrays
 from .channel_robustness import PROFILES,measure
 from .channel_freeze import _rows,_accepted
 from .training import scores,decisions
@@ -110,10 +111,10 @@ def fit(x,y,vx,vy,groups,*,epochs=1000,hidden=88,seed=42):
                 checkpoint_candidates_evaluated=len(candidates),checkpoint_threshold_q10=selected['threshold_q10'])
 
 
-def train_candidate(domains,mixed,output,*,epochs=1000,hidden=88,neural_weight=4,frontend='adaptive'):
+def train_candidate(domains,mixed,output,*,epochs=1000,hidden=88,neural_weight=4,frontend='adaptive',neural_prosody=False,prosody_qualification=None):
     output=Path(output).absolute();mixed=Path(mixed).absolute()
     if (output.resolve()!=output or output.exists() or type(domains) is not dict or set(domains)!={'legacy','neural'} or
-            type(neural_weight) is not int or not 1<=neural_weight<=8 or frontend not in ('adaptive','context')):
+            type(neural_weight) is not int or not 1<=neural_weight<=8 or frontend not in ('adaptive','context') or type(neural_prosody) is not bool or neural_prosody and (frontend!='adaptive' or prosody_qualification is None) or not neural_prosody and prosody_qualification is not None):
         raise ValueError('fresh bounded development experiment required')
     domains={name:Path(domains[name]) for name in ('legacy','neural')};records=[];seen=set();waves=set();variants=set()
     for path in domains.values():
@@ -128,7 +129,13 @@ def train_candidate(domains,mixed,output,*,epochs=1000,hidden=88,neural_weight=4
     if len(variants)!=1 or combined.get('role')!='development' or combined['records']!=records or combined['variants'] not in variants:
         raise ValueError('mixed development identity differs from component domains')
     builder=make_arrays if frontend=='adaptive' else load_context_arrays
-    arrays={name:builder(path,'hp160',frontend=frontend,noise_replicas=5,noise_mode='fresh',hum_replicas=3) for name,path in domains.items()}
+    arrays={}
+    for name,path in domains.items():
+        kwargs=dict(frontend=frontend,noise_replicas=5,noise_mode='fresh',hum_replicas=3)
+        current=builder
+        if neural_prosody and name=='neural':
+            current=load_prosody_arrays;kwargs['qualified']=prosody_qualification
+        arrays[name]=current(path,'hp160',**kwargs)
     x=np.concatenate([arrays['legacy']['train']['x'],np.tile(arrays['neural']['train']['x'],(neural_weight,1))])
     y=np.concatenate([arrays['legacy']['train']['y'],np.tile(arrays['neural']['train']['y'],neural_weight)])
     vx=np.concatenate([a['validation']['x'] for a in arrays.values()]);vy=np.concatenate([a['validation']['y'] for a in arrays.values()])
@@ -136,12 +143,15 @@ def train_candidate(domains,mixed,output,*,epochs=1000,hidden=88,neural_weight=4
     groups=np.array([domain*8+PROFILES.index(p) for domain,a in enumerate(arrays.values()) for p in a['validation']['profiles']])
     result=fit(x,y,vx,vy,groups,epochs=epochs,hidden=hidden);layers=result.pop('layers');logits=scores(vx,layers)
     threshold,rows,accepted=select_threshold(vy,logits,groups);combined_rows=_rows(vy,logits,profiles,'hp160',threshold)
+    feature_files=('channel_frontend.py','channel_training.py') if frontend=='adaptive' else ('context_frontend.py','context_arrays.py')
+    if neural_prosody:feature_files+=('prosody_arrays.py',)
     result.update(candidate='hp160',frontend_version=frontend,threshold_q10=threshold,validation=combined_rows,
                   domain_profiles=rows,accepted_all_domains=accepted,accepted_validation=accepted and _accepted(combined_rows),
                   training_domain_weights=dict(legacy=1,neural=neural_weight),noise_replicas=5,hum_replicas=3,noise_mode='fresh',
                   dataset_manifest_sha256=hashlib.sha256((mixed/'manifest.json').read_bytes()).hexdigest(),
                   trainer_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-                  feature_sha256={name:hashlib.sha256(Path(__file__).with_name(name).read_bytes()).hexdigest() for name in (('channel_frontend.py','channel_training.py') if frontend=='adaptive' else ('context_frontend.py','context_arrays.py'))},
+                  feature_sha256={name:hashlib.sha256(Path(__file__).with_name(name).read_bytes()).hexdigest() for name in feature_files},
+                  neural_prosody=neural_prosody,training_augmentation=arrays['neural'].get('augmentation'),
                   weights_bytes=sum(l['weight'].nbytes+l['bias'].nbytes+4 for l in layers),
                   split_examples=dict(train=len(y),validation=len(vy)),final_evaluated=False,real_voice_tested=False,device_tested=False,vast_usd=0)
     output.mkdir(parents=True)
