@@ -5,7 +5,7 @@ from pathlib import Path
 import re
 import numpy as np
 from . import decision_assets as assets
-from .decision_freeze import verify, _features, _recompute, _accepted
+from .decision_freeze import verify, _features, _recompute, _accepted, _scores
 from .channel_robustness import PROFILES, measure
 from .native_evaluation import _examples
 from .neural_corpus import validate_plan, _generate, _finalize, _digest
@@ -99,7 +99,7 @@ def evaluate_final(frozen, dataset, output):
             raise ValueError('final reconstructed label changed')
         labels.append(label); seed = int(row['id'][:16], 16)
         for profile in PROFILES:
-            logit = scores(_features(pcm, profile, seed, meta['runtime'])[None, :], layers)
+            logit = _scores(_features(pcm, profile, seed, meta['runtime'])[None, :], layers,meta['runtime'])
             predictions[profile].append(int(decisions(logit, table)[0]))
     if set(labels) != set(range(7)):
         raise ValueError('all seven final classes required')
