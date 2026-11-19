@@ -1,0 +1,136 @@
+{
+  "scope": "development_only_domain_weighted_trial_rejected",
+  "source_commit": "88b21c2ea3719580881d07efca686970c5e1fb5c",
+  "trainer_sha256": "fc06fe17271015599fe3d677e644632258e384cfef5c083225a1f5efced5a078",
+  "epochs": 1000,
+  "hidden": 88,
+  "training_domain_weights": {
+    "legacy": 1,
+    "neural": 4
+  },
+  "selected_epoch": 381,
+  "threshold_q10": 1188,
+  "weights_sha256": "00e98ba47a26ef7fe70ddfd9130a0866529c933992d707dd510bbcc0d61316ff",
+  "weights_bytes": 23884,
+  "elapsed_host_seconds": 74.612,
+  "accepted_validation": false,
+  "accepted_all_domains": false,
+  "domain_profiles": [
+    {
+      "domain": "legacy",
+      "profile": "clean",
+      "macro_f1": 1.0,
+      "false_activation_rate": 0.0,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "legacy",
+      "profile": "quiet",
+      "macro_f1": 1.0,
+      "false_activation_rate": 0.0,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "legacy",
+      "profile": "dc",
+      "macro_f1": 1.0,
+      "false_activation_rate": 0.0,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "legacy",
+      "profile": "drift",
+      "macro_f1": 0.9894020766201218,
+      "false_activation_rate": 0.0,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "legacy",
+      "profile": "hum",
+      "macro_f1": 0.9020596963644588,
+      "false_activation_rate": 0.013513513513513514,
+      "command_recall": 0.8541666666666666
+    },
+    {
+      "domain": "legacy",
+      "profile": "noise",
+      "macro_f1": 0.8790718077143567,
+      "false_activation_rate": 0.02252252252252252,
+      "command_recall": 0.875
+    },
+    {
+      "domain": "legacy",
+      "profile": "early",
+      "macro_f1": 1.0,
+      "false_activation_rate": 0.0,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "legacy",
+      "profile": "late",
+      "macro_f1": 1.0,
+      "false_activation_rate": 0.0,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "neural",
+      "profile": "clean",
+      "macro_f1": 0.945578231292517,
+      "false_activation_rate": 0.06,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "neural",
+      "profile": "quiet",
+      "macro_f1": 0.9391233766233765,
+      "false_activation_rate": 0.06,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "neural",
+      "profile": "dc",
+      "macro_f1": 0.945578231292517,
+      "false_activation_rate": 0.06,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "neural",
+      "profile": "drift",
+      "macro_f1": 0.9391233766233765,
+      "false_activation_rate": 0.06,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "neural",
+      "profile": "hum",
+      "macro_f1": 0.9161815545890487,
+      "false_activation_rate": 0.08,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "neural",
+      "profile": "noise",
+      "macro_f1": 0.945578231292517,
+      "false_activation_rate": 0.06,
+      "command_recall": 1.0
+    },
+    {
+      "domain": "neural",
+      "profile": "early",
+      "macro_f1": 0.8659013605442176,
+      "false_activation_rate": 0.06,
+      "command_recall": 0.8666666666666667
+    },
+    {
+      "domain": "neural",
+      "profile": "late",
+      "macro_f1": 0.945578231292517,
+      "false_activation_rate": 0.06,
+      "command_recall": 1.0
+    }
+  ],
+  "final_conditions_generated": false,
+  "frozen_candidate_created": false,
+  "firmware_updated": false,
+  "human_voice_improvement_verified": false
+}

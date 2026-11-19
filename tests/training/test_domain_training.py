@@ -12,6 +12,8 @@ class DomainFitTests(unittest.TestCase):
         pa=scores(x,a['layers']);pb=scores(x,b['layers']);np.testing.assert_array_equal(pa,pb)
         self.assertTrue(validation_rank(y,pa.argmax(1),groups)[0])
         self.assertEqual(a['selected_epoch'],b['selected_epoch'])
+        self.assertLessEqual(a['checkpoint_candidates_evaluated'],16)
+        self.assertEqual(a['selection_metric'],'calibrated_worst_development_domain_profile')
 
 
 if __name__=='__main__':unittest.main()

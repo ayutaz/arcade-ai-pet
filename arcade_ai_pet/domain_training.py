@@ -50,6 +50,37 @@ def select_threshold(labels,logits,groups):
     return selected[3],selected[4],not selected[0]
 
 
+def shortlist(checkpoints):
+    if (type(checkpoints) is not list or not 1<=len(checkpoints)<=201 or
+            any(type(c.get('epoch')) is not int or not 1<=c['epoch']<=1000 for c in checkpoints) or
+            len({c['epoch'] for c in checkpoints})!=len(checkpoints)):
+        raise ValueError('bounded unique training checkpoints required')
+    key=lambda c:(c['rank'],-c['epoch'])
+    selected={c['epoch']:c for c in sorted(checkpoints,key=key,reverse=True)[:8]}
+    maximum=max(c['epoch'] for c in checkpoints)
+    for period in range(8):
+        candidates=[c for c in checkpoints if min(7,(c['epoch']-1)*8//maximum)==period]
+        if candidates:
+            chosen=max(candidates,key=key);selected[chosen['epoch']]=chosen
+    return [selected[epoch] for epoch in sorted(selected)]
+
+
+def select_checkpoint(checkpoints,values,labels,groups):
+    _inputs(labels,groups)
+    if type(checkpoints) is not list or not 1<=len(checkpoints)<=16:
+        raise ValueError('at most sixteen calibration candidates required')
+    best=None;best_key=None
+    for checkpoint in checkpoints:
+        logits=scores(values,checkpoint['layers']);threshold,rows,passed=select_threshold(labels,logits,groups)
+        key=(passed,min(r['macro_f1'] for r in rows),sum(r['macro_f1'] for r in rows),-threshold,-checkpoint['epoch'])
+        if best_key is None or key>best_key:
+            best_key=key;best=dict(layers=checkpoint['layers'],selected_epoch=checkpoint['epoch'],
+                threshold_q10=threshold,accepted_all_domains=passed,domain_profiles=rows,
+                raw_validation_rank=validation_rank(labels,logits.argmax(1),groups),
+                validation_accuracy=float(np.mean(logits.argmax(1)==labels)))
+    return best
+
+
 def fit(x,y,vx,vy,groups,*,epochs=1000,hidden=88,seed=42):
     import torch
     _inputs(vy,groups)
@@ -65,15 +96,17 @@ def fit(x,y,vx,vy,groups,*,epochs=1000,hidden=88,seed=42):
     optimizer=torch.optim.Adam(model.parameters(),lr=.003,weight_decay=.0001)
     counts=np.bincount(y,minlength=7);weight=1/np.maximum(counts,1);weight/=weight.mean()
     lossfn=torch.nn.CrossEntropyLoss(weight=torch.tensor(weight,dtype=torch.float32))
-    tx=torch.tensor(x,dtype=torch.float32);ty=torch.tensor(y,dtype=torch.long);best=None;best_rank=None
+    tx=torch.tensor(x,dtype=torch.float32);ty=torch.tensor(y,dtype=torch.long);checkpoints=[]
     for epoch in range(epochs):
         optimizer.zero_grad();loss=lossfn(model(tx),ty);loss.backward();optimizer.step()
         if epoch%5==0 or epoch==epochs-1:
             layers=[quantize_layer(model[i].weight.detach().numpy(),model[i].bias.detach().numpy()) for i in (0,2)]
             predictions=scores(vx,layers).argmax(1);rank=validation_rank(vy,predictions,groups)
-            if best_rank is None or rank>best_rank:best_rank=rank;best=(layers,epoch+1,float(np.mean(predictions==vy)))
-    return dict(layers=best[0],selected_epoch=best[1],validation_accuracy=best[2],seed=seed,epochs=epochs,
-                selection_metric='worst_development_domain_profile',raw_validation_rank=best_rank)
+            checkpoints.append(dict(layers=layers,epoch=epoch+1,rank=rank))
+    candidates=shortlist(checkpoints);selected=select_checkpoint(candidates,vx,vy,groups)
+    return dict(layers=selected['layers'],selected_epoch=selected['selected_epoch'],validation_accuracy=selected['validation_accuracy'],seed=seed,epochs=epochs,
+                selection_metric='calibrated_worst_development_domain_profile',raw_validation_rank=selected['raw_validation_rank'],
+                checkpoint_candidates_evaluated=len(candidates),checkpoint_threshold_q10=selected['threshold_q10'])
 
 
 def train_candidate(domains,mixed,output,*,epochs=1000,hidden=88,neural_weight=4):

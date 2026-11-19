@@ -59,5 +59,23 @@ class DomainTrainingTests(unittest.TestCase):
                 with self.assertRaises(ValueError):train.train_candidate(domains,mixed,root/'rejected')
             self.assertFalse((root/'rejected').exists())
 
+    def test_checkpoint_selection_compares_calibrated_gates_instead_of_raw_rank(self):
+        y=np.tile(np.array([0,1,2,3,4,5,6,5,5,5]),16);g=np.repeat(np.arange(16),10)
+        a=np.eye(7,dtype=np.int64)[y]*10;b=a.copy()
+        a[0]=0;a[0,1]=10
+        indexes=np.where(y==5)[0];b[indexes]=0;b[indexes,0]=2;b[indexes,5]=1
+        self.assertGreater(train.validation_rank(y,a.argmax(1),g),train.validation_rank(y,b.argmax(1),g))
+        with patch.object(train,'scores',side_effect=[a,b]):
+            selected=train.select_checkpoint([dict(layers='raw-best',epoch=10),dict(layers='calibrated-best',epoch=20)],np.zeros((len(y),260)),y,g)
+        self.assertEqual(selected['selected_epoch'],20);self.assertEqual(selected['threshold_q10'],2)
+        self.assertTrue(selected['accepted_all_domains'])
+
+    def test_shortlist_is_bounded_and_keeps_best_of_each_training_period(self):
+        checkpoints=[dict(layers=[],epoch=i,rank=(False,i/201,i/201)) for i in range(1,202)]
+        short=train.shortlist(checkpoints)
+        self.assertLessEqual(len(short),16);self.assertEqual(len({r['epoch'] for r in short}),len(short))
+        self.assertIn(201,{r['epoch'] for r in short})
+        self.assertEqual({min(7,(r['epoch']-1)*8//201) for r in short},set(range(8)))
+
 
 if __name__=='__main__':unittest.main()
