@@ -1,0 +1,11 @@
+{
+  "scope": "local_mps_small_fixture_functional_repeat_not_candidate_training",
+  "both_runs_completed": true,
+  "steps_per_run": 4,
+  "quantized_layers_equal": true,
+  "integer_logits_equal": true,
+  "elapsed_seconds": 4.479,
+  "real_corpus_used": false,
+  "device_tested": false,
+  "vast_usd": 0
+}

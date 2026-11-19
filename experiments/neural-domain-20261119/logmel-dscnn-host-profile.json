@@ -1,0 +1,47 @@
+{
+  "scope": "untrained_random_input_throughput_probe_not_candidate_quality",
+  "host": {
+    "system": "Darwin",
+    "architecture": "arm64",
+    "python": "3.12.13",
+    "numpy": "2.5.5",
+    "torch": "2.15.0"
+  },
+  "backends": [
+    {
+      "device": "cpu",
+      "status": "success",
+      "batch_size": 256,
+      "warmup_steps": 3,
+      "timed_steps": 5,
+      "median_training_step_seconds": 0.15174916700925678,
+      "maximum_training_step_seconds": 0.17274558398639783,
+      "integer_reference_64_examples_seconds": 0.017349999980069697,
+      "numeric_bytes": 23411,
+      "deterministic_algorithms": true,
+      "process_high_water_bytes": 408649728
+    },
+    {
+      "device": "mps",
+      "status": "success",
+      "batch_size": 256,
+      "warmup_steps": 3,
+      "timed_steps": 5,
+      "median_training_step_seconds": 0.02897066599689424,
+      "maximum_training_step_seconds": 0.03205308399628848,
+      "integer_reference_64_examples_seconds": 0.02962812501937151,
+      "numeric_bytes": 23411,
+      "deterministic_algorithms": true,
+      "process_high_water_bytes": 548945920
+    }
+  ],
+  "training_data_used": false,
+  "model_saved": false,
+  "source_sha256": {
+    "dscnn_model.py": "4579a91bd4ce9778b33246c1f34353a9ff8d755df50334dd865824b7d642ad3f",
+    "dscnn_quantize.py": "65a01b00fa0bf1e24b821c2c7afcea24a00c3f3b2e147d79205a423b96d0a71d",
+    "dscnn_training.py": "2de724e8f49c53cd357ca691ec08ec348e1ff9c71e904a55e478af969d9ee762"
+  },
+  "device_tested": false,
+  "vast_usd": 0
+}

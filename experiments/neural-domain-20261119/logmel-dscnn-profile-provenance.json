@@ -1,0 +1,8 @@
+{
+  "scope": "profile_source_relationship_after_fit_addition",
+  "unchanged_profile_training_prefix_bytes": 1935,
+  "prefix_sha256": "2de724e8f49c53cd357ca691ec08ec348e1ff9c71e904a55e478af969d9ee762",
+  "model_and_quantizer_unchanged": true,
+  "note": "Profile measured build/export before fit was appended; current file retains its exact prefix.",
+  "target_measured": false
+}

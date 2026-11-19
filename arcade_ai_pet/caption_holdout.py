@@ -9,6 +9,7 @@ from .native_evaluation import _examples
 from .channel_robustness import PROFILES, simulate, condition
 from .channel_training import level, _noise_options
 from .cmn_frontend import features
+from . import logmel_frontend
 
 
 def _manifest(dataset):
@@ -62,7 +63,11 @@ def _checksums(dataset):
     return {name: digest(real_path(dataset / name)) for name in ('manifest.json', 'train.npz', 'validation.npz', 'test.npz')}
 
 
-def make_arrays(dataset, *, selection, noise_replicas=5, noise_mode='fresh', hum_replicas=3):
+def make_arrays(dataset, *, selection, noise_replicas=5, noise_mode='fresh', hum_replicas=3,
+                frontend='context-duration-cmn'):
+    if frontend not in ('context-duration-cmn', 'context-logmel64'):
+        raise ValueError('explicit supported development frontend required')
+    feature_fn = features if frontend == 'context-duration-cmn' else logmel_frontend.features
     _noise_options(noise_replicas, noise_mode, hum_replicas)
     if type(selection) is not dict:
         raise ValueError('explicit deterministic development selection required')
@@ -95,7 +100,7 @@ def make_arrays(dataset, *, selection, noise_replicas=5, noise_mode='fresh', hum
                 current = seed
                 if replica and profile == 'noise' and noise_mode == 'fresh':
                     current = int.from_bytes(hashlib.sha256(ident.encode() + pcm.tobytes() + bytes([replica])).digest()[:8], 'little')
-                out['x'].append(features(level(condition(simulate(pcm, profile, current), 'hp160'))))
+                out['x'].append(feature_fn(level(condition(simulate(pcm, profile, current), 'hp160'))))
                 out['y'].append(label); out['profiles'].append(profile)
                 out['source_ids'].append(ident); out['variants'].append(variant)
                 out['condition_ids'].append(row.get('condition_id', ''))

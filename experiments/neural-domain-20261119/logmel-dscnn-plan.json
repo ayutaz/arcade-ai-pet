@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "scope": "development_logmel_dscnn_fixed_recipe_before_training",
+  "maximum_model_configurations": 1,
+  "epochs": 30,
+  "batch_size": 256,
+  "seed": 42,
+  "training_device": "mps",
+  "maximum_training_steps": 8000,
+  "maximum_fit_seconds": 900,
+  "optimizer": "Adam",
+  "learning_rate": 0.003,
+  "weight_decay": 0.0001,
+  "class_loss_weighting": "inverse_training_class_counts_normalized",
+  "floating_training": "Conv2d_BatchNorm_ReLU6",
+  "candidate_evaluation": "channel_quantized_integer_reference_only",
+  "checkpoint_epochs": [
+    1,
+    6,
+    11,
+    16,
+    21,
+    26,
+    30
+  ],
+  "maximum_checkpoint_candidates": 16,
+  "calibration_max_passes": 4,
+  "frontend": "context-logmel64",
+  "feature_count": 2113,
+  "conditioning": "hp160",
+  "peak": 4096,
+  "rate": 16000,
+  "samples": 32000,
+  "time_bins": 64,
+  "mel_bands": 32,
+  "context_frames": 10,
+  "pooling": "fractional_frame_overlap",
+  "band_normalization": "per_utterance_band_mean_then_divide4",
+  "energy_normalization": "relative_log_energy_divide2",
+  "duration": "4_times_unpadded_span_over198",
+  "integer_format": "logmel-dscnn-v1; signed_Q5_input_uint8_Q5_ReLU6_per_channel_shifts",
+  "numeric_bytes": 23411,
+  "numeric_budget_bytes": 24576,
+  "network_workspace_budget_bytes": 16384,
+  "target_workspace_measured": false,
+  "neural_weight": 2,
+  "noise_replicas": 5,
+  "hum_replicas": 3,
+  "noise_mode": "fresh",
+  "holdout_seed": 2026111904,
+  "held_condition_ids": [
+    "extension-13",
+    "extension-14",
+    "extension-03",
+    "extension-02"
+  ],
+  "held_control_count": 20,
+  "held_control_ids_sha256": "c22432767bf8d1b0a9e8c3787d7b0b042eae153a9dda65b3081469de7ecf325a",
+  "development_manifest_sha256": {
+    "legacy": "907d32cd3262ac6e2ff2636dee9a625d13b1050ed0385a211a25ad7898832dfd",
+    "neural": "5814cac6b2884f2c84e59a00e479b4aba0bee3ab00aff0fec61f3e623559b214"
+  },
+  "selection_domains": [
+    "legacy_validation",
+    "held_neural_validation"
+  ],
+  "additional_required_regression": [
+    "original_neural_validation"
+  ],
+  "quality_gates": {
+    "macro_f1_min": 0.9,
+    "false_activation_rate_max": 0.05,
+    "command_recall_min": 0.8
+  },
+  "require_all_24_domain_profiles_and_8_pooled": true,
+  "require_selection_domains_pooled_profiles": true,
+  "original_test_used_for_fit_or_selection": false,
+  "consumed_final_plans": [
+    "67598d206e18b8d78bdf133fe8c9a0a4fc72b690b090ec88298926e5ab06554d",
+    "d357efa61c2085d221582407e99f892654ff56c2642d366a4c8d0ced442323c0"
+  ],
+  "final_used_for_fit_or_selection": false,
+  "new_unused_final_required_before_adoption": true,
+  "grouped_native_conformance_and_freeze_required": true,
+  "previous_results_informed_architecture_hypothesis": true,
+  "backend_probe_real_corpus_used": false,
+  "training_started": false,
+  "target_built": false,
+  "device_tested": false,
+  "vast_usd": 0
+}
