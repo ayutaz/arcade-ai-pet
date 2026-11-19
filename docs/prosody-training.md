@@ -32,3 +32,7 @@ planは元manifest・元WAV・加工WAV・生成コードをhashで結ぶ。点�
 コマンドはいずれも`uv run --locked --group train python -m unittest discover -s tests -p test_prosody_arrays.py`と`-p test_domain_training.py`。実際のASR一致率・学習精度は契約テストとは別に記録する。
 
 回帰は通常149件/15.488秒、training9件/1.785秒、SDK2件が成功し、skipなし。`uv lock --check`と`git diff --check`も成功。SDKのメモリ上限拒否メッセージは、上限超過を拒否するfixtureの出力である。
+
+実データの準備で48kHz元音声を16kHz限定として拒否した。WAV hashは一致し、元データの破損ではなかった。48kHz fixtureを先に追加し、同じ拒否でRedを確認。既存`read_pcm`と同じ16kHz変換を加工前に使う修正後、7件が成功した。加工・点検対象の出力WAVは16kHzのまま。失敗時は出力先を作成していない。
+
+48kHz修正後の通常回帰は150件/15.515秒が成功。training/SDKは直前の同じ学習・VMコードで成功した結果と区別する。

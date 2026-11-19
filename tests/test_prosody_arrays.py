@@ -17,16 +17,27 @@ class ProsodyArraysTests(unittest.TestCase):
         for invalid in (True,2.,float('nan')):
             with self.assertRaises(ValueError):prosody.speed_variant(pcm,invalid)
 
-    def fixture(self,root):
+    def fixture(self,root,rate=16000):
         (root/'sources').mkdir();records=[]
         pcm=np.rint(2000*np.sin(np.arange(8000)*.1)).astype('<i2')
         for label,split in enumerate(('train','validation','test')):
             ident=hashlib.sha256(split.encode()).hexdigest();file=root/'sources'/(ident+'.wav')
             if split=='train':
-                with wave.open(str(file),'wb') as stream:stream.setparams((1,2,16000,0,'NONE','not compressed'));stream.writeframes(pcm.tobytes())
+                with wave.open(str(file),'wb') as stream:stream.setparams((1,2,rate,0,'NONE','not compressed'));stream.writeframes(pcm.tobytes())
             records.append(dict(id=ident,source=split,split=split,label=label,prompt=('あそぼ','おいで','まって')[label],sha256=hashlib.sha256(file.read_bytes()).hexdigest() if file.exists() else 'a'*64))
         manifest=dict(role='development',variants=1,records=records);(root/'manifest.json').write_text(json.dumps(manifest))
         return manifest,dict(train=dict(x=np.zeros((14,260),dtype=np.float32),y=np.zeros(14,dtype=np.int64),profiles=['clean']*14),validation=dict(x=np.ones((1,260),dtype=np.float32),y=np.ones(1,dtype=np.int64),profiles=['clean']))
+
+    def test_neural_48khz_source_is_resampled_before_rate_transform(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp).resolve();manifest,base=self.fixture(root,rate=48000)
+            qa=root/'qualified';plan=prosody.prepare_sources(root,qa)
+            self.assertEqual(len(plan['transforms']),2)
+            self.assertTrue(all(row['frames']<3200 for row in plan['transforms']))
+            for row in plan['transforms']:
+                with wave.open(str(qa/'sources'/row['file'])) as stream:self.assertEqual(stream.getframerate(),16000)
+            report=prosody.qualify_sources(qa,recognize=lambda *a:'あそぼ')
+            self.assertEqual(report['accepted_transforms'],2)
 
     def test_validation_is_unchanged_and_extra_rates_skip_validation_test_files(self):
         with tempfile.TemporaryDirectory() as tmp:

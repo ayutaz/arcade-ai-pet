@@ -45,9 +45,9 @@ def _sources(dataset, manifest):
             raise ValueError('unique train prompt identity required')
         path = dataset/'sources'/(ident+'.wav')
         raw, rate, pcm = _read_wave(path)
-        if rate != 16000 or hashlib.sha256(raw).hexdigest() != row['sha256']:
+        if hashlib.sha256(raw).hexdigest() != row['sha256']:
             raise ValueError('training source changed')
-        sources[ident] = (row, trim_silence(pcm))
+        sources[ident] = (row, trim_silence(read_pcm(path)))
     if not sources:
         raise ValueError('spoken training sources required')
     return sources
