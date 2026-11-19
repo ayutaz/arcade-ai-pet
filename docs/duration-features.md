@@ -1,6 +1,6 @@
 # 発話時間を追加するホストPoC
 
-**既存260特徴を維持し、発話時間を1値追加した261入力の実験。実データの認識改善・C移植・実機動作は未確認。** 旧v3の凍結対象13ファイル、旧量子化器/reader/exportは変更しない。
+**既存260特徴を維持し、発話時間を1値追加した261入力のホストPoC。固定1構成の実学習は基準未達で不採用。C移植・実機適用は未実施。** 旧v3の凍結対象13ファイル、旧量子化器/reader/exportは変更しない。
 
 ## 根拠
 
@@ -49,3 +49,10 @@ train_candidate(
 ## データと公開範囲
 
 [生成plan](../experiments/neural-domain-20261119/extension-source-plan.json)と[学習前の固定条件](../experiments/neural-domain-20261119/extension-predeclared-training.json)を保存。後者の未学習flagは実行前snapshot。旧/新データと教師モデルのlicenseはそれぞれ適用し、Irodoriのmodel cardの倫理的制限も維持する。元WAV・教師重み・失敗音源・本体PCMは配布しない。新しいAPI課金/GPU契約/FW書込みは行っていない。
+
+
+## 固定1構成の実行結果
+
+[初回の数値](../experiments/neural-domain-20261119/duration-initial-result.json)。事前条件どおり、source5ee49feで既存の1,236元発話を学習した。104.844秒、23,972B、最悪F1=0.865901・最大誤反応0.12・最小操作recall0.833333で**不採用**。最終4caption・元WAV・評価行・実機は変更していない。
+
+最小recallは従来の比重2の0.729167より上がったが、複数条件のgateに未達で、発話時間1値の追加だけでは全体の問題を解決できなかった。追加の比重/閾値探索で合格を作らず、残る誤判定の音声情報を調べる。C版/モデル凍結/独立最終評価/target buildへ進めない。

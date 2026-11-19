@@ -42,4 +42,4 @@ Greenは通常6件/0.014秒、実学習1件/1.241秒。最大16候補を校正�
 学習用の元発話を増やす場合は[評価を保持した追加手順](training-extension.md)。点検済みの未分割音声だけをtrainへ足し、旧validation/testを変更しない。
 
 
-[発話時間を加える261入力のPoC](duration-features.md)は旧260特徴を保持し、別量子化器で追加値を扱う。明示したduration modeだけが対象で、旧reader/exportには渡さない。実データの認識改善はまだ確認していない。
+[発話時間を加える261入力のPoC](duration-features.md)は旧260特徴を保持し、別量子化器で追加値を扱う。明示したduration modeだけが対象で、旧reader/exportには渡さない。固定した実データ1構成も基準未達で不採用。失敗結果と未実施範囲を同資料へ残す。
