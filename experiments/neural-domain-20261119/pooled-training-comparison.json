@@ -1,0 +1,384 @@
+{
+  "scope": "development_validation_only_not_final_or_real_voice",
+  "baseline": {
+    "weights_sha256": "374987a02446e805f18427d7de8de3cd955c4833efc6e0a9dbd9fa655c3c59f2",
+    "threshold_q10": 995,
+    "accepted_all_domains": false,
+    "domains": {
+      "legacy": {
+        "accepted": true,
+        "minimum_f1": 0.9056261199118343,
+        "maximum_false": 0.009009009009009009,
+        "minimum_command_recall": 0.8333333333333334,
+        "profiles": [
+          {
+            "profile": "clean",
+            "macro_f1": 1.0,
+            "false_activation_rate": 0.0,
+            "command_recall": 1.0
+          },
+          {
+            "profile": "quiet",
+            "macro_f1": 1.0,
+            "false_activation_rate": 0.0,
+            "command_recall": 1.0
+          },
+          {
+            "profile": "dc",
+            "macro_f1": 1.0,
+            "false_activation_rate": 0.0,
+            "command_recall": 1.0
+          },
+          {
+            "profile": "drift",
+            "macro_f1": 0.993070944786042,
+            "false_activation_rate": 0.0,
+            "command_recall": 1.0
+          },
+          {
+            "profile": "hum",
+            "macro_f1": 0.9224424524607285,
+            "false_activation_rate": 0.0045045045045045045,
+            "command_recall": 0.8333333333333334
+          },
+          {
+            "profile": "noise",
+            "macro_f1": 0.9056261199118343,
+            "false_activation_rate": 0.009009009009009009,
+            "command_recall": 0.8541666666666666
+          },
+          {
+            "profile": "early",
+            "macro_f1": 0.9866531453433217,
+            "false_activation_rate": 0.0,
+            "command_recall": 0.9791666666666666
+          },
+          {
+            "profile": "late",
+            "macro_f1": 1.0,
+            "false_activation_rate": 0.0,
+            "command_recall": 1.0
+          }
+        ]
+      },
+      "neural": {
+        "accepted": false,
+        "minimum_f1": 0.5223665223665224,
+        "maximum_false": 0.22,
+        "minimum_command_recall": 0.5333333333333333,
+        "profiles": [
+          {
+            "profile": "clean",
+            "macro_f1": 0.8217798594847776,
+            "false_activation_rate": 0.14,
+            "command_recall": 0.8666666666666667
+          },
+          {
+            "profile": "quiet",
+            "macro_f1": 0.8154866638737607,
+            "false_activation_rate": 0.14,
+            "command_recall": 0.8666666666666667
+          },
+          {
+            "profile": "dc",
+            "macro_f1": 0.8217798594847776,
+            "false_activation_rate": 0.14,
+            "command_recall": 0.8666666666666667
+          },
+          {
+            "profile": "drift",
+            "macro_f1": 0.8154866638737607,
+            "false_activation_rate": 0.14,
+            "command_recall": 0.8666666666666667
+          },
+          {
+            "profile": "hum",
+            "macro_f1": 0.5223665223665224,
+            "false_activation_rate": 0.2,
+            "command_recall": 0.5333333333333333
+          },
+          {
+            "profile": "noise",
+            "macro_f1": 0.8264782836211407,
+            "false_activation_rate": 0.22,
+            "command_recall": 1.0
+          },
+          {
+            "profile": "early",
+            "macro_f1": 0.7486138541438081,
+            "false_activation_rate": 0.14,
+            "command_recall": 0.7333333333333333
+          },
+          {
+            "profile": "late",
+            "macro_f1": 0.7912442396313365,
+            "false_activation_rate": 0.14,
+            "command_recall": 0.8
+          }
+        ]
+      }
+    }
+  },
+  "candidates": [
+    {
+      "epochs": 600,
+      "selected_epoch": 571,
+      "accepted_validation": false,
+      "elapsed_host_seconds": 66.586,
+      "validation_manifest_sha256": "b50f8690735c63871603a8a0fb0b4e15aea5b3831ac6e39a681b8ffe3d13aaf6",
+      "weights_bytes": 23884,
+      "domain_report": {
+        "weights_sha256": "b0bed8b8116803beb5970b317eeeed6493a1fbfb580cc31b6ecef0a6a155898d",
+        "threshold_q10": 652,
+        "accepted_all_domains": false,
+        "domains": {
+          "legacy": {
+            "accepted": true,
+            "minimum_f1": 0.9046905909667278,
+            "maximum_false": 0.018018018018018018,
+            "minimum_command_recall": 0.875,
+            "profiles": [
+              {
+                "profile": "clean",
+                "macro_f1": 1.0,
+                "false_activation_rate": 0.0,
+                "command_recall": 1.0
+              },
+              {
+                "profile": "quiet",
+                "macro_f1": 1.0,
+                "false_activation_rate": 0.0,
+                "command_recall": 1.0
+              },
+              {
+                "profile": "dc",
+                "macro_f1": 1.0,
+                "false_activation_rate": 0.0,
+                "command_recall": 1.0
+              },
+              {
+                "profile": "drift",
+                "macro_f1": 0.9894020766201218,
+                "false_activation_rate": 0.0,
+                "command_recall": 1.0
+              },
+              {
+                "profile": "hum",
+                "macro_f1": 0.9201660057962578,
+                "false_activation_rate": 0.009009009009009009,
+                "command_recall": 0.875
+              },
+              {
+                "profile": "noise",
+                "macro_f1": 0.9046905909667278,
+                "false_activation_rate": 0.018018018018018018,
+                "command_recall": 0.8958333333333334
+              },
+              {
+                "profile": "early",
+                "macro_f1": 0.9805772005772005,
+                "false_activation_rate": 0.0045045045045045045,
+                "command_recall": 0.9791666666666666
+              },
+              {
+                "profile": "late",
+                "macro_f1": 1.0,
+                "false_activation_rate": 0.0,
+                "command_recall": 1.0
+              }
+            ]
+          },
+          "neural": {
+            "accepted": false,
+            "minimum_f1": 0.8074211502782932,
+            "maximum_false": 0.12,
+            "minimum_command_recall": 0.7333333333333333,
+            "profiles": [
+              {
+                "profile": "clean",
+                "macro_f1": 0.8869701726844584,
+                "false_activation_rate": 0.06,
+                "command_recall": 0.8666666666666667
+              },
+              {
+                "profile": "quiet",
+                "macro_f1": 0.8806431663574521,
+                "false_activation_rate": 0.06,
+                "command_recall": 0.8666666666666667
+              },
+              {
+                "profile": "dc",
+                "macro_f1": 0.8869701726844584,
+                "false_activation_rate": 0.06,
+                "command_recall": 0.8666666666666667
+              },
+              {
+                "profile": "drift",
+                "macro_f1": 0.8806431663574521,
+                "false_activation_rate": 0.06,
+                "command_recall": 0.8666666666666667
+              },
+              {
+                "profile": "hum",
+                "macro_f1": 0.8234035549703752,
+                "false_activation_rate": 0.12,
+                "command_recall": 0.8666666666666667
+              },
+              {
+                "profile": "noise",
+                "macro_f1": 0.8869701726844584,
+                "false_activation_rate": 0.06,
+                "command_recall": 0.8666666666666667
+              },
+              {
+                "profile": "early",
+                "macro_f1": 0.8074211502782932,
+                "false_activation_rate": 0.06,
+                "command_recall": 0.7333333333333333
+              },
+              {
+                "profile": "late",
+                "macro_f1": 0.8869701726844584,
+                "false_activation_rate": 0.06,
+                "command_recall": 0.8666666666666667
+              }
+            ]
+          }
+        }
+      },
+      "domain_inference_reused_by_identical_weights_and_threshold": false
+    },
+    {
+      "epochs": 1000,
+      "selected_epoch": 571,
+      "accepted_validation": false,
+      "elapsed_host_seconds": 65.745,
+      "validation_manifest_sha256": "cf3038fcdd32782418fcb8cb8f05fe785444f31a137f0537a177e8352d2e4b1d",
+      "weights_bytes": 23884,
+      "domain_report": {
+        "weights_sha256": "b0bed8b8116803beb5970b317eeeed6493a1fbfb580cc31b6ecef0a6a155898d",
+        "threshold_q10": 652,
+        "accepted_all_domains": false,
+        "domains": {
+          "legacy": {
+            "accepted": true,
+            "minimum_f1": 0.9046905909667278,
+            "maximum_false": 0.018018018018018018,
+            "minimum_command_recall": 0.875,
+            "profiles": [
+              {
+                "profile": "clean",
+                "macro_f1": 1.0,
+                "false_activation_rate": 0.0,
+                "command_recall": 1.0
+              },
+              {
+                "profile": "quiet",
+                "macro_f1": 1.0,
+                "false_activation_rate": 0.0,
+                "command_recall": 1.0
+              },
+              {
+                "profile": "dc",
+                "macro_f1": 1.0,
+                "false_activation_rate": 0.0,
+                "command_recall": 1.0
+              },
+              {
+                "profile": "drift",
+                "macro_f1": 0.9894020766201218,
+                "false_activation_rate": 0.0,
+                "command_recall": 1.0
+              },
+              {
+                "profile": "hum",
+                "macro_f1": 0.9201660057962578,
+                "false_activation_rate": 0.009009009009009009,
+                "command_recall": 0.875
+              },
+              {
+                "profile": "noise",
+                "macro_f1": 0.9046905909667278,
+                "false_activation_rate": 0.018018018018018018,
+                "command_recall": 0.8958333333333334
+              },
+              {
+                "profile": "early",
+                "macro_f1": 0.9805772005772005,
+                "false_activation_rate": 0.0045045045045045045,
+                "command_recall": 0.9791666666666666
+              },
+              {
+                "profile": "late",
+                "macro_f1": 1.0,
+                "false_activation_rate": 0.0,
+                "command_recall": 1.0
+              }
+            ]
+          },
+          "neural": {
+            "accepted": false,
+            "minimum_f1": 0.8074211502782932,
+            "maximum_false": 0.12,
+            "minimum_command_recall": 0.7333333333333333,
+            "profiles": [
+              {
+                "profile": "clean",
+                "macro_f1": 0.8869701726844584,
+                "false_activation_rate": 0.06,
+                "command_recall": 0.8666666666666667
+              },
+              {
+                "profile": "quiet",
+                "macro_f1": 0.8806431663574521,
+                "false_activation_rate": 0.06,
+                "command_recall": 0.8666666666666667
+              },
+              {
+                "profile": "dc",
+                "macro_f1": 0.8869701726844584,
+                "false_activation_rate": 0.06,
+                "command_recall": 0.8666666666666667
+              },
+              {
+                "profile": "drift",
+                "macro_f1": 0.8806431663574521,
+                "false_activation_rate": 0.06,
+                "command_recall": 0.8666666666666667
+              },
+              {
+                "profile": "hum",
+                "macro_f1": 0.8234035549703752,
+                "false_activation_rate": 0.12,
+                "command_recall": 0.8666666666666667
+              },
+              {
+                "profile": "noise",
+                "macro_f1": 0.8869701726844584,
+                "false_activation_rate": 0.06,
+                "command_recall": 0.8666666666666667
+              },
+              {
+                "profile": "early",
+                "macro_f1": 0.8074211502782932,
+                "false_activation_rate": 0.06,
+                "command_recall": 0.7333333333333333
+              },
+              {
+                "profile": "late",
+                "macro_f1": 0.8869701726844584,
+                "false_activation_rate": 0.06,
+                "command_recall": 0.8666666666666667
+              }
+            ]
+          }
+        }
+      },
+      "domain_inference_reused_by_identical_weights_and_threshold": true
+    }
+  ],
+  "final_conditions_generated": false,
+  "frozen_candidate_created": false,
+  "firmware_updated": false,
+  "human_voice_improvement_verified": false
+}
