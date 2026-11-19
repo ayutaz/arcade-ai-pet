@@ -38,3 +38,5 @@ Greenは通常6件/0.014秒、実学習1件/1.241秒。最大16候補を校正�
 追加の開発実験は[ASR点検付きの速度・音程変化](prosody-training.md)。元のvalidationと推論frontendは維持し、点検したneural trainの加工音声だけを追加する。
 
 別方式のホストPoCは[時間方向の小型分類器](temporal-classifier.md)。既存のadaptive特徴と評価条件を使い、旧2層のfreeze/exportとは分ける。
+
+学習用の元発話を増やす場合は[評価を保持した追加手順](training-extension.md)。点検済みの未分割音声だけをtrainへ足し、旧validation/testを変更しない。
