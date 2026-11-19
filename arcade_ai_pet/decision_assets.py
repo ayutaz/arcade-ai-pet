@@ -97,6 +97,10 @@ def render(layers, table):
 
 
 def export_assets(weights, table, output):
+    return _export_assets(weights, table, output, RUNTIME, CONTRACT)
+
+
+def _export_assets(weights, table, output, runtime, contract):
     table = thresholds(table)
     weights = real_path(weights)
     output = real_path(output)
@@ -104,7 +108,7 @@ def export_assets(weights, table, output):
         raise ValueError('fresh numeric asset output required')
     layers, size = read_layers(weights)
     rendered = render(layers, table)
-    result = dict(runtime=RUNTIME, input_contract=CONTRACT.copy(), thresholds_q10=table,
+    result = dict(runtime=runtime, input_contract=contract.copy(), thresholds_q10=table,
                   weights_sha256=digest(weights), weights_bytes=size, numeric_bytes=size + 20,
                   header_sha256={name: hashlib.sha256(text.encode()).hexdigest() for name, text in rendered.items()},
                   frozen=False, device_tested=False, real_voice_tested=False)

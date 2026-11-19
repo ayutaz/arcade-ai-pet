@@ -5,7 +5,8 @@ import re
 import shutil
 import tempfile
 import numpy as np
-from . import decision_assets as assets
+from . import decision_assets as assets, cmn_assets, cmn_frontend
+from .cmn_native import CmnNativeModel
 from .decision_native import DecisionNativeModel, SOURCES as NATIVE_SOURCES
 from .channel_freeze import SOURCES as LEGACY_SOURCES
 from .channel_robustness import PROFILES, simulate, condition, measure
@@ -26,16 +27,34 @@ SOURCES = tuple(dict.fromkeys((*LEGACY_SOURCES,
     *('native/' + name for name in NATIVE_SOURCES))))
 
 
-def _source_hashes():
-    return {name: assets.digest(ROOT / name) for name in SOURCES}
+CMN_SOURCES = (*SOURCES, 'arcade_ai_pet/cmn_frontend.py', 'arcade_ai_pet/cmn_arrays.py',
+               'arcade_ai_pet/cmn_assets.py', 'arcade_ai_pet/cmn_native.py',
+               'arcade_ai_pet/duration_arrays.py', 'arcade_ai_pet/duration_quantize.py',
+               'native/cmn_features.c', 'native/cmn_features.h')
+
+
+def _profile(runtime):
+    if runtime == assets.RUNTIME:
+        return assets, DecisionNativeModel
+    if runtime == cmn_assets.RUNTIME:
+        return cmn_assets, CmnNativeModel
+    raise ValueError('unsupported frozen runtime')
+
+
+def _source_hashes(runtime=assets.RUNTIME):
+    _profile(runtime)
+    names = CMN_SOURCES if runtime == cmn_assets.RUNTIME else SOURCES
+    return {name: assets.digest(ROOT / name) for name in names}
 
 
 def _accepted(rows):
     return bool(rows) and all(r['macro_f1'] >= .90 and r['false_activation_rate'] <= .05 and r['command_recall'] >= .80 for r in rows)
 
 
-def _features(pcm, profile, seed):
-    return features(level(condition(simulate(pcm, profile, seed), 'hp160')), context=True)
+def _features(pcm, profile, seed, runtime=assets.RUNTIME):
+    _profile(runtime)
+    prepared = level(condition(simulate(pcm, profile, seed), 'hp160'))
+    return cmn_frontend.features(prepared) if runtime == cmn_assets.RUNTIME else features(prepared, context=True)
 
 
 def _domains(domains, final_ids):
@@ -61,11 +80,12 @@ def _domains(domains, final_ids):
     return paths, sorted(ids), sorted(waves), manifests
 
 
-def _recompute(paths, directory, layers, table, *, validation_only):
+def _recompute(paths, directory, layers, table, *, validation_only, runtime=assets.RUNTIME):
     labels, predictions, groups = [], [], []
     stats = dict(rows=0, exact_integer_logits=0, banked_features_equal=0, final_decisions_equal=0,
                  maximum_feature_error=0.0)
-    with DecisionNativeModel(directory) as engine:
+    _, native_model = _profile(runtime)
+    with native_model(directory) as engine:
         for domain_index, (name, dataset) in enumerate(paths.items()):
             manifest = json.loads((dataset / 'manifest.json').read_text())
             expanded = [r for r in manifest['records'] for _ in range(manifest['variants'] if 'sha256' in r else 1)]
@@ -76,7 +96,7 @@ def _recompute(paths, directory, layers, table, *, validation_only):
                     continue
                 seed = int(row['id'][:16], 16)
                 for profile_index, profile in enumerate(PROFILES):
-                    expected = _features(pcm, profile, seed)
+                    expected = _features(pcm, profile, seed, runtime)
                     logits = scores(expected[None, :], layers)[0]
                     prediction = int(decisions(logits[None, :], table)[0])
                     changed = simulate(pcm, profile, seed)
@@ -102,7 +122,8 @@ def _recompute(paths, directory, layers, table, *, validation_only):
     return rows, pooled, stats
 
 
-def freeze_candidate(weights, table, domains, plan, output):
+def freeze_candidate(weights, table, domains, plan, output, *, runtime=assets.RUNTIME):
+    profile_assets, _ = _profile(runtime)
     output = assets.real_path(output)
     if output.exists():
         raise ValueError('fresh frozen output required')
@@ -114,19 +135,19 @@ def freeze_candidate(weights, table, domains, plan, output):
     weights = assets.real_path(weights)
     layers, size = assets.read_layers(weights)
     paths, ids, waves, manifests = _domains(domains, set(final_ids))
-    code_hashes = _source_hashes(); weights_hash = assets.digest(weights)
+    code_hashes = _source_hashes(runtime); weights_hash = assets.digest(weights)
     # A failed gate leaves the requested output absent. Temporary generated
     # headers are validated/regenerated again by the trusted native constructor.
     with tempfile.TemporaryDirectory() as tmp:
         temporary = Path(tmp).resolve() / 'assets'
-        asset_meta = assets.export_assets(weights, table, temporary)
-        rows, pooled, conformance = _recompute(paths, temporary, layers, np.asarray(table, dtype=np.int32), validation_only=True)
+        asset_meta = profile_assets.export_assets(weights, table, temporary)
+        rows, pooled, conformance = _recompute(paths, temporary, layers, np.asarray(table, dtype=np.int32), validation_only=True, runtime=runtime)
         if not _accepted(rows) or not _accepted(pooled) or not conformance['matched']:
             raise ValueError('development quality/native gates failed')
-        if (code_hashes != _source_hashes() or weights_hash != assets.digest(weights) or
+        if (code_hashes != _source_hashes(runtime) or weights_hash != assets.digest(weights) or
             manifests != {name: assets.digest(path / 'manifest.json') for name, path in paths.items()}):
             raise ValueError('inputs changed during freeze')
-        result = dict(schema=1, runtime=assets.RUNTIME, input_contract=assets.CONTRACT.copy(),
+        result = dict(schema=1, runtime=runtime, input_contract=profile_assets.CONTRACT.copy(),
                       architecture=[261, layers[0]['weight'].shape[0], 7], thresholds_q10=table,
                       weights_sha256=weights_hash, weights_bytes=size, numeric_bytes=size + 20,
                       source_sha256=code_hashes, development_manifest_sha256=manifests,
@@ -147,8 +168,9 @@ def verify(directory):
     directory = assets.real_path(directory)
     meta = json.loads(assets.real_path(directory / 'decision-frozen.json').read_text())
     table = assets.thresholds(meta['thresholds_q10'])
-    if (meta.get('schema') != 1 or meta.get('runtime') != assets.RUNTIME or
-        meta.get('input_contract') != assets.CONTRACT or meta.get('source_sha256') != _source_hashes()):
+    profile_assets, _ = _profile(meta.get('runtime'))
+    if (meta.get('schema') != 1 or meta.get('runtime') != profile_assets.RUNTIME or
+        meta.get('input_contract') != profile_assets.CONTRACT or meta.get('source_sha256') != _source_hashes(profile_assets.RUNTIME)):
         raise ValueError('frozen source/contract changed')
     layers, size = assets.read_layers(directory / 'weights.npz')
     if (assets.digest(directory / 'weights.npz') != meta['weights_sha256'] or size != meta['weights_bytes'] or
@@ -162,7 +184,8 @@ def verify(directory):
     if assets.digest(assets.real_path(directory / 'decision-metadata.json')) != meta['asset_metadata_sha256']:
         raise ValueError('frozen numeric metadata changed')
     numeric = json.loads((directory / 'decision-metadata.json').read_text())
-    if numeric['thresholds_q10'] != table or numeric['weights_sha256'] != meta['weights_sha256']:
+    if (numeric['thresholds_q10'] != table or numeric['weights_sha256'] != meta['weights_sha256'] or
+        numeric.get('runtime') != profile_assets.RUNTIME or numeric.get('input_contract') != profile_assets.CONTRACT):
         raise ValueError('frozen table/numeric identity changed')
     for name in ('feature_tables.h', 'decision_model.h'):
         if assets.digest(assets.real_path(directory / name)) != meta['header_sha256'][name]:
