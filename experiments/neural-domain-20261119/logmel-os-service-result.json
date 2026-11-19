@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "scope": "frozen_model_os_service_host_only",
+  "os_source": "15f3201ab69aecc4f2dcdab3fe07ef38539ff0a3",
+  "model_binding": {
+    "weights_sha256": "194c5fceaeb9e51f83d8637033680a779c50c614becc3ff7bc37339ec31d27a8",
+    "plan_sha256": "f81bdc42c256b15bd0410c58cc1f71d6a75582dbec6db0bfdeb578dc222afa1d",
+    "frozen_sha256": "89e06e7eda40c3af46c12883e3cbb77415960b466683094ad787d406b1330ab6"
+  },
+  "rows": 4808,
+  "service_classifications": 9616,
+  "layouts": [
+    "banked",
+    "contiguous"
+  ],
+  "final_decision_mismatches": 0,
+  "rank_score_threshold_mismatches": 0,
+  "pcm_features_workspace_scrubbed": true,
+  "owner_closed": true,
+  "model_revision": 5,
+  "additional_verification_not_tdd": true,
+  "elapsed_seconds": 31.804,
+  "device_tested": false,
+  "real_voice_tested": false
+}
