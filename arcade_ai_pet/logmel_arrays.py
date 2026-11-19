@@ -7,12 +7,14 @@ from .channel_robustness import PROFILES, condition, simulate
 from .channel_training import level, _noise_options
 from .native_evaluation import _examples
 from .logmel_frontend import features
+from . import envelope_frontend
 
 
 def make_arrays(dataset, candidate, *, frontend='context-logmel64', noise_replicas=1,
                 noise_mode='fresh', hum_replicas=1):
-    if candidate != 'hp160' or frontend != 'context-logmel64':
+    if candidate != 'hp160' or frontend not in ('context-logmel64','context-logmel64-envelope'):
         raise ValueError('explicit hp160/context-logmel64 experiment required')
+    feature_fn = envelope_frontend.features if frontend == 'context-logmel64-envelope' else features
     _noise_options(noise_replicas, noise_mode, hum_replicas)
     dataset = Path(dataset)
     manifest = json.loads((dataset / 'manifest.json').read_text())
@@ -33,7 +35,7 @@ def make_arrays(dataset, candidate, *, frontend='context-logmel64', noise_replic
                 current = seed
                 if replica and profile == 'noise' and noise_mode == 'fresh':
                     current = int.from_bytes(hashlib.sha256(row['id'].encode() + pcm.tobytes() + bytes([replica])).digest()[:8], 'little')
-                out['x'].append(features(level(condition(simulate(pcm, profile, current), candidate))))
+                out['x'].append(feature_fn(level(condition(simulate(pcm, profile, current), candidate))))
                 out['y'].append(label); out['profiles'].append(profile)
     for out in arrays.values():
         if not out['y']:

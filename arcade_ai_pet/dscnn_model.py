@@ -8,10 +8,13 @@ GROUPS = (1,8,1,16,1)
 BATCH = 32
 
 
-def validate(layers):
+def validate(layers, *, envelope=False):
+    if type(envelope) is not bool:
+        raise ValueError('explicit boolean envelope mode required')
+    shapes = (*SHAPES[:5], (7,3169)) if envelope else SHAPES
     if not isinstance(layers, (list, tuple)) or len(layers) != 6:
         raise ValueError('exactly six fixed CNN layers required')
-    for row, shape in zip(layers, SHAPES, strict=True):
+    for row, shape in zip(layers, shapes, strict=True):
         if (type(row) is not dict or set(row) != {'weight', 'bias', 'shift'} or
             any(not isinstance(row[k], np.ndarray) for k in row) or
             row['weight'].dtype != np.int8 or row['weight'].shape != shape or
@@ -21,8 +24,8 @@ def validate(layers):
             raise ValueError('fixed int8/int32 CNN representation required')
 
 
-def weights_bytes(layers):
-    validate(layers)
+def weights_bytes(layers, *, envelope=False):
+    validate(layers, envelope=envelope)
     return sum(value.nbytes for row in layers for value in row.values())
 
 
@@ -38,11 +41,14 @@ def activation_layout():
     return dict(uint8_shapes=shapes, ping_pong_bytes_estimate=estimate, target_workspace_measured=False)
 
 
-def inputs(values):
+def inputs(values, *, envelope=False):
+    if type(envelope) is not bool:
+        raise ValueError('explicit boolean envelope mode required')
+    count = 2145 if envelope else FEATURE_COUNT
     if (not isinstance(values, np.ndarray) or values.dtype != np.float32 or values.ndim != 2 or
-        values.shape[1] != FEATURE_COUNT or not 1 <= len(values) <= 65536 or
+        values.shape[1] != count or not 1 <= len(values) <= 65536 or
         not np.isfinite(values).all() or np.any(abs(values) > 16) or
-        np.any(values[:,2048:2112] > 0) or np.any((values[:,-1] < 0) | (values[:,-1] > 4))):
+        np.any(values[:,2048:2112] > 0) or np.any((values[:,2112] < 0) | (values[:,2112] > 4))):
         raise ValueError('bounded float32 logmel/negative energy/duration vectors required')
     return values[:,:2048].reshape(-1,1,64,32), values[:,2048:]
 
@@ -66,9 +72,9 @@ def _conv(values, layer, stride, groups):
     return np.clip(total, 0, 192).astype(np.uint8)
 
 
-def scores(values, layers):
-    validate(layers)
-    images, tails = inputs(values)
+def scores(values, layers, *, envelope=False):
+    validate(layers, envelope=envelope)
+    images, tails = inputs(values, envelope=envelope)
     rows = []
     for start in range(0, len(values), BATCH):
         current = np.rint(images[start:start+BATCH] * 32).astype(np.int16)

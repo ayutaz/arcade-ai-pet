@@ -4,7 +4,11 @@ from .dscnn_model import SHAPES, STRIDES, GROUPS, validate
 from .dscnn_quantize import fold_batch_norm, quantize_layer
 
 
-def build_model():
+def build_model(*, envelope=False):
+    if type(envelope) is not bool:
+        raise ValueError('explicit boolean envelope mode required')
+    feature_count = 2145 if envelope else 2113
+    head_count = 3169 if envelope else 3137
     import torch
     class Dscnn(torch.nn.Module):
         def __init__(self):
@@ -15,11 +19,11 @@ def build_model():
                                     padding=shape[2]//2, groups=groups, bias=False),
                     torch.nn.BatchNorm2d(shape[0]), torch.nn.ReLU6())
                 for shape, stride, groups in zip(SHAPES[:5], STRIDES, GROUPS, strict=True)])
-            self.head = torch.nn.Linear(3137, 7)
+            self.head = torch.nn.Linear(head_count, 7)
 
         def forward(self, values):
-            if values.ndim != 2 or values.shape[1] != 2113:
-                raise ValueError('flat 2113-value logmel vectors required')
+            if values.ndim != 2 or values.shape[1] != feature_count:
+                raise ValueError('flat vectors for the declared logmel mode required')
             image = values[:,:2048].reshape(-1,1,64,32)
             for block in self.blocks:
                 image = block(image)
@@ -27,7 +31,7 @@ def build_model():
     return Dscnn()
 
 
-def quantize(model):
+def quantize(model, *, envelope=False):
     if model.training:
         raise ValueError('BN export requires evaluation mode')
     layers = []
@@ -39,7 +43,7 @@ def quantize(model):
             bn.bias.detach().cpu().numpy(), eps=bn.eps)
         layers.append(quantize_layer(weight, bias))
     layers.append(quantize_layer(model.head.weight.detach().cpu().numpy(), model.head.bias.detach().cpu().numpy()))
-    validate(layers)
+    validate(layers, envelope=envelope)
     return layers
 
 
@@ -50,19 +54,20 @@ from .domain_training import _inputs, validation_rank, select_threshold, shortli
 
 
 def fit(x, y, vx, vy, groups, *, epochs=30, batch_size=256, seed=42,
-        device='cpu', max_steps=8000, max_seconds=900):
+        device='cpu', max_steps=8000, max_seconds=900, envelope=False):
     import torch
     started = monotonic()
-    if (type(epochs) is not int or not 1 <= epochs <= 1000 or
+    if (type(envelope) is not bool or type(epochs) is not int or not 1 <= epochs <= 1000 or
         type(batch_size) is not int or not 1 <= batch_size <= 1024 or
         type(seed) is not int or not 0 <= seed < 2**31 or
         type(max_steps) is not int or not 1 <= max_steps <= 1000000 or
         type(max_seconds) not in (int, float) or not math.isfinite(max_seconds) or not 0 < max_seconds <= 86400 or
         device not in ('cpu', 'mps')):
         raise ValueError('bounded local CNN training configuration required')
+    mode = dict(envelope=True) if envelope else {}
     _inputs(vy, groups)
     for values, labels in ((x,y), (vx,vy)):
-        inputs(values)
+        inputs(values, **mode)
         if (not isinstance(labels, np.ndarray) or labels.shape != (len(values),) or
             not np.issubdtype(labels.dtype, np.integer) or set(labels.tolist()) != set(range(7))):
             raise ValueError('all seven aligned training/validation classes required')
@@ -77,7 +82,7 @@ def fit(x, y, vx, vy, groups, *, epochs=30, batch_size=256, seed=42,
     torch.set_num_threads(2); torch.manual_seed(seed); torch.use_deterministic_algorithms(True)
     model = optimizer = tx = ty = None
     try:
-        model = build_model().to(device)
+        model = build_model(**mode).to(device)
         optimizer = torch.optim.Adam(model.parameters(), lr=.003, weight_decay=.0001)
         counts = np.bincount(y, minlength=7)
         weight = 1 / np.maximum(counts, 1); weight /= weight.mean()
@@ -105,8 +110,8 @@ def fit(x, y, vx, vy, groups, *, epochs=30, batch_size=256, seed=42,
                 steps += 1
                 check_time()
             if epoch % 5 == 0 or epoch == epochs - 1:
-                model.eval(); layers = quantize(model)
-                logits = scores(vx, layers)
+                model.eval(); layers = quantize(model, **mode)
+                logits = scores(vx, layers, **mode)
                 checkpoints.append(dict(layers=layers, epoch=epoch+1,
                                         rank=validation_rank(vy, logits.argmax(1), groups)))
                 check_time()
@@ -114,7 +119,7 @@ def fit(x, y, vx, vy, groups, *, epochs=30, batch_size=256, seed=42,
         best = best_key = None
         for row in candidates:
             check_time()
-            logits = scores(vx, row['layers'])
+            logits = scores(vx, row['layers'], **mode)
             threshold, reports, passed = select_threshold(vy, logits, groups)
             key = (passed, min(r['macro_f1'] for r in reports), sum(r['macro_f1'] for r in reports), -threshold, -row['epoch'])
             if best_key is None or key > best_key:
@@ -124,7 +129,7 @@ def fit(x, y, vx, vy, groups, *, epochs=30, batch_size=256, seed=42,
         best.update(seed=seed, epochs=epochs, batch_size=batch_size, training_device=device,
                     training_steps=steps, checkpoint_candidates_evaluated=len(candidates),
                     first_batch_loss=first_loss, final_batch_loss=last_loss,
-                    fit_elapsed_seconds=monotonic()-started, weights_bytes=weights_bytes(best['layers']),
+                    fit_elapsed_seconds=monotonic()-started, weights_bytes=weights_bytes(best['layers'], **mode),
                     selection_metric='calibrated_worst_development_domain_profile')
         return best
     finally:
