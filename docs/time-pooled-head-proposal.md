@@ -1,5 +1,7 @@
 # 時間方向pooling headの次期案
 
+現行の[実装と比較結果](time-pooled-head.md)は15/24条件で不採用。以下は実装前の設計記録で、JSONの当時のflagも保持する。
+
 2026-11-19。**未実装/未学習/recipe未固定。** [設計値](../experiments/neural-domain-20261119/time-pooled-head-proposal.json)。[区間を揃える診断](paired-windows.md)では一部が回復した一方、悪化や負例誤反応もあり、切り出しだけでは未達を解消できなかった。clean側から誤順位の例も残る。
 
 ## 仮説
@@ -20,4 +22,4 @@
 
 既存の失敗を消さず、評価行の削除/再ラベル、消費済み最終2組の再利用、同じ閾値だけの探索をしない。実機a553/16app・実声6/15、Vast.ai累計0米ドルを維持する。
 
-後続の[先行TDDによる実装と固定recipe](time-pooled-head.md)へ進んだ。上の未実装/未学習とJSONのflagは設計時点の履歴として維持する。
+後続の[先行TDD・固定recipeと不採用結果](time-pooled-head.md)へ進んだ。上の未実装/未学習とJSONのflagは設計時点の履歴として維持する。

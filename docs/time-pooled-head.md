@@ -1,6 +1,6 @@
 # 時間方向pooling headのホスト実装
 
-2026-11-19。先行TDD15契約と回帰374件が成功し、実データの前に[1構成のrecipe](../experiments/neural-domain-20261119/time-pool-plan.json)を固定した。実学習の結果/C/ESP32-S3は未確認。[初期設計](time-pooled-head-proposal.md)の未実装JSONは作成時の記録として維持する。
+2026-11-19。先行TDD15契約と回帰374件が成功し、実データの前に[1構成のrecipe](../experiments/neural-domain-20261119/time-pool-plan.json)を固定した。固定1構成の実学習は完了したが15/24条件で不採用。C/ESP32-S3は未確認。[初期設計](time-pooled-head-proposal.md)の未実装JSONは作成時の記録として維持する。
 
 ## 方式と容量
 
@@ -40,3 +40,21 @@ uv run --locked --group train python -m unittest discover -s tests/training -p t
 同じ元archive・保留4合成条件/20無音・全24domain・結合8条件・選定結合8条件を維持する。30epoch/batch256/seed42、ローカルMPS、最大8,000step/fit900秒、予定7,350step。Adam0.003/weight_decay0.0001、逆頻度class weight。語別の手作業ルーティングや評価行の削除/再ラベル、消費済み最終2組の再利用を行わない。
 
 全基準通過後だけ、新形式のC照合/正式freeze/新独立最終評価/S3資源へ進む。実機a553/16app・実声6/15、既存候補の不採用とVast.ai累計0米ドルを維持する。新FWの個別許可は別工程。
+
+## 固定1構成の結果
+
+[実測と別照合](../experiments/neural-domain-20261119/time-pool-result.json)。source `7d4660ab7d918913ea5a55d353e5a10341257276`をarchiveし、30epoch/7,350stepを完走。全処理381.421秒、fit299.585秒、選定epoch26。数値7,507B、ホスト最大RSS1,518,747,648Bで、S3の総RAM/速度の実測ではない。
+
+| 開発domain | 最小F1 | 最大誤反応 | 最小操作recall | 未達profile |
+|---|---:|---:|---:|---|
+| legacy | 0.886875 | 0.018018 | 0.812500 | noise |
+| 保留neural | 0.871754 | 0.033981 | 0.800000 | 全8条件 |
+| 元neural検証 | 0.917413 | 0.020000 | 0.866667 | なし |
+
+**全24条件中15条件が合格し、基準未達で不採用。** 旧log-melの21/24、平均スペクトル版の17/24を下回った。小型化は確認できたが、未知の合成条件への認識は改善していない。
+
+56組の指標と採否を混同行列から再計算し、32source/8元入力/重み/recipe hash、7×865のhead/容量/旧形式での拒否を照合した。quality driverのexit1は品質未達による終了で、学習処理の例外ではない。新C/正式freeze/新独立最終/target/実機へ進めない。
+
+次は[floatと整数の対比較](float-checkpoint-probe-proposal.md)を先行TDDで用意する。今回も元のfloat checkpointの判定を残していないため、学習した分類自体と量子化のどちらが影響したかは確定できない。既存のdequantized shadowは、量子化前の重みを復元したものではない。新しいhead形状を追加探索する前に、この観測不足を解消する。
+
+実機a553/16app・実声6/15、過去の不採用とVast.ai累計0米ドルを維持する。
