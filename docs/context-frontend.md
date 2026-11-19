@@ -35,3 +35,8 @@
 - 回帰は通常142件/15.655秒、training9件/9.617秒、SDK2件/3.285秒、skipなし。
 
 実モデルの改善、C/Python一致、S3 build、実機の認識・表示・聴取はこの契約テストに含まない。
+
+
+## 実モデルの結果
+
+[最初のcontext候補](../experiments/neural-domain-20261119/context-initial-result.json)はepoch186/threshold2213、23884B。最悪F1=0.86176、最大誤反応0.10、最低recall0.75で未達だった。区間を広げるだけでは十分でなく、C移植・最終条件生成・実機適用へ進めない。ホストPoCを失敗結果込みで保持し、既定adaptiveの推奨を変更しない。
