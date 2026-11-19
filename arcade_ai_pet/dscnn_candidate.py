@@ -8,6 +8,8 @@ from .caption_training import _domains, _input_hashes, _quality, SOURCES as SHAR
 from .caption_holdout import select_holdout, make_arrays as load_neural_arrays
 from .logmel_arrays import make_arrays as load_legacy_arrays
 from .dscnn_training import fit
+from .dscnn_residual_training import fit as fit_residual
+from .dscnn_residual import frozen_digest, assert_frozen
 from .dscnn_model import scores, weights_bytes
 from .class_rejection import calibrate, decisions
 from .channel_robustness import PROFILES, measure
@@ -16,7 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCES = (*SHARED_SOURCES, 'arcade_ai_pet/logmel_frontend.py', 'arcade_ai_pet/logmel_arrays.py',
            'arcade_ai_pet/dscnn_model.py', 'arcade_ai_pet/dscnn_quantize.py',
            'arcade_ai_pet/dscnn_training.py', 'arcade_ai_pet/dscnn_candidate.py',
-           'arcade_ai_pet/envelope_frontend.py')
+           'arcade_ai_pet/envelope_frontend.py', 'arcade_ai_pet/dscnn_residual.py',
+           'arcade_ai_pet/dscnn_residual_training.py')
 
 
 def _source_hashes():
@@ -24,7 +27,7 @@ def _source_hashes():
 
 
 def train_candidate(domains, output, *, holdout_seed, epochs=30, batch_size=256, neural_weight=2,
-                    max_passes=4, device='cpu', max_steps=8000, max_seconds=900, frontend='context-logmel64'):
+                    max_passes=4, device='cpu', max_steps=8000, max_seconds=900, frontend='context-logmel64', frozen_base=None):
     output = real_path(output)
     if (type(frontend) is not str or frontend not in ('context-logmel64','context-logmel64-envelope') or
         output.exists() or type(epochs) is not int or not 1 <= epochs <= 1000 or
@@ -36,6 +39,9 @@ def train_candidate(domains, output, *, holdout_seed, epochs=30, batch_size=256,
         type(max_seconds) not in (int, float) or not math.isfinite(max_seconds) or not 0 < max_seconds <= 86400):
         raise ValueError('fresh output and bounded local DS-CNN recipe required')
     mode = dict(envelope=True) if frontend == 'context-logmel64-envelope' else {}
+    if frozen_base is not None and (not mode or device != 'cpu'):
+        raise ValueError('frozen prefix requires envelope frontend and CPU')
+    base_identity = frozen_digest(frozen_base) if frozen_base is not None else None
     paths = _domains(domains)
     before, code = _input_hashes(paths), _source_hashes()
     selection = select_holdout(paths['neural'], seed=holdout_seed)
@@ -55,9 +61,15 @@ def train_candidate(domains, output, *, holdout_seed, epochs=30, batch_size=256,
     y = np.concatenate((legacy['train']['y'], np.tile(neural['train']['y'], neural_weight)))
     vx, vy = (np.concatenate([row[key] for row in primary]) for key in ('x', 'y'))
     groups = np.asarray([domain * 8 + PROFILES.index(profile) for domain, row in enumerate(primary) for profile in row['profiles']], dtype=np.int64)
-    result = fit(x, y, vx, vy, groups, epochs=epochs, batch_size=batch_size, seed=42,
-                 device=device, max_steps=max_steps, max_seconds=max_seconds, **mode)
+    fitter = fit_residual if frozen_base is not None else fit
+    extra = dict(base_layers=frozen_base) if frozen_base is not None else {}
+    result = fitter(x, y, vx, vy, groups, epochs=epochs, batch_size=batch_size, seed=42,
+                 device=device, max_steps=max_steps, max_seconds=max_seconds, **mode, **extra)
     layers = result.pop('layers')
+    if frozen_base is not None:
+        if frozen_digest(frozen_base) != base_identity:
+            raise ValueError('frozen base changed during candidate fit')
+        assert_frozen(frozen_base, layers)
     calibrated = calibrate(vy, scores(vx, layers, **mode), groups,
                            initial_threshold=result['checkpoint_threshold_q10'], max_passes=max_passes)
     table = np.asarray(calibrated['thresholds_q10'], dtype=np.int32)
@@ -91,6 +103,12 @@ def train_candidate(domains, output, *, holdout_seed, epochs=30, batch_size=256,
                   neural_weight=neural_weight, noise_replicas=5, hum_replicas=3, noise_mode='fresh',
                   weights_bytes=size, numeric_bytes=size+20, frozen=False, final_evaluated=False,
                   device_tested=False, real_voice_tested=False, vast_usd=0)
+    if frozen_base is not None:
+        if frozen_digest(frozen_base) != base_identity:
+            raise ValueError('frozen base changed during candidate calibration')
+        assert_frozen(frozen_base, layers)
+        result.update(base_prefix_unchanged=True, base_numeric_sha256=base_identity,
+                      learning_method='frozen_prefix_auxiliary_qat')
     output.mkdir(parents=True, mode=0o700)
     np.savez(output / 'weights.npz', **{f'{field}{i}': layer[field] for i, layer in enumerate(layers) for field in ('weight', 'bias', 'shift')})
     result['weights_sha256'] = digest(output / 'weights.npz')
