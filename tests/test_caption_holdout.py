@@ -133,6 +133,23 @@ class CaptionHoldoutTests(unittest.TestCase):
             with patches(data),patch.object(holdout,'select_holdout',side_effect=replace):
                 with self.assertRaises(ValueError):holdout.make_arrays(root,selection=selected)
 
+    def test_logmel_profile_is_explicit_and_keeps_the_same_source_partition(self):
+        from arcade_ai_pet import logmel_frontend
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp).resolve();_,_,data=fixture(root);selected=holdout.select_holdout(root,seed=SEED)
+            with patches(data),patch.object(holdout,'features',side_effect=AssertionError('CMN reached')),patch.object(logmel_frontend,'features',side_effect=lambda pcm:np.zeros(2113,dtype=np.float32)):
+                arrays=holdout.make_arrays(root,selection=selected,frontend='context-logmel64',noise_replicas=1,hum_replicas=1)
+            self.assertTrue(all(row['x'].shape[1]==2113 for row in arrays.values()))
+            held=set(arrays['held_validation']['source_ids'])
+            self.assertFalse(held & set(arrays['train']['source_ids']))
+            self.assertTrue(set(selected['held_control_ids'])<=held)
+
+    def test_foreign_frontend_is_refused_before_source_reconstruction(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp).resolve();fixture(root);selected=holdout.select_holdout(root,seed=SEED)
+            with patch.object(holdout,'_examples',side_effect=AssertionError('PCM reached')):
+                with self.assertRaises(ValueError):holdout.make_arrays(root,selection=selected,frontend='foreign')
+
     def test_reconstruction_count_or_label_mismatch_cannot_silently_change_membership(self):
         for mode in ('short','label'):
             with self.subTest(mode=mode),tempfile.TemporaryDirectory() as tmp:
