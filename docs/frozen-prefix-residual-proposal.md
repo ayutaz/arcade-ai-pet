@@ -26,4 +26,4 @@
 
 元CNNの表現自体に不足があれば、補助係数だけでは解決できない。新しい学習の成功や実声改善を予告せず、既存の不採用/実機a553/16app/実声6/15を維持する。
 
-後続の[先行TDDによる実装と固定recipe](frozen-prefix-residual.md)へ進んだ。本文とJSONの未実装/未学習flagは設計時点の記録として保持する。
+後続の[先行TDD・固定recipeと不採用結果](frozen-prefix-residual.md)へ進んだ。本文とJSONの未実装/未学習flagは設計時点の記録として保持する。
