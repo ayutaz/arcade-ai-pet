@@ -41,3 +41,5 @@ uv run --locked python -m unittest discover -s tests -p test_generated_audio.py
 7件/0.005秒が成功。実ASRや音声モデルをダウンロードせず、模擬callbackで境界を検査する。
 標準106件/10.063秒、CPU学習8件/9.464秒、実SDKの両VM2件/3.013秒も成功、skipなし。
 FW・認識器の重み・閾値・app packageは変更しない。
+
+追加生成では[短い音声のデコード制限とWAV再利用](generation-resume.md)を使う。保存した音声のhashを照合し、旧ASR判定を使い回さず再点検する。
