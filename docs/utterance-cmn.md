@@ -1,6 +1,6 @@
 # 発話ごとのMFCC平均を除くPoC
 
-2026-11-19。**固定1構成で開発用24条件が全合格。独立評価/実機の改善は未確認。** [予約4条件の最終評価](reserved-final-evaluation.md)で不採用になった前候補を維持し、開発データだけで別の前処理を比較した。[実行前の条件](../experiments/neural-domain-20261119/utterance-cmn-plan.json)。
+2026-11-19。**固定1構成で開発用24条件が全合格。独立評価/実機の改善は未確認。** [前候補の最終評価の不合格](reserved-final-evaluation.md)を保持し、開発データだけで別の前処理を比較した。[実行前の条件](../experiments/neural-domain-20261119/utterance-cmn-plan.json)。
 
 ## 仮説と契約
 
