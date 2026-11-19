@@ -33,7 +33,7 @@ def source_callbacks(runtime, asr, *, request_factory, resample):
         if values.ndim!=1 or not 1600<=len(values)<=32000 or not np.isfinite(values).all():
             raise ValueError('finite resampled source required')
         segments,_=asr.transcribe(np.ascontiguousarray(values),language='ja',beam_size=5,
-                                 condition_on_previous_text=False,vad_filter=False,temperature=0.)
+                                 condition_on_previous_text=False,vad_filter=False,temperature=0.,max_new_tokens=32)
         return ''.join(row.text for row in segments).strip()
 
     return synthesize,recognize

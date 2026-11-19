@@ -32,7 +32,7 @@ class HostTeacherTests(unittest.TestCase):
         pcm=np.full(48000,16384,dtype=np.int16);self.assertEqual(recognize(48000,pcm),'待って。')
         args,kwargs=asr.transcribe.call_args;self.assertEqual(args[0].shape,(16000,));self.assertEqual(args[0].dtype,np.float32)
         self.assertTrue(np.all(args[0]==.5));self.assertTrue(np.all(pcm==16384))
-        self.assertEqual(kwargs,dict(language='ja',beam_size=5,condition_on_previous_text=False,vad_filter=False,temperature=0.))
+        self.assertEqual(kwargs,dict(language='ja',beam_size=5,condition_on_previous_text=False,vad_filter=False,temperature=0.,max_new_tokens=32))
         factory.assert_not_called()
     def test_invalid_synthesis_never_writes_a_source(self):
         for values in (np.full((1,48000),np.nan),np.zeros((2,48000)),np.zeros((1,100000))):
