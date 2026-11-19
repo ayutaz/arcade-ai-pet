@@ -17,3 +17,22 @@ uv run --locked python -m unittest discover -s tests -p test_logmel_native.py -v
 正式freeze・未使用の独立最終・S3全体build/実行は未完了。実機a553/16app、最新実声6/15、Vast.ai累計0米ドルを維持する。
 
 [先行条件](../experiments/neural-domain-20261119/native-logmel-plan.json)。
+
+## 全経路の照合結果
+
+固定source `a2f7878b9130ee27d155b42cf7a551aedf535c93`。既存の全601元例/4,808 profile行をPCMから再構築し、20.111秒で完走した。
+
+| 照合 | 結果 |
+|---|---|
+| 元のPython特徴cache | 全4,808行を完全再現 |
+| HP160/level4096のPCM | 全行一致 |
+| C特徴量・Q5 | 最大特徴差0、量子化差0 |
+| contiguous/banked | 全行bit一致 |
+| 整数出力・最終判定 | 全行差0 |
+| 24group/56指標 | 既存の開発用合格と一致 |
+
+数学table/hash、43source、元8入力、全3cache、固定重み194c5fce…と5閾値の不変を確認した。評価行/ラベル/モデル/閾値の変更はない。host上の合成評価であり、実声/実機の改善を確認した結果ではない。
+
+次はこの候補のasset/freezeと未使用の独立最終評価へ進む。新たなモデル探索・追加学習は行わず、未達はそのまま報告する。S3全体buildと具体的な固定FWの個別許可は別工程。
+
+[照合結果](../experiments/neural-domain-20261119/native-logmel-result.json)。
