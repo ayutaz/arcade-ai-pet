@@ -34,6 +34,9 @@ CMN_SOURCES = (*SOURCES, 'arcade_ai_pet/cmn_frontend.py', 'arcade_ai_pet/cmn_arr
 
 
 def _profile(runtime):
+    if runtime == 'context-logmel-dscnn-v1':
+        from . import dscnn_assets
+        return dscnn_assets, dscnn_assets.DscnnNativeAssets
     if runtime == assets.RUNTIME:
         return assets, DecisionNativeModel
     if runtime == cmn_assets.RUNTIME:
@@ -42,6 +45,9 @@ def _profile(runtime):
 
 
 def _source_hashes(runtime=assets.RUNTIME):
+    if runtime == 'context-logmel-dscnn-v1':
+        from .dscnn_freeze import source_hashes
+        return source_hashes()
     _profile(runtime)
     names = CMN_SOURCES if runtime == cmn_assets.RUNTIME else SOURCES
     return {name: assets.digest(ROOT / name) for name in names}
@@ -54,7 +60,18 @@ def _accepted(rows):
 def _features(pcm, profile, seed, runtime=assets.RUNTIME):
     _profile(runtime)
     prepared = level(condition(simulate(pcm, profile, seed), 'hp160'))
+    if runtime == 'context-logmel-dscnn-v1':
+        from .logmel_frontend import features as logmel
+        return logmel(prepared)
     return cmn_frontend.features(prepared) if runtime == cmn_assets.RUNTIME else features(prepared, context=True)
+
+
+def _scores(values,layers,runtime=assets.RUNTIME):
+    _profile(runtime)
+    if runtime == 'context-logmel-dscnn-v1':
+        from .dscnn_model import scores as cnn_scores
+        return cnn_scores(values,layers)
+    return scores(values,layers)
 
 
 def _domains(domains, final_ids):
@@ -80,7 +97,10 @@ def _domains(domains, final_ids):
     return paths, sorted(ids), sorted(waves), manifests
 
 
-def _recompute(paths, directory, layers, table, *, validation_only, runtime=assets.RUNTIME):
+def _recompute(paths, directory, layers, table, *, validation_only, runtime=assets.RUNTIME, selection=None):
+    if runtime == 'context-logmel-dscnn-v1':
+        from .dscnn_freeze import recompute
+        return recompute(paths,directory,layers,table,validation_only=validation_only,selection=selection)
     labels, predictions, groups = [], [], []
     stats = dict(rows=0, exact_integer_logits=0, banked_features_equal=0, final_decisions_equal=0,
                  maximum_feature_error=0.0)
@@ -122,7 +142,10 @@ def _recompute(paths, directory, layers, table, *, validation_only, runtime=asse
     return rows, pooled, stats
 
 
-def freeze_candidate(weights, table, domains, plan, output, *, runtime=assets.RUNTIME):
+def freeze_candidate(weights, table, domains, plan, output, *, runtime=assets.RUNTIME, holdout_seed=None):
+    if runtime == 'context-logmel-dscnn-v1':
+        from .dscnn_freeze import freeze_candidate as freeze_cnn
+        return freeze_cnn(weights,table,domains,plan,output,holdout_seed=holdout_seed)
     profile_assets, _ = _profile(runtime)
     output = assets.real_path(output)
     if output.exists():
@@ -167,6 +190,9 @@ def freeze_candidate(weights, table, domains, plan, output, *, runtime=assets.RU
 def verify(directory):
     directory = assets.real_path(directory)
     meta = json.loads(assets.real_path(directory / 'decision-frozen.json').read_text())
+    if meta.get('runtime') == 'context-logmel-dscnn-v1':
+        from .dscnn_freeze import verify as verify_cnn
+        return verify_cnn(directory)
     table = assets.thresholds(meta['thresholds_q10'])
     profile_assets, _ = _profile(meta.get('runtime'))
     if (meta.get('schema') != 1 or meta.get('runtime') != profile_assets.RUNTIME or
