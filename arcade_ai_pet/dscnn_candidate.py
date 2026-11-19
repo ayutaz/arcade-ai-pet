@@ -20,7 +20,8 @@ SOURCES = (*SHARED_SOURCES, 'arcade_ai_pet/logmel_frontend.py', 'arcade_ai_pet/l
            'arcade_ai_pet/dscnn_model.py', 'arcade_ai_pet/dscnn_quantize.py',
            'arcade_ai_pet/dscnn_training.py', 'arcade_ai_pet/dscnn_candidate.py',
            'arcade_ai_pet/envelope_frontend.py', 'arcade_ai_pet/dscnn_residual.py',
-           'arcade_ai_pet/dscnn_residual_training.py', 'arcade_ai_pet/dscnn_probe.py')
+           'arcade_ai_pet/dscnn_residual_training.py', 'arcade_ai_pet/dscnn_probe.py',
+           'arcade_ai_pet/spectral_mask.py')
 
 
 def _source_hashes():
@@ -39,12 +40,22 @@ def _check_float_checkpoint(state, layers, result, mode, device):
         raise ValueError('float checkpoint does not bind the integer layers')
 
 
+def _check_mask_recipe(result, enabled):
+    expected = dict(time_max=6,frequency_max=3,fill=0,seed=43,training_only=True)
+    if enabled:
+        if result.get('spectral_mask') != expected:
+            raise ValueError('declared training-only mask recipe changed or missing')
+    elif 'spectral_mask' in result:
+        raise ValueError('undeclared spectral masking refused')
+
+
 def train_candidate(domains, output, *, holdout_seed, epochs=30, batch_size=256, neural_weight=2,
-                    max_passes=4, device='cpu', max_steps=8000, max_seconds=900, frontend='context-logmel64', frozen_base=None, time_pool=False, float_probe=False):
+                    max_passes=4, device='cpu', max_steps=8000, max_seconds=900, frontend='context-logmel64', frozen_base=None, time_pool=False, float_probe=False, spectral_mask=False):
     output = real_path(output)
     if (type(frontend) is not str or frontend not in ('context-logmel64','context-logmel64-envelope') or
         type(time_pool) is not bool or time_pool and (frontend!='context-logmel64-envelope' or frozen_base is not None) or
         type(float_probe) is not bool or float_probe and frozen_base is not None or
+        type(spectral_mask) is not bool or spectral_mask and (frontend!='context-logmel64' or frozen_base is not None or time_pool) or
         output.exists() or type(epochs) is not int or not 1 <= epochs <= 1000 or
         type(batch_size) is not int or not 1 <= batch_size <= 1024 or
         type(neural_weight) is not int or not 1 <= neural_weight <= 8 or
@@ -82,8 +93,11 @@ def train_candidate(domains, output, *, holdout_seed, epochs=30, batch_size=256,
     extra = dict(base_layers=frozen_base) if frozen_base is not None else {}
     if float_probe:
         extra['float_probe'] = True
+    if spectral_mask:
+        extra['spectral_mask'] = True
     result = fitter(x, y, vx, vy, groups, epochs=epochs, batch_size=batch_size, seed=42,
                  device=device, max_steps=max_steps, max_seconds=max_seconds, **mode, **extra)
+    _check_mask_recipe(result,spectral_mask)
     layers = result.pop('layers')
     has_float_state = 'float_state' in result
     float_state = result.pop('float_state', None)
@@ -138,6 +152,7 @@ def train_candidate(domains, output, *, holdout_seed, epochs=30, batch_size=256,
                       learning_method='frozen_prefix_auxiliary_qat')
     if float_probe:
         _check_float_checkpoint(float_state, layers, result, mode, device)
+    _check_mask_recipe(result,spectral_mask)
     output.mkdir(parents=True, mode=0o700)
     np.savez(output / 'weights.npz', **{f'{field}{i}': layer[field] for i, layer in enumerate(layers) for field in ('weight', 'bias', 'shift')})
     result['weights_sha256'] = digest(output / 'weights.npz')
