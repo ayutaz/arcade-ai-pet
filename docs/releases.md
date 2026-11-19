@@ -9,7 +9,7 @@
 - `SHA256SUMS`: archiveのSHA-256。
 
 firmwareやpaired app package、本体録音、鍵、build/cacheは含めない。
-公開済みのモデルNPZ・CC BY 3.0の帰属/ライセンス・評価JSONもarchiveへ含める。モデルを再学習せず、実機のv2をv3へ自動更新しない。
+公開済みの小型モデルNPZ・CC BY 3.0の帰属/ライセンス・評価JSONもarchiveへ含める。候補のsource公開と正式Releaseを区別し、モデルの再学習や実機の自動更新は行わない。
 
 ## 公開前の条件
 
@@ -55,3 +55,9 @@ uv run --locked python -m unittest discover -s tests -p test_source_release.py -
 最終回帰: 標準99件/10.567秒、実SDK統合2件/1.964秒（実SDK両VM）が成功（skipなし）。uv lock・actionlint1.7.12・差分検査も成功。Actionsの実発火や本体の動作を保証する結果とは区別する。
 学習系の回帰も8件/1.930秒で成功。今回の変更でモデルを再学習していない。
 単一backslashのファイル名も拒否する既存動作を追加照合した。これは先行Redを伴う新実装ではない。
+
+## 2026-11-19の公開準備
+
+固定log-mel候補の数値・数学table・freeze/独立最終評価・帰属条件をsourceへ収録する。先行2契約はファイル欠落でRed、追加後2件/1.270秒でGreen。全通常395件/44.197秒が成功した。上流TTS重み・生成音声・本体PCM・FW/app binaryは含めない。
+
+[現在の実機試験](logmel-device-check.md)は合成5語/返答まで成功したが、Desk併用の修正と実声/実物受入が未完了。この準備だけでタグ/正式Releaseを作らない。

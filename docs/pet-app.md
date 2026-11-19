@@ -1,6 +1,6 @@
 # ペットWASMの使い方と検証範囲
 
-2026-11-17 JST。固定FW/Petを1台へ適用し、基本の自動実機試験は成功。[実機結果](device-validation.md)。実声の品質・聴取・実LCD/物理入力は未確認。入力補正版c032でも合成5語は操作0/5で、音声操作は未完成。
+2026-11-19。現行appは1.0.1。固定log-mel FWで合成5語/返答5本が成功したが、Desk併用の音声確保エラーが残る。新モデルの実声品質・聴取・実LCD/物理入力は未確認。[現在の試験](logmel-device-check.md)。以前のc032/操作0/5は[履歴](device-validation.md)へ保持する。
 
 ## build
 
@@ -18,8 +18,8 @@ PYTHONPATH=../scratch-arcade-os/prototypes/lab-os uv run --locked python \
 
 2つ目は既存SDKのMacウィンドウ。HOMEでZを押して起動する。
 通常のホストウィンドウはMacのマイク/スピーカーへ接続せず、手動操作で試す。
-生成先は新規フォルダのみ。packageは5,142B、WASM4,886B、権限draw/speaker/microphone。
-同じsourceからのhash: `14f657f0fe5955d916f6a6811b2975bda0e9bd944a30f968aadbc9eb7c43a23f`。
+生成先は新規フォルダのみ。packageは5,176B、権限draw/speaker/microphone。
+同じsourceからのhash: `a6b624c9684642448f673bf782e2e777953b506c523e95d8a4f5376f281155dd`。
 
 ## 操作
 
