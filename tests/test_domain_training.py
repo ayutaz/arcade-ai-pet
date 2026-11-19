@@ -77,5 +77,24 @@ class DomainTrainingTests(unittest.TestCase):
         self.assertIn(201,{r['epoch'] for r in short})
         self.assertEqual({min(7,(r['epoch']-1)*8//201) for r in short},set(range(8)))
 
+    def test_context_mode_uses_context_builder_and_refuses_legacy_freeze(self):
+        from arcade_ai_pet import channel_freeze
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp).resolve();domains={name:root/name for name in ('legacy','neural')};records=[]
+            for name,path in domains.items():
+                path.mkdir();row=dict(id=hashlib.sha256(name.encode()).hexdigest(),sha256=hashlib.sha256((name+'wave').encode()).hexdigest());records.append(row)
+                (path/'manifest.json').write_text(json.dumps(dict(role='development',variants=1,records=[row])))
+            mixed=root/'mixed';mixed.mkdir();(mixed/'manifest.json').write_text(json.dumps(dict(role='development',variants=1,records=records)))
+            model=root/'fixture';fixture.checkpoint(model);layers,_=read_layers(model/'weights.npz')
+            def arrays(*args,**kwargs):
+                y=np.tile(np.arange(7),8);x=np.zeros((56,260),dtype=np.float32);x[np.arange(56),y]=4
+                return dict(train=dict(x=x,y=y),validation=dict(x=x,y=y,profiles=[p for p in PROFILES for _ in range(7)]))
+            with patch.object(train,'make_arrays',side_effect=AssertionError('no adaptive arrays')),patch.object(train,'load_context_arrays',side_effect=arrays,create=True),patch.object(train,'fit',return_value=dict(layers=layers,selected_epoch=1)):
+                result=train.train_candidate(domains,mixed,root/'candidate',epochs=5,hidden=7,frontend='context')
+            self.assertEqual(result['frontend_version'],'context');self.assertIn('context_frontend.py',result['feature_sha256'])
+            with patch.object(channel_freeze,'make_arrays',side_effect=AssertionError('no legacy feature export')):
+                with self.assertRaises(ValueError):channel_freeze.freeze_channel(root/'candidate',mixed,root/'legacy-frozen')
+            self.assertFalse((root/'legacy-frozen').exists())
+
 
 if __name__=='__main__':unittest.main()
