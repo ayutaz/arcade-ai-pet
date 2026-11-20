@@ -12,15 +12,16 @@ The app runs as a small WASM package; speech recognition runs in the OS.
 
 ## Current status
 
-**Experimental; human-voice acceptance is still pending. No tagged release yet.**
+**Experimental source edition. Human-voice acceptance remains incomplete.**
+[Release notes](docs/release-notes/v0.1.0.md).
 
 | Part | Evidence |
 |---|---|
 | Pet app 1.0.1 | 5,176-byte package; movement, voice-result actions and exit tested in both host VMs |
 | Learned movement | 472-byte policy; 8.64 points vs 0.97 for seeded random play on 64 unseen host boards |
 | [Fixed voice candidate](models/kws-logmel-v1/model-card.md) | 23,411 bytes of numeric parameters; all 3,448 C/Python decisions match; eight reserved synthetic profiles pass |
-| One handheld, synthetic playback | 5/5 commands, 0/5 negative activations, all five replies complete; recording cleared and 16 apps preserved |
-| Remaining work | Desk/Wi-Fi audio allocation failed on that firmware. A memory fix is built and reviewed but not installed. The new model has no human-voice result yet |
+| Latest handheld check (3522 firmware) | 4/5 commands, 0/5 negative activations, no internal errors; four accepted replies complete; 16 apps preserved |
+| Known limits | Pet can fail to launch after Wi-Fi use; a normal restart recovers it. A smaller workspace fix is built but not installed. The new model has no human-voice result yet |
 
 The previous model scored **6/15 human commands**, below the 12/15 target.
 The new synthetic results do not replace that human trial or prove reliable voice control.
