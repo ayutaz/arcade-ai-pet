@@ -84,3 +84,10 @@ class SourceReleaseTests(unittest.TestCase):
             self.assertIn(text,workflow)
         self.assertNotIn('continue-on-error',workflow);self.assertNotIn('--clobber',workflow)
         self.assertIn('source-release/*',workflow)
+
+    def test_unaccepted_voice_candidate_is_published_only_as_an_explicit_prerelease(self):
+        workflow=(ROOT/'.github/workflows/release.yml').read_text()
+        publish=workflow.split('gh release create',1)[1]
+        self.assertIn('--prerelease',publish)
+        self.assertIn('--notes-file "docs/release-notes/$RELEASE_TAG.md"',publish)
+        self.assertNotIn('--generate-notes',publish)
